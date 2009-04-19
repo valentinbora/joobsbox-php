@@ -2,5 +2,4 @@ RewriteEngine On
 RewriteCond %{REQUEST_URI}  !^.*/index\.php$
 RewriteCond %{REQUEST_URI}  !^.*/plugins/.*\.(js|css|png|gif|jpg|mp3|wav)$
 RewriteCond %{REQUEST_URI}  !^.*/docs/.*$
-RewriteCond %{REQUEST_URI}  !^.*/updatesvn\.php$
 RewriteRule .* index.php [NC,L]
