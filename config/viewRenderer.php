@@ -30,5 +30,3 @@ function configureTheme($theme = APPLICATION_THEME) {
 		}
 	}
 }
-
-configureTheme();

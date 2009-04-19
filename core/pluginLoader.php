@@ -6,7 +6,7 @@ class PluginLoader {
 		$event_handlers = array();
 		$filters		= array();
 		
-		$dir = new DirectoryIterator("plugins");
+		$dir = new DirectoryIterator(APPLICATION_DIRECTORY . "/plugins");
 		$plugins = array();
 		foreach($dir as $file) {
 			$className = $file->getFilename();
