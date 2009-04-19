@@ -75,7 +75,6 @@ class PublicaController extends Zend_Controller_Action
 			->setLabel('Means of application:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
-			->addFilter('HtmlEntities')
 			->addValidator('notEmpty')
 			->setDescription('Ex: "Send CV to email ..." or "Apply online at URL ..."')
 			->setRequired(true);
@@ -119,7 +118,7 @@ class PublicaController extends Zend_Controller_Action
 			if(isset($publishNamespace->jobHash) && $publishNamespace->jobHash == $hash) {
 				throw new Exception($this->view->translate("You are not allowed to add the same job multiple times."));
 			}
-
+			
 			// Ok, here we go: insert the job into the database
 			try {
 				$values['id'] = $jobOperations->insert(array(
