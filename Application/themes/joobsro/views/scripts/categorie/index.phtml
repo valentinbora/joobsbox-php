@@ -1,0 +1,22 @@
+<div class="list">
+	<div class="inner">
+		<div class="toRight">
+			<a href="<?php echo $this->baseUrl;?>/rss/categorie/<?php echo $this->MakeLink($this->category['Name']);?>/">RSS</a>
+			<a href="<?php echo $this->baseUrl;?>/rss/categorie/<?php echo $this->MakeLink($this->category['Name']);?>/"><img src="<?php echo $this->themeImages;?>/icon-rss.gif" alt="RSS" border="0" /></a>
+		</div>
+		<a href="<?php echo $this->baseUrl;?>/categorie/<?php echo $this->MakeLink($this->category['Name']);?>.html">
+			<?php echo $this->category['Name']; ?>
+		</a>
+	</div>
+	<ul>          
+		<?php foreach($this->jobs as $a => $job): ?>
+		<li <?php if($a%2):?>class="alternate"<?php endif;?>>
+			<a href="<?php echo $this->baseUrl;?>/job/<?php echo $this->MakeLink($job['Title']) . "-" . $job['ID']; ?>.html"><?php echo $job['Title']; ?></a>
+			<span class="lighterSmall">la</span>
+			<?php echo $job['Company']; ?>
+			<span class="lighterSmall">in</span>
+			<?php echo $job['Location']; ?>
+		</li>
+		<?php endforeach; ?>
+	</ul>
+</div>

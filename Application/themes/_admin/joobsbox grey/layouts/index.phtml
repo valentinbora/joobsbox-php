@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<?php 
+	$this->headTitle()->prepend('Jobbboard tester');
+	$this->headTitle()->setSeparator(' - ');
+	echo $this->headTitle();
+?>
+
+<?php
+	$this->headLink()->prependStylesheet($this->themeUrl . "/css/global.css");
+	$this->headLink()->prependStylesheet($this->themeUrl . "/css/reset.css");
+	$this->headScript()
+		->prependScript($this->translateHash, 'text/javascript', array('charset' => 'UTF-8'))
+		->prependFile($this->baseUrl . '/public/js/lib/jquery.js', 'text/javascript')
+		->appendFile($this->baseUrl . '/public/js/lib/jquery.corner.js', 'text/javascript')
+		->appendFile($this->baseUrl . '/public/js/lib/jquery.pngFix.pack.js', 'text/javascript')		
+		->appendFile($this->themeUrl . '/js/global.js', 'text/javascript');
+	echo $this->headLink();
+	echo $this->headStyle();
+	echo $this->headScript(); 
+?>
+</head>
+<body>
+	<div id="admin-header">
+		
+	</div>
+	
+	<div id="admin-main">
+		<ul id="admin-menu">
+			<li class="item <?php if($this->currentPluginName == "dashboard"):?>current<?php endif;?>" id="menu-dashboard"><a href="<?php echo $this->baseUrl . '/admin'; ?>"><?php echo $this->translate("Dashboard"); ?></a></li>
+			<li class="separator"></li>
+			
+			<?php /************ Here come the plugins ****************/ ?>
+			<?php foreach($this->plugins as $pluginName => $pluginOptions): ?>
+			<li class="item <?php if($pluginName == $this->currentPluginName):?>current<?php endif; ?>">
+				<a href="<?php echo $this->baseUrl . strtolower("/admin/$pluginName"); ?>" style="background-image: url(<?php 
+						if($pluginOptions->main->image): 
+							echo $this->baseUrl . '/' . $this->pluginPath . $pluginName . '/' . $pluginOptions->main->image; 
+						else:
+							echo $this->themeImages . '/adminPluginNoImage.png'; 
+						endif;?>);" />
+					<?php 
+						if($pluginOptions->main->{"title_" . $this->locale}) {
+							echo ucfirst($pluginOptions->main->{"title_" . $this->locale});
+						} elseif($pluginOptions->main->title) {
+							echo ucfirst($pluginOptions->main->title);
+						} else {
+							echo ucfirst($pluginName); 
+						}
+					?>
+				</a>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+		
+		<div id="admin-content">
+			<div id="admin-content-wrap">
+				<?php echo $this->layout()->content;?>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

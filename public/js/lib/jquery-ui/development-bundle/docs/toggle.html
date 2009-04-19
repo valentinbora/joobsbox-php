@@ -1,0 +1,68 @@
+<p>&laquo; <a href="http://docs.jquery.com/UI/Effects" title="UI/Effects">Back to UI/Effects</a><div class="api"><div>
+</div><a name="effectoptionsspeedcallback"></a><div class="section-edit">[<a href="/action/edit/UI/Effects/toggle">edit</a>]</div>
+</p>
+<a name="toggle.28.C2.A0effect.2C.C2.A0options.2C.C2.A0.5Bspeed.5D.2C.C2.A0.5Bcallback.5D_.29"></a><h3> <strong class="selflink">toggle</strong>(&nbsp;effect,&nbsp;options,&nbsp;<span class="optional">[</span>speed<span class="optional">]</span>,&nbsp;<span class="optional">[</span>callback<span class="optional">]</span> ) </h3>
+<p><div class="entry">
+<ul class="tabs-nav">
+<li><a href="#overview"><span>Overview</span></a></li>
+<li><a href="#toptions"><span>Options</span></a></li>
+<li><a href="#examples"><span>Examples</span></a></li>
+<li><a href="#discuss" class="tabs-disabled"><span>Discuss</span></a></li>
+</ul>
+<div id="overview" class="tabs-container">
+</p>
+<div class="desc"><div>Uses a specific effect on an element to toggle the element if the first argument is an effect string.</div>
+<div class="longdesc"></div></div><div class="args"><b class="args">Arguments:</b><table class="args" cellspacing="0"><tr class="option"><th>effect</th><td class="type">String</td><td class="default"></td></tr><tr><td colspan="3" class="desc">The effect to be used. Possible values: 'blind', 'clip', 'drop', 'explode', 'fold', 'puff', 'slide', 'scale', 'size', 'pulsate'.</td></tr><br /><tr class="option"><th>options</th><td class="type">Hash</td><td class="default"></td></tr><tr><td colspan="3" class="desc">A object/hash including specific options for the effect.</td></tr><br /><tr class="option"><th>speed<span class="optional"> (Optional)</span></th><td class="type">String, Number</td><td class="default"></td></tr><tr><td colspan="3" class="desc">A string representing one of the three predefined speeds ("slow", "normal", or "fast") or the number of milliseconds to run the animation (e.g. 1000).</td></tr><br /><tr class="option"><th>callback<span class="optional"> (Optional)</span></th><td class="type">Function</td><td class="default"></td></tr><tr><td colspan="3" class="desc">A function that is called after the effect is completed.</td></tr></table></div> </div>
+<p><div id="examples" class="options examples tabs-container"><b class="options">Examples:</b><table class="options examples" cellspacing="0"><thead><tr><th>Name</th><th>Type</th></tr></thead><tbody>
+<div class="example">
+<ul><li><a href="#demo"><span>Demo</span></a></li><li><a href="#source"><span>View Source</span></a></li></ul>
+<div id="demo" class="tabs-container" rel="125">
+Apply the effect slide if you click on the p to toggle a div.<br />
+</p>
+<pre>
+    $(&quot;p&quot;).<a href="http://docs.jquery.com/Events/click" title="Events/click">click</a>(function () {
+      $(&quot;div&quot;).<strong class="selflink">toggle</strong>(&quot;slide&quot;, {}, 1000);
+    });
+
+</pre>
+<p></div><div id="source" class="tabs-container">
+</p>
+<pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "<a href="http://www.w3.org/TR/html4/loose.dtd" class="external free" title="http://www.w3.org/TR/html4/loose.dtd">http://www.w3.org/TR/html4/loose.dtd</a>"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="<a href="http://code.jquery.com/jquery-latest.js" class="external free" title="http://code.jquery.com/jquery-latest.js">http://code.jquery.com/jquery-latest.js</a>"&gt;&lt;/script&gt;
+  
+  &lt;script src=&quot;http://ui.jquery.com/latest/ui/effects.core.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://ui.jquery.com/latest/ui/effects.slide.js&quot;&gt;&lt;/script&gt;
+
+  &lt;script&gt;
+  $(document).ready(function(){
+    
+    $(&quot;p&quot;).<a href="http://docs.jquery.com/Events/click" title="Events/click">click</a>(function () {
+      $(&quot;div&quot;).<strong class="selflink">toggle</strong>(&quot;slide&quot;, {}, 1000);
+    });
+
+  });
+  &lt;/script&gt;
+  &lt;style&gt;
+  div { margin: 0px; width: 100px; height: 80px; background: blue; position: relative; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Click me&lt;/p&gt;&lt;div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p></div>
+</p><p></div>
+</tbody></table></div>
+</p><p></div></div>
+</p><!-- 
+Pre-expand include size: 13961 bytes
+Post-expand include size: 13911 bytes
+Template argument size: 4532 bytes
+Maximum: 2097152 bytes
+-->
+
+<!-- Saved in parser cache with key jqdocs_docs:pcache:idhash:2615-1!1!0!!en!2 and timestamp 20090303130312 -->

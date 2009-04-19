@@ -1,0 +1,65 @@
+<p>&laquo; <a href="http://docs.jquery.com/UI/Effects" title="UI/Effects">Back to UI/Effects</a><div class="api"><div>
+</div><a name="classduration"></a><div class="section-edit">[<a href="/action/edit/UI/Effects/removeClass">edit</a>]</div>
+</p>
+<a name="removeClass.28.C2.A0.5Bclass.5D.2C.C2.A0.5Bduration.5D_.29"></a><h3> <strong class="selflink">removeClass</strong>(&nbsp;<span class="optional">[</span>class<span class="optional">]</span>,&nbsp;<span class="optional">[</span>duration<span class="optional">]</span> ) </h3>
+<p><div class="entry">
+<ul class="tabs-nav">
+<li><a href="#overview"><span>Overview</span></a></li>
+<li><a href="#toptions"><span>Options</span></a></li>
+<li><a href="#examples"><span>Examples</span></a></li>
+<li><a href="#discuss" class="tabs-disabled"><span>Discuss</span></a></li>
+</ul>
+<div id="overview" class="tabs-container">
+</p>
+<div class="desc"><div>Removes the specified class from the set of matched elements with an optional transition.</div>
+<div class="longdesc"></div></div><div class="args"><b class="args">Arguments:</b><table class="args" cellspacing="0"><tr class="option"><th>class<span class="optional"> (Optional)</span></th><td class="type">String</td><td class="default"></td></tr><tr><td colspan="3" class="desc">One CSS class to remove from the elements.</td></tr><br /><tr class="option"><th>duration<span class="optional"> (Optional)</span></th><td class="type">String, Number</td><td class="default"></td></tr><tr><td colspan="3" class="desc">A string representing one of the three predefined speeds ("slow", "normal", or "fast") or the number of milliseconds to run the animation (e.g. 1000).</td></tr></table></div> </div>
+<p><div id="examples" class="options examples tabs-container"><b class="options">Examples:</b><table class="options examples" cellspacing="0"><thead><tr><th>Name</th><th>Type</th></tr></thead><tbody>
+<div class="example">
+<ul><li><a href="#demo"><span>Demo</span></a></li><li><a href="#source"><span>View Source</span></a></li></ul>
+<div id="demo" class="tabs-container" rel="125">
+Remove the class 'blue' from the matched elements with a 1-second transition.<br />
+</p>
+<pre>$(&quot;p&quot;).<a href="http://docs.jquery.com/Attributes/removeClass" title="Attributes/removeClass">removeClass</a>(&quot;blue&quot;, 1000);
+</pre>
+<p></div><div id="source" class="tabs-container">
+</p>
+<pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "<a href="http://www.w3.org/TR/html4/loose.dtd" class="external free" title="http://www.w3.org/TR/html4/loose.dtd">http://www.w3.org/TR/html4/loose.dtd</a>"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="<a href="http://code.jquery.com/jquery-latest.js" class="external free" title="http://code.jquery.com/jquery-latest.js">http://code.jquery.com/jquery-latest.js</a>"&gt;&lt;/script&gt;
+  
+  &lt;script src=&quot;http://ui.jquery.com/latest/ui/effects.core.js&quot;&gt;&lt;/script&gt;
+
+  &lt;script&gt;
+  $(document).ready(function(){
+    $(&quot;p&quot;).<a href="http://docs.jquery.com/Attributes/removeClass" title="Attributes/removeClass">removeClass</a>(&quot;blue&quot;, 1000);
+  });
+  &lt;/script&gt;
+  &lt;style&gt;
+  p { margin: 4px; font-size:16px; font-weight:bolder; }
+  .blue { color:blue; }
+  .under { text-decoration:underline; }
+  .highlight { background:yellow; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p class=&quot;blue under&quot;&gt;Hello&lt;/p&gt;
+  &lt;p class=&quot;blue under highlight&quot;&gt;and&lt;/p&gt;
+  &lt;p class=&quot;blue under&quot;&gt;then&lt;/p&gt;
+  &lt;p class=&quot;blue under&quot;&gt;Goodbye&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p></div>
+</p><p></div>
+</tbody></table></div>
+</p><p></div></div>
+</p><!-- 
+Pre-expand include size: 12234 bytes
+Post-expand include size: 11062 bytes
+Template argument size: 3757 bytes
+Maximum: 2097152 bytes
+-->
+
+<!-- Saved in parser cache with key jqdocs_docs:pcache:idhash:2607-1!1!0!!en!2 and timestamp 20090303123958 -->

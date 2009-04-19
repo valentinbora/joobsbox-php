@@ -1,0 +1,73 @@
+<p>&laquo; <a href="http://docs.jquery.com/UI/Effects" title="UI/Effects">Back to UI/Effects</a><div class="api"><div>
+</div><a name="classduration"></a><div class="section-edit">[<a href="/action/edit/UI/Effects/toggleClass">edit</a>]</div>
+</p>
+<a name="toggleClass.28.C2.A0class.2C.C2.A0.5Bduration.5D_.29"></a><h3> <strong class="selflink">toggleClass</strong>(&nbsp;class,&nbsp;<span class="optional">[</span>duration<span class="optional">]</span> ) </h3>
+<p><div class="entry">
+<ul class="tabs-nav">
+<li><a href="#overview"><span>Overview</span></a></li>
+<li><a href="#toptions"><span>Options</span></a></li>
+<li><a href="#examples"><span>Examples</span></a></li>
+<li><a href="#discuss" class="tabs-disabled"><span>Discuss</span></a></li>
+</ul>
+<div id="overview" class="tabs-container">
+</p>
+<div class="desc"><div>Adds the specified class if it is not present, and removes the specified class if it is present, using an optional transition.</div>
+<div class="longdesc"></div></div><div class="args"><b class="args">Arguments:</b><table class="args" cellspacing="0"><tr class="option"><th>class</th><td class="type">String</td><td class="default"></td></tr><tr><td colspan="3" class="desc">A CSS class to toggle on the elements.</td></tr><br /><tr class="option"><th>duration<span class="optional"> (Optional)</span></th><td class="type">String, Number</td><td class="default"></td></tr><tr><td colspan="3" class="desc">A string representing one of the three predefined speeds ("slow", "normal", or "fast") or the number of milliseconds to run the animation (e.g. 1000).</td></tr></table></div> </div>
+<p><div id="examples" class="options examples tabs-container"><b class="options">Examples:</b><table class="options examples" cellspacing="0"><thead><tr><th>Name</th><th>Type</th></tr></thead><tbody>
+<div class="example">
+<ul><li><a href="#demo"><span>Demo</span></a></li><li><a href="#source"><span>View Source</span></a></li></ul>
+<div id="demo" class="tabs-container" rel="125">
+Toggle the class 'highlight' when a paragraph is clicked with a one second transition.<br />
+</p>
+<pre>
+    $(&quot;p&quot;).<a href="http://docs.jquery.com/Events/click" title="Events/click">click</a>(function () {
+      $(this).<a href="http://docs.jquery.com/Attributes/toggleClass" title="Attributes/toggleClass">toggleClass</a>(&quot;highlight&quot;, 1000);
+    });
+
+</pre>
+<p></div><div id="source" class="tabs-container">
+</p>
+<pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "<a href="http://www.w3.org/TR/html4/loose.dtd" class="external free" title="http://www.w3.org/TR/html4/loose.dtd">http://www.w3.org/TR/html4/loose.dtd</a>"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="<a href="http://code.jquery.com/jquery-latest.js" class="external free" title="http://code.jquery.com/jquery-latest.js">http://code.jquery.com/jquery-latest.js</a>"&gt;&lt;/script&gt;
+  
+  &lt;script src=&quot;http://dev.jquery.com/view/tags/ui/latest/ui/effects.core.js&quot;&gt;&lt;/script&gt;
+
+  &lt;script&gt;
+  $(document).ready(function(){
+    
+    $(&quot;p&quot;).<a href="http://docs.jquery.com/Events/click" title="Events/click">click</a>(function () {
+      $(this).<a href="http://docs.jquery.com/Attributes/toggleClass" title="Attributes/toggleClass">toggleClass</a>(&quot;highlight&quot;, 1000);
+    });
+
+  });
+  &lt;/script&gt;
+  &lt;style&gt;
+  p { margin: 4px; font-size:16px; font-weight:bolder; 
+      cursor:pointer; }
+  .blue { color:blue; }
+  .highlight { background:yellow; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p class=&quot;blue&quot;&gt;Click to toggle&lt;/p&gt;
+  &lt;p class=&quot;blue highlight&quot;&gt;highlight&lt;/p&gt;
+  &lt;p class=&quot;blue&quot;&gt;on these&lt;/p&gt;
+  &lt;p class=&quot;blue&quot;&gt;paragraphs&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p></div>
+</p><p></div>
+</tbody></table></div>
+</p><p></div></div>
+</p><!-- 
+Pre-expand include size: 11862 bytes
+Post-expand include size: 11012 bytes
+Template argument size: 4366 bytes
+Maximum: 2097152 bytes
+-->
+
+<!-- Saved in parser cache with key jqdocs_docs:pcache:idhash:2608-1!1!0!!en!2 and timestamp 20090303130313 -->

@@ -1,0 +1,15 @@
+﻿<div class="inner">
+	<strong>
+		<?php echo $this->filter("job_title", $this->job['Title']); ?>
+		<span class="lighterSmall"> <?php echo $this->translate("at"); ?> </span>
+		<?php echo $this->filter("job_company", $this->job['Company']); ?>
+		<span class="lighterSmall"> <?php echo $this->translate("in"); ?> </span>
+		<?php echo $this->filter("job_location", $this->job['Location']); ?>
+	</strong>
+</div>
+<div id="jobContent">
+	<h2><?php echo $this->translate("Description:"); ?></h2>
+	<?php echo $this->filter("job_description", $this->job['Description']); ?>
+	<h2><?php echo $this->translate("To apply:"); ?></h2>
+	<?php echo $this->filter("job_application_method", $this->job['ToApply']); ?>
+</div>

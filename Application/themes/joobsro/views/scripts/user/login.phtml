@@ -1,0 +1,11 @@
+<?php $this->headScript()->appendFile($this->themeUrl . '/js/login.js'); ?>
+<div>
+	<?php 
+		echo $this->form; 
+		if(isset($this->loginError)) {
+	?>
+		<div class="error"><?php echo $this->loginError; ?></div>
+	<?php
+		}
+	?>
+</div>
