@@ -26,7 +26,6 @@ class RssController extends Zend_Controller_Action {
 		require_once "Application/Models/Jobs.php";
 		
 		$conf			= Zend_Registry::get("conf");
-		$conf			= $conf['rss'];
 		$params 		= $this->getRequest()->getParams();
 		$this->_model 	= new Model_Jobs();
 		$allJobs 		= false;
@@ -38,7 +37,7 @@ class RssController extends Zend_Controller_Action {
 				$jobs = $this->_model->fetchAllJobs(0)
 									 ->order('ID DESC')
 									 ->where("CategoryID = '$categoryId'")
-									 ->limit($conf['ALL_JOBS_COUNT'], 0)
+									 ->limit($conf['rss']['ALL_JOBS_COUNT'], 0)
 									 ->fetch();
 				$jobs = $jobs->toArray();
 				$lastUpdate = strtotime($jobs[0]['ChangedDate']);
@@ -51,7 +50,7 @@ class RssController extends Zend_Controller_Action {
 			$allJobs = true;
 			$jobs = $this->_model->fetchAllJobs(0)
 								 ->order('ID DESC')
-								 ->limit($conf['ALL_JOBS_COUNT'], 0)
+								 ->limit($conf['rss']['ALL_JOBS_COUNT'], 0)
 								 ->fetch();
 			$jobs = $jobs->toArray();
 			$lastUpdate = strtotime($jobs[0]['ChangedDate']);
@@ -60,11 +59,11 @@ class RssController extends Zend_Controller_Action {
 		// Generate the feed
 		$siteUrl = "http://" . $_SERVER["HTTP_HOST"];
 		$data		= array(
-			"title"			  => $conf['COMMON_TITLE'] . " - " . (($allJobs) ? ("Toate joburile") : ($params['categorie'])),
+			"title"			  => $conf['general']['COMMON_TITLE'] . " - " . (($allJobs) ? ("Toate joburile") : ($params['categorie'])),
 			"link"			  => $siteUrl . $_SERVER["REQUEST_URI"],
 			"lastUpdate"	  => $lastUpdate,
 			'charset'		  => 'utf-8',
-			'description'	  => $conf['DESCRIPTION'],
+			'description'	  => $conf['rss']['DESCRIPTION'],
 			'entries'		  => array()
 		);
 		foreach($jobs as $job) {

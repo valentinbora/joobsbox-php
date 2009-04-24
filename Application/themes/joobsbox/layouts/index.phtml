@@ -34,7 +34,7 @@
 					</a>
 				</div>
 				<div id="search">
-					<form action="<?php echo $this->baseUrl; ?>/cauta" method="get">
+					<form action="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('search'); ?>" method="get">
 						<input name="txtSearch" type="text" id="searchInput" />
 						<input type="image" src="<?php echo $this->themeImages; ?>/button-search.gif" />
 					</form>

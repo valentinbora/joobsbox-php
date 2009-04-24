@@ -1,6 +1,7 @@
 <?php
-$translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Application/languages/url_ro.mo', 'ro');
-Zend_Controller_Router_Route::setDefaultTranslator($translate);
+$translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Application/languages/url', null, array('scan' => Zend_Translate::LOCALE_FILENAME));
+Zend_Registry::set("Joobsbox_Translate_URL", $translateUrl);
+Zend_Controller_Router_Route::setDefaultTranslator($translateUrl);
 $front = Zend_Controller_Front::getInstance();
 $router = $front->getRouter();
 
@@ -9,20 +10,18 @@ $rssRoute = new Zend_Controller_Router_Route(
     array(
 		'controller' => 'rss',  
 		'action' => 'index'
-	),
-	null,
-	$translate
+	)
 );
 
 $mainRoute = new Zend_Controller_Router_Route(
-    '@publish',
+    ':@controller/:@action/*',
     array(
-        'controller' => 'publish',
+        'controller' => 'index',
         'action'     => 'index'
     )
 );
 
-$router->addRoute("publish", $mainRoute);
+$router->addRoute("main", $mainRoute);
 $router->addRoute("rss", $rssRoute);
 
 $mainRoute->assemble(array());

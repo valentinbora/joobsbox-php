@@ -5,6 +5,7 @@ STANDALONE=1
 ADMIN_THEME=joobsbox grey
 THEME=joobsro
 COMMON_TITLE=Joobsbox PHP Demo
+LOCALE=en_UK
 
 [rss]
 ALL_JOBS_COUNT=15
