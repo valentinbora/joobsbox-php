@@ -2,6 +2,7 @@ body												{font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans
 
 /* Header */
 #admin-header										{width: 100%; height: 65px; background-color: #464646; background-image: url('../images/logo.png'); background-repeat: no-repeat; background-position: 17px 40%;}
+#admin-header a										{color: #EEE; font-size: 80%; position: relative; top: 30px; left: 170px;}
 
 /* Main area */
 #admin-main											{margin-left: 175px;}

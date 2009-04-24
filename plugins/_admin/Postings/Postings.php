@@ -7,10 +7,37 @@ class Postings extends AdminPlugin
 	}
 	
 	function indexAction() {
+		if(isset($_POST['action']) && method_exists($this, $_POST['action'] . 'Action')) {
+			$method = $_POST['action'] . 'Action';
+			$this->$method();
+		}
 		$pending = $this->jobsModel->fetchAllJobs(0, Model_Jobs::INCLUDE_NON_PUBLIC)->where("Public = ?", 0)->order('ID DESC')->fetch()->toArray();
 		
 		$this->view->pending  = $pending;
-		$this->view->postings = $this->jobsModel->fetchAllJobs()->toArray();
+		$this->view->postings = $this->jobsModel->fetchAllJobs(0)->order('ID DESC')->fetch()->toArray();
+	}
+	
+	private function deleteAction() {
+		$this->jobOperationsModel = $this->getModel("JobOperations");
+		
+		foreach($_POST['job'] as $job => $a) {
+			$job = (int)$job;
+			$this->jobOperationsModel->delete($this->jobOperationsModel->getAdapter()->quoteInto('ID = ?', $job));
+		}
+		echo "ok";
+		die();
+	}
+	
+	private function acceptAction() {
+		$this->jobOperationsModel = $this->getModel("JobOperations");
+		
+		foreach($_POST['job'] as $job => $a) {
+			$job = (int)$job;
+			Zend_Registry::get("EventHelper")->fireEvent("job_accepted", $job);
+			$this->jobOperationsModel->update(array('Public' => 1, 'ChangedDate' => new Zend_Db_Expr('NOW()')), $this->jobOperationsModel->getAdapter()->quoteInto('ID = ?', $job));
+		}
+		echo "ok";
+		die();
 	}
 	
 	function modifyAction() {

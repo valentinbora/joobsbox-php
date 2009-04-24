@@ -99,6 +99,15 @@ class Plugin {
 			$this->baseUrl = $baseUrl;
 		}
 	}
+	
+	/**
+     * gives access to application models
+     */
+	protected function getModel($modelName) {
+		Zend_Loader::loadFile($modelName . ".php", null, true);
+		$modelName = "Model_$modelName";
+		return new $modelName;
+	}
 }
 
 /**

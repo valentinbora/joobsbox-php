@@ -9,6 +9,7 @@
 .postings .ui-selecting 					{background: #FECA40;}
 .postings .ui-selected 					{background: #F39814; color: white;}
 .postings td, .postings th				{padding: 8px; margin-bottom: 2px; border: none; border-bottom: 1px solid #CCC; text-align: left;}
+.postings tr.noBorder td					{border: none;}
 .postings td								{background-color: #FFF; font-size: 90%;}
 .postings thead tr							{color: #FFF;}
 .postings tbody tr:hover td					{background-color: #DDE;}
@@ -25,3 +26,6 @@
 	
 /* Dashboard */
 h1.dashboard-title						{background-image: url('../images/icons/postings_48.png');}
+
+tr.next									{display: none;}
+a.expand								{text-decoration: none;

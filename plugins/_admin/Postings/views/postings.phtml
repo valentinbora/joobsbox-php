@@ -6,6 +6,7 @@
 	</ul>
 	
 	<div id="pending" class="tab-content postings-container">
+		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="form-pending">
 		<?php if(count($this->pending)): ?>
 		<div id="toolbar">
 			<?php echo $this->translate("Actions:"); ?>
@@ -15,27 +16,32 @@
 		<table id="pending-postings" class="postings">
 			<thead>
 				<tr>
+					<th></th>
 					<th><input type="checkbox" id="selectAllPending" /></th>
 					<th><?php echo $this->translate('Title'); ?></th>
 					<th><?php echo $this->translate('Company'); ?></th>
 					<th><?php echo $this->translate('Location'); ?></th>
-					<th><?php echo $this->translate('Description'); ?></th>
 					<th><?php echo $this->translate('Posted at'); ?></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach($this->pending as $posting): ?>
-				<tr>
+				<tr id="job_<?php echo $posting['ID']; ?>" class="job">
+					<td><a class="expand" href="#">+</a></td>
 					<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
 					<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></a></td>
 					<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
 					<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
-					<td><?php echo $this->filter("job_description_admin", substr($posting['Description'], 0, 15)); ?></td>
 					<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
+				</tr>
+				<tr class="next">
+					<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>
 		</table>
+		<input type="hidden" id="actionPending" name="action" value="approve" />
+		</form>
 		<?php else: echo $this->translate("No pending postings."); endif; ?>
 	</div>
 	
@@ -49,28 +55,35 @@
 			<thead>
 				<tr>
 					<th></th>
+					<th></th>
 					<th><?php echo $this->translate('Title'); ?></th>
 					<th><?php echo $this->translate('Company'); ?></th>
 					<th><?php echo $this->translate('Location'); ?></th>
-					<th><?php echo $this->translate('Description'); ?></th>
 					<th><?php echo $this->translate('Posted at'); ?></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach($this->postings as $posting): ?>
-				<tr>
+				<tr id="job_<?php echo $posting['ID']; ?>" class="job">
+					<td><a class="expand" href="#">+</a></td>
 					<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
 					<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></a></td>
 					<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
 					<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
-					<td><?php echo $this->filter("job_description_admin", substr($posting['Description'], 0, 15)); ?></td>
 					<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
+				</tr>
+				<tr class="next">
+					<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>
 		</table>
 		<?php else: echo $this->translate("No active postings."); endif; ?>
 	</div>
+</div>
+
+<div id="operationDialog">
+	<?php echo $this->translate("The operation has finished successfully."); ?>
 </div>
 
 <?php

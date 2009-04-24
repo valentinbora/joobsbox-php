@@ -23,6 +23,7 @@ require "db.ini.php";
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 Zend_Db_Table_Abstract::setDefaultAdapter($db);
 Zend_Registry::set("db", $db);
+$db->query('SET NAMES "utf8"');
 
 if(!file_exists(APPLICATION_DIRECTORY . "/config/passwordSalt.php")) {
 	$salt = "";

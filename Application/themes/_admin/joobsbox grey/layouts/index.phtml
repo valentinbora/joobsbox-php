@@ -4,7 +4,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <?php 
-	$this->headTitle()->prepend('Jobbboard tester');
+	$this->headTitle($this->conf['general']['COMMON_TITLE']);
 	$this->headTitle()->setSeparator(' - ');
 	echo $this->headTitle();
 ?>
@@ -25,7 +25,7 @@
 </head>
 <body>
 	<div id="admin-header">
-		
+		<a href="<?php echo $this->baseUrl; ?>">← <?php echo $this->translate("Back to site"); ?></a>
 	</div>
 	
 	<div id="admin-main">

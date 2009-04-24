@@ -67,7 +67,6 @@ class PublishController extends Zend_Controller_Action
 			->setDescription('HTML code is not accepted. Length must be less than 4000 characters.')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
-			->addFilter('HtmlEntities')
 			->addValidator('notEmpty')
 			->setRequired(true);
 		
@@ -119,7 +118,7 @@ class PublishController extends Zend_Controller_Action
 				throw new Exception($this->view->translate("You are not allowed to add the same job multiple times."));
 			}
 			
-			// Ok, here we go: insert the job into the database
+			// Ok, here we go: insert the job into the database --- bombs away!
 			try {
 				$values['id'] = $jobOperations->insert(array(
 					'CategoryID'	=> $values['category'],
