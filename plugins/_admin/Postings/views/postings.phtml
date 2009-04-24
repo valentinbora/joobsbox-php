@@ -5,14 +5,14 @@
 		<li><a href="#approved"><?php echo $this->translate("Approved"); ?></a></li>
 	</ul>
 	
-	<div id="pending" class="tab-content">
+	<div id="pending" class="tab-content postings-container">
 		<?php if(count($this->pending)): ?>
 		<div id="toolbar">
 			<?php echo $this->translate("Actions:"); ?>
-			<a id="acceptPostings"><?php echo $this->translate('Accept selected postings'); ?></a>
-			<a id="deletePostings"><?php echo $this->translate('Delete selected postings'); ?></a>
+			<a id="acceptPostingsPending" class="accept"><?php echo $this->translate('Accept selected postings'); ?></a>
+			<a id="deletePostingsPending" class="delete"><?php echo $this->translate('Delete selected postings'); ?></a>
 		</div>
-		<table id="pending-postings">
+		<table id="pending-postings" class="postings">
 			<thead>
 				<tr>
 					<th><input type="checkbox" id="selectAllPending" /></th>
@@ -39,8 +39,37 @@
 		<?php else: echo $this->translate("No pending postings."); endif; ?>
 	</div>
 	
-	<div id="approved">
-		
+	<div id="approved" class="tab-content postings-container">
+		<?php if(count($this->postings)): ?>
+		<div id="toolbar">
+			<?php echo $this->translate("Actions:"); ?>
+			<a id="deletePostingsApproved" class="delete"><?php echo $this->translate('Delete selected postings'); ?></a>
+		</div>
+		<table id="approved-postings" class="postings">
+			<thead>
+				<tr>
+					<th></th>
+					<th><?php echo $this->translate('Title'); ?></th>
+					<th><?php echo $this->translate('Company'); ?></th>
+					<th><?php echo $this->translate('Location'); ?></th>
+					<th><?php echo $this->translate('Description'); ?></th>
+					<th><?php echo $this->translate('Posted at'); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach($this->postings as $posting): ?>
+				<tr>
+					<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
+					<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></a></td>
+					<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
+					<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
+					<td><?php echo $this->filter("job_description_admin", substr($posting['Description'], 0, 15)); ?></td>
+					<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php else: echo $this->translate("No active postings."); endif; ?>
 	</div>
 </div>
 

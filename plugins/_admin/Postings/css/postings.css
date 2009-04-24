@@ -5,23 +5,23 @@
 .tab-content							{-webkit-border-radius-topleft: 6px;}
 .tab-content table						{width: 100%;}
 
-#pending-postings 						{list-style: none; margin: 0; padding: 0; background-color: #546375; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; -webkit-border-radius-topleft: 10px; -webkit-border-radius-topright: 10px;}
-#pending-postings .ui-selecting 			{background: #FECA40;}
-#pending-postings .ui-selected 			{background: #F39814; color: white;}
-#pending-postings td, #pending-postings th{padding: 8px; margin-bottom: 2px; border: none; border-bottom: 1px solid #CCC; text-align: left;}
-#pending-postings td						{background-color: #FFF; font-size: 90%;}
-#pending-postings thead tr					{color: #FFF;}
-#pending-postings tbody tr:hover td			{background-color: #DDE;}
-#pending-postings tbody tr.selected td		{background-color: #f6a828;}
+.postings 								{list-style: none; margin: 0; padding: 0; background-color: #546375; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; -webkit-border-radius-topleft: 10px; -webkit-border-radius-topright: 10px; margin-top: 150px; width: 100%;}
+.postings .ui-selecting 					{background: #FECA40;}
+.postings .ui-selected 					{background: #F39814; color: white;}
+.postings td, .postings th				{padding: 8px; margin-bottom: 2px; border: none; border-bottom: 1px solid #CCC; text-align: left;}
+.postings td								{background-color: #FFF; font-size: 90%;}
+.postings thead tr							{color: #FFF;}
+.postings tbody tr:hover td					{background-color: #DDE;}
+.postings tbody tr.selected td				{background-color: #f6a828;}
 
 #posting-tabs							{padding: 0; margin-top: 15px;}
 #posting-tabs ul, #posting-tabs ul li		{list-style: none;}
-#pending								{position: relative; padding: 150px 0; overflow: hidden;}	
-#pending #toolbar						{clear: both; text-align: left; width: 100%; background-color: #dedede; background-image: url('../images/toolkit_background.jpg'); background-position: left top; background-repeat: repeat-x; padding: 25px 5px 20px 25px; border-bottom: 4px solid #b5b5b5; position: absolute; left: 0; top: 0;}
-	#pending #toolbar a					{cursor: pointer; display: block; background-repeat: no-repeat; background-position: 3px 50%; padding: 5px 5px 2px 30px; height: 22px; width: 35%}
-	#pending #toolbar a:hover			{background-color: #FCFCFC;}
-	#pending #toolbar a#acceptPostings	{background-image: url('../images/icons/add_20.png');}
-	#pending #toolbar a#deletePostings  	{background-image: url('../images/icons/delete_20.png');}
+.postings-container						{position: relative; padding: 150px 0; overflow: hidden;}	
+.postings-container #toolbar				{clear: both; text-align: left; width: 100%; background-color: #dedede; background-image: url('../images/toolkit_background.jpg'); background-position: left top; background-repeat: repeat-x; padding: 25px 5px 20px 25px; border-bottom: 4px solid #b5b5b5; position: absolute; left: 0; top: 0;}
+	.postings-container #toolbar a					{cursor: pointer; display: block; background-repeat: no-repeat; background-position: 3px 50%; padding: 5px 5px 2px 30px; height: 22px; width: 35%}
+	.postings-container #toolbar a:hover				{background-color: #FCFCFC;}
+	.postings-container #toolbar a.accept			{background-image: url('../images/icons/add_20.png');}
+	.postings-container #toolbar a.delete		 	{background-image: url('../images/icons/delete_20.png');}
 	
 /* Dashboard */
 h1.dashboard-title						{background-image: url('../images/icons/postings_48.png');}

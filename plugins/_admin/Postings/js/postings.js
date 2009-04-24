@@ -1,29 +1,23 @@
 $(function() {
 	$("#posting-tabs").tabs();
-	$("#pending-postings tbody tr").click(function(el) {
+	$("#pending-postings tbody tr").click(function(ev) {
 		var cb = $(this).find("input[type=checkbox]");
 		cb = cb[0];
-		if($(cb).attr("checked")) {
-			$(this).removeClass("selected");
-			$(cb).attr("checked", false);
-		} else {
-			$(this).addClass("selected");
-			$(cb).attr("checked", true);
+		$(this).toggleClass("selected");
+		if($(ev.target).attr("tagName") != "INPUT") {
+			$(cb).attr("checked", $(this).hasClass("selected"));
 		}
 	});
 	$("#selectAllPending").click(function(){
 		if($(this).attr("checked")) {
-			$("#pending-postings tbody tr td input[type=checkbox]").attr("checked", false);
-		} else {
 			$("#pending-postings tbody tr td input[type=checkbox]").attr("checked", true);
+			$("#pending-postings tbody tr").addClass("selected");
+		} else {
+			$("#pending-postings tbody tr td input[type=checkbox]").attr("checked", false);
+			$("#pending-postings tbody tr").removeClass("selected");
 		}
 	});
-	$('#saveConfiguration').click(function(){
-		var data = {};
-
-		$.post(pluginUrl + 'saveConfiguration', {'data': $.toJSON(data)},
-		  function(data){
-		    	$('#saveDialog').dialog('option', 'mustReload', data.mustReload).dialog('open');			
-		  }, "json");
+	$("#deletePostingsPending").click(function() {
+		
 	});
 });
