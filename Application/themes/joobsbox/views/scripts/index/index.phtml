@@ -1,0 +1,24 @@
+	<div class="list">
+		<?php foreach($this->jobs as $category => $jobs): ?>
+		<div class="inner">
+			<div class="toRight">
+				<a href="<?php echo $this->baseUrl;?>/rss/categorie/<?php echo $this->MakeLink($category);?>/">RSS</a>
+				<a href="<?php echo $this->baseUrl;?>/rss/categorie/<?php echo $this->MakeLink($category);?>/"><img src="<?php echo $this->themeImages;?>/icon-rss.gif" alt="RSS" border="0" /></a>
+			</div>
+			<a href="<?php echo $this->baseUrl;?>/categorie/<?php echo $this->MakeLink($category);?>.html">
+				<?php echo $category; ?>
+			</a>
+		</div>
+			<ul>
+				<?php foreach($jobs as $a => $job): ?>
+				<li <?php if($a%2):?>class="alternate"<?php endif;?>>
+					<a href="<?php echo $this->baseUrl;?>/job/<?php echo $this->MakeLink($job['Title']) . "-" . $job['ID']; ?>.html"><?php echo $this->filter("job_title", $job['Title']); ?></a>
+					<span class="lighterSmall"> <?php echo $this->translate("at"); ?> </span>
+					<?php echo $this->filter("job_company", $job['Company']); ?>
+					<span class="lighterSmall"> <?php echo $this->translate("in"); ?> </span>
+					<?php echo $this->filter("job_location", $job['Location']); ?>
+				</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endforeach; ?>
+	</div>

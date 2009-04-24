@@ -13,15 +13,7 @@
  * @package Joobsbox_Controllers
  */
 class JobController extends Zend_Controller_Action
-{
-	public function init() {
-		//$this->_forward("job");
-	}
-	
-	public function indexAction() {
-	
-	}
-	
+{	
 	public function jobAction() {
 		$jobUrl = $this->getRequest()->getParams();
 		$jobUrl = $jobUrl['action'];
@@ -35,7 +27,7 @@ class JobController extends Zend_Controller_Action
 		$job	= $jobs->fetchJobById($jobId);
 		
 		if(!$job) {
-			throw new Zend_Controller_Action_Exception('Job-ul nu exista');
+			throw new Zend_Controller_Action_Exception(_('The requested job does not exist!'));
 		}
 		
 		$this->view->job = $job;

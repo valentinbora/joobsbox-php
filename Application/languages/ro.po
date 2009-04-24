@@ -14,9 +14,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: translate;setLabel;setDescription;setValue\n"
 "X-Poedit-Basepath: I:/web/jobboard/www/\n"
-"X-Poedit-SearchPath-0: Application/Controllers\n"
-"X-Poedit-SearchPath-1: Application/Helpers\n"
-"X-Poedit-SearchPath-2: Application/Themes\n"
+"X-Poedit-SearchPath-0: Application/\n"
 
 #: Application/Controllers/CategorieController.php:35
 msgid "This category does not exist."
@@ -133,6 +131,9 @@ msgstr "Jobul a fost salvat. Acum trebuie acceptat de un moderator pentru a apă
 #: Application/Themes/_admin/joobsbox grey/layouts/index.phtml:57
 msgid "Dashboard"
 msgstr "Panou control"
+
+msgid "publish"
+msgstr "publica"
 
 #~ msgid "Create category"
 #~ msgstr "Creează categorie"

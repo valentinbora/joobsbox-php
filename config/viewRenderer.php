@@ -18,6 +18,7 @@ function configureTheme($theme = APPLICATION_THEME) {
 	$conf = Zend_Registry::get("conf");
 	$conf['general']['THEME'] = $theme;
 	Zend_Registry::set("conf", $conf);
+	$viewRenderer->view->conf = $conf;
 	
 	if($conf['general']['STANDALONE']) {
 		if($layout = Zend_Layout::getMvcInstance()) {

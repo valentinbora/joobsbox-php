@@ -56,4 +56,4 @@ if(isset($joobsbox_base_url)) {
 }
 
 define("BASE_URL", $baseUrl);
-define("APPLICATION_THEME", "joobsro");
+define("APPLICATION_THEME", "joobsbox");
