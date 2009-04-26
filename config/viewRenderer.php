@@ -5,7 +5,7 @@ $viewRenderer->initView();
 $viewRenderer->view->baseUrl=$baseUrl;
 $viewRenderer->view->publicUrl=$baseUrl . "/public";
 
-function configureTheme($theme = APPLICATION_THEME) {
+function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 	global $baseUrl, $viewRenderer;
 	$viewRenderer->view->themeUrl		= $baseUrl . "/public/" . $theme;
 	$viewRenderer->view->themeImages	= $baseUrl . "/public/" . $theme . "/images";
@@ -23,10 +23,11 @@ function configureTheme($theme = APPLICATION_THEME) {
 	if($conf['general']['STANDALONE']) {
 		if($layout = Zend_Layout::getMvcInstance()) {
 			$layout->setLayoutPath(APPLICATION_DIRECTORY . '/Application/themes/' . $conf['general']['THEME'] . '/layouts');
+			$layout->setLayout($layoutName);
 		} else {
 			Zend_Layout::startMvc(array(
 				'layoutPath' => APPLICATION_DIRECTORY . '/Application/themes/' . $conf['general']['THEME'] . '/layouts',
-				'layout' => 'index'
+				'layout' => $layoutName
 			));
 		}
 	}

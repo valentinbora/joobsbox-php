@@ -1,0 +1,97 @@
+<h1 class="dashboard-title"><?php echo $this->translate("Postings"); ?></h1>
+<div id="posting-tabs">
+	<ul>
+		<li><a href="#pending"><?php echo $this->translate("Pending"); ?></a></li>
+		<li><a href="#approved"><?php echo $this->translate("Approved"); ?></a></li>
+	</ul>
+	
+	<div id="pending" class="tab-content postings-container">
+		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="form-pending">
+		<?php if(count($this->pending)): ?>
+		<div id="toolbar">
+			<?php echo $this->translate("Actions:"); ?>
+			<a id="acceptPostingsPending" class="accept"><?php echo $this->translate('Accept selected postings'); ?></a>
+			<a id="deletePostingsPending" class="delete"><?php echo $this->translate('Delete selected postings'); ?></a>
+		</div>
+		<table id="pending-postings" class="postings">
+			<thead>
+				<tr>
+					<th></th>
+					<th><input type="checkbox" id="selectAllPending" /></th>
+					<th><?php echo $this->translate('Title'); ?></th>
+					<th><?php echo $this->translate('Company'); ?></th>
+					<th><?php echo $this->translate('Location'); ?></th>
+					<th><?php echo $this->translate('Posted at'); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach($this->pending as $posting): ?>
+				<tr id="job_<?php echo $posting['ID']; ?>" class="job">
+					<td><a class="expand" href="#">+</a></td>
+					<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
+					<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></a></td>
+					<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
+					<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
+					<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
+				</tr>
+				<tr class="next">
+					<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+		<input type="hidden" id="actionPending" name="action" value="approve" />
+		</form>
+		<?php else: echo $this->translate("No pending postings."); endif; ?>
+	</div>
+	
+	<div id="approved" class="tab-content postings-container">
+		<?php if(count($this->postings)): ?>
+		<div id="toolbar">
+			<?php echo $this->translate("Actions:"); ?>
+			<a id="deletePostingsApproved" class="delete"><?php echo $this->translate('Delete selected postings'); ?></a>
+		</div>
+		<table id="approved-postings" class="postings">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th><?php echo $this->translate('Title'); ?></th>
+					<th><?php echo $this->translate('Company'); ?></th>
+					<th><?php echo $this->translate('Location'); ?></th>
+					<th><?php echo $this->translate('Posted at'); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach($this->postings as $posting): ?>
+				<tr id="job_<?php echo $posting['ID']; ?>" class="job">
+					<td><a class="expand" href="#">+</a></td>
+					<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
+					<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></a></td>
+					<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
+					<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
+					<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
+				</tr>
+				<tr class="next">
+					<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php else: echo $this->translate("No active postings."); endif; ?>
+	</div>
+</div>
+
+<div id="operationDialog">
+	<?php echo $this->translate("The operation has finished successfully."); ?>
+</div>
+
+<?php
+	$this->headLink()->appendStylesheet($this->path . 'css/postings.css');
+	$this->headLink()->appendStylesheet($this->baseUrl . '/public/js/lib/jquery-ui/css/cupertino/jquery-ui-1.7.1.custom.css');
+	$this->headScript()
+		->appendFile($this->path . 'js/jquery.json-1.3.min.js')
+		->appendScript('var pluginUrl="' . $this->pluginUrl . '";')
+		->appendFile($this->path . 'js/postings.js', 'text/javascript')
+		->appendFile($this->baseUrl . '/public/js/lib/jquery-ui/js/jquery-ui-1.7.custom.min.js');
+?>

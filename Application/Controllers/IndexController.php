@@ -18,6 +18,9 @@ class IndexController extends Zend_Controller_Action {
 	protected $_model;
 	
 	public function indexAction(){
+		if(!file_exists("config/db.ini.php")) {
+			$this->_redirect('install/step1');
+		}
 		require_once "Application/Models/Jobs.php";
 		$this->_model = new Model_Jobs();
 		

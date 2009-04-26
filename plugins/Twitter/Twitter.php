@@ -1,5 +1,8 @@
 <?php
 class Twitter extends Plugin {
+	public function init() {
+		
+	}
 	
 	function event_job_accepted($jobId) {
 		$jobData = $this->getModel("Jobs")->fetchJobById($jobId);

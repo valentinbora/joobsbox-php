@@ -37,15 +37,15 @@
 			<?php foreach($this->plugins as $pluginName => $pluginOptions): ?>
 			<li class="item <?php if($pluginName == $this->currentPluginName):?>current<?php endif; ?>">
 				<a href="<?php echo $this->baseUrl . strtolower("/admin/$pluginName"); ?>" style="background-image: url(<?php 
-						if($pluginOptions->main->image): 
+						if(isset($pluginOptions->main) && isset($pluginOptions->main->image)): 
 							echo $this->baseUrl . '/' . $this->pluginPath . $pluginName . '/' . $pluginOptions->main->image; 
 						else:
 							echo $this->themeImages . '/adminPluginNoImage.png'; 
 						endif;?>);" />
 					<?php 
-						if($pluginOptions->main->{"title_" . $this->locale}) {
+						if(isset($pluginOptions->main) && isset($pluginOptions->main->{"title_" . $this->locale})) {
 							echo ucfirst($pluginOptions->main->{"title_" . $this->locale});
-						} elseif($pluginOptions->main->title) {
+						} elseif(isset($pluginOptions->main) && isset($pluginOptions->main->title)) {
 							echo ucfirst($pluginOptions->main->title);
 						} else {
 							echo ucfirst($pluginName); 

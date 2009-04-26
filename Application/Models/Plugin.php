@@ -14,7 +14,7 @@
  * Provides application plugins with storage and helpers
  */
 class Plugin {
-	protected $_helper;
+	public $_helper;
 	private $_pluginName;
 	
 	/**

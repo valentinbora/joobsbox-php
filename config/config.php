@@ -1,7 +1,6 @@
 <?php
 ini_set("display_errors", "On");
 error_reporting(E_ALL | E_NOTICE | E_STRICT);
-date_default_timezone_set("Europe/Bucharest");
 
 // Class autoload functionality
 include("Zend/Loader.php");
@@ -19,35 +18,40 @@ Zend_Registry::set("Translation_Hash", $translate->getMessages());
 Zend_Registry::set('Zend_Translate', $translate);
 
 // Database parameters
-require "db.ini.php";
-$db = Zend_Db::factory('PDO_MYSQL', $params);
-Zend_Db_Table_Abstract::setDefaultAdapter($db);
-Zend_Registry::set("db", $db);
-$db->query('SET NAMES "utf8"');
-
-if(!file_exists(APPLICATION_DIRECTORY . "/config/passwordSalt.php")) {
-	$salt = "";
-	for ($i = 0; $i < 50; $i++) {
-		$salt .= chr(rand(97, 122));
-	}
-	file_put_contents("config/passwordSalt.php", $salt);
-	Zend_Registry::set('staticSalt', $salt);
-} else {
-	Zend_Registry::set('staticSalt', file_get_contents(APPLICATION_DIRECTORY . "/config/passwordSalt.php"));
+if(file_exists('config/db.ini.php')) {
+	$db = Zend_Db::factory('PDO_MYSQL', new Zend_Config_Ini('config/db.ini.php'));
+	Zend_Db_Table_Abstract::setDefaultAdapter($db);
+	Zend_Registry::set("db", $db);
+	$db->query('SET NAMES "utf8"');
+	
+	getStaticSalt();
+	
+	// Authentication
+	$auth = Zend_Auth::getInstance();
+	$authAdapter = new Zend_Auth_Adapter_DbTable(
+		Zend_Registry::get("db"),
+		'users',
+		'username',
+		'password',
+		"MD5(CONCAT('"
+		. Zend_Registry::get('staticSalt')
+		. "', ?, password_salt))"
+	);
+	Zend_Registry::set("authAdapter", $authAdapter);
 }
 
-// Authentication
-$auth = Zend_Auth::getInstance();
-$authAdapter = new Zend_Auth_Adapter_DbTable(
-	Zend_Registry::get("db"),
-	'users',
-	'username',
-	'password',
-	"MD5(CONCAT('"
-	. Zend_Registry::get('staticSalt')
-	. "', ?, password_salt))"
-);
-Zend_Registry::set("authAdapter", $authAdapter);
+function getStaticSalt() {
+	if(!file_exists(APPLICATION_DIRECTORY . "/config/passwordSalt.php")) {
+		$salt = "";
+		for ($i = 0; $i < 50; $i++) {
+			$salt .= chr(rand(97, 122));
+		}
+		file_put_contents("config/passwordSalt.php", $salt);
+		Zend_Registry::set('staticSalt', $salt);
+	} else {
+		Zend_Registry::set('staticSalt', file_get_contents(APPLICATION_DIRECTORY . "/config/passwordSalt.php"));
+	}
+}
 
 if(isset($joobsbox_base_url)) {
 	$baseUrl = $joobsbox_base_url;
