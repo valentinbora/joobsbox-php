@@ -16,7 +16,7 @@
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Mail.php 14071 2009-02-12 22:22:43Z beberlei $
+ * @version    $Id: Mail.php 14072 2009-02-12 22:23:49Z beberlei $
  */
 
 
@@ -254,7 +254,7 @@ class Zend_Mail extends Zend_Mime_Message
      * Return encoding of mail headers
      *
      * @deprecated use {@link getHeaderEncoding()} instead
-     * @return <type>
+     * @return string
      */
     public function getEncodingOfHeaders()
     {

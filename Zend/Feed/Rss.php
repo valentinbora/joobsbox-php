@@ -17,7 +17,7 @@
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Rss.php 13894 2009-01-31 13:23:40Z yoshida@zend.co.jp $
+ * @version    $Id: Rss.php 13901 2009-02-01 12:03:02Z yoshida@zend.co.jp $
  */
 
 
@@ -183,7 +183,8 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $image = $this->_element->createElement('image');
             $url = $this->_element->createElement('url', $array->image);
             $image->appendChild($url);
-            $imagetitle = $this->_element->createElement('title', $array->title);
+            $imagetitle = $this->_element->createElement('title');
+            $imagetitle->appendChild($this->_element->createCDATASection($array->title));
             $image->appendChild($imagetitle);
             $imagelink = $this->_element->createElement('link', $array->link);
             $image->appendChild($imagelink);

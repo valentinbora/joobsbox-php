@@ -402,7 +402,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             $sql = "SELECT DISTINCT C.TABLE_SCHEMA, C.TABLE_NAME, C.COLUMN_NAME, C.ORDINAL_POSITION,
                 C.DATA_TYPE, C.COLUMN_DEFAULT, C.NULLS ,C.LENGTH, C.SCALE, LEFT(C.IDENTITY,1),
                 LEFT(tc.TYPE, 1) AS tabconsttype, k.COLSEQ
-                FROM QSYS2.SYSCOLUMNS C
+                FROM QSYS2.SYSCOLUMNS C     
                 LEFT JOIN (QSYS2.syskeycst k JOIN QSYS2.SYSCST tc
                     ON (k.TABLE_SCHEMA = tc.TABLE_SCHEMA
                       AND k.TABLE_NAME = tc.TABLE_NAME

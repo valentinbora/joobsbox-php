@@ -16,7 +16,7 @@
  * @package    Zend_Layout
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Layout.php 13017 2008-12-04 15:29:24Z doctorrock83 $
+ * @version    $Id: Layout.php 13016 2008-12-04 15:25:43Z doctorrock83 $
  */
 
 /**

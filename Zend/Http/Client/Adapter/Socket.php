@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @version    $Id: Socket.php 13014 2008-12-04 12:07:05Z yoshida@zend.co.jp $
+ * @version    $Id: Socket.php 13013 2008-12-04 12:04:24Z yoshida@zend.co.jp $
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

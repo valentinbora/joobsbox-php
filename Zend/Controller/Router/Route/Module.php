@@ -15,7 +15,7 @@
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
+ * @version    $Id: Module.php 14247 2009-03-08 17:37:50Z dasprid $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -148,8 +148,6 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
         
         if (!$this->isPartial()) {
             $path = trim($path, self::URI_DELIMITER);
-        } else {
-            $matchedPath = $path;
         }
 
         if ($path != '') {
@@ -178,7 +176,7 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
         }
         
         if ($this->isPartial()) {
-            $this->setMatchedPath($matchedPath);
+            $this->setMatchedPath($path);
         }
 
         $this->_values = $values + $params;

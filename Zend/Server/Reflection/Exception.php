@@ -31,7 +31,7 @@ require_once 'Zend/Exception.php';
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id: Exception.php 12619 2008-11-13 15:24:29Z alexander $
+ * @version $Id: Exception.php 12618 2008-11-13 15:23:05Z alexander $
  */
 class Zend_Server_Reflection_Exception extends Zend_Exception
 {

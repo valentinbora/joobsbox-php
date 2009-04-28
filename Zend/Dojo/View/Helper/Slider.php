@@ -17,7 +17,7 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Slider.php 13658 2009-01-15 23:37:30Z matthew $
+ * @version    $Id: Slider.php 13657 2009-01-15 23:36:35Z matthew $
  */
 
 /** Zend_Dojo_View_Helper_Dijit */

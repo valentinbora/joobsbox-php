@@ -17,7 +17,7 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: SubmitButton.php 12692 2008-11-18 20:30:09Z matthew $
+ * @version    $Id: SubmitButton.php 12691 2008-11-18 20:16:06Z matthew $
  */
 
 /** Zend_Dojo_View_Helper_Button */

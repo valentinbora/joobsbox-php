@@ -16,7 +16,7 @@
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: DbSelect.php 12287 2008-11-04 21:49:22Z mikaelkael $
+ * @version    $Id: DbSelect.php 14137 2009-02-21 23:25:39Z norm2782 $
  */
 
 /**
@@ -149,6 +149,7 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
     {
         if ($this->_rowCount === null) {
             $rowCount = clone $this->_select;
+            $db = $rowCount->getAdapter();
 
             /**
              * The DISTINCT and GROUP BY queries only work when selecting one column.
@@ -160,14 +161,20 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
                 $columns = array();
 
                 foreach ($columnParts as $part) {
-                    if ($part[1] == '*' || $part[1] instanceof Zend_Db_Expr) {
+                    if ($part[1] == Zend_Db_Select::SQL_WILDCARD || $part[1] instanceof Zend_Db_Expr) {
                         $columns[] = $part[1];
                     } else {
-                        $columns[] = $rowCount->getAdapter()->quoteIdentifier($part[1], true);
+                        $column = $db->quoteIdentifier($part[1], true);
+
+                        if (!empty($part[0])) {
+                            $column = $db->quoteIdentifier($part[0], true) . '.' . $column;
+                        }
+
+                        $columns[] = $column;
                     }
                 }
 
-                if (count($columns) == 1 && $columns[0] == '*') {
+                if (count($columns) == 1 && $columns[0] == Zend_Db_Select::SQL_WILDCARD) {
                     $groupPart = null;
                 } else {
                     $groupPart = implode(',', $columns);
@@ -176,8 +183,8 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
                 $groupParts = $rowCount->getPart(Zend_Db_Select::GROUP);
 
                 foreach ($groupParts as &$part) {
-                    if (!($part == '*' || $part instanceof Zend_Db_Expr)) {
-                        $part = $rowCount->getAdapter()->quoteIdentifier($part, true);
+                    if (!($part == Zend_Db_Select::SQL_WILDCARD || $part instanceof Zend_Db_Expr)) {
+                        $part = $db->quoteIdentifier($part, true);
                     }
                 }
 
@@ -185,7 +192,7 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
             }
 
             $countPart  = empty($groupPart) ? 'COUNT(*)' : 'COUNT(DISTINCT ' . $groupPart . ')';
-            $expression = new Zend_Db_Expr($countPart . ' AS ' . $rowCount->getAdapter()->quoteIdentifier(self::ROW_COUNT_COLUMN));
+            $expression = new Zend_Db_Expr($countPart . ' AS ' . $db->quoteIdentifier(self::ROW_COUNT_COLUMN));
 
             $rowCount->__toString(); // Workaround for ZF-3719 and related
             $rowCount->reset(Zend_Db_Select::COLUMNS)

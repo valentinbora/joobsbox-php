@@ -168,6 +168,8 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
     {
         // Loop each element and write the name of the property.
         foreach ($object as $key => $value) {
+            // skip variables starting with an _ provate transient
+            if( $key[0] == "_")	continue;
             $this->_stream->writeUTF($key);
             $this->writeTypeMarker($value);
         }
@@ -277,14 +279,18 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
                 // Check to see if the user has defined an explicit Action Script type.
             case isset($object->_explicitType):
                 $className = $object->_explicitType;
-                unset($object->_explicitType);
                 break;
                 // Check if user has defined a method for accessing the Action Script type
             case method_exists($object, 'getASClassName'):
                 $className = $object->getASClassName();
                 break;
                 // No return class name is set make it a generic object
+            case ($object instanceof stdClass):
+                $className = '';
+                break;
+		// By default, use object's class name
             default:
+		$className = get_class($object);
                 break;
         }
         if(!$className == '') {

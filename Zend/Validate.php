@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -17,15 +16,13 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Validate.php 8729 2008-03-10 11:44:10Z thomas $
+ * @version    $Id: Validate.php 14567 2009-03-31 21:45:57Z thomas $
  */
-
 
 /**
  * @see Zend_Validate_Interface
  */
 require_once 'Zend/Validate/Interface.php';
-
 
 /**
  * @category   Zend
@@ -140,12 +137,12 @@ class Zend_Validate implements Zend_Validate_Interface
      */
     public static function is($value, $classBaseName, array $args = array(), $namespaces = array())
     {
-        $namespaces = array_merge(array('Zend_Validate'), (array) $namespaces);
+        $namespaces = array_merge((array) $namespaces, array('Zend_Validate'));
         foreach ($namespaces as $namespace) {
             $className = $namespace . '_' . ucfirst($classBaseName);
             try {
                 require_once 'Zend/Loader.php';
-                @Zend_Loader::loadClass($className);
+                Zend_Loader::loadClass($className);
                 if (class_exists($className, false)) {
                     $class = new ReflectionClass($className);
                     if ($class->implementsInterface('Zend_Validate_Interface')) {

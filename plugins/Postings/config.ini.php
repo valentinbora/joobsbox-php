@@ -1,4 +1,4 @@
 [main]
-title_ro_RO			=	Anunțuri
-title_en_UK			=	Postings
+title_ro			=	Anunțuri
+title_en			=	Postings
 image				=	images/postings_24.png

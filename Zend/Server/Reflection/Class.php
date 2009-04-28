@@ -24,11 +24,6 @@
 require_once 'Zend/Server/Reflection/Method.php';
 
 /**
- * Zend_Server_Reflection_Exception
- */
-require_once 'Zend/Server/Reflection/Exception.php';
-
-/**
  * Class/Object reflection
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
@@ -39,7 +34,7 @@ require_once 'Zend/Server/Reflection/Exception.php';
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id: Class.php 12619 2008-11-13 15:24:29Z alexander $
+ * @version $Id: Class.php 13217 2008-12-14 11:09:37Z thomas $
  */
 class Zend_Server_Reflection_Class
 {
@@ -110,6 +105,7 @@ class Zend_Server_Reflection_Class
             return call_user_func_array(array($this->_reflection, $method), $args);
         }
 
+        require_once 'Zend/Server/Reflection/Exception.php';
         throw new Zend_Server_Reflection_Exception('Invalid reflection method');
     }
 
@@ -180,6 +176,7 @@ class Zend_Server_Reflection_Class
         }
 
         if (!is_string($namespace) || !preg_match('/[a-z0-9_\.]+/i', $namespace)) {
+            require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid namespace');
         }
 

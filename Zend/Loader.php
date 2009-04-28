@@ -16,7 +16,7 @@
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Loader.php 12507 2008-11-10 16:29:09Z matthew $
+ * @version    $Id: Loader.php 12772 2008-11-22 17:05:16Z matthew $
  */
 
 /**
@@ -80,7 +80,7 @@ class Zend_Loader
             self::loadFile($file, $dirs, true);
         } else {
             self::_securityCheck($file);
-            include_once $file;
+            include $file;
         }
 
         if (!class_exists($class, false) && !interface_exists($class, false)) {
@@ -183,7 +183,7 @@ class Zend_Loader
     public static function autoload($class)
     {
         try {
-            self::loadClass($class);
+            @self::loadClass($class);
             return $class;
         } catch (Exception $e) {
             return false;
@@ -232,7 +232,7 @@ class Zend_Loader
         /**
          * Security check
          */
-        if (preg_match('/[^a-z0-9\\/\\\\_.-]/i', $filename)) {
+        if (preg_match('/[^a-z0-9\\/\\\\_.:-]/i', $filename)) {
             require_once 'Zend/Exception.php';
             throw new Zend_Exception('Security check: Illegal character in filename');
         }

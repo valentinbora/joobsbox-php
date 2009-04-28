@@ -17,14 +17,11 @@
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 13691 2009-01-19 05:33:06Z cadorn $
+ * @version    $Id: Abstract.php 13621 2009-01-14 01:53:04Z cadorn $
  */
 
 /** Zend_Log_Filter_Priority */
 require_once 'Zend/Log/Filter/Priority.php';
-
-/** Zend_Log_Exception */
-require_once 'Zend/Log/Exception.php';
 
 /**
  * @category   Zend
@@ -32,7 +29,7 @@ require_once 'Zend/Log/Exception.php';
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 13691 2009-01-19 05:33:06Z cadorn $
+ * @version    $Id: Abstract.php 13621 2009-01-14 01:53:04Z cadorn $
  */
 abstract class Zend_Log_Writer_Abstract
 {

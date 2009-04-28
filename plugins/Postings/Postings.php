@@ -1,5 +1,5 @@
 <?php
-class Postings extends AdminPlugin
+class Postings extends Joobsbox_Plugin_AdminBase
 {
 	function init() {
 		$this->jobsModel = $this->getModel("Jobs");
@@ -15,7 +15,7 @@ class Postings extends AdminPlugin
 			$method = $_POST['action'] . 'Action';
 			$this->$method();
 		}
-		$pending = $this->jobsModel->fetchAllJobs(0, Model_Jobs::INCLUDE_NON_PUBLIC)->where("Public = ?", 0)->order('ID DESC')->fetch()->toArray();
+		$pending = $this->jobsModel->fetchAllJobs(0, Joobsbox_Model_Jobs::INCLUDE_NON_PUBLIC)->where("Public = ?", 0)->order('ID DESC')->fetch()->toArray();
 		
 		$this->view->pending  = $pending;
 		$this->view->postings = $this->jobsModel->fetchAllJobs(0)->order('ID DESC')->fetch()->toArray();

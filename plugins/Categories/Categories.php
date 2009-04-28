@@ -1,5 +1,5 @@
 <?php
-class Categories extends AdminPlugin
+class Categories extends Joobsbox_Plugin_AdminBase
 {
 	function init() {
 		$this->jobsModel = $this->getModel("Jobs");

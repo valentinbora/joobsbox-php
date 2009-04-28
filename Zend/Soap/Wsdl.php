@@ -16,10 +16,8 @@
  * @package    Zend_Soap
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Wsdl.php 12622 2008-11-13 15:43:54Z alexander $
+ * @version    $Id: Wsdl.php 14917 2009-04-15 15:40:17Z beberlei $
  */
-
-require_once 'Zend/Server/Exception.php';
 
 require_once "Zend/Soap/Wsdl/Strategy/Interface.php";
 require_once "Zend/Soap/Wsdl/Strategy/Abstract.php";
@@ -93,6 +91,7 @@ class Zend_Soap_Wsdl
                     xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'></definitions>";
         $this->_dom = new DOMDocument();
         if (!$this->_dom->loadXML($wsdl)) {
+            require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('Unable to create DomDocument');
         } else {
             $this->_wsdl = $this->_dom->documentElement;
@@ -461,6 +460,10 @@ class Zend_Soap_Wsdl
      */
     public function getSchema()
     {
+        if($this->_schema == null) {
+            $this->addSchemaTypeSection();
+        }
+
         return $this->_schema;
     }
 

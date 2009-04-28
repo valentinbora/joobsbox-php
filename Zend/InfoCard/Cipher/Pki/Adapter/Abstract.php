@@ -17,18 +17,13 @@
  * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 9094 2008-03-30 18:36:55Z thomas $
+ * @version    $Id: Abstract.php 13213 2008-12-14 11:05:07Z thomas $
  */
 
 /**
  * Zend_InfoCard_Cipher_Pki_Interface
  */
 require_once 'Zend/InfoCard/Cipher/Pki/Interface.php';
-
-/**
- * Zend_InfoCard_Cipher_Exception
- */
-require_once 'Zend/InfoCard/Cipher/Exception.php';
 
 /**
  * An abstract class for public-key ciphers
@@ -73,7 +68,9 @@ abstract class Zend_InfoCard_Cipher_Pki_Adapter_Abstract implements Zend_InfoCar
                 $this->_padding = $padding;
                 break;
             default:
+                require_once 'Zend/InfoCard/Cipher/Exception.php';
                 throw new Zend_InfoCard_Cipher_Exception("Invalid Padding Type Provided");
+                break;
         }
 
         return $this;

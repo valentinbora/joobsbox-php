@@ -25,7 +25,7 @@
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: DisplayGroup.php 12787 2008-11-23 14:17:44Z matthew $
+ * @version    $Id: DisplayGroup.php 12786 2008-11-23 14:15:48Z matthew $
  */
 class Zend_Form_DisplayGroup implements Iterator,Countable
 {

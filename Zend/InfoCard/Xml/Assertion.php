@@ -17,13 +17,8 @@
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Assertion.php 9094 2008-03-30 18:36:55Z thomas $
+ * @version    $Id: Assertion.php 13213 2008-12-14 11:05:07Z thomas $
  */
-
-/**
- * Zend_InfoCard_Xml_Exception
- */
-require_once 'Zend/InfoCard/Xml/Exception.php';
 
 /**
  * Zend_InfoCard_Xml_Assertion_Interface
@@ -71,6 +66,7 @@ final class Zend_InfoCard_Xml_Assertion
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;
         } else {
+            require_once 'Zend/InfoCard/Xml/Exception.php';
             throw new Zend_InfoCard_Xml_Exception("Invalid Data provided to create instance");
         }
 
@@ -86,6 +82,7 @@ final class Zend_InfoCard_Xml_Assertion
             }
         }
 
+        require_once 'Zend/InfoCard/Xml/Exception.php';
         throw new Zend_InfoCard_Xml_Exception("Unable to determine Assertion type by Namespace");
     }
 }

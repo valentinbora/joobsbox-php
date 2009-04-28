@@ -1,5 +1,6 @@
 <?php
-$translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Application/languages/url', null, array('scan' => Zend_Translate::LOCALE_FILENAME));
+$translateUrl = new Zend_Translate('gettext', 'Joobsbox/Languages/url/', null, array('scan' => Zend_Translate::LOCALE_FILENAME));
+$translateUrl->setLocale(Zend_Registry::get("conf")->general->locale);
 Zend_Registry::set("Joobsbox_Translate_URL", $translateUrl);
 Zend_Controller_Router_Route::setDefaultTranslator($translateUrl);
 $front = Zend_Controller_Front::getInstance();

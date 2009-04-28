@@ -1,19 +1,20 @@
 <?php
-ini_set("display_errors", "On");
-error_reporting(E_ALL | E_NOTICE | E_STRICT);
-
 // Class autoload functionality
-include("Zend/Loader.php");
-Zend_Loader::registerAutoload();
+require_once 'Zend/Loader/Autoloader.php';
+$loader = Zend_Loader_Autoloader::getInstance();
+$loader
+	->registerNamespace('Joobsbox_');
 
 // Static parameters
-$conf = parse_ini_file("config.ini.php", 1);
+$conf = new Zend_Config_Ini("config/config.ini.php");
 Zend_Registry::set("conf", $conf);
 
-// Translation
-$translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Application/languages/main', $conf['general']['LOCALE'], array('scan' => Zend_Translate::LOCALE_FILENAME));
-Zend_Registry::set("Zend_Locale", $conf['general']['LOCALE']);
+// Timezone
+date_default_timezone_set($conf->general->timezone);
 
+// Translation
+$translate = new Zend_Translate('gettext', 'Joobsbox/Languages/main', $conf->general->locale, array('scan' => Zend_Translate::LOCALE_FILENAME));
+Zend_Registry::set("Zend_Locale", $conf->general->locale);
 Zend_Registry::set("Translation_Hash", $translate->getMessages());
 Zend_Registry::set('Zend_Translate', $translate);
 

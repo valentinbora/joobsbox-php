@@ -17,7 +17,7 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 13711 2009-01-20 17:37:35Z mikaelkael $
+ * @version    $Id: Abstract.php 14691 2009-04-06 01:52:52Z norm2782 $
  */
 
 
@@ -72,6 +72,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
         unset($dsn['username']);
         unset($dsn['password']);
         unset($dsn['options']);
+        unset($dsn['charset']);
         unset($dsn['driver_options']);
 
         // use all remaining parts in the DSN
@@ -216,6 +217,10 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      */
     public function query($sql, $bind = array())
     {
+        if (empty($bind) && $sql instanceof Zend_Db_Select) {
+            $bind = $sql->getBind();
+        }
+
         if (is_array($bind)) {
             foreach ($bind as $name => $value) {
                 if (!is_int($name) && !preg_match('/^:/', $name)) {

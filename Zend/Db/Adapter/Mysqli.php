@@ -17,7 +17,7 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Mysqli.php 13281 2008-12-15 20:53:30Z mikaelkael $
+ * @version    $Id: Mysqli.php 14692 2009-04-06 02:20:57Z norm2782 $
  */
 
 
@@ -310,7 +310,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
                     // Suppress warnings here
                     // Ignore it if it's not a valid constant
                     $option = @constant(strtoupper($option));
-                    if(is_null($option))
+                    if($option === null)
                         continue;
                 }
                 mysqli_options($this->_connection, $option, $value);
@@ -334,6 +334,10 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
              */
             require_once 'Zend/Db/Adapter/Mysqli/Exception.php';
             throw new Zend_Db_Adapter_Mysqli_Exception(mysqli_connect_error());
+        }
+
+        if (!empty($this->_config['charset'])) {
+            mysqli_set_charset($this->_connection, $this->_config['charset']);
         }
     }
 

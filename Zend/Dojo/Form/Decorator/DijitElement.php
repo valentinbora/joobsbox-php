@@ -38,7 +38,7 @@ require_once 'Zend/Form/Decorator/ViewHelper.php';
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: DijitElement.php 12690 2008-11-18 18:45:28Z alexander $
+ * @version    $Id: DijitElement.php 12687 2008-11-18 14:13:40Z mcleod@spaceweb.nl $
  */
 class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelper
 {

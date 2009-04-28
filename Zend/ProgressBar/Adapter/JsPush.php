@@ -14,7 +14,7 @@
  * @package    Zend_ProgressBar
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: JsPush.php 14112 2009-02-19 06:32:51Z yoshida@zend.co.jp $
+ * @version    $Id: JsPush.php 14099 2009-02-17 15:16:15Z yoshida@zend.co.jp $
  */
 
 /**

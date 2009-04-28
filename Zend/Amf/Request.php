@@ -89,7 +89,7 @@ class Zend_Amf_Request
     public function initialize($request)
     {
         $this->_inputStream  = new Zend_Amf_Parse_InputStream($request);
-        $this->_deserializer = new Zend_Amf_Parse_AMF0_Deserializer($this->_inputStream);
+        $this->_deserializer = new Zend_Amf_Parse_Amf0_Deserializer($this->_inputStream);
         $this->readMessage($this->_inputStream);
         return $this;
     }
@@ -181,7 +181,7 @@ class Zend_Amf_Request
              * an AMF0 array called Content. The following code gets the object
              * out of the content array and sets it as the message data.
              */
-            if(is_array($data) && is_object($data[0])){
+            if(is_array($data) && $data[0] instanceof Zend_Amf_Value_Messaging_AbstractMessage){
                 $data = $data[0];
             }
 

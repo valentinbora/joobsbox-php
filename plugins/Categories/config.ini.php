@@ -1,4 +1,4 @@
 [main]
-title_ro_RO			=	Categorii
-title_en_UK			=	Categories
+title_ro			=	Categorii
+title_en			=	Categories
 image				=	images/categories_24.png

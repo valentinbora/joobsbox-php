@@ -18,7 +18,7 @@
  * @subpackage Amazon
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: SimilarProduct.php 14126 2009-02-20 16:15:52Z sidhighwind $
+ * @version    $Id: SimilarProduct.php 12667 2008-11-15 16:51:39Z beberlei $
  */
 
 
@@ -52,7 +52,10 @@ class Zend_Service_Amazon_SimilarProduct
         $xpath = new DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
         foreach (array('ASIN', 'Title') as $el) {
-            $this->$el = (string) $xpath->query("./az:$el/text()", $dom)->item(0)->data;
+            $text = $xpath->query("./az:$el/text()", $dom)->item(0);
+            if($text instanceof DOMText) {
+                $this->$el = (string)$text->data;
+            }
         }
     }
 }

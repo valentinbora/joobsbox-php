@@ -19,11 +19,6 @@
  */
 
 /**
- * Zend_Server_Reflection_Exception
- */
-require_once 'Zend/Server/Reflection/Exception.php';
-
-/**
  * Parameter Reflection
  *
  * Decorates a ReflectionParameter to allow setting the parameter type
@@ -33,7 +28,7 @@ require_once 'Zend/Server/Reflection/Exception.php';
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id: Parameter.php 12619 2008-11-13 15:24:29Z alexander $
+ * @version $Id: Parameter.php 13217 2008-12-14 11:09:37Z thomas $
  */
 class Zend_Server_Reflection_Parameter
 {
@@ -87,6 +82,7 @@ class Zend_Server_Reflection_Parameter
             return call_user_func_array(array($this->_reflection, $method), $args);
         }
 
+        require_once 'Zend/Server/Reflection/Exception.php';
         throw new Zend_Server_Reflection_Exception('Invalid reflection method');
     }
 
@@ -109,6 +105,7 @@ class Zend_Server_Reflection_Parameter
     public function setType($type)
     {
         if (!is_string($type) && (null !== $type)) {
+            require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameter type');
         }
 
@@ -134,6 +131,7 @@ class Zend_Server_Reflection_Parameter
     public function setDescription($description)
     {
         if (!is_string($description) && (null !== $description)) {
+            require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameter description');
         }
 

@@ -16,13 +16,12 @@
  * @package   Zend_Measure
  * @copyright Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Dynamic.php 9508 2008-05-23 10:56:41Z thomas $
+ * @version   $Id: Dynamic.php 13209 2008-12-13 22:34:06Z thomas $
  */
 
 /**
  * Implement needed classes
  */
-require_once 'Zend/Measure/Exception.php';
 require_once 'Zend/Measure/Abstract.php';
 require_once 'Zend/Locale.php';
 

@@ -1,5 +1,5 @@
 <?php
-class Twitter extends Plugin {
+class Twitter extends Joobsbox_Plugin_Base {
 	public function init() {
 		
 	}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -16,11 +17,12 @@
  * @package    Zend_Http
  * @subpackage Cookie
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com/)
- * @version    $Id: Cookie.php 14130 2009-02-21 11:24:22Z yoshida@zend.co.jp $
+ * @version    $Id: Cookie.php 14530 2009-03-29 14:17:14Z shahar $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 require_once 'Zend/Uri/Http.php';
+
 
 /**
  * Zend_Http_Cookie is a class describing an HTTP cookie and all it's parameters.
@@ -34,8 +36,8 @@ require_once 'Zend/Uri/Http.php';
  *
  * See http://wp.netscape.com/newsref/std/cookie_spec.html for some specs.
  *
- * @category    Zend
- * @package     Zend_Http
+ * @category   Zend
+ * @package    Zend_Http
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com/)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -304,14 +306,29 @@ class Zend_Http_Cookie
                 list($k, $v) = $keyValue;
                 switch (strtolower($k))    {
                     case 'expires':
-                        $expires = strtotime($v);
+                        if(($expires = strtotime($v)) === false) {
+                            /**
+                             * The expiration is past Tue, 19 Jan 2038 03:14:07 UTC
+                             * the maximum for 32-bit signed integer. Zend_Date
+                             * can get around that limit.
+                             * 
+                             * @see Zend_Date
+                             */
+                            require_once 'Zend/Date.php';
+    
+                            $expireDate = new Zend_Date($v);
+                            $expires = $expireDate->getTimestamp();
+                        }
                         break;
+                        
                     case 'path':
                         $path = $v;
                         break;
+                        
                     case 'domain':
                         $domain = $v;
                         break;
+                        
                     default:
                         break;
                 }

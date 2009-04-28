@@ -15,7 +15,7 @@
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
+ * @version    $Id: Regex.php 14247 2009-03-08 17:37:50Z dasprid $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 

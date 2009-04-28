@@ -16,7 +16,7 @@
  * @package   Zend_Locale
  * @copyright Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Locale.php 13685 2009-01-18 15:21:33Z thomas $
+ * @version   $Id: Locale.php 13971 2009-02-04 18:42:22Z thomas $
  */
 
 /**
@@ -127,7 +127,7 @@ class Zend_Locale
      *
      * @var boolean
      */
-    public static $compatibilityMode = true;
+    public static $compatibilityMode = false;
 
     /**
      * Internal variable

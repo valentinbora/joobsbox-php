@@ -16,7 +16,7 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: StringLength.php 13278 2008-12-15 19:55:17Z thomas $
+ * @version    $Id: StringLength.php 13277 2008-12-15 19:52:00Z thomas $
  */
 
 /**

@@ -18,7 +18,7 @@
  * @subpackage Amazon
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Offer.php 14126 2009-02-20 16:15:52Z sidhighwind $
+ * @version    $Id: Offer.php 14534 2009-03-30 11:14:53Z yoshida@zend.co.jp $
  */
 
 
@@ -59,7 +59,7 @@ class Zend_Service_Amazon_Offer
     /**
      * @var string
      */
-    public $CurrentyCode;
+    public $CurrencyCode;
 
     /**
      * @var string
