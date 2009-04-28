@@ -36,8 +36,8 @@ class PublicController extends Zend_Controller_Action
 		
 		$path = str_replace("public/", "", $path);
 		$path = urldecode($path);
-		if(realpath(APPLICATION_DIRECTORY . '/Joobsbox/themes/' . $path)) {
-			$this->serveFile(realpath(APPLICATION_DIRECTORY . '/Joobsbox/themes/' . $path));
+		if(realpath(APPLICATION_DIRECTORY . '/Joobsbox/Themes/' . $path)) {
+			$this->serveFile(realpath(APPLICATION_DIRECTORY . '/Joobsbox/Themes/' . $path));
 		} else {
 			if(realpath(APPLICATION_DIRECTORY . '/public/' . $path)) {
 				$this->serveFile(realpath(APPLICATION_DIRECTORY . '/public/' . $path));
