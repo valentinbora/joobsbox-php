@@ -1,21 +1,22 @@
 [general]
-DEV=1
-JOBS_PER_CATEG=10
-STANDALONE=1
-ADMIN_THEME=joobsbox grey
-THEME=joobsro
-COMMON_TITLE=Joobsbox PHP Demo
-LOCALE=en_UK
+DEV = "1"
+JOBS_PER_CATEG = "10"
+STANDALONE = "1"
+ADMIN_THEME = "joobsbox grey"
+THEME = "joobsro"
+COMMON_TITLE = "Joobsbox PHP Demo"
+LOCALE = "ro"
 
 [rss]
-ALL_JOBS_COUNT=15
-CATEGORY_JOBS_COUNT=15
-DESCRIPTION=None
+ALL_JOBS_COUNT = "15"
+CATEGORY_JOBS_COUNT = "15"
+DESCRIPTION = ""
 
 [db]
-prefix=
+prefix = ""
 
 [dbtables]
-postings=jobs
-categories=categories
-users=users
+postings = "jobs"
+categories = "categories"
+users = "users"
+

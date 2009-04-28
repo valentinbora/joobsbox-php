@@ -1,0 +1,4 @@
+host = "localhost"
+username = "jobboard"
+password = "jobboard"
+dbname = "jobboard"

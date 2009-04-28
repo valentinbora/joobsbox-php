@@ -11,7 +11,7 @@ $conf = parse_ini_file("config.ini.php", 1);
 Zend_Registry::set("conf", $conf);
 
 // Translation
-$translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Application/languages/main', null, array('scan' => Zend_Translate::LOCALE_FILENAME));
+$translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Application/languages/main', $conf['general']['LOCALE'], array('scan' => Zend_Translate::LOCALE_FILENAME));
 Zend_Registry::set("Zend_Locale", $conf['general']['LOCALE']);
 
 Zend_Registry::set("Translation_Hash", $translate->getMessages());
