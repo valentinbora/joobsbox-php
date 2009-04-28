@@ -1,9 +1,0 @@
-<?php
-$params = array(
-	"host" 		=> "",
-	"username"	=> "",
-	"password"	=> "",
-	"dbname"	=> "",
-	"port"		=> "3306",
-	"profiler"	=> 1
-);
