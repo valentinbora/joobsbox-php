@@ -17,12 +17,6 @@
 class InstallController extends Zend_Controller_Action {
 	protected $_model;
 	
-	public function init() {
-		if(file_exists("config/db.ini.php")) {
-			$this->_redirect('');
-		}
-	}
-	
 	public function indexAction(){
 		$this->_redirect("install/step1");
 	}
@@ -82,5 +76,40 @@ class InstallController extends Zend_Controller_Action {
 	 */
 	public function step2Action() {
 		configureTheme(APPLICATION_THEME, 'install');
+
+		$db = Zend_Registry::get("db");
+		$sql = file("sql/base.sql");
+		$qry = "";
+		foreach($sql as $line) {
+		    if(trim($line) != "" && strpos($line, "--") === FALSE) {
+			$qry .= $line;
+			if(preg_match("/;[\040]*\$/", $line)) {
+			    $db->query($qry);
+			    $qry = "";
+			}
+		    }
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public function step3Action() {
+		configureTheme(APPLICATION_THEME, 'install');
+
+		$username = trim($_POST['username']);
+		$password = $_POST['password'];
+		$realname = $_POST['realname'];
+		if(trim($password) == "" || trim($username) == "") {
+		    $this->view->error = 1;
+		} else {
+		    $db = Zend_Registry::get("db");
+		    $db->insert('users', array(
+			'username' => $username,
+			'password' => md5(sha1($password) . $password . Zend_Registry::get('staticSalt')),
+			'password_salt' => sha1($password),
+			'realname' => $realname
+		    ));
+		}
 	}
 }

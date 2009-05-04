@@ -4,7 +4,7 @@ jobs_per_categ = "10"
 standalone = "1"
 admin_theme = "joobsbox grey"
 theme = "joobsro"
-common_title = "Joobsbox Demo"
+common_title = "Joobsbox PHP Demo"
 locale = "ro"
 timezone = "Europe/Bucharest"
 
