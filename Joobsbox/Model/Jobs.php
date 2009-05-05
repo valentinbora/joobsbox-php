@@ -111,6 +111,7 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 		
 		$result 		 = array();
 		
+		if(count($cats))
 		foreach($cats as $index => $category) {
 			$categId = $category['ID'];
 			

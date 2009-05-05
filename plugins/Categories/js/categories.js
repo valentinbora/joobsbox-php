@@ -10,7 +10,8 @@ $(function() {
 			draggable : "all", 
 			dragrules : ["secondary-categ inside root", "secondary-categ inside primary-categ" , "primary-categ after primary-categ", "primary-categ before primary-categ", "primary-categ inside primary-categ"],
 			drag_copy : "ctrl",
-			renameable: ["primary-categ", "secondary-categ"]
+			renameable: ["primary-categ", "secondary-categ"],
+			createable: "all"
 		},
 		callback: {
 			onselect: function(selected, tree) {
@@ -22,7 +23,8 @@ $(function() {
 				selectedCategNode = $(selected).attr("rel");
 			},
 			beforecreate: function(node, parent) {
-				var type = $(parent).attr("rel");
+			return true;
+				var type = $(node).attr("rel");
 				if(type == "primary-categ" || type == "root") {
 					return true;
 				} else {

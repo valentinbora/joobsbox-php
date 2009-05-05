@@ -1,5 +1,5 @@
 	<div class="list">
-		<?php foreach($this->jobs as $category => $jobs): ?>
+		<?php if(count($this->jobs)) foreach($this->jobs as $category => $jobs): ?>
 		<div class="inner">
 			<div class="toRight">
 				<a href="<?php echo $this->baseUrl . '/rss/' . $this->TranslateUrl("category") . '/' . $this->MakeLink($category);?>/">RSS</a>

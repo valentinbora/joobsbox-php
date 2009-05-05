@@ -104,9 +104,10 @@ class InstallController extends Zend_Controller_Action {
 		    $this->view->error = 1;
 		} else {
 		    $db = Zend_Registry::get("db");
+		    $db->delete('users', array("username='$username'"));
 		    $db->insert('users', array(
 			'username' => $username,
-			'password' => md5(sha1($password) . $password . Zend_Registry::get('staticSalt')),
+			'password' => md5(Zend_Registry::get('staticSalt') . $password . sha1($password)),
 			'password_salt' => sha1($password),
 			'realname' => $realname
 		    ));

@@ -22,7 +22,7 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
      * @access public
      * @var array
     */
-	public $_contents;
+	public $_contents = array();
 	/**
      * Contains the Category collection as key => value pairs
      *
@@ -42,20 +42,21 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 	function __construct($contents) {
 		$this->_contentsNames = array();
 		
-		foreach($contents as $category) {
-			$category['Children'] = array();
-			$category['CollectionParent'] = $this;
-			
-			$this->_contents[$category['ID']] = new Joobsbox_Iterator_Categories_CategoryObject($category);
-			$this->_contentsNames[$category['ID']] = $category['Name'];
-		}
+		if(count($contents)) {
+		    foreach($contents as $category) {
+			    $category['Children'] = array();
+			    $category['CollectionParent'] = $this;
+			    
+			    $this->_contents[$category['ID']] = new Joobsbox_Iterator_Categories_CategoryObject($category);
+			    $this->_contentsNames[$category['ID']] = $category['Name'];
+		    }
 		
-		ksort($this->_contents);
-		
-		foreach($this->_contents as $key => $category) {
-			if($category['Parent']) {
-				$this->_contents[$category['Parent']]['Children'][] = $category['ID'];
-			}
+		    ksort($this->_contents);
+		    foreach($this->_contents as $key => $category) {
+			    if($category['Parent']) {
+				    $this->_contents[$category['Parent']]['Children'][] = $category['ID'];
+			    }
+		    }
 		}
 	}
 	
@@ -116,10 +117,12 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 	function filterRootNodes() {
 		$filtered = $this->_contents;
 
-		foreach($filtered as $key => $value) {
-			if($value['Parent'] != 0) {
-				unset($filtered[$key]);
-			}
+		if(count($filtered)) {
+		    foreach($filtered as $key => $value) {
+			    if($value['Parent'] != 0) {
+				    unset($filtered[$key]);
+			    }
+		    }
 		}
 		
 		return new Joobsbox_Iterator_Categories($filtered);
@@ -128,10 +131,12 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 	function filterEmpty() {
 		$filtered = $this->_contents;
 
-		foreach($filtered as $key => $value) {
-			if($value['nrPostings'] == 0) {
-				unset($filtered[$key]);
-			}
+		if(count($filtered)) {
+		    foreach($filtered as $key => $value) {
+			    if($value['nrPostings'] == 0) {
+				    unset($filtered[$key]);
+			    }
+		    }
 		}
 		
 		return new Joobsbox_Iterator_Categories($filtered);
@@ -145,7 +150,9 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 	// ORDERS
 	/***************/
 	function orderByOrderIndex() {
-		uasort($this->_contents, "compareOrderIndex");
+		if(count($this->_contents)) {
+		    uasort($this->_contents, "compareOrderIndex");
+		}
 		return $this;
 	}
 
