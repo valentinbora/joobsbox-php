@@ -15,7 +15,7 @@
  * @package Joobsbox_Model
  */
 
-class Joosbox_Model_JobOperations extends Zend_Db_Table_Abstract {
+class Joobsbox_Model_JobOperations extends Zend_Db_Table_Abstract {
 	protected $_name = 'jobs';
 	protected $_primary = "ID";
 	

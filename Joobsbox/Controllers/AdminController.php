@@ -118,7 +118,7 @@ class AdminController extends Zend_Controller_Action
 			}
 			$action .= "Action";
 			if(method_exists($plugin, $action)) {
-				call_user_func($action, $plugin);
+				call_user_func(array($plugin, $action));
 			} elseif(method_exists($plugin, "indexAction")) {
 				call_user_func(array($plugin, "indexAction"));
 			}

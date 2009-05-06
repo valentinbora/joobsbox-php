@@ -10,8 +10,7 @@ $(function() {
 			draggable : "all", 
 			dragrules : ["secondary-categ inside root", "secondary-categ inside primary-categ" , "primary-categ after primary-categ", "primary-categ before primary-categ", "primary-categ inside primary-categ"],
 			drag_copy : "ctrl",
-			renameable: ["primary-categ", "secondary-categ"],
-			createable: "all"
+			renameable: ["primary-categ", "secondary-categ"]
 		},
 		callback: {
 			onselect: function(selected, tree) {
@@ -23,7 +22,6 @@ $(function() {
 				selectedCategNode = $(selected).attr("rel");
 			},
 			beforecreate: function(node, parent) {
-			return true;
 				var type = $(node).attr("rel");
 				if(type == "primary-categ" || type == "root") {
 					return true;
@@ -34,6 +32,7 @@ $(function() {
 			},
 			oncreate: function(node, ref_node, type, tree) {
 				$(node).attr("rel", newNodeType);
+				return true;
 			},
 			beforemove: function(node, ref_node) {
 				var type = $(node).parents("li").get(0);
@@ -107,7 +106,7 @@ $(function() {
 			}
 			data.categories.push(category);
 		});
-		
+
 		$('#saveDialog').dialog({
 			bgiframe: true,
 			modal: true,

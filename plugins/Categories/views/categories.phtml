@@ -11,9 +11,9 @@
 	<ul>
 		<li id="node_root" class="open" rel="root">
 			<a href="#"><?php echo $this->translate('Categories'); ?></a>
+			<?php if(count($this->categories->filterRootNodes())): ?>
 			<ul>
-				<?php foreach($this->categories->filterRootNodes() as $category):			
-						if($category['Name'] != 'Uncategorized'): 							?>
+				<?php foreach($this->categories->filterRootNodes() as $category): ?>
 
 							<li id="node_<?php echo $category['ID']; ?>" rel="primary-categ">
 								<a href="#"><?php echo $category['Name']; ?></a>
@@ -28,8 +28,9 @@
 									</ul>
 				<?php 			endif; 														?>
 							</li>
-				<?php endif; endforeach; 													?>
+				<?php endforeach; 													?>
 			</ul>
+			<?php endif; ?>
 		</li>
 	</ul>
 </div>

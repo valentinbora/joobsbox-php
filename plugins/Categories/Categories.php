@@ -91,8 +91,7 @@ class Categories extends Joobsbox_Plugin_AdminBase
 		foreach($mustDelete as $categoryID) {
 			if($categoryID > 1) {
 				$where = $db->quoteInto('ID = ?', $categoryID);
-				$db->update($jobsModel->jobs_table_name, array("CategoryID" => 1), 'CategoryID = ' . $categoryID);
-
+				$db->update(Zend_Registry::get("conf")->dbtables->postings, array("CategoryID" => 1), 'CategoryID = ' . $categoryID);
 				$categoryModel->delete($where);
 			}
 		}

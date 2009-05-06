@@ -108,8 +108,7 @@ class PublishController extends Zend_Controller_Action
 		$publishNamespace = new Zend_Session_Namespace('PublishJob');
 		
         if ($form->isValid($_POST)) {
-			require "application/models/JobOperations.php";
-			$jobOperations = new Model_JobOperations;
+			$jobOperations = new Joobsbox_Model_JobOperations;
 			$values = $form->getValues();
 			$hash = md5(implode("", $values));
 			

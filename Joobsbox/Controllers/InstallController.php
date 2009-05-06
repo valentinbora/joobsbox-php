@@ -17,6 +17,13 @@
 class InstallController extends Zend_Controller_Action {
 	protected $_model;
 	
+	public function init() {
+	    $config = new Zend_Config_Ini("config/config.ini.php");
+	    if(isset($config->general->restrict_install) && $config->general->restrict_install) {
+		$this->_redirect("");
+	    }
+	}
+	
 	public function indexAction(){
 		$this->_redirect("install/step1");
 	}
@@ -89,6 +96,13 @@ class InstallController extends Zend_Controller_Action {
 			}
 		    }
 		}
+		$db->delete("categories", array("ID=0"));
+		$db->insert("categories", array(
+		    'ID'    => 0,
+		    'Name'  => 'Uncategorized',
+		    'OrderIndex' => 100,
+		    'Parent'=> 0
+		));
 	}
 
 	/**
@@ -112,5 +126,16 @@ class InstallController extends Zend_Controller_Action {
 			'realname' => $realname
 		    ));
 		}
+		$config = parse_ini_file('config/config.ini.php', true);
+		$config = new Zend_Config($config, true);
+		$config->general->restrict_install = 1;
+		
+		$configWriter = new Zend_Config_Writer_Ini();
+		$configWriter->write('config/config.ini.php', $config);
+
+		$authAdapter = Zend_Registry::get("authAdapter");
+		$authAdapter->setIdentity($username)->setCredential($password);
+		$auth = Zend_Auth::getInstance();
+		$result = $auth->authenticate($authAdapter);
 	}
 }
