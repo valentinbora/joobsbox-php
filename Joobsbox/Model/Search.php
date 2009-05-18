@@ -18,13 +18,13 @@
 class Joobsbox_Model_Search {
 	protected $_index;
 	
-    public function __construct() {
-		if(file_exists("Joobsbox/SearchIndexes/main")) {
-			$this->_index = Zend_Search_Lucene::open("Joobsbox/SearchIndexes/main");
-		} else {
-			$this->_index = Zend_Search_Lucene::create("Joobsbox/SearchIndexes/main");
-		}
-    }
+	public function __construct() {
+		    if(file_exists("Joobsbox/SearchIndexes/main")) {
+			    $this->_index = Zend_Search_Lucene::open("Joobsbox/SearchIndexes/main");
+		    } else {
+			    $this->_index = Zend_Search_Lucene::create("Joobsbox/SearchIndexes/main");
+		    }
+	}
 	
 	public function search($string) {
 		$query = Zend_Search_Lucene_Search_QueryParser::parse($string);

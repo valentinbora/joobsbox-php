@@ -7,6 +7,7 @@ theme = "joobsro"
 common_title = "Joobsbox PHP Demo"
 locale = "ro"
 timezone = "Europe/Bucharest"
+restrict_install = 1
 
 [rss]
 all_jobs_count = "15"

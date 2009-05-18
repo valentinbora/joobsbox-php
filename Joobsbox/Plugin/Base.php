@@ -104,8 +104,7 @@ class Joobsbox_Plugin_Base {
      * gives access to application models
      */
 	protected function getModel($modelName) {
-		Zend_Loader::loadFile($modelName . ".php", null, true);
-		$modelName = "Model_$modelName";
+		$modelName = "Joobsbox_Model_$modelName";
 		return new $modelName;
 	}
 }

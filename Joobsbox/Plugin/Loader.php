@@ -14,7 +14,7 @@ class Joobsbox_Plugin_Loader {
 				if(file_exists("plugins/$className/$className.php")) {
 					Zend_Loader::loadFile("plugins/$className/$className.php");
 					$class = new ReflectionClass($className);
-					if($class->getParentClass() && $class->getParentClass()->getName() == "Plugin") {
+					if($class->getParentClass() && $class->getParentClass()->getName() == "Joobsbox_Plugin_Base") {
 						foreach($class->getMethods() as $method) {
 							$methodName = $method->getName();
 

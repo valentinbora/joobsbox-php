@@ -33,12 +33,16 @@ class Postings extends Joobsbox_Plugin_AdminBase
 	}
 	
 	private function acceptAction() {
+		echo 'ok';die();
 		$this->jobOperationsModel = $this->getModel("JobOperations");
-		
+		$this->searchModel = $this->getModel("Search");
+
 		foreach($_POST['job'] as $job => $a) {
 			$job = (int)$job;
 			Zend_Registry::get("EventHelper")->fireEvent("job_accepted", $job);
 			$this->jobOperationsModel->update(array('Public' => 1, 'ChangedDate' => new Zend_Db_Expr('NOW()')), $this->jobOperationsModel->getAdapter()->quoteInto('ID = ?', $job));
+			
+			$this->searchModel->addJob($this->jobsModel->fetchJobById($job));
 		}
 		echo "ok";
 		die();

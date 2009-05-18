@@ -138,7 +138,6 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 			    }
 		    }
 		}
-		
 		return new Joobsbox_Iterator_Categories($filtered);
 	}
 	
