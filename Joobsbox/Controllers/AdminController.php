@@ -108,6 +108,7 @@ class AdminController extends Zend_Controller_Action
 		$plugin->view = $this->view;
 		$plugin->path = $plugin->view->path = $this->view->baseUrl . '/' . $this->pluginPath . $pluginName . "/";
 		$plugin->_helper = $this->_helper;
+		$plugin->request = $this->getRequest();
 		$plugin->init();
 		
 		if($return) {

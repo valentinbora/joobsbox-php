@@ -22,18 +22,19 @@ div.inner {
 	margin: 0;
 	border:0;
 	zoom:1;
-	background-color: #F2F1F1;
+	background-color: #e4f2fd;
 	font-size: 20px;
 	color: #333333;
 	padding: 7px;
 	text-align: left;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: serif;
 	font-weight: bold;
+	text-shadow: #888 0px 1px 3px;
 }
 div.outer {
-	margin: 10px;
-	padding: 4px;
-	background-color: #E5E4E4;
+	margin: 5px;
+	padding: 5px;
+	background-color: #DDD;
 }
 /*********** LIST **********************************/
 .list ul {
@@ -64,7 +65,7 @@ div.outer {
 	color: #000000;
 }
 .list li a {
-	color: #0070B7;
+	color: #21759b;
 	font-weight: bold;
 }
 .list li a:hover {
@@ -82,9 +83,9 @@ div.outer {
 	text-align: left;
 	background-color: #FFFFFF;
 }
-#header										{width: 100%; height: 65px; background-color: #464646; background-image: url('../images/logo.png'); background-repeat: no-repeat; background-position: 17px 40%; font-size: 110%; text-transform: uppercase; line-height: 80px; color: #DDD; font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif; margin-bottom: 15px;}
+#header										{width: 100%; height: 65px; background-image: url('../images/logo.png'); background-repeat: no-repeat; background-position: 17px 40%; font-size: 110%; text-transform: uppercase; line-height: 80px; color: #DDD; font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif; margin-bottom: 15px;}
 
-#header a									{display: block; width: 150px; height: 100%;}
+#header a									{display: block; width: 150px; height: 100%; outline: none;}
 
 #footer {
 	border-top: 1px solid #ddd;
@@ -93,6 +94,12 @@ div.outer {
 	float: left;
 	width: 100%;
 	padding-top: 10px;
+	text-transform: uppercase;
+	text-decoration: none;
+	padding: 5px;
+	font-size: 80%;
+	text-align: center;
+	padding-bottom: 20px;
 }
 #wrapper {
 	text-align: center;
@@ -105,19 +112,35 @@ div.outer {
 #tools {
 	padding-left: 6px;
 	padding-right: 15px;
+	padding-bottom: 15px;
 	height: 35px;
 }
 #tools #search {
 	float: right;
 	vertical-align: middle;
-	background-image: url(../images/input-bkg.gif);
 	background-position: left top;
 	background-repeat: no-repeat;
 }
 
-#tools #posteaza {
+#tools #postJob {
 	float: left;
 }
+
+#tools #postJob a {
+	display: block;
+	width: 100%;
+	background-image: url('../images/postJobBackground.jpg');
+	background-repeat: no-repeat;
+	width: 200px;
+	height: 35px;
+	text-align: center;
+	color: #FFF;
+	text-decoration: none;
+	line-height: 35px;
+	font-weight: bold;
+	font-size: 90%;
+}
+
 #alert{
 	padding-bottom: 5px;
 	font-weight: bold;
@@ -133,16 +156,33 @@ div.outer {
 	margin-left: 20px;
 	width: 80%;
 }
-#searchInput {
+
+#searchInputContainer {
+	float: left;
 	width: 150px;
-	border: 0;
-	padding: 6px;
-	vertical-align: top;
+	height: 25px;
+	border: 1px solid #CCC;
+}
+
+#searchButtonContainer {
+	float: left;
+	width: 25px;
+	height: 25px;
+	border: 1px solid #CCC;
+	border-left: none;
+}
+
+#searchInput {
+	width: 100%;
+	height: 20px;
+	display: block;
 	color: #666666;
-	font-size: 16px;
+	padding-left: 5px;
+	padding-top: 5px;
+	border: none;
+	outline: none;
 	font-weight: bold;
 	background: transparent;
-	outline: none;
 }
 #ok{
 	padding-bottom: 5px;

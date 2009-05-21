@@ -29,28 +29,21 @@
 		<div id="main">
 			<div id="header"><a href="<?php echo $this->baseUrl; ?>"></a></div>
 			<div id="tools">
-				<div id="posteaza">
+				<div id="postJob">
 					<a href="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('publish'); ?>">
-						<img src="<?php echo $this->themeImages; ?>/button-publish.gif" alt="Posteaza gratuit un anunt!" width="235" height="34" border="0" />
+						<?php printf($this->translate("Post a job for %d days"), $this->conf->general->posting_ttl); ?>
 					</a>
 				</div>
 				<div id="search">
 					<form action="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('search'); ?>" method="get">
-						<input name="txtSearch" type="text" id="searchInput" />
-						<input type="image" src="<?php echo $this->themeImages; ?>/button-search.gif" />
+						<div id="searchInputContainer"><input name="txtSearch" type="text" id="searchInput" value="<?php echo $this->translate("Search here"); ?>" /></div>
+						<div id="searchButtonContainer"><input type="image" src="<?php echo $this->themeImages; ?>/search.jpg" /></div>
 					</form>
 				</div>
 			</div>
 			<?php echo $this->layout()->content;?>
 			<div id="footer">
-				<a href="http://framework.zend.com/">
-					<img src="<?php echo $this->themeImages; ?>/PoweredBy_ZF_4LightBG.png" border="0">
-				</a>
-				<!--
-				<a href="http://www.joobs.ro">
-					<img src="<?php echo $this->themeImages; ?>/powered-by-joobs.ro.gif" alt="POWERED BY Joobs.ro" />
-				</a>
-				-->
+				powered by <a href="http://www.joobsbox.com" rel="external" target="_blank">joobsbox</a> + <a href="http://www.joobsb.ro" rel="external" target="_blank">joobs.ro</a> + <a href="http://framework.zend.com" rel="external" target="_blank">zend framework</a>
 			</div>
 		</div>
 	</div>

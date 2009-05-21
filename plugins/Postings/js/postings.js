@@ -66,7 +66,7 @@ $(function() {
 			type: "POST",
 			url: window.location.href,
 			data: $("#form-pending").serialize(),
-			/*success: function(msg){
+			success: function(msg){
 				$("#pending-postings tbody tr.selected").each(function() {
 					$(this).fadeOut("slow", function(el) {
 						$(this).next('tr.next').remove();
@@ -74,7 +74,7 @@ $(function() {
 					});
 				});
 				$('#operationDialog').dialog('open');
-			}*/
+			}
 		 });
 	});
 	$("#deletePostingsApproved").click(function(ev) {

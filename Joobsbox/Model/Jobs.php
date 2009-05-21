@@ -56,7 +56,7 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 		
 		if($returnImmediately) {
 			$stmt	= $this->filter("all_jobs", $select->query()->fetchAll());
-			return jobsIterator($stmt);
+			return new Joobsbox_Iterator_Jobs($stmt);
 		}
 		
 		return new Joobsbox_Iterator_Jobs_FetchObject($select, $this->_db);

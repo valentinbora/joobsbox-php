@@ -5,6 +5,8 @@
 <?php
 if($this->addSuccess) {
 	echo '<div class="message">' . $this->translate("The job has been saved. It now has to be accepted by a moderator in order to appear publicly on the site.") . '</div>';
+} else if($this->editSuccess) {
+	echo '<div class="message">' . $this->translate("The job has been modified and saved.") . '</div>';
 } else {
 	echo $this->form;
 }

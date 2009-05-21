@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jobboard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-28 16:26+0200\n"
+"POT-Creation-Date: 2009-05-21 23:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Valentin Bora <contact@valentinbora.com>\n"
 "Language-Team: \n"
@@ -14,195 +14,256 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: translate;setLabel;setDescription;setValue\n"
 "X-Poedit-Basepath: I:/web/joobsbox-php/\n"
-"X-Poedit-SearchPath-0: Application\n"
+"X-Poedit-SearchPath-0: Joobsbox\n"
 
-#: Application/Controllers/CategoryController.php:35
+#: Joobsbox/Controllers/CategoryController.php:34
 msgid "This category does not exist."
 msgstr "Această categorie nu există."
 
-#: Application/Controllers/JobController.php:30
+#: Joobsbox/Controllers/JobController.php:29
 msgid "The requested job does not exist!"
 msgstr "Acest job nu există."
 
-#: Application/Controllers/PublishController.php:33
+#: Joobsbox/Controllers/PublishController.php:32
 msgid "Job title:"
 msgstr "Titlul postului căutat:"
 
-#: Application/Controllers/PublishController.php:38
+#: Joobsbox/Controllers/PublishController.php:37
 msgid "Ex: \"Flash Designer\" or \"ASP.NET Programmer\""
 msgstr "Ex: \"Flash Designer\" sau \"Programator ASP.NET\""
 
-#: Application/Controllers/PublishController.php:42
+#: Joobsbox/Controllers/PublishController.php:41
 msgid "Company:"
 msgstr "Firma angajatoare:"
 
-#: Application/Controllers/PublishController.php:49
+#: Joobsbox/Controllers/PublishController.php:48
 msgid "Location:"
 msgstr "Locația:"
 
-#: Application/Controllers/PublishController.php:54
+#: Joobsbox/Controllers/PublishController.php:53
 msgid "Ex: \"Iaşi, Bucureşti\""
 msgstr "Ex: \"Iași, București\""
 
-#: Application/Controllers/PublishController.php:60
+#: Joobsbox/Controllers/PublishController.php:57
+msgid "Choose..."
+msgstr "Alege..."
+
+#: Joobsbox/Controllers/PublishController.php:60
 msgid "Category:"
 msgstr "Categoria:"
 
-#: Application/Controllers/PublishController.php:66
+#: Joobsbox/Controllers/PublishController.php:66
 msgid "Job description:"
 msgstr "Descrierea postului:"
 
-#: Application/Controllers/PublishController.php:67
+#: Joobsbox/Controllers/PublishController.php:67
 msgid "HTML code is not accepted. Length must be less than 4000 characters."
 msgstr "Nu se acceptă cod HTML şi nu mai mult de 4000 caractere"
 
-#: Application/Controllers/PublishController.php:74
+#: Joobsbox/Controllers/PublishController.php:74
 msgid "Means of application:"
 msgstr "Cum va aplica un candidat:"
 
-#: Application/Controllers/PublishController.php:78
+#: Joobsbox/Controllers/PublishController.php:78
 msgid "Ex: \"Send CV to email ...\" or \"Apply online at URL ...\""
 msgstr "Ex: \"Trimite CV la email ....\" sau \"Aplică online la adresa ....\""
 
-#: Application/Controllers/PublishController.php:82
+#: Joobsbox/Controllers/PublishController.php:82
 msgid "Add"
 msgstr "Adaugă"
 
-#: Application/Controllers/PublishController.php:118
+#: Joobsbox/Controllers/PublishController.php:93
+msgid "Modify"
+msgstr "Modifică"
+
+#: Joobsbox/Controllers/PublishController.php:129
 msgid "You are not allowed to add the same job multiple times."
 msgstr "Nu ai dreptul să adaugi același job de mai multe ori."
 
-#: Application/Controllers/PublishController.php:138
+#: Joobsbox/Controllers/PublishController.php:151
+#: Joobsbox/Controllers/PublishController.php:171
 msgid "An error occured while saving the job. Please try again."
 msgstr "A apărut o eroare în timpul salvării jobului. Încearcă din nou."
 
-#: Application/Controllers/UserController.php:33
+#: Joobsbox/Controllers/UserController.php:33
 msgid "Username:"
 msgstr "Nume utilizator:"
 
-#: Application/Controllers/UserController.php:41
+#: Joobsbox/Controllers/UserController.php:41
 msgid "Password:"
 msgstr "Parola:"
 
-#: Application/Controllers/UserController.php:49
+#: Joobsbox/Controllers/UserController.php:49
 msgid "Do not check if on a public computer"
 msgstr "Nu bifa dacă te afli la un calculator public"
 
-#: Application/Controllers/UserController.php:50
+#: Joobsbox/Controllers/UserController.php:50
 msgid "Remember me:"
 msgstr "Ține-mă minte"
 
-#: Application/Controllers/UserController.php:53
+#: Joobsbox/Controllers/UserController.php:53
 msgid "Login"
 msgstr "Intră"
 
-#: Application/Controllers/UserController.php:96
+#: Joobsbox/Controllers/UserController.php:96
 msgid "Username and/or password incorrect"
 msgstr "Nume de utilizator sau parola incorecte"
 
-#: Application/themes/joobsbox/views/scripts/admin/index.phtml:2
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:34
+#, php-format
+msgid "Post a job for %d days"
+msgstr "Postează anunț %d zile"
+
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:39
+msgid "Search here"
+msgstr "Caută aici"
+
+#: Joobsbox/Themes/joobsbox/views/scripts/admin/index.phtml:2
 msgid "Administration Dashboard"
 msgstr "Panou administrare"
 
-#: Application/themes/joobsbox/views/scripts/cauta/index.phtml:5
-#: Application/themes/joobsbox/views/scripts/search/index.phtml:5
+#: Joobsbox/Themes/joobsbox/views/scripts/cauta/index.phtml:5
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:5
 msgid "Search"
 msgstr "Căutare"
 
-#: Application/themes/joobsbox/views/scripts/cauta/index.phtml:12
-#: Application/themes/joobsbox/views/scripts/index/index.phtml:16
-#: Application/themes/joobsbox/views/scripts/job/job.phtml:3
-#: Application/themes/joobsbox/views/scripts/job/job.phtml:12
-#: Application/themes/joobsbox/views/scripts/search/index.phtml:12
+#: Joobsbox/Themes/joobsbox/views/scripts/cauta/index.phtml:12
+#: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:16
+#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:3
+#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:12
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:12
 msgid "at"
 msgstr "la"
 
-#: Application/themes/joobsbox/views/scripts/cauta/index.phtml:14
-#: Application/themes/joobsbox/views/scripts/index/index.phtml:18
-#: Application/themes/joobsbox/views/scripts/job/job.phtml:5
-#: Application/themes/joobsbox/views/scripts/job/job.phtml:14
-#: Application/themes/joobsbox/views/scripts/search/index.phtml:14
+#: Joobsbox/Themes/joobsbox/views/scripts/cauta/index.phtml:14
+#: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:18
+#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:5
+#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:14
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:14
 msgid "in"
 msgstr "în"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:2
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:1
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:1
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step3.phtml:1
+msgid "Installation - Step "
+msgstr "Instalare - Pasul "
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:3
 msgid "Welcome to Joobsbox installation!"
 msgstr "Bun venit la instalarea Joobsbox!"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:4
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:5
 msgid "I need some information and then we're ready to go."
 msgstr "Am nevoie de câteva informaţii şi apoi suntem gata."
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:8
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:9
 msgid "Site information"
 msgstr "Informaţii site"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:10
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:11
 msgid "Site name"
 msgstr "Nume site"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:15
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:16
 msgid "Database information"
 msgstr "Informaţii bază de date"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:18
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:19
 msgid "Database name"
 msgstr "Nume bază de date"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:22
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:23
 msgid "Database username"
 msgstr "Nume utilizator"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:26
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:27
 msgid "Database password"
 msgstr "Parolă"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:30
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:31
 msgid "Database host"
 msgstr "Gazdă"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:34
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:35
 msgid "Table prefix"
 msgstr "Prefix tabele"
 
-#: Application/themes/joobsbox/views/scripts/install/step1.phtml:40
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:41
 msgid "There was an error connecting to the database. Make sure the connection information you provided is correct."
 msgstr "A apărut o eroare în timpul conectării la baza de date. Asigură-te că datele furnizate pentru conexiune sunt corecte."
 
-#: Application/themes/joobsbox/views/scripts/install/step2.phtml:2
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:3
 msgid "Joobsbox installation complete!"
 msgstr "Joobsbox este gata instalat!"
 
-#: Application/themes/joobsbox/views/scripts/install/step2.phtml:4
-msgid "Congratulations. You finished installing Joobsbox."
-msgstr "Felicitări. Ai terminat de instalat Joobsbox."
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:5
+msgid "Congratulations. You finished installing Joobsbox. Now please configure your administrator username and password."
+msgstr "Felicitări. Ai terminat de instalat Joobsbox. Acum configurează un nume de utilizator și o parola pentru contul tău de administrator."
 
-#: Application/themes/joobsbox/views/scripts/job/job.phtml:19
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:8
+msgid "Administrator credentials"
+msgstr "Date autentificare pentru administrator"
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:10
+msgid "Your name"
+msgstr "Numele tău"
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:14
+msgid "Username"
+msgstr "Nume utilizator"
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:18
+msgid "Password"
+msgstr "Parola"
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:24
+msgid "Please provide a valid username and password."
+msgstr "Introdu nume de utilizator și parolă corecte"
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:27
+msgid "Done"
+msgstr "Gata"
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step3.phtml:3
+msgid "Everything went well!"
+msgstr "Totul a mers bine!"
+
+#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:19
 msgid "Description:"
 msgstr "Descriere:"
 
-#: Application/themes/joobsbox/views/scripts/job/job.phtml:21
+#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:21
 msgid "To apply:"
 msgstr "Pentru a aplica:"
 
-#: Application/themes/joobsbox/views/scripts/publish/index.phtml:3
+#: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:1
+msgid "Publish a job posting"
+msgstr "Publică un anunţ"
+
+#: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:3
 msgid "Publish a job"
 msgstr "Publică un anunţ."
 
-#: Application/themes/joobsbox/views/scripts/publish/index.phtml:7
+#: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:7
 msgid "The job has been saved. It now has to be accepted by a moderator in order to appear publicly on the site."
 msgstr "Jobul a fost salvat. Acum trebuie acceptat de un moderator pentru a apărea public pe site."
 
-#: Application/themes/joobsbox/views/scripts/search/index.phtml:1
+#: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:9
+msgid "The job has been modified and saved."
+msgstr "Postul a fost modificat și salvat."
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:1
 msgid "Job search"
 msgstr "Căutare joburi"
 
-#: Application/themes/_admin/joobsbox grey/layouts/index.phtml:28
+#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:30
 msgid "Back to site"
 msgstr "Înapoi la site."
 
-#: Application/themes/_admin/joobsbox grey/layouts/index.phtml:33
-#: grey/views/scripts/admin/index.phtml:1
+#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:35
+#: grey/views/scripts/admin/index.phtml:2
+#: grey/views/scripts/admin/index.phtml:4
 msgid "Dashboard"
 msgstr "Panou control"
 

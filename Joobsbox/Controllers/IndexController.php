@@ -23,6 +23,12 @@ class IndexController extends Zend_Controller_Action {
 		}
 		$this->_model = new Joobsbox_Model_Jobs();
 		
+		/*$jobs = $this->_model->fetchAllJobs();
+		$search = new Joobsbox_Model_Search();
+		foreach($jobs as $job) {
+			$search->addJob($job);
+		}*/
+		
 		$this->view->jobs = $this->_model->fetchNJobsPerCategory();
 		
 		$this->_helper->event("received_jobs");

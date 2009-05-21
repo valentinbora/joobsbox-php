@@ -51,6 +51,8 @@ class Joobsbox_Model_Search {
 			}
 		}
 		
+		Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
+		
 		// Add the job now
 		$job = new Zend_Search_Lucene_Document();
 		$job->addField(Zend_Search_Lucene_Field::Keyword('DocumentType', 'job'));

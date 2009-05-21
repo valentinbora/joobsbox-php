@@ -53,8 +53,9 @@ class PublishController extends Zend_Controller_Action
 			->setDescription('Ex: "Iaşi, Bucureşti"')
 			->setRequired(true);
 			
-		$categories = array("" => "Choose...");
-		$categories = array_merge($categories, $this->_model->fetchCategories()->getIndexNamePairs());
+		$categories = $this->_model->fetchCategories()->getIndexNamePairs();
+		array_unshift($categories, $this->view->translate("Choose..."));
+		
 		$category = $form->createElement('select', 'category')
 			->setLabel('Category:')
 			->addValidator('notEmpty')
@@ -79,6 +80,18 @@ class PublishController extends Zend_Controller_Action
 		
 		$submit = $form->createElement('submit', 'submit')
 			->setLabel("Add");
+			
+		$publishNamespace = new Zend_Session_Namespace('PublishJob');
+		if(isset($publishNamespace->editJobId)) {
+			$jobData = $this->_model->fetchJobById($publishNamespace->editJobId);
+			$title->setValue($jobData['Title']);
+			$company->setValue($jobData['Company']);
+			$location->setValue($jobData['Location']);
+			$category->setValue($jobData['CategoryID']);
+			$description->setValue($jobData['Description']);
+			$application->setValue($jobData['ToApply']);
+			$submit->setLabel('Modify');
+		}
 			
 		$form->addElement($title)
 			 ->addElement($company)
@@ -116,24 +129,48 @@ class PublishController extends Zend_Controller_Action
 				throw new Exception($this->view->translate("You are not allowed to add the same job multiple times."));
 			}
 			
-			// Ok, here we go: insert the job into the database --- bombs away!
-			try {
-				$values['id'] = $jobOperations->insert(array(
-					'CategoryID'	=> $values['category'],
-					'Title'			=> $values['title'],
-					'Description'	=> $values['description'],
-					'ToApply'		=> $values['application'],
-					'Company'		=> $values['company'],
-					'Location'		=> $values['location'],
-					'PostedAt'		=> new Zend_Db_Expr('NOW()'),
-					'Public'		=> 0
-				));
+			if(isset($publishNamespace->editJobId)) {
+				// We have to modify it, nothing more to discuss
+				try {
+					$where = $jobOperations->getAdapter()->quoteInto('ID = ?', $publishNamespace->editJobId);
+					$values['id'] = $jobOperations->update(array(
+						'CategoryID'	=> $values['category'],
+						'Title'			=> $values['title'],
+						'Description'	=> $values['description'],
+						'ToApply'		=> $values['application'],
+						'Company'		=> $values['company'],
+						'Location'		=> $values['location'],
+						'ChangedDate'	=> new Zend_Db_Expr('NOW()'),
+						'Public'		=> 1
+					), $where);
 
-				$this->view->addSuccess = 1;
-				$this->_helper->event("job_posted", $values);
-				$publishNamespace->jobHash = $hash;
-			} catch (Exception $e) {
-				throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
+					$this->view->editSuccess = 1;
+					unset($publishNamespace->editJobId);
+					$this->_helper->event("job_edited", $values);
+					$publishNamespace->jobHash = $hash;
+				} catch (Exception $e) {
+					throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
+				}
+			} else {
+				// Ok, here we go: insert the job into the database --- bombs away!
+				try {
+					$values['id'] = $jobOperations->insert(array(
+						'CategoryID'	=> $values['category'],
+						'Title'			=> $values['title'],
+						'Description'	=> $values['description'],
+						'ToApply'		=> $values['application'],
+						'Company'		=> $values['company'],
+						'Location'		=> $values['location'],
+						'PostedAt'		=> new Zend_Db_Expr('NOW()'),
+						'Public'		=> 0
+					));
+
+					$this->view->addSuccess = 1;
+					$this->_helper->event("job_posted", $values);
+					$publishNamespace->jobHash = $hash;
+				} catch (Exception $e) {
+					throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
+				}
 			}
 		} else {
 			$values = $form->getValues();

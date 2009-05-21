@@ -15,6 +15,9 @@
 .postings tbody tr:hover td					{background-color: #DDE;}
 .postings tbody tr.selected td				{background-color: #f6a828;}
 
+td.operations a							{display: block; float: left; width: 20px; height: 20px;}
+.editBtn								{background-image: url('../images/icons/edit_20.png'); width: 20px; height: 20px;}
+
 #posting-tabs							{padding: 0; margin-top: 15px;}
 #posting-tabs ul, #posting-tabs ul li		{list-style: none;}
 .postings-container						{position: relative; padding: 150px 0; overflow: hidden;}	
