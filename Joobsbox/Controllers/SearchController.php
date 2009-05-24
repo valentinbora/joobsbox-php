@@ -20,7 +20,7 @@ class SearchController extends Zend_Controller_Action {
 		$this->_model = new Joobsbox_Model_Search();
 		
 		$query = $this->getRequest()->getParam("txtSearch");
-
+		
 		$results = $this->_model->search($query);
 		
 		$resultsArray = array();

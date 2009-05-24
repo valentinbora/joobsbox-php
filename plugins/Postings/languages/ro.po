@@ -18,12 +18,12 @@ msgstr ""
 #: views/dashboard.phtml:5
 #: views/postings.phtml:18
 msgid "at"
-msgstr ""
+msgstr "la"
 
 #: views/dashboard.phtml:7
 #: views/postings.phtml:20
 msgid "in"
-msgstr ""
+msgstr "în"
 
 #: views/dashboard.phtml:14
 msgid "Total postings:"
@@ -57,8 +57,9 @@ msgstr "Şterge anunţurile selectate:"
 msgid "No pending postings."
 msgstr "Niciun anunţ în aşteptare."
 
+msgid "Postings"
+msgstr "Anunțuri"
+
 #~ msgid "Save"
 #~ msgstr "Salvează"
 
-msgid "Postings"
-msgstr "Anunțuri"

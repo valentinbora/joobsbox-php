@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `categories` (
+CREATE TABLE IF NOT EXISTS `{#prefix#}categories` (
 `ID` int(10) unsigned NOT NULL auto_increment,
 `Name` varchar(100) collate utf8_unicode_ci NOT NULL,
 `OrderIndex` tinyint(4) NOT NULL,
@@ -10,7 +10,7 @@ KEY `OrderIndex` (`OrderIndex`),
 KEY `Parent` (`Parent`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
-CREATE TABLE IF NOT EXISTS `jobs` (
+CREATE TABLE IF NOT EXISTS `{#prefix#}jobs` (
 `ID` int(10) unsigned NOT NULL auto_increment,
 `CategoryID` int(11) NOT NULL default '0',
 `Title` varchar(200) collate utf8_unicode_ci NOT NULL,
@@ -29,7 +29,7 @@ PRIMARY KEY  (`ID`),
 KEY `CategoryID` (`CategoryID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
-CREATE TABLE IF NOT EXISTS `plugin_data` (
+CREATE TABLE IF NOT EXISTS `{#prefix#}plugin_data` (
 `id` int(10) unsigned NOT NULL auto_increment,
 `plugin_name` varchar(255) collate utf8_unicode_ci NOT NULL,
 `option_name` varchar(255) collate utf8_unicode_ci NOT NULL,
@@ -38,7 +38,7 @@ PRIMARY KEY  (`id`),
 KEY `option_name` (`option_name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `{#prefix#}users` (
 `ID` int(10) unsigned NOT NULL auto_increment,
 `username` varchar(45) collate utf8_unicode_ci NOT NULL,
 `realname` varchar(100) collate utf8_unicode_ci NOT NULL,

@@ -21,14 +21,15 @@ class IndexController extends Zend_Controller_Action {
 		if(!file_exists("config/db.ini.php")) {
 			$this->_redirect('install/step1');
 		}
-		$this->_model = new Joobsbox_Model_Jobs();
 		
 		/*$jobs = $this->_model->fetchAllJobs();
 		$search = new Joobsbox_Model_Search();
 		foreach($jobs as $job) {
 			$search->addJob($job);
-		}*/
+		}
+		$search->commit();*/
 		
+		$this->_model = new Joobsbox_Model_Jobs();
 		$this->view->jobs = $this->_model->fetchNJobsPerCategory();
 		
 		$this->_helper->event("received_jobs");

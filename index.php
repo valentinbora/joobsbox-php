@@ -19,15 +19,16 @@ Zend_Registry::get("TranslationHelper")->regenerateHash();
 Zend_Controller_Action_HelperBroker::addPrefix('Joobsbox_Helpers');
 
 if(!isset($testing)) {
-	Zend_Controller_Front::getInstance()->setBaseUrl($baseUrl);
+	$front = Zend_Controller_Front::getInstance();
+	$front->setBaseUrl($baseUrl)->setParam('disableOutputBuffering', true);
 	
 	configureTheme();
 	
 	if(isset($joobsbox_render_var)) {
-		Zend_Controller_Front::getInstance()->returnResponse(true);
+		$front->returnResponse(true);
 	}
 
-	$response = Zend_Controller_Front::getInstance()->dispatch();
+	$response = $front->dispatch();
 
 	if(isset($joobsbox_render_var)) {
 		$joobsbox_render_var = $response->getBody();

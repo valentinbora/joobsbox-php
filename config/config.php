@@ -1,17 +1,42 @@
 <?php
+set_magic_quotes_runtime(false);
+ini_set('magic_quotes_gpc', false);
+
 // Class autoload functionality
 require_once 'Zend/Loader/Autoloader.php';
 $loader = Zend_Loader_Autoloader::getInstance();
 $loader
 	->registerNamespace('Joobsbox_');
+	
+// Timezone default
+date_default_timezone_set("GMT");
 
+// Set up caching
+$frontendOptions = array(
+	'default_options' => array(
+		'cache_with_session_variables' => true,
+		'cache_with_cookie_variables' => true,
+		'make_id_with_session_variables' => false,
+		'make_id_with_cookie_variables' => false
+	),
+	'regexps' => array(
+		'/$' => array("cache" => true)
+	)
+);
+
+$backendOptions = array('cache_dir' => 'cache/');
+
+$cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
+$cache->start();
+Zend_Registry::set("cache", $cache);
+	
 // Static parameters
 $conf = new Zend_Config_Ini("config/config.ini.php");
 Zend_Registry::set("conf", $conf);
 
 // Timezone
 date_default_timezone_set($conf->general->timezone);
-
+	
 // Translation
 $translate = new Zend_Translate('gettext', 'Joobsbox/Languages/main', $conf->general->locale, array('scan' => Zend_Translate::LOCALE_FILENAME));
 Zend_Registry::set("Zend_Locale", $conf->general->locale);
@@ -31,7 +56,7 @@ if(file_exists('config/db.ini.php')) {
 	$auth = Zend_Auth::getInstance();
 	$authAdapter = new Zend_Auth_Adapter_DbTable(
 		Zend_Registry::get("db"),
-		'users',
+		$conf->db->prefix . 'users',
 		'username',
 		'password',
 		"MD5(CONCAT('"

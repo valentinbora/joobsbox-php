@@ -7,8 +7,8 @@ $viewRenderer->view->publicUrl=$baseUrl . "/public";
 
 function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 	global $baseUrl, $viewRenderer;
-	$viewRenderer->view->themeUrl		= $baseUrl . "/public/" . $theme;
-	$viewRenderer->view->themeImages	= $baseUrl . "/public/" . $theme . "/images";
+	$viewRenderer->view->themeUrl		= $baseUrl . "/Joobsbox/Themes/" . $theme;
+	$viewRenderer->view->themeImages	= $baseUrl . "/Joobsbox/Themes/" . $theme . "/images";
 	$viewRenderer->view->theme			= $theme;
 	$viewRenderer->view->setScriptPath(APPLICATION_DIRECTORY . '/Joobsbox/Themes/' . $theme . '/views/scripts');
 

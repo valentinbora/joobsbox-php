@@ -127,7 +127,7 @@ class AdminController extends Zend_Controller_Action
 		
 		$translate = Zend_Registry::get("Zend_Translate");
 		$locale	   = Zend_Registry::get("Zend_Locale");
-		$translate->addTranslation($this->pluginPath . $pluginName . '/languages/', $locale);
+		$translate->addTranslation($this->pluginPath . $pluginName . '/languages/' . $locale . '.mo', $locale);
 		Zend_Registry::set("Translation_Hash", $translate->getMessages());
 		Zend_Registry::get("TranslationHelper")->regenerateHash();
 		
@@ -135,6 +135,8 @@ class AdminController extends Zend_Controller_Action
 		$viewRenderer->view->addScriptPath($this->pluginPath . $pluginName . '/views');
 		$viewRenderer->setNoController(true);
 		$viewRenderer->setViewScriptPathNoControllerSpec(':action.:suffix');
+		$tit = "title_" . Zend_Registry::get("Zend_Locale");
+		$this->view->headTitle()->prepend($this->plugins[$pluginName]->main->$tit);
 		
 		if(!$return) {
 			$viewRenderer->setNoRender();

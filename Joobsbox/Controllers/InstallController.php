@@ -58,6 +58,7 @@ class InstallController extends Zend_Controller_Action {
 				$config = parse_ini_file('config/config.ini.php', true);
 				$config = new Zend_Config($config, true);
 				$config->general->common_title = $sitename;
+				$config->db->prefix = $dbprefix;
 				
 				$configWriter = new Zend_Config_Writer_Ini();
 				$configWriter->write('config/config.ini.php', $config);
@@ -83,9 +84,13 @@ class InstallController extends Zend_Controller_Action {
 	 */
 	public function step2Action() {
 		configureTheme(APPLICATION_THEME, 'install');
-
+		
+		$config = new Zend_Config_Ini('config/config.ini.php');
 		$db = Zend_Registry::get("db");
-		$sql = file("sql/base.sql");
+		$sql = file_get_contents("sql/base.sql");
+		$sql = str_replace("{#prefix#}", $config->db->prefix, $sql);
+		$sql = str_replace("\r\n", "\n", $sql);
+		$sql = explode("\n", $sql);
 		$qry = "";
 		foreach($sql as $line) {
 		    if(trim($line) != "" && strpos($line, "--") === FALSE) {
@@ -96,8 +101,8 @@ class InstallController extends Zend_Controller_Action {
 			}
 		    }
 		}
-		$db->delete("categories", array("ID=0"));
-		$db->insert("categories", array(
+		$db->delete($config->db->prefix . "categories", array("ID=0"));
+		$db->insert($config->db->prefix . "categories", array(
 		    'ID'    => 0,
 		    'Name'  => 'Uncategorized',
 		    'OrderIndex' => 100,
@@ -114,12 +119,14 @@ class InstallController extends Zend_Controller_Action {
 		$username = trim($_POST['username']);
 		$password = $_POST['password'];
 		$realname = $_POST['realname'];
+		$config = new Zend_Config_Ini('config/config.ini.php');
+		
 		if(trim($password) == "" || trim($username) == "") {
 		    $this->view->error = 1;
 		} else {
 		    $db = Zend_Registry::get("db");
-		    $db->delete('users', array("username='$username'"));
-		    $db->insert('users', array(
+		    $db->delete($config->db->prefix . 'users', array("username='$username'"));
+		    $db->insert($config->db->prefix . 'users', array(
 			'username' => $username,
 			'password' => md5(Zend_Registry::get('staticSalt') . $password . sha1($password)),
 			'password_salt' => sha1($password),

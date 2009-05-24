@@ -55,6 +55,7 @@ class Postings extends Joobsbox_Plugin_AdminBase
 		foreach($_POST['job'] as $job => $a) {
 			$job = (int)$job;
 			$this->jobOperationsModel->delete($this->jobOperationsModel->getAdapter()->quoteInto('ID = ?', $job));
+			$this->searchModel->deleteJob($job);
 		}
 		echo "ok";
 		die();

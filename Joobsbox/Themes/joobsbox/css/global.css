@@ -21,7 +21,6 @@ a {
 div.inner {
 	margin: 0;
 	border:0;
-	zoom:1;
 	background-color: #e4f2fd;
 	font-size: 20px;
 	color: #333333;
@@ -86,6 +85,8 @@ div.outer {
 #header										{width: 100%; height: 65px; background-image: url('../images/logo.png'); background-repeat: no-repeat; background-position: 17px 40%; font-size: 110%; text-transform: uppercase; line-height: 80px; color: #DDD; font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif; margin-bottom: 15px;}
 
 #header a									{display: block; width: 150px; height: 100%; outline: none;}
+
+.site-title									{text-indent: -1800px;}
 
 #footer {
 	border-top: 1px solid #ddd;
@@ -260,6 +261,8 @@ div.outer {
 /*********** OTHERS ********************************/
 .toRight img {
 	vertical-align: text-bottom;
+	border: none;
+	outline: none;
 }
 .admin, .toRight {
 	float:right;

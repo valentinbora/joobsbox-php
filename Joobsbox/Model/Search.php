@@ -19,11 +19,13 @@ class Joobsbox_Model_Search {
 	protected $_index;
 	
 	public function __construct() {
-		    if(file_exists("Joobsbox/SearchIndexes/main")) {
-			    $this->_index = Zend_Search_Lucene::open("Joobsbox/SearchIndexes/main");
-		    } else {
-			    $this->_index = Zend_Search_Lucene::create("Joobsbox/SearchIndexes/main");
-		    }
+		if(file_exists("Joobsbox/SearchIndexes/main")) {
+			$this->_index = Zend_Search_Lucene::open("Joobsbox/SearchIndexes/main");
+		} else {
+			$this->_index = Zend_Search_Lucene::create("Joobsbox/SearchIndexes/main");
+		}
+		Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive ()); 
+		Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('utf-8'); 
 	}
 	
 	public function search($string) {
@@ -51,17 +53,15 @@ class Joobsbox_Model_Search {
 			}
 		}
 		
-		Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
-		
 		// Add the job now
 		$job = new Zend_Search_Lucene_Document();
-		$job->addField(Zend_Search_Lucene_Field::Keyword('DocumentType', 'job'));
-		$job->addField(Zend_Search_Lucene_Field::Keyword('ID', $jobData['ID']));
-		$job->addField(Zend_Search_Lucene_Field::Text('Title', $jobData['Title']));
-		$job->addField(Zend_Search_Lucene_Field::Text('Description', $jobData['Description']));
-		$job->addField(Zend_Search_Lucene_Field::Text('Company', $jobData['Company']));
-		$job->addField(Zend_Search_Lucene_Field::Keyword('CategoryID', $jobData['CategoryID']));
-		$job->addField(Zend_Search_Lucene_Field::Text('Location', $jobData['Location']));
+		$job->addField(Zend_Search_Lucene_Field::Keyword('DocumentType', 'job', 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Keyword('ID', $jobData['ID'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Text('Title', $jobData['Title'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Text('Description', $jobData['Description'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Text('Company', $jobData['Company'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Keyword('CategoryID', $jobData['CategoryID'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Text('Location', $jobData['Location'], 'utf-8'));
 		$this->_index->addDocument($job);
 	}
 	

@@ -122,6 +122,7 @@ class PublishController extends Zend_Controller_Action
 		
         if ($form->isValid($_POST)) {
 			$jobOperations = new Joobsbox_Model_JobOperations;
+			$searchModel = new Joobsbox_Model_Search;
 			$values = $form->getValues();
 			$hash = md5(implode("", $values));
 			
@@ -136,7 +137,7 @@ class PublishController extends Zend_Controller_Action
 					$values['id'] = $jobOperations->update(array(
 						'CategoryID'	=> $values['category'],
 						'Title'			=> $values['title'],
-						'Description'	=> $values['description'],
+						'Description'	=> $this->_helper->filter("purify_html", $values['description']),
 						'ToApply'		=> $values['application'],
 						'Company'		=> $values['company'],
 						'Location'		=> $values['location'],
@@ -145,6 +146,7 @@ class PublishController extends Zend_Controller_Action
 					), $where);
 
 					$this->view->editSuccess = 1;
+					$searchModel->addJob($publishNamespace->editJobId);
 					unset($publishNamespace->editJobId);
 					$this->_helper->event("job_edited", $values);
 					$publishNamespace->jobHash = $hash;
@@ -157,7 +159,7 @@ class PublishController extends Zend_Controller_Action
 					$values['id'] = $jobOperations->insert(array(
 						'CategoryID'	=> $values['category'],
 						'Title'			=> $values['title'],
-						'Description'	=> $values['description'],
+						'Description'	=> $this->_helper->filter("purify_html", $values['description']),
 						'ToApply'		=> $values['application'],
 						'Company'		=> $values['company'],
 						'Location'		=> $values['location'],
