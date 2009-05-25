@@ -1,4 +1,28 @@
 <?php
+/**
+ * Filter call Helper
+ * 
+ * @author Valentin Bora <contact@valentinbora.com>
+ * @version 1.0
+ * @package Joobsbox_Helpers
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
+ */
+ 
+/**
+ * Filter call Helper
+ *
+ * Example usage:
+ * <code>
+ * echo $this->Filter('event_name', $dataToFilter);
+ * </code>
+ *
+ * @package Joobsbox_Helpers
+ * @category Joobsbox
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
+ * 
+ */
 class Joobsbox_Helpers_Filter extends Zend_Controller_Action_Helper_Abstract
 {
     public function filter() {

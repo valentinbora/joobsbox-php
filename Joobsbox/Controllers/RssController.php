@@ -7,10 +7,14 @@
  * @author Valentin Bora <contact@valentinbora.com>
  * @version 1.0
  * @package Joobsbox_Controller
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
  
 /**
  * @package Joobsbox_Controller
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 
 class RssController extends Zend_Controller_Action {

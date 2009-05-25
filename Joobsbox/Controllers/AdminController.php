@@ -8,12 +8,16 @@
  * @version 1.0
  * @category Joobsbox
  * @package Joobsbox_Controller
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
  
 /**
  * Manages the admin panel
  * @category Joobsbox
  * @package Joobsbox_Controller
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 class AdminController extends Zend_Controller_Action
 {

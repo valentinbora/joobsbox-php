@@ -7,12 +7,16 @@
  * @author Valentin Bora <contact@valentinbora.com>
  * @version 1.0
  * @package Joobsbox_Controller
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
  
 /**
  * Manages the application installation
  * @package Joobsbox_Controller
  * @category Joobsbox
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 class InstallController extends Zend_Controller_Action {
 	protected $_model;

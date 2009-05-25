@@ -1,6 +1,32 @@
 <?php
+/**
+ * Plugin Loader
+ * 
+ * Loads all plugins and keeps records of what plugin implements what event handlers and filters
+ *
+ * @author Valentin Bora <contact@valentinbora.com>
+ * @version 1.0
+ * @category Joobsbox
+ * @package Joobsbox_Plugin
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
+ */
+
+/**
+ * 
+ */
 Zend_Loader::loadClass("Joobsbox_Plugin_Model");
 
+/**
+ * Plugin Loader Class
+ * 
+ * @author Valentin Bora <contact@valentinbora.com>
+ * @version 1.0
+ * @category Joobsbox
+ * @package Joobsbox_Plugin
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
+ */
 class Joobsbox_Plugin_Loader {
 	function __construct() {
 		$event_handlers = array();

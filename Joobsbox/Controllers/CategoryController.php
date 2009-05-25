@@ -8,11 +8,15 @@
  * @version 1.0
  * @package Joobsbox_Controller
  * @category Joobsbox
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
  
 /**
  * @package Joobsbox_Controller
  * @category Joobsbox
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 class CategoryController extends Zend_Controller_Action
 {

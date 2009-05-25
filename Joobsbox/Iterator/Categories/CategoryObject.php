@@ -6,10 +6,14 @@
  * @author Valentin Bora <contact@valentinbora.com>
  * @version 1.0
  * @package Joobsbox_Iterator_Object
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
  
 /*
  * @package Joobsbox_Iterator_Object
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 class Joobsbox_Iterator_Categories_CategoryObject extends ArrayObject
 {

@@ -8,11 +8,15 @@
  * @version 1.0
  * @category Joobsbox
  * @package Joobsbox_Model
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 
  /**
  * @category Joobsbox
  * @package Joobsbox_Model
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 
 class Joobsbox_Model_Search {

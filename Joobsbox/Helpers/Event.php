@@ -1,4 +1,29 @@
 <?php
+/**
+ * Event trigger Helper
+ * 
+ * @author Valentin Bora <contact@valentinbora.com>
+ * @version 1.0
+ * @package Joobsbox_Helpers
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ 
+ */
+ 
+/**
+ * Event trigger Helper
+ *
+ * Example usage:
+ * <code>
+ * $this->Event('event_name');
+ * </code>
+ *
+ * @package Joobsbox_Helpers
+ * @category Joobsbox
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license)
+ * @license	   New BSD License
+ * 
+ */
 class Joobsbox_Helpers_Event extends Zend_Controller_Action_Helper_Abstract
 {
     public function fireEvent() {
