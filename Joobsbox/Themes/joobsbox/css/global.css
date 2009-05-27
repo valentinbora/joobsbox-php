@@ -88,16 +88,17 @@ div.outer {
 
 .site-title									{text-indent: -1800px;}
 
+#full-rss									{background-color: #ffffcc; text-align: center; padding: 7px 5px; border-top: 1px solid #ddd; color: #888888; font-size: 90%;}
 #footer {
 	border-top: 1px solid #ddd;
 	color: #888;
-	margin-top: 30px;
+	
 	float: left;
 	width: 100%;
 	padding-top: 10px;
 	text-transform: uppercase;
 	text-decoration: none;
-	padding: 5px;
+	padding: 5px 0;
 	font-size: 80%;
 	text-align: center;
 	padding-bottom: 20px;

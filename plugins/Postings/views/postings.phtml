@@ -27,7 +27,7 @@
 			<tbody>
 				<?php foreach($this->pending as $posting): ?>
 				<tr id="job_<?php echo $posting['ID']; ?>" class="job">
-					<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $this->path . 'edit/' . $posting['ID']; ?>" class="editBtn"></a></td>
+					<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $_SERVER['REQUEST_URI'] . '/edit/' . $posting['ID']; ?>" class="editBtn"></a></td>
 					<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
 					<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></a></td>
 					<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>

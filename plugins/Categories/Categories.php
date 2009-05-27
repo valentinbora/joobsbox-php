@@ -96,6 +96,8 @@ class Categories extends Joobsbox_Plugin_AdminBase
 			}
 		}
 		
+		Joobsbox_Helpers_Cache::clearAllCache();
+		
 		echo json_encode(array("mustReload" => $mustReload));
 		die();
 	}

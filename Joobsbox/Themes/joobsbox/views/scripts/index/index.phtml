@@ -9,7 +9,8 @@
  */
 ?>
 	<div class="list">
-		<?php if(count($this->jobs)) foreach($this->jobs as $category => $jobs): ?>
+		<?php if(count($this->jobs)) :
+		foreach($this->jobs as $category => $jobs): ?>
 		<div class="inner">
 			<div class="toRight">
 				<a href="<?php echo $this->baseUrl . '/rss/' . $this->TranslateUrl("category") . '/' . $this->MakeLink($category);?>/">RSS</a>
@@ -30,5 +31,9 @@
 				</li>
 				<?php endforeach; ?>
 			</ul>
-		<?php endforeach; ?>
+		<?php endforeach; 
+		else: 
+			echo $this->translate("No jobs postings are available at this time. Be the first to publish one!");
+		endif;
+		?>
 	</div>

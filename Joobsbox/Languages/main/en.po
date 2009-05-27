@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: joobsbox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-21 22:11+0200\n"
+"POT-Creation-Date: 2009-05-27 23:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Valentin Bora <contact@valentinbora.com>\n"
 "Language-Team: \n"
@@ -11,211 +11,262 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: UNITED KINGDOM\n"
-"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-KeywordsList: translate;setLabel\n"
 "X-Poedit-Basepath: I:/web/joobsbox-php/Joobsbox/\n"
 "X-Poedit-SearchPath-0: Themes\n"
 "X-Poedit-SearchPath-1: Controllers\n"
 "X-Poedit-SearchPath-2: Model\n"
 
-#: Controllers/CategoryController.php:34
+#: Controllers/CategoryController.php:38
 msgid "This category does not exist."
 msgstr "This category does not exist."
 
-#: Controllers/JobController.php:29
+#: Controllers/JobController.php:33
 msgid "The requested job does not exist!"
 msgstr "The requested job does not exist!"
 
-#: Controllers/PublishController.php:116
+#: Controllers/PublishController.php:36
+msgid "Job title:"
+msgstr "Job title:"
+
+#: Controllers/PublishController.php:45
+msgid "Company:"
+msgstr "Company:"
+
+#: Controllers/PublishController.php:52
+msgid "Location:"
+msgstr "Location:"
+
+#: Controllers/PublishController.php:60
+msgid "Choose..."
+msgstr "Choose..."
+
+#: Controllers/PublishController.php:66
+msgid "Category:"
+msgstr "Category:"
+
+#: Controllers/PublishController.php:72
+msgid "Job description:"
+msgstr "Job description:"
+
+#: Controllers/PublishController.php:80
+msgid "Means of application:"
+msgstr "Means of application:"
+
+#: Controllers/PublishController.php:88
+msgid "Add"
+msgstr "Add"
+
+#: Controllers/PublishController.php:99
+msgid "Modify"
+msgstr "Modify"
+
+#: Controllers/PublishController.php:136
 msgid "You are not allowed to add the same job multiple times."
 msgstr "You are not allowed to add the same job multiple times."
 
-#: Controllers/PublishController.php:136
+#: Controllers/PublishController.php:161
+#: Controllers/PublishController.php:181
 msgid "An error occured while saving the job. Please try again."
 msgstr "An error occured while saving the job. Please try again."
 
-#: Controllers/UserController.php:96
+#: Controllers/UserController.php:37
+msgid "Username:"
+msgstr "Username:"
+
+#: Controllers/UserController.php:45
+msgid "Password:"
+msgstr "Password:"
+
+#: Controllers/UserController.php:54
+msgid "Remember me:"
+msgstr "Remember me:"
+
+#: Controllers/UserController.php:57
+msgid "Login"
+msgstr "Login"
+
+#: Controllers/UserController.php:100
 msgid "Username and/or password incorrect"
 msgstr "Username and/or password incorrect"
 
-#: Themes/joobsbox/layouts/index.phtml:34
+#: Themes/joobsbox/layouts/index.phtml:44
 #, php-format
 msgid "Post a job for %d days"
 msgstr "Post a job for %d days"
 
-#: Themes/joobsbox/layouts/index.phtml:39
+#: Themes/joobsbox/layouts/index.phtml:49
 msgid "Search here"
 msgstr "Search here"
 
-#: Themes/joobsbox/views/scripts/admin/index.phtml:2
+#: Themes/joobsbox/layouts/index.phtml:56
+#, php-format
+msgid "Subscribe to the full <a href=\"%s\">RSS Feed</a> and be notified when when new jobs are posted."
+msgstr "Subscribe to the full <a href=\"%s\">RSS Feed</a> and be notified when when new jobs are posted."
+
+#: Themes/joobsbox/layouts/install.phtml:40
+msgid "Installation"
+msgstr "Installation"
+
+#: Themes/joobsbox/views/scripts/admin/index.phtml:12
 msgid "Administration Dashboard"
 msgstr "Administration Dashboard"
 
-#: Themes/joobsbox/views/scripts/cauta/index.phtml:5
-#: Themes/joobsbox/views/scripts/search/index.phtml:5
-msgid "Search"
-msgstr "Search"
-
-#: Themes/joobsbox/views/scripts/cauta/index.phtml:12
-#: Themes/joobsbox/views/scripts/index/index.phtml:16
-#: Themes/joobsbox/views/scripts/job/job.phtml:3
-#: Themes/joobsbox/views/scripts/job/job.phtml:12
-#: Themes/joobsbox/views/scripts/search/index.phtml:12
+#: Themes/joobsbox/views/scripts/index/index.phtml:27
+#: Themes/joobsbox/views/scripts/job/job.phtml:13
+#: Themes/joobsbox/views/scripts/job/job.phtml:22
+#: Themes/joobsbox/views/scripts/search/index.phtml:22
 msgid "at"
 msgstr "at"
 
-#: Themes/joobsbox/views/scripts/cauta/index.phtml:14
-#: Themes/joobsbox/views/scripts/index/index.phtml:18
-#: Themes/joobsbox/views/scripts/job/job.phtml:5
-#: Themes/joobsbox/views/scripts/job/job.phtml:14
-#: Themes/joobsbox/views/scripts/search/index.phtml:14
+#: Themes/joobsbox/views/scripts/index/index.phtml:29
+#: Themes/joobsbox/views/scripts/job/job.phtml:15
+#: Themes/joobsbox/views/scripts/job/job.phtml:24
+#: Themes/joobsbox/views/scripts/search/index.phtml:24
 msgid "in"
 msgstr "in"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:1
-#: Themes/joobsbox/views/scripts/install/step2.phtml:1
-#: Themes/joobsbox/views/scripts/install/step3.phtml:1
+#: Themes/joobsbox/views/scripts/index/index.phtml:36
+msgid "No jobs postings are available at this time. Be the first to publish one!"
+msgstr "No jobs postings are available at this time. Be the first to publish one!"
+
+#: Themes/joobsbox/views/scripts/install/step1.phtml:11
+#: Themes/joobsbox/views/scripts/install/step2.phtml:11
+#: Themes/joobsbox/views/scripts/install/step3.phtml:11
 msgid "Installation - Step "
 msgstr "Installation - Step "
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:3
+#: Themes/joobsbox/views/scripts/install/step1.phtml:13
 msgid "Welcome to Joobsbox installation!"
 msgstr "Welcome to Joobsbox installation!"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:5
+#: Themes/joobsbox/views/scripts/install/step1.phtml:15
 msgid "I need some information and then we're ready to go."
 msgstr "I need some information and then we're ready to go."
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:9
+#: Themes/joobsbox/views/scripts/install/step1.phtml:19
 msgid "Site information"
 msgstr "Site information"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:11
+#: Themes/joobsbox/views/scripts/install/step1.phtml:21
 msgid "Site name"
 msgstr "Site name"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:16
+#: Themes/joobsbox/views/scripts/install/step1.phtml:26
 msgid "Database information"
 msgstr "Database information"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:19
+#: Themes/joobsbox/views/scripts/install/step1.phtml:29
 msgid "Database name"
 msgstr "Database name"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:23
+#: Themes/joobsbox/views/scripts/install/step1.phtml:33
 msgid "Database username"
 msgstr "Database username"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:27
+#: Themes/joobsbox/views/scripts/install/step1.phtml:37
 msgid "Database password"
 msgstr "Database password"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:31
+#: Themes/joobsbox/views/scripts/install/step1.phtml:41
 msgid "Database host"
 msgstr "Database host"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:35
+#: Themes/joobsbox/views/scripts/install/step1.phtml:45
 msgid "Table prefix"
 msgstr "Table prefix"
 
-#: Themes/joobsbox/views/scripts/install/step1.phtml:41
+#: Themes/joobsbox/views/scripts/install/step1.phtml:51
 msgid "There was an error connecting to the database. Make sure the connection information you provided is correct."
 msgstr "There was an error connecting to the database. Make sure the connection information you provided is correct."
 
-#: Themes/joobsbox/views/scripts/install/step2.phtml:3
+#: Themes/joobsbox/views/scripts/install/step2.phtml:13
 msgid "Joobsbox installation complete!"
 msgstr "Joobsbox installation complete!"
 
-#: Themes/joobsbox/views/scripts/install/step2.phtml:5
+#: Themes/joobsbox/views/scripts/install/step2.phtml:15
 msgid "Congratulations. You finished installing Joobsbox. Now please configure your administrator username and password."
 msgstr "Congratulations. You finished installing Joobsbox. Now please configure your administrator username and password."
 
-#: Themes/joobsbox/views/scripts/install/step2.phtml:8
+#: Themes/joobsbox/views/scripts/install/step2.phtml:18
 msgid "Administrator credentials"
 msgstr "Administrator credentials"
 
-#: Themes/joobsbox/views/scripts/install/step2.phtml:10
+#: Themes/joobsbox/views/scripts/install/step2.phtml:20
 msgid "Your name"
 msgstr "Your name"
 
-#: Themes/joobsbox/views/scripts/install/step2.phtml:14
+#: Themes/joobsbox/views/scripts/install/step2.phtml:24
 msgid "Username"
 msgstr "Username"
 
-#: Themes/joobsbox/views/scripts/install/step2.phtml:18
+#: Themes/joobsbox/views/scripts/install/step2.phtml:28
 msgid "Password"
 msgstr "Password"
 
-#: Themes/joobsbox/views/scripts/install/step2.phtml:24
+#: Themes/joobsbox/views/scripts/install/step2.phtml:34
 msgid "Please provide a valid username and password."
 msgstr "Please provide a valid username and password."
 
-#: Themes/joobsbox/views/scripts/install/step2.phtml:27
+#: Themes/joobsbox/views/scripts/install/step2.phtml:37
 msgid "Done"
 msgstr "Done"
 
-#: Themes/joobsbox/views/scripts/install/step3.phtml:3
+#: Themes/joobsbox/views/scripts/install/step3.phtml:13
 msgid "Everything went well!"
 msgstr "Everything went well!"
 
-#: Themes/joobsbox/views/scripts/job/job.phtml:19
+#: Themes/joobsbox/views/scripts/job/job.phtml:29
 msgid "Description:"
 msgstr "Description:"
 
-#: Themes/joobsbox/views/scripts/job/job.phtml:21
+#: Themes/joobsbox/views/scripts/job/job.phtml:31
 msgid "To apply:"
 msgstr "To apply:"
 
-#: Themes/joobsbox/views/scripts/publish/index.phtml:1
+#: Themes/joobsbox/views/scripts/publish/index.phtml:11
 msgid "Publish a job posting"
 msgstr "Publish a job posting"
 
-#: Themes/joobsbox/views/scripts/publish/index.phtml:3
+#: Themes/joobsbox/views/scripts/publish/index.phtml:13
 msgid "Publish a job"
 msgstr "Publish a job"
 
-#: Themes/joobsbox/views/scripts/publish/index.phtml:7
+#: Themes/joobsbox/views/scripts/publish/index.phtml:17
 msgid "The job has been saved. It now has to be accepted by a moderator in order to appear publicly on the site."
 msgstr "The job has been saved. It now has to be accepted by a moderator in order to appear publicly on the site."
 
-#: Themes/joobsbox/views/scripts/search/index.phtml:1
+#: Themes/joobsbox/views/scripts/publish/index.phtml:19
+msgid "The job has been modified and saved."
+msgstr "The job has been modified and saved."
+
+#: Themes/joobsbox/views/scripts/search/index.phtml:11
 msgid "Job search"
 msgstr "Job search"
 
-#: Themes/_admin/joobsbox grey/layouts/index.phtml:30
+#: Themes/joobsbox/views/scripts/search/index.phtml:15
+msgid "Search"
+msgstr "Search"
+
+#: Themes/_admin/joobsbox grey/layouts/index.phtml:40
 msgid "Back to site"
 msgstr "Back to site"
 
-#: Themes/_admin/joobsbox grey/layouts/index.phtml:35
+#: Themes/_admin/joobsbox grey/layouts/index.phtml:45
+#: grey/views/scripts/admin/index.phtml:12
+#: grey/views/scripts/admin/index.phtml:14
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#~ msgid "Job title:"
-#~ msgstr "Job title:"
 #~ msgid "Ex: \"Flash Designer\" or \"ASP.NET Programmer\""
 #~ msgstr "Ex: \"Flash Designer\" or \"ASP.NET Programmer\""
-#~ msgid "Company:"
-#~ msgstr "Company:"
-#~ msgid "Location:"
-#~ msgstr "Location:"
 #~ msgid "Ex: \"Iaşi, Bucureşti\""
 #~ msgstr "Ex: \"Iaşi, Bucureşti\""
-#~ msgid "Category:"
-#~ msgstr "Category:"
-#~ msgid "Job description:"
-#~ msgstr "Job description:"
 #~ msgid "HTML code is not accepted. Length must be less than 4000 characters."
 #~ msgstr ""
 #~ "HTML code is not accepted. Length must be less than 4000 characters."
-#~ msgid "Means of application:"
-#~ msgstr "Means of application:"
 #~ msgid "Ex: \"Send CV to email ...\" or \"Apply online at URL ...\""
 #~ msgstr "Ex: \"Send CV to email ...\" or \"Apply online at URL ...\""
-#~ msgid "Add"
-#~ msgstr "Add"
 #~ msgid "Do not check if on a public computer"
 #~ msgstr "Do not check if on a public computer"
-#~ msgid "Remember me:"
-#~ msgstr "Remember me:"
-#~ msgid "Login"
-#~ msgstr "Login"
 

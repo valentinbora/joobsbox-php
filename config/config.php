@@ -10,7 +10,6 @@ $loader
 	
 // Timezone default
 date_default_timezone_set("GMT");
-
 // Set up caching
 $frontendOptions = array(
 	'default_options' => array(
@@ -27,7 +26,12 @@ $frontendOptions = array(
 $backendOptions = array('cache_dir' => 'cache/');
 
 $cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
-$cache->start();
+
+$urlChunks = explode("/", $_SERVER['REQUEST_URI']);
+if(!in_array("admin", $urlChunks)) {
+	$cache->start();
+}	
+
 Zend_Registry::set("cache", $cache);
 	
 // Static parameters

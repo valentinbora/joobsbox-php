@@ -57,8 +57,10 @@ class PublishController extends Zend_Controller_Action
 			->setDescription('Ex: "Iaşi, Bucureşti"')
 			->setRequired(true);
 			
-		$categories = $this->_model->fetchCategories()->getIndexNamePairs();
-		array_unshift($categories, $this->view->translate("Choose..."));
+		$categories[0] = $this->view->translate("Choose...");
+		foreach($this->_model->fetchCategories()->getIndexNamePairs() as $key => $value) {
+			$categories[$key] = $value;
+		}
 		
 		$category = $form->createElement('select', 'category')
 			->setLabel('Category:')
@@ -154,6 +156,7 @@ class PublishController extends Zend_Controller_Action
 					unset($publishNamespace->editJobId);
 					$this->_helper->event("job_edited", $values);
 					$publishNamespace->jobHash = $hash;
+					Joobsbox_Helpers_Cache::clearAllCache();
 				} catch (Exception $e) {
 					throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
 				}

@@ -25,6 +25,14 @@ class AdminController extends Zend_Controller_Action
 	private $currentPlugin;
 	
 	public function init() {
+		$session = new Zend_Session_Namespace("Admin");
+		if(!isset($session->rand)) {
+			$session->rand = time();
+			$this->_redirect("/admin");
+		} else {
+			$session->rand = time();
+		}
+	
 		$this->_conf = Zend_Registry::get("conf");
 		configureTheme("_admin/" . $this->_conf->general->admin_theme);
 		

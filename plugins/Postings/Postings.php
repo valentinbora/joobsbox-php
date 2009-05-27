@@ -58,6 +58,7 @@ class Postings extends Joobsbox_Plugin_AdminBase
 			$this->searchModel->deleteJob($job);
 		}
 		echo "ok";
+		Joobsbox_Helpers_Cache::clearAllCache();
 		die();
 	}
 	
@@ -71,6 +72,9 @@ class Postings extends Joobsbox_Plugin_AdminBase
 			$x = $this->jobOperationsModel->update(array('Public' => 1, 'ChangedDate' => new Zend_Db_Expr('NOW()')), $this->jobOperationsModel->getAdapter()->quoteInto('ID = ?', $job));
 			
 			$this->searchModel->addJob($this->jobsModel->fetchJobById($job));
+			
+			// Rebuild cache
+			Joobsbox_Helpers_Cache::clearAllCache();
 		}
 		echo "ok";
 		die();
