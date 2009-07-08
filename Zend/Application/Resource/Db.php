@@ -17,7 +17,7 @@
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Db.php 14893 2009-04-14 19:28:15Z matthew $
+ * @version    $Id: Db.php 15337 2009-05-05 17:33:06Z matthew $
  */
 
 /**
@@ -142,7 +142,7 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return void
+     * @return Zend_Db_Adapter_Abstract|null
      */
     public function init()
     {

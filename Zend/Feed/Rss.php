@@ -17,7 +17,7 @@
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Rss.php 13901 2009-02-01 12:03:02Z yoshida@zend.co.jp $
+ * @version    $Id: Rss.php 15382 2009-05-07 13:28:14Z alexander $
  */
 
 
@@ -80,9 +80,10 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
         parent::__wakeup();
 
         // Find the base channel element and create an alias to it.
-        if ($this->_element->firstChild->nodeName == 'rdf:RDF') {
-            $this->_element = $this->_element->firstChild;
-        } else {
+        $rdfTags = $this->_element->getElementsByTagNameNS('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'RDF');
+        if ($rdfTags->length != 0) {
+        	$this->_element = $rdfTags->item(0);
+        } else  {
             $this->_element = $this->_element->getElementsByTagName('channel')->item(0);
         }
         if (!$this->_element) {
@@ -399,6 +400,11 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $title = $this->_element->createElement('title');
             $title->appendChild($this->_element->createCDATASection($dataentry->title));
             $item->appendChild($title);
+
+            if (isset($dataentry->author)) {
+                $author = $this->_element->createElement('author', $dataentry->author);
+                $item->appendChild($author);
+            }
 
             $link = $this->_element->createElement('link', $dataentry->link);
             $item->appendChild($link);

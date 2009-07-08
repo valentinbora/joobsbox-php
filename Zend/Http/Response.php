@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Response
- * @version    $Id: Response.php 12519 2008-11-10 18:41:24Z alexander $
+ * @version    $Id: Response.php 16024 2009-06-12 15:44:56Z doctorrock83 $
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -395,6 +395,16 @@ class Zend_Http_Response
     public function asString($br = "\n")
     {
         return $this->getHeadersAsString(true, $br) . $br . $this->getRawBody();
+    }
+
+    /**
+     * Implements magic __toString()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->asString();
     }
 
     /**

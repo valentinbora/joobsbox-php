@@ -17,7 +17,7 @@
  * @subpackage Bootstrap
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: BootstrapAbstract.php 14911 2009-04-15 11:15:43Z matthew $
+ * @version    $Id: BootstrapAbstract.php 15556 2009-05-12 14:45:23Z matthew $
  */
 
 /**
@@ -132,7 +132,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
                 }
             }
         }
-        $this->_options = $this->_options + $options;
+        $this->_options = $this->mergeOptions($this->_options, $options);
         return $this;
     }
 
@@ -169,6 +169,29 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
             return $this->_options[$key];
         }
         return null;
+    }
+
+    /**
+     * Merge options recursively
+     * 
+     * @param  array $array1 
+     * @param  mixed $array2 
+     * @return array
+     */
+    public function mergeOptions(array $array1, $array2 = null)
+    {
+        if (is_array($array2)) {
+            foreach ($array2 as $key => $val) {
+                if (is_array($array2[$key])) {
+                    $array1[$key] = (array_key_exists($key, $array1) && is_array($array1[$key]))
+                                  ? $this->mergeOptions($array1[$key], $array2[$key]) 
+                                  : $array2[$key];
+                } else {
+                    $array1[$key] = $val;
+                }
+            }
+        }
+        return $array1;
     }
 
     /**
@@ -226,9 +249,16 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function registerPluginResource($resource, $options = null)
     {
+        /*
+        if (is_string($resource) && class_exists($resource)) {
+            $options = (array) $options;
+            $options['bootstrap'] = $this;
+            $resource = new $resource($options);
+        }
+         */
         if ($resource instanceof Zend_Application_Resource_Resource) {
-            $className  = get_class($resource);
-            $pluginName = strtolower(substr(strrchr($className, '_'), 1)); 
+            $resource->setBootstrap($this);
+            $pluginName = $this->_resolvePluginResourceName($resource);
             $this->_pluginResources[$pluginName] = $resource;
             return $this;
         }
@@ -237,7 +267,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
             throw new Zend_Application_Bootstrap_Exception('Invalid resource provided to ' . __METHOD__);
         }
 
-        $resource = strtolower($resource);
+        // $resource = strtolower($resource);
         $this->_pluginResources[$resource] = $options;
         return $this;
     }
@@ -278,8 +308,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function hasPluginResource($resource)
     {
-        $resource = strtolower($resource);
-        return array_key_exists($resource, $this->_pluginResources);
+        return (null !== $this->getPluginResource($resource));
     }
     
     /**
@@ -290,22 +319,51 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function getPluginResource($resource)
     {
-        $resource = strtolower($resource);
-        
-        if (!array_key_exists($resource, $this->_pluginResources)) {
-            return null;            
+        if (array_key_exists(strtolower($resource), $this->_pluginResources)) {
+            $resource = strtolower($resource);
+            if (!$this->_pluginResources[$resource] instanceof Zend_Application_Resource_Resource) {
+                $resourceName = $this->_loadPluginResource($resource, $this->_pluginResources[$resource]);
+                if (!$resourceName) {
+                    throw new Zend_Application_Bootstrap_Exception(sprintf('Unable to resolve plugin "%s"; no corresponding plugin with that name', $resource));
+                }
+                $resource = $resourceName;
+            }
+            return $this->_pluginResources[$resource];
         }
 
-        if (!$this->_pluginResources[$resource] instanceof Zend_Application_Resource_Resource) {
-            $options   = $this->_pluginResources[$resource];
-            $className = $this->getPluginLoader()->load($resource);
-            $this->_pluginResources[$resource] = new $className($options);
+        foreach ($this->_pluginResources as $plugin => $spec) {
+            if ($spec instanceof Zend_Application_Resource_Resource) {
+                $pluginName = $this->_resolvePluginResourceName($spec);
+                if (0 === strcasecmp($resource, $pluginName)) {
+                    unset($this->_pluginResources[$plugin]);
+                    $this->_pluginResources[$pluginName] = $spec;
+                    return $spec;
+                }
+                continue;
+            }
+
+
+            if (false !== $pluginName = $this->_loadPluginResource($plugin, $spec)) {
+                if (0 === strcasecmp($resource, $pluginName)) {
+                    return $this->_pluginResources[$pluginName];
+                }
+            }
+
+            if (class_exists($plugin)) {
+                $spec = (array) $spec;
+                $spec['bootstrap'] = $this;
+                $instance = new $plugin($spec);
+                $pluginName = $this->_resolvePluginResourceName($instance);
+                unset($this->_pluginResources[$plugin]);
+                $this->_pluginResources[$pluginName] = $instance;
+
+                if (0 === strcasecmp($resource, $pluginName)) {
+                    return $instance;
+                }
+            }
         }
 
-        $plugin = $this->_pluginResources[$resource];
-        $plugin->setBootstrap($this);
-        
-        return $plugin;
+        return null;            
     }
 
     /**
@@ -315,13 +373,10 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function getPluginResources()
     {
-        $resources = array();
-        
         foreach (array_keys($this->_pluginResources) as $resource) {
-            $resources[$resource] = $this->getPluginResource($resource);
+            $this->getPluginResource($resource);
         }
-        
-        return $resources;
+        return $this->_pluginResources;
     }
 
     /**
@@ -331,6 +386,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function getPluginResourceNames()
     {
+        $this->getPluginResources();
         return array_keys($this->_pluginResources);
     }
 
@@ -377,7 +433,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
         ) {
             $this->_application = $application;
         } else {
-            throw new Zend_Application_Bootstrap_Exception('Invalid application provided to bootstrap constructor');
+            throw new Zend_Application_Bootstrap_Exception('Invalid application provided to bootstrap constructor (received "' . get_class($application) . '" instance)');
         }
         return $this;
     }
@@ -606,6 +662,36 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
     }
 
     /**
+     * Load a plugin resource
+     * 
+     * @param  string $resource 
+     * @param  array|object|null $options 
+     * @return string|false
+     */
+    protected function _loadPluginResource($resource, $options)
+    {
+        $options   = (array) $options;
+        $options['bootstrap'] = $this;
+        $className = $this->getPluginLoader()->load(strtolower($resource), false);
+
+        if (!$className) {
+            return false;
+        }
+
+        $instance = new $className($options);
+
+        unset($this->_pluginResources[$resource]);
+
+        if (isset($instance->_explicitType)) {
+            $resource = $instance->_explicitType;
+        }
+        $resource = strtolower($resource);
+        $this->_pluginResources[$resource] = $instance;
+
+        return $resource;
+    }
+
+    /**
      * Mark a resource as having run
      * 
      * @param  string $resource 
@@ -616,5 +702,37 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
         if (!in_array($resource, $this->_run)) {
             $this->_run[] = $resource;
         }
+    }
+
+    /**
+     * Resolve a plugin resource name
+     *
+     * Uses, in order of preference
+     * - $_explicitType property of resource
+     * - Short name of resource (if a matching prefix path is found)
+     * - class name (if none of the above are true)
+     *
+     * The name is then cast to lowercase.
+     * 
+     * @param  Zend_Application_Resource_Resource $resource 
+     * @return string
+     */
+    protected function _resolvePluginResourceName($resource)
+    {
+        if (isset($resource->_explicitType)) {
+            $pluginName = $resource->_explicitType;
+        } else  {
+            $className  = get_class($resource);
+            $pluginName = $className;
+            $loader     = $this->getPluginLoader();
+            foreach ($loader->getPaths() as $prefix => $paths) {
+                if (0 === strpos($className, $prefix)) {
+                    $pluginName = substr($className, strlen($prefix));
+                    $pluginName = trim($pluginName, '_');
+                }
+            }
+        }
+        $pluginName = strtolower($pluginName);
+        return $pluginName;
     }
 }

@@ -16,7 +16,7 @@
  * @package    Zend_Locale
  * @subpackage Format
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Format.php 14729 2009-04-07 11:26:18Z thomas $
+ * @version    $Id: Format.php 15765 2009-05-25 19:59:45Z thomas $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -170,6 +170,10 @@ class Zend_Locale_Format
                     if ($value instanceof Zend_Cache_Core) {
                         Zend_Locale_Data::setCache($value);
                     }
+                    break;
+
+                case 'disablecache' :
+                    Zend_Locale_Data::disableCache($value);
                     break;
 
                 case 'precision' :

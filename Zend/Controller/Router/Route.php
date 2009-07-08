@@ -15,7 +15,7 @@
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Route.php 14573 2009-04-01 08:06:16Z dasprid $
+ * @version    $Id: Route.php 15464 2009-05-09 16:34:07Z dasprid $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -165,10 +165,10 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
 
         if ($route !== '') {
             foreach (explode($this->_urlDelimiter, $route) as $pos => $part) {
-                if (substr($part, 0, 1) == $this->_urlVariable) {
+                if (substr($part, 0, 1) == $this->_urlVariable && substr($part, 1, 1) != $this->_urlVariable) {
                     $name = substr($part, 1);
 
-                    if (substr($name, 0, 1) === '@') {
+                    if (substr($name, 0, 1) === '@' && substr($name, 1, 1) !== '@') {
                         $name                  = substr($name, 1);
                         $this->_translatable[] = $name;
                         $this->_isTranslated   = true;
@@ -177,7 +177,11 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                     $this->_parts[$pos]     = (isset($reqs[$name]) ? $reqs[$name] : $this->_defaultRegex);
                     $this->_variables[$pos] = $name;
                 } else {
-                    if (substr($part, 0, 1) === '@') {
+                    if (substr($part, 0, 1) == $this->_urlVariable) {
+                        $part = substr($part, 1);
+                    }
+                    
+                    if (substr($part, 0, 1) === '@' && substr($part, 1, 1) !== '@') {
                         $this->_isTranslated = true;
                     }
                     
@@ -198,7 +202,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      * @param string $path Path used to match against this routing map
      * @return array|false An array of assigned values or a false on a mismatch
      */
-    public function match($path)
+    public function match($path, $partial = false)
     {
         if ($this->_isTranslated) {
             $translateMessages = $this->getTranslator()->getMessages();
@@ -208,7 +212,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
         $values          = array();
         $matchedPath     = '';
         
-        if (!$this->isPartial()) {
+        if (!$partial) {
             $path = trim($path, $this->_urlDelimiter);
         }
         
@@ -218,7 +222,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
             foreach ($path as $pos => $pathPart) {
                 // Path is longer than a route, it's not a match
                 if (!array_key_exists($pos, $this->_parts)) {
-                    if ($this->isPartial()) {
+                    if ($partial) {
                         break;
                     } else {
                         return false;
@@ -244,14 +248,18 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
 
                 // Translate value if required
                 $part = $this->_parts[$pos];
-                if ($this->_isTranslated && (substr($part, 0, 1) === '@' && $name === null) || $name !== null && in_array($name, $this->_translatable)) {
+                if ($this->_isTranslated && (substr($part, 0, 1) === '@' && substr($part, 1, 1) !== '@' && $name === null) || $name !== null && in_array($name, $this->_translatable)) {
                     if (substr($part, 0, 1) === '@') {
                         $part = substr($part, 1);
                     }
-
+                    
                     if (($originalPathPart = array_search($pathPart, $translateMessages)) !== false) {
                         $pathPart = $originalPathPart;
                     }
+                }
+                
+                if (substr($part, 0, 2) === '@@') {
+                    $part = substr($part, 1);
                 }
 
                 // If it's a static part, match directly
@@ -302,7 +310,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      * @param  boolean $reset Whether or not to set route defaults with those provided in $data
      * @return string Route path with user submitted parameters
      */
-    public function assemble($data = array(), $reset = false, $encode = false)
+    public function assemble($data = array(), $reset = false, $encode = false, $partial = false)
     {
         if ($this->_isTranslated) {
             $translator = $this->getTranslator();
@@ -348,8 +356,16 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 } 
             } elseif ($part != '*') {
                 if ($this->_isTranslated && substr($part, 0, 1) === '@') {
-                    $url[$key] = $translator->translate(substr($part, 1), $locale);
+                    if (substr($part, 1, 1) !== '@') {
+                        $url[$key] = $translator->translate(substr($part, 1), $locale);
+                    } else {
+                        $url[$key] = substr($part, 1);
+                    }
                 } else {
+                    if (substr($part, 0, 2) === '@@') {
+                        $part = substr($part, 1);
+                    }
+                    
                     $url[$key] = $part;
                 }
             } else {
@@ -377,7 +393,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 }
             }
                 
-            if ($flag || $value !== $defaultValue) {
+            if ($flag || $value !== $defaultValue || $partial) {
                 if ($encode) $value = urlencode($value);
                 $return = $this->_urlDelimiter . $value . $return;
                 $flag = true;
@@ -408,6 +424,16 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      */
     public function getDefaults() {
         return $this->_defaults;
+    }
+    
+    /**
+     * Get all variables which are used by the route
+     *
+     * @return array
+     */
+    public function getVariables()
+    {
+        return $this->_variables;
     }
 
     /**

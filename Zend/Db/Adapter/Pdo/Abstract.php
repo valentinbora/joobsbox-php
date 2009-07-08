@@ -17,7 +17,7 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 14691 2009-04-06 01:52:52Z norm2782 $
+ * @version    $Id: Abstract.php 15577 2009-05-14 12:43:34Z matthew $
  */
 
 
@@ -25,12 +25,6 @@
  * @see Zend_Db_Adapter_Abstract
  */
 require_once 'Zend/Db/Adapter/Abstract.php';
-
-
-/**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
 
 
 /**
@@ -177,7 +171,10 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     {
         $this->_connect();
         $stmtClass = $this->_defaultStmtClass;
-        Zend_Loader::loadClass($stmtClass);
+        if (!class_exists($stmtClass)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($stmtClass);
+        }
         $stmt = new $stmtClass($this, $sql);
         $stmt->setFetchMode($this->_fetchMode);
         return $stmt;
@@ -239,6 +236,42 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
              */
             require_once 'Zend/Db/Statement/Exception.php';
             throw new Zend_Db_Statement_Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * Executes an SQL statement and return the number of affected rows
+     *
+     * @param  mixed  $sql  The SQL statement with placeholders.
+     *                      May be a string or Zend_Db_Select.
+     * @return integer      Number of rows that were modified
+     *                      or deleted by the SQL statement
+     */
+    public function exec($sql)
+    {
+        if ($sql instanceof Zend_Db_Select) {
+            $sql = $sql->assemble();
+        }
+        
+        try {
+            $affected = $this->getConnection()->exec($sql);
+            
+            if ($affected === false) {
+                $errorInfo = $this->getConnection()->errorInfo();
+                /**
+                 * @see Zend_Db_Adapter_Exception
+                 */
+                require_once 'Zend/Db/Adapter/Exception.php';
+                throw new Zend_Db_Adapter_Exception($errorInfo[2]);
+            }
+            
+            return $affected;
+        } catch (PDOException $e) {
+            /**
+             * @see Zend_Db_Adapter_Exception
+             */
+            require_once 'Zend/Db/Adapter/Exception.php';
+            throw new Zend_Db_Adapter_Exception($e->getMessage());
         }
     }
 

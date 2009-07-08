@@ -15,7 +15,7 @@
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Regex.php 14247 2009-03-08 17:37:50Z dasprid $
+ * @version    $Id: Regex.php 15461 2009-05-09 15:54:21Z dasprid $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -70,9 +70,9 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
      * @param  string $path Path used to match against this routing map
      * @return array|false  An array of assigned values or a false on a mismatch
      */
-    public function match($path)
+    public function match($path, $partial = false)
     {
-        if (!$this->isPartial()) {
+        if (!$partial) {
             $path = trim(urldecode($path), '/');
             $regex = '#^' . $this->_regex . '$#i';
         } else {
@@ -85,7 +85,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
             return false;
         }
         
-        if ($this->isPartial()) {
+        if ($partial) {
             $this->setMatchedPath($values[0]);
         }
 
@@ -154,7 +154,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
      * @param  array $data An array of name (or index) and value pairs used as parameters
      * @return string Route path with user submitted parameters
      */
-    public function assemble($data = array(), $reset = false, $encode = false)
+    public function assemble($data = array(), $reset = false, $encode = false, $partial = false)
     {
         if ($this->_reverse === null) {
             require_once 'Zend/Controller/Router/Exception.php';
@@ -218,6 +218,26 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
      */
     public function getDefaults() {
         return $this->_defaults;
+    }
+    
+    /**
+     * Get all variables which are used by the route
+     *
+     * @return array
+     */
+    public function getVariables()
+    {
+        $variables = array();
+        
+        foreach ($this->_map as $key => $value) {
+            if (is_numeric($key)) {
+                $variables[] = $value;
+            } else {
+                $variables[] = $key;
+            }
+        }
+        
+        return $variables;
     }
 
     /**

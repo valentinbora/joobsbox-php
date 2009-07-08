@@ -16,7 +16,7 @@
  * @package    Zend_Application
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Application.php 14893 2009-04-14 19:28:15Z matthew $
+ * @version    $Id: Application.php 15556 2009-05-12 14:45:23Z matthew $
  */
 
 /**
@@ -119,7 +119,7 @@ class Zend_Application
         $options = array_change_key_case($options, CASE_LOWER);
 
         if (!empty($options['config'])) {
-            $options += $this->_loadConfig($options['config']);
+            $options = $this->mergeOptions($options, $this->_loadConfig($options['config']));
         }
         
         $this->_options = $options;
@@ -198,6 +198,29 @@ class Zend_Application
     }
 
     /**
+     * Merge options recursively
+     * 
+     * @param  array $array1 
+     * @param  mixed $array2 
+     * @return array
+     */
+    public function mergeOptions(array $array1, $array2 = null)
+    {
+        if (is_array($array2)) {
+            foreach ($array2 as $key => $val) {
+                if (is_array($array2[$key])) {
+                    $array1[$key] = (array_key_exists($key, $array1) && is_array($array1[$key]))
+                                  ? $this->mergeOptions($array1[$key], $array2[$key]) 
+                                  : $array2[$key];
+                } else {
+                    $array1[$key] = $val;
+                }
+            }
+        }
+        return $array1;
+    }
+
+    /**
      * Set PHP configuration settings
      * 
      * @param  array $settings 
@@ -263,7 +286,9 @@ class Zend_Application
             $class = 'Bootstrap';
         }
 
-        require_once $path;
+        if (!class_exists($class, false)) {
+            require_once $path;
+        }
         $this->_bootstrap = new $class($this);
         
         return $this;
@@ -285,11 +310,12 @@ class Zend_Application
     /**
      * Bootstrap application
      * 
-     * @return void
+     * @return Zend_Application
      */
     public function bootstrap()
     {
         $this->getBootstrap()->bootstrap();
+        return $this;
     }
 
     /**

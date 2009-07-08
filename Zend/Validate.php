@@ -16,7 +16,7 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Validate.php 14567 2009-03-31 21:45:57Z thomas $
+ * @version    $Id: Validate.php 15577 2009-05-14 12:43:34Z matthew $
  */
 
 /**
@@ -141,18 +141,18 @@ class Zend_Validate implements Zend_Validate_Interface
         foreach ($namespaces as $namespace) {
             $className = $namespace . '_' . ucfirst($classBaseName);
             try {
-                require_once 'Zend/Loader.php';
-                Zend_Loader::loadClass($className);
-                if (class_exists($className, false)) {
-                    $class = new ReflectionClass($className);
-                    if ($class->implementsInterface('Zend_Validate_Interface')) {
-                        if ($class->hasMethod('__construct')) {
-                            $object = $class->newInstanceArgs($args);
-                        } else {
-                            $object = $class->newInstance();
-                        }
-                        return $object->isValid($value);
+                if (!class_exists($className)) {
+                    require_once 'Zend/Loader.php';
+                    Zend_Loader::loadClass($className);
+                }
+                $class = new ReflectionClass($className);
+                if ($class->implementsInterface('Zend_Validate_Interface')) {
+                    if ($class->hasMethod('__construct')) {
+                        $object = $class->newInstanceArgs($args);
+                    } else {
+                        $object = $class->newInstance();
                     }
+                    return $object->isValid($value);
                 }
             } catch (Zend_Validate_Exception $ze) {
                 // if there is an exception while validating throw it

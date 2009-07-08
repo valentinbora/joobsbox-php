@@ -16,7 +16,7 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Json.php 15052 2009-04-21 15:34:02Z matthew $
+ * @version    $Id: Json.php 15113 2009-04-23 16:54:22Z matthew $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -54,10 +54,10 @@ class Zend_View_Helper_Json extends Zend_View_Helper_Abstract
      */
     public function json($data, $keepLayouts = false)
     {
-
+        $options = array();
         if (is_array($keepLayouts))
         {
-            $options = $keepLayouts;
+            $options     = $keepLayouts;
             $keepLayouts = (array_key_exists('keepLayouts', $keepLayouts))
                             ? $keepLayouts['keepLayouts']
                             : false;

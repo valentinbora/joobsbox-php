@@ -15,12 +15,9 @@
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Rewrite.php 14248 2009-03-08 18:51:35Z dasprid $
+ * @version    $Id: Rewrite.php 15577 2009-05-14 12:43:34Z matthew $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/** Zend_Loader */
-require_once 'Zend/Loader.php';
 
 /** Zend_Controller_Router_Abstract */
 require_once 'Zend/Controller/Router/Abstract.php';
@@ -197,7 +194,10 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     protected function _getRouteFromConfig(Zend_Config $info)
     {
         $class = (isset($info->type)) ? $info->type : 'Zend_Controller_Router_Route';
-        Zend_Loader::loadClass($class);
+        if (!class_exists($class)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($class);
+        }
               
         $route = call_user_func(array($class, 'getInstance'), $info);
         

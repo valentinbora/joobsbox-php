@@ -23,7 +23,7 @@ class InstallController extends Zend_Controller_Action {
 	
 	public function init() {
 	    $config = new Zend_Config_Ini("config/config.ini.php");
-	    if(isset($config->general->restrict_install) && $config->general->restrict_install) {
+	    if(isset($config->general->restrict_install) && $config->general->restrict_install && file_exists("config/db.ini.php")) {
 		$this->_redirect("");
 	    }
 	}

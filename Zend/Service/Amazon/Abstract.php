@@ -37,22 +37,39 @@ abstract class Zend_Service_Amazon_Abstract extends Zend_Service_Abstract
     /**
      * @var string Amazon Access Key
      */
-    protected static $defaultAccessKey = null;
+    protected static $_defaultAccessKey = null;
 
     /**
      * @var string Amazon Secret Key
      */
-    protected static $defaultSecretKey = null;
+    protected static $_defaultSecretKey = null;
+
+    /**
+     * @var string Amazon Region
+     */
+    protected static $_defaultRegion = null;
 
     /**
      * @var string Amazon Secret Key
      */
-    protected $secretKey;
+    protected $_secretKey;
 
     /**
      * @var string Amazon Access Key
      */
-    protected $accessKey;
+    protected $_accessKey;
+
+    /**
+     * @var string Amazon Region
+     */
+    protected $_region;
+
+    /**
+     * An array that contains all the valid Amazon Ec2 Regions.
+     *
+     * @var array
+     */
+    protected static $_validEc2Regions = array('eu-west-1', 'us-east-1');
 
     /**
      * Set the keys to use when accessing SQS.
@@ -63,8 +80,24 @@ abstract class Zend_Service_Amazon_Abstract extends Zend_Service_Abstract
      */
     public static function setKeys($accessKey, $secretKey)
     {
-        self::$defaultAccessKey = $accessKey;
-        self::$defaultSecretKey = $secretKey;
+        self::$_defaultAccessKey = $accessKey;
+        self::$_defaultSecretKey = $secretKey;
+    }
+
+    /**
+     * Set which region you are working in.  It will append the
+     * end point automaticly
+     *
+     * @param string $region
+     */
+    public static function setRegion($region)
+    {
+        if(in_array(strtolower($region), self::$_validEc2Regions, true)) {
+            self::$_defaultRegion = $region;
+        } else {
+            require_once 'Zend/Service/Amazon/Exception.php';
+            throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
+        }
     }
 
     /**
@@ -72,22 +105,44 @@ abstract class Zend_Service_Amazon_Abstract extends Zend_Service_Abstract
      *
      * @param  string $access_key       Override the default Access Key
      * @param  string $secret_key       Override the default Secret Key
+     * @param  string $region           Sets the AWS Region
      * @return void
      */
-    public function __construct($accessKey=null, $secretKey=null)
+    public function __construct($accessKey=null, $secretKey=null, $region=null)
     {
         if(!$accessKey) {
-            $accessKey = self::$defaultAccessKey;
+            $accessKey = self::$_defaultAccessKey;
         }
         if(!$secretKey) {
-            $secretKey = self::$defaultSecretKey;
+            $secretKey = self::$_defaultSecretKey;
         }
+        if(!$region) {
+            $region = self::$_defaultRegion;
+        } else {
+            // make rue the region is valid
+            if(!empty($region) && !in_array(strtolower($region), self::$_validEc2Regions, true)) {
+                require_once 'Zend/Service/Amazon/Exception.php';
+                throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
+            }
+        }
+
         if(!$accessKey || !$secretKey) {
             require_once 'Zend/Service/Amazon/Exception.php';
             throw new Zend_Service_Amazon_Exception("AWS keys were not supplied");
         }
-        $this->accessKey = $accessKey;
-        $this->secretKey = $secretKey;
+        $this->_accessKey = $accessKey;
+        $this->_secretKey = $secretKey;
+        $this->_region = $region;
+    }
+
+    /**
+     * Method to fetch the AWS Region
+     *
+     * @return string
+     */
+    protected function _getRegion()
+    {
+        return (!empty($this->_region)) ? $this->_region . '.' : '';
     }
 
     /**
@@ -95,9 +150,9 @@ abstract class Zend_Service_Amazon_Abstract extends Zend_Service_Abstract
      *
      * @return string
      */
-    protected function getAccessKey()
+    protected function _getAccessKey()
     {
-        return $this->accessKey;
+        return $this->_accessKey;
     }
 
     /**
@@ -105,8 +160,8 @@ abstract class Zend_Service_Amazon_Abstract extends Zend_Service_Abstract
      *
      * @return string
      */
-    protected function getSecretKey()
+    protected function _getSecretKey()
     {
-        return $this->secretKey;
+        return $this->_secretKey;
     }
 }

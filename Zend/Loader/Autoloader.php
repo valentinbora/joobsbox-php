@@ -16,7 +16,7 @@
  * @package    Zend_Loader
  * @subpackage Autoloader
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Autoloader.php 14710 2009-04-07 03:55:22Z matthew $
+ * @version    $Id: Autoloader.php 16029 2009-06-12 18:01:37Z doctorrock83 $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -75,7 +75,7 @@ class Zend_Loader_Autoloader
     /**
      * @var bool Whether or not to suppress file not found warnings
      */
-    protected $_suppressNotFoundWarnings = true;
+    protected $_suppressNotFoundWarnings = false;
 
     /**
      * Retrieve singleton instance
@@ -197,7 +197,7 @@ class Zend_Loader_Autoloader
     /**
      * Register a namespace to autoload
      * 
-     * @param  string $namespace 
+     * @param  string|array $namespace 
      * @return Zend_Loader_Autoloader
      */
     public function registerNamespace($namespace)
@@ -219,7 +219,7 @@ class Zend_Loader_Autoloader
     /**
      * Unload a registered autoload namespace
      * 
-     * @param  string $namespace 
+     * @param  string|array $namespace 
      * @return Zend_Loader_Autoloader
      */
     public function unregisterNamespace($namespace)
@@ -436,15 +436,16 @@ class Zend_Loader_Autoloader
     protected function _autoload($class)
     {
         $callback = $this->getDefaultAutoloader();
-        if ($this->suppressNotFoundWarnings()) {
-            try {
+        try {
+            if ($this->suppressNotFoundWarnings()) {
                 @call_user_func($callback, $class);
-                return $class;
-            } catch (Zend_Exception $e) {
-                return false;
+            } else {
+                call_user_func($callback, $class);
             }
+            return $class;
+        } catch (Zend_Exception $e) {
+            return false;
         }
-        return call_user_func($callback, $class);
     }
 
     /**

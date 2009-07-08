@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -39,7 +39,7 @@ require_once 'Zend/Amf/Value/MessageBody.php';
  *
  * @todo       Currently not checking if the object needs to be Type Mapped to a server object.
  * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Amf_Request
@@ -105,6 +105,7 @@ class Zend_Amf_Request
         $clientVersion = $stream->readUnsignedShort();
         if (($clientVersion != Zend_Amf_Constants::AMF0_OBJECT_ENCODING)
             && ($clientVersion != Zend_Amf_Constants::AMF3_OBJECT_ENCODING)
+            && ($clientVersion != Zend_Amf_Constants::FMS_OBJECT_ENCODING)
         ) {
             require_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Unknown Player Version ' . $clientVersion);

@@ -17,7 +17,7 @@
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: View.php 14893 2009-04-14 19:28:15Z matthew $
+ * @version    $Id: View.php 15333 2009-05-05 13:43:53Z matthew $
  */
 
 /**
@@ -40,7 +40,7 @@ class Zend_Application_Resource_View extends Zend_Application_Resource_ResourceA
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return void
+     * @return Zend_View
      */
     public function init()
     {

@@ -17,7 +17,7 @@
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ResourceAbstract.php 14881 2009-04-13 16:48:43Z matthew $
+ * @version    $Id: ResourceAbstract.php 15556 2009-05-12 14:45:23Z matthew $
  */
 
 /**
@@ -92,9 +92,12 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
+            if ('bootstrap' == $key) {
+                unset($options[$key]);
+            }
         }
         
-        $this->_options += $options;
+        $this->_options = $this->mergeOptions($this->_options, $options);
 
         return $this;
     }
@@ -107,6 +110,29 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
     public function getOptions()
     {
         return $this->_options;
+    }
+
+    /**
+     * Merge options recursively
+     * 
+     * @param  array $array1 
+     * @param  mixed $array2 
+     * @return array
+     */
+    public function mergeOptions(array $array1, $array2 = null)
+    {
+        if (is_array($array2)) {
+            foreach ($array2 as $key => $val) {
+                if (is_array($array2[$key])) {
+                    $array1[$key] = (array_key_exists($key, $array1) && is_array($array1[$key]))
+                                  ? $this->mergeOptions($array1[$key], $array2[$key]) 
+                                  : $array2[$key];
+                } else {
+                    $array1[$key] = $val;
+                }
+            }
+        }
+        return $array1;
     }
 
     /**

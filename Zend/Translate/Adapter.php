@@ -148,11 +148,10 @@ abstract class Zend_Translate_Adapter {
                      new RecursiveDirectoryIterator($data, RecursiveDirectoryIterator::KEY_AS_PATHNAME),
                      RecursiveIteratorIterator::SELF_FIRST) as $directory => $info) {
                 $file = $info->getFilename();
-		/*
                 if (strpos($directory, DIRECTORY_SEPARATOR . $this->_options['ignore']) !== false) {
                     // ignore files matching first characters from option 'ignore' and all files below
                     continue;
-                }*/
+                }
 
                 if ($info->isDir()) {
                     // pathname as locale

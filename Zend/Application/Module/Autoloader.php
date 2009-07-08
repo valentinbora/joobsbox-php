@@ -16,7 +16,7 @@
  * @package    Zend_Application
  * @subpackage Module
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Autoloader.php 14001 2009-02-06 17:52:21Z matthew $
+ * @version    $Id: Autoloader.php 15203 2009-04-27 15:20:43Z matthew $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -71,9 +71,17 @@ class Zend_Application_Module_Autoloader extends Zend_Loader_Autoloader_Resource
                 'namespace' => 'Plugin',
                 'path'      => 'plugins',
             ),
-            'api' => array(
-                'namespace' => 'Api',
-                'path'      => 'apis',
+            'service' => array(
+                'namespace' => 'Service',
+                'path'      => 'services',
+            ),
+            'viewhelper' => array(
+                'namespace' => 'View_Helper',
+                'path'      => 'views/helpers',
+            ),
+            'viewfilter' => array(
+                'namespace' => 'View_Filter',
+                'path'      => 'views/filters',
             ),
         ));
         $this->setDefaultResourceType('model');

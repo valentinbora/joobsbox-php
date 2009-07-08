@@ -108,8 +108,12 @@ class Zend_Tool_Framework_Client_Console
         }
         
         // support setting the loader from the environment
-        if (isset($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS']) && Zend_Loader::loadClass($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])) {
-            $this->_registry->setLoader(new $_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS']);
+        if (isset($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])) {
+            if (class_exists($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])
+                || Zend_Loader::loadClass($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])
+            ) {
+                $this->_registry->setLoader(new $_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS']);
+            }
         }
 
         return;
@@ -145,11 +149,18 @@ class Zend_Tool_Framework_Client_Console
      */
     protected function _postDispatch()
     {
-        if ($this->_registry->getResponse()->isException()) {
-            echo PHP_EOL 
-               . 'An error has occured:' 
-               . PHP_EOL
-               . $this->_registry->getResponse()->getException()->getMessage();
+        $request = $this->_registry->getRequest();
+        $response = $this->_registry->getResponse();
+        
+        if ($response->isException()) {
+            require_once 'Zend/Tool/Framework/Client/Console/HelpSystem.php';
+            $helpSystem = new Zend_Tool_Framework_Client_Console_HelpSystem();
+            $helpSystem->setRegistry($this->_registry)
+                ->respondWithErrorMessage($response->getException()->getMessage(), $response->getException())
+                ->respondWithSpecialtyAndParamHelp(
+                    $request->getProviderName(),
+                    $request->getActionName()
+                    );
         }
         
         echo PHP_EOL;

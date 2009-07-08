@@ -4,9 +4,7 @@ ini_set('magic_quotes_gpc', false);
 
 // Class autoload functionality
 require_once 'Zend/Loader/Autoloader.php';
-$loader = Zend_Loader_Autoloader::getInstance();
-$loader
-	->registerNamespace('Joobsbox_');
+$loader = Zend_Loader_Autoloader::getInstance()->registerNamespace('Joobsbox_');
 	
 // Timezone default
 date_default_timezone_set("GMT");
@@ -29,7 +27,7 @@ $cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
 
 $urlChunks = explode("/", $_SERVER['REQUEST_URI']);
 if(!in_array("admin", $urlChunks)) {
-	$cache->start();
+//	$cache->start();
 }	
 
 Zend_Registry::set("cache", $cache);

@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client
- * @version    $Id: Client.php 14207 2009-03-03 06:35:09Z rob $
+ * @version    $Id: Client.php 15577 2009-05-14 12:43:34Z matthew $
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -792,12 +792,15 @@ class Zend_Http_Client
     public function setAdapter($adapter)
     {
         if (is_string($adapter)) {
-            try {
-                Zend_Loader::loadClass($adapter);
-            } catch (Zend_Exception $e) {
-                /** @see Zend_Http_Client_Exception */
-                require_once 'Zend/Http/Client/Exception.php';
-                throw new Zend_Http_Client_Exception("Unable to load adapter '$adapter': {$e->getMessage()}");
+            if (!class_exists($adapter)) {
+                try {
+                    require_once 'Zend/Loader.php';
+                    Zend_Loader::loadClass($adapter);
+                } catch (Zend_Exception $e) {
+                    /** @see Zend_Http_Client_Exception */
+                    require_once 'Zend/Http/Client/Exception.php';
+                    throw new Zend_Http_Client_Exception("Unable to load adapter '$adapter': {$e->getMessage()}");
+                }
             }
 
             $adapter = new $adapter;

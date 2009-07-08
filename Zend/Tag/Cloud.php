@@ -17,7 +17,7 @@
  * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Cloud.php 14871 2009-04-12 18:46:55Z dasprid $
+ * @version    $Id: Cloud.php 15457 2009-05-09 15:19:13Z dasprid $
  */
 
 /**
@@ -108,6 +108,11 @@ class Zend_Tag_Cloud
      */
     public function setOptions(array $options)
     {
+        if (isset($options['prefixPath'])) {
+            $this->addPrefixPaths($options['prefixPath']);
+            unset($options['prefixPath']);
+        }
+        
         foreach ($options as $key => $value) {
             if (in_array(strtolower($key), $this->_skipOptions)) {
                 continue;
@@ -156,7 +161,7 @@ class Zend_Tag_Cloud
     /**
      * Append a single tag to the cloud
      *
-     * @param  Zend_Tag_IItem|array $tag
+     * @param  Zend_Tag_Taggable|array $tag
      * @return Zend_Tag_Cloud
      */
     public function appendTag($tag)
@@ -299,6 +304,18 @@ class Zend_Tag_Cloud
     }
 
     /**
+     * Set plugin loaders for use with decorators
+     * 
+     * @param  Zend_Loader_PluginLoader_Interface $loader 
+     * @return Zend_Tag_Cloud
+     */
+    public function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader)
+    {
+        $this->_pluginLoader = $loader;
+        return $this;
+    }
+    
+    /**
      * Get the plugin loader for decorators
      *
      * @return Zend_Loader_PluginLoader
@@ -314,6 +331,44 @@ class Zend_Tag_Cloud
         }
 
         return $this->_pluginLoader;
+    }
+    
+    /**
+     * Add many prefix paths at once
+     * 
+     * @param  array $paths 
+     * @return Zend_Tag_Cloud
+     */
+    public function addPrefixPaths(array $paths)
+    {
+        if (isset($paths['prefix']) && isset($paths['path'])) {
+            return $this->addPrefixPath($paths['prefix'], $paths['path']);
+        } 
+        
+        foreach ($paths as $path) {
+            if (!isset($path['prefix']) || !isset($path['path'])) {
+                continue;
+            }
+            
+            $this->addPrefixPath($path['prefix'], $path['path']);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Add prefix path for plugin loader
+     *
+     * @param  string $prefix
+     * @param  string $path 
+     * @return Zend_Tag_Cloud
+     */
+    public function addPrefixPath($prefix, $path) 
+    {
+        $loader = $this->getPluginLoader();
+        $loader->addPrefixPath($prefix, $path);
+        
+        return $this;
     }
 
     /**

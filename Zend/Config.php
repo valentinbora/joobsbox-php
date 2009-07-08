@@ -16,7 +16,7 @@
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Config.php 14415 2009-03-21 21:56:00Z rob $
+ * @version    $Id: Config.php 16091 2009-06-16 19:23:08Z doctorrock83 $
  */
 
 
@@ -197,7 +197,8 @@ class Zend_Config implements Countable, Iterator
     public function toArray()
     {
         $array = array();
-        foreach ($this->_data as $key => $value) {
+        $data = $this->_data;
+        foreach ($data as $key => $value) {
             if ($value instanceof Zend_Config) {
                 $array[$key] = $value->toArray();
             } else {

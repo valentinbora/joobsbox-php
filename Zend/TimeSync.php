@@ -16,14 +16,9 @@
  * @category   Zend
  * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: TimeSync.php 13522 2009-01-06 16:35:55Z thomas $
+ * @version    $Id: TimeSync.php 15577 2009-05-14 12:43:34Z matthew $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/**
- * Zend_Loader
- */
-require_once 'Zend/Loader.php';
 
 /**
  * Zend_Date
@@ -298,8 +293,10 @@ class Zend_TimeSync implements IteratorAggregate
         }
 
         $className = 'Zend_TimeSync_' . $protocol;
-
-        Zend_Loader::loadClass($className);
+        if (!class_exists($className)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($className);
+        }
         $timeServerObj = new $className($adress, $port);
 
         $this->_timeservers[$alias] = $timeServerObj;
