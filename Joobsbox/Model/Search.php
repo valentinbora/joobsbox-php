@@ -20,7 +20,7 @@
  */
 
 class Joobsbox_Model_Search {
-	protected $_index;
+	public $_index;
 	
 	public function __construct() {
 		if(file_exists("Joobsbox/SearchIndexes/main")) {
@@ -34,6 +34,12 @@ class Joobsbox_Model_Search {
 	
 	public function search($string) {
 		$query = Zend_Search_Lucene_Search_QueryParser::parse($string);
+		return $this->_index->find($query);
+	}
+	
+	public function searchTag($tag, $value) {
+	  Zend_Search_Lucene::setDefaultSearchField($tag);
+	  $query = Zend_Search_Lucene_Search_QueryParser::parse($value);
 		return $this->_index->find($query);
 	}
 	
@@ -70,12 +76,9 @@ class Joobsbox_Model_Search {
 	}
 	
 	public function resetIndex() {
-		$hits  = $this->search("*");
-		if(count($hits)) {
-			foreach($hits as $hit) {
-				$this->_index->delete($hit->id);
-			}
-		}
+		for ($count = 0; $count < $this->_index->count(); $count++) {
+        $this->_index->delete($count);
+    }
 		$this->commit();
 	}
 	
