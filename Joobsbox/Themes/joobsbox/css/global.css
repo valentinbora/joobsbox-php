@@ -86,7 +86,7 @@ div.outer {
 
 #header a									{display: block; width: 150px; height: 100%; outline: none;}
 
-.site-title									{text-indent: -1800px;}
+.site-title								{text-indent: -1800px; font-size: 1px;}
 
 #full-rss									{background-color: #ffffcc; text-align: center; padding: 7px 5px; border-top: 1px solid #ddd; color: #888888; font-size: 90%;}
 #footer {

@@ -50,20 +50,20 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 	 * @returns jobFetchObject
 	 */
     public function fetchAllJobs($returnImmediately=1, $includeNonPublic=false) {
-		$select = $this->_db->select()->from($this->_postings_table);
+		  $select = $this->_db->select()->from($this->_postings_table);
 		
-		if(!$includeNonPublic) {
-			$select->where('Public = 1');
-		}
+		  if(!$includeNonPublic) {
+  			$select->where('Public = 1')->where('ExpirationDate >= ?', time());
+  		}
 		
-		$this->fireEvent("retrieve_jobs");
+  		$this->fireEvent("retrieve_jobs");
 		
-		if($returnImmediately) {
-			$stmt	= $this->filter("all_jobs", $select->query()->fetchAll());
-			return new Joobsbox_Iterator_Jobs($stmt);
-		}
+  		if($returnImmediately) {
+  			$stmt	= $this->filter("all_jobs", $select->query()->fetchAll());
+  			return new Joobsbox_Iterator_Jobs($stmt);
+  		}
 		
-		return new Joobsbox_Iterator_Jobs_FetchObject($select, $this->_db);
+  		return new Joobsbox_Iterator_Jobs_FetchObject($select, $this->_db);
     }
 	
 	/**
@@ -108,12 +108,12 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 	 * @returns array
 	 */
 	public function fetchNJobsPerCategory($maxJobsPerCateg=10) {
-		$maxJobsPerCateg	 = $this->_conf->general->jobs_per_categ;
-		$jobs 			 = $this->fetchAllJobs(0)->order("ID DESC")->fetch();
-		$categoriesById		 = $this->fetchCategories()->toArray();
-		$cats 			 = $this->fetchCategories()->filterEmpty()->orderByOrderIndex()->toArray();
+		$maxJobsPerCateg	  = $this->_conf->general->jobs_per_categ;
+		$jobs 			        = $this->fetchAllJobs(0)->order("ID DESC")->fetch();
+		$categoriesById		  = $this->fetchCategories()->toArray();
+		$cats 			        = $this->fetchCategories()->filterEmpty()->orderByOrderIndex()->toArray();
 		
-		$result 		 = array();
+		$result 		        = array();
 		
 		if(count($cats))
 		foreach($cats as $index => $category) {

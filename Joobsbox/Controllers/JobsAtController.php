@@ -17,20 +17,15 @@
  * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 
-class SearchController extends Zend_Controller_Action {
+class JobsAtController extends Zend_Controller_Action {
 	protected $_model;
 	
 	public function indexAction(){
 		$this->_model = new Joobsbox_Model_Search();
+		$query = $this->getRequest()->getParam('action');
 		
-		$query = $this->getRequest()->getParam("txtSearch");
-		
-		if(!strlen($query)) {
-		  throw new Exception($this->view->translate("You cannot search for nothing!"));
-		}
-		
-		$results = $this->_model->search($query);
-		
+		$results = $this->_model->searchTag('Company', $query);
+
 		$resultsArray = array();
 		foreach($results as $result) {
 			$resultsArray[] = array(
@@ -40,22 +35,11 @@ class SearchController extends Zend_Controller_Action {
 				"Company"	=> $result->Company
 			);
 		}
-		$this->view->searchedString = $this->_helper->filter("purify_html", $query);
+		$this->view->searchedCompany = $this->_helper->filter("purify_html", $query);
 		$this->view->jobs = $resultsArray;
 	}
 	
-	public function regenerateAction() {
-		$this->_model = new Joobsbox_Model_Search();
-		$this->_model->resetIndex();
-		$jobs = new Joobsbox_Model_Jobs();
-		
-		$jobs = $jobs->fetchAllJobs();
-
-		foreach($jobs as $job) {
-		  $this->_model->addJob($job);
-		}
-		$this->_model->commit();
-		dd("There are now " . $this->_model->_index->count() . " jobs indexed");
-		dd("Done");
+	public function __call($function, $args) {
+	  $this->_forward('index');
 	}
 }
