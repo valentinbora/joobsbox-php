@@ -87,6 +87,13 @@ class PublishController extends Zend_Controller_Action
 		$submit = $form->createElement('submit', 'submit')
 			->setLabel("Add");
 			
+		$form->addElement($title)
+			 ->addElement($company)
+			 ->addElement($location)
+			 ->addElement($category)
+			 ->addElement($description)
+			 ->addElement($application);
+		
 		$publishNamespace = new Zend_Session_Namespace('PublishJob');
 		if(isset($publishNamespace->editJobId)) {
 			$jobData = $this->_model->fetchJobById($publishNamespace->editJobId);
@@ -96,16 +103,21 @@ class PublishController extends Zend_Controller_Action
 			$category->setValue($jobData['CategoryID']);
 			$description->setValue($jobData['Description']);
 			$application->setValue($jobData['ToApply']);
+			
+			$exp = $form->createElement('text', 'expirationDate')
+			  ->setLabel('Expiration date:')
+			  ->addFilter('StripTags')
+			  ->addFilter('StringTrim')
+			  ->addValidator('notEmpty')
+			  ->setRequired(true)
+			  ->setValue(date("m/d/Y", $jobData['ExpirationDate']));
+			$form->addElement($exp);
+			
 			$submit->setLabel('Modify');
 		}
 			
-		$form->addElement($title)
-			 ->addElement($company)
-			 ->addElement($location)
-			 ->addElement($category)
-			 ->addElement($description)
-			 ->addElement($application)
-			 ->addElement($submit);
+		
+		$form->addElement($submit);
 			 
 		$this->form = $form;
 		
@@ -148,6 +160,7 @@ class PublishController extends Zend_Controller_Action
 						'Company'		=> $values['company'],
 						'Location'		=> $values['location'],
 						'ChangedDate'	=> new Zend_Db_Expr('NOW()'),
+						'ExpirationDate' => strtotime($values['expirationDate']),
 						'Public'		=> 1
 					), $where);
 

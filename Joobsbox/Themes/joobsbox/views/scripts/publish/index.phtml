@@ -20,4 +20,8 @@ if($this->addSuccess) {
 } else {
 	echo $this->form;
 }
+
+$this->asset->load("jquery");
+$this->asset->load("jquery-ui");
+$this->headScript()->appendFile($this->themeUrl . '/js/publish.js');
 ?>

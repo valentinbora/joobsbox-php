@@ -7,9 +7,10 @@ $viewRenderer->view->publicUrl=$baseUrl . "/public";
 
 function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 	global $baseUrl, $viewRenderer;
-	$viewRenderer->view->themeUrl		= $baseUrl . "/Joobsbox/Themes/" . $theme;
+	$viewRenderer->view->themeUrl		  = $baseUrl . "/Joobsbox/Themes/" . $theme;
 	$viewRenderer->view->themeImages	= $baseUrl . "/Joobsbox/Themes/" . $theme . "/images";
-	$viewRenderer->view->theme			= $theme;
+	$viewRenderer->view->theme			  = $theme;
+	$viewRenderer->view->asset        = new Joobsbox_Helpers_AssetHelper;
 	$viewRenderer->view->setScriptPath(APPLICATION_DIRECTORY . '/Joobsbox/Themes/' . $theme . '/views/scripts');
 
 	$viewRenderer->view->setEncoding("UTF-8");

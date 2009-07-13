@@ -10,7 +10,9 @@
 ?>
 	<div class="list">
 		<?php if(count($this->jobs)) :
-		foreach($this->jobs as $category => $jobs): ?>
+		foreach($this->jobs as $category => $jobs):
+		  if(count($jobs)):
+		?>
 		<div class="inner">
 			<div class="toRight">
 				<a href="<?php echo $this->baseUrl . '/rss/' . $this->TranslateUrl("category") . '/' . $this->MakeLink($category);?>/">RSS</a>
@@ -29,7 +31,7 @@
 					<span class="lighterSmall"> <?php echo $this->translate("in"); ?> </span>
 					<?php echo $this->filter("job_location", $job['Location']); ?>
 				</li>
-				<?php endforeach; ?>
+				<?php endforeach; endif; ?>
 			</ul>
 		<?php endforeach; 
 		else: 
