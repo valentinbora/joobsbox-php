@@ -13,11 +13,6 @@
  */
 
 /**
- * 
- */
-Zend_Loader::loadClass("Joobsbox_Plugin_Model");
-
-/**
  * Plugin Loader Class
  * 
  * @author Valentin Bora <contact@valentinbora.com>
