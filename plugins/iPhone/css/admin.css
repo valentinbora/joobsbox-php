@@ -1,0 +1,24 @@
+#admin-header a {
+    font-size:      120%;
+}
+
+#admin-menu {
+    border: 1px solid red;
+    width:  70px;
+    padding-left:0px;
+    
+    pozition: relative;
+    left:0px;
+}
+
+#admin-menu li.item {
+    background-image: none;
+    overflow:hidden;
+    /*-webkit-border-radius-bottomright:6px;
+    -webkit-border-radius-topleft:0px;
+    -webkit-border-radius-topright:6px;*/
+}
+
+#admin-content {
+    width:      100px;
+}

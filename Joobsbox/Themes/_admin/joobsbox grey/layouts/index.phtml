@@ -14,6 +14,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <?php 
+	echo $this->filter('head_html');
 	$this->headTitle($this->conf->general->common_title);
 	$this->headTitle()->prepend("Admin");
 	$this->headTitle()->setSeparator(' - ');
@@ -34,6 +35,7 @@
 	echo $this->headStyle();
 	echo $this->headScript(); 
 ?>
+<link media="only screen and (max-device-width: 480px)" href="<?php echo $this->baseUrl ?>/plugins/iPhone/css/admin.css" type= "text/css" rel="stylesheet">
 </head>
 <body>
 	<div id="admin-header">

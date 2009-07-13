@@ -4,11 +4,11 @@ jobs_per_categ = "10"
 standalone = "1"
 admin_theme = "joobsbox grey"
 theme = "joobsro"
-common_title = "Joobsbox"
+common_title = "Manuels Joobsy"
 locale = "ro"
 timezone = "Europe/Bucharest"
+posting_ttl = "30"
 restrict_install = 1
-posting_ttl = 30
 
 [rss]
 all_jobs_count = "15"
