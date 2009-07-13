@@ -23,31 +23,31 @@ $frontendOptions = array(
 
 $backendOptions = array('cache_dir' => 'cache/');
 
-$cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
+//$cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
 
 $urlChunks = explode("/", $_SERVER['REQUEST_URI']);
 if(!in_array("admin", $urlChunks)) {
 //	$cache->start();
 }	
 
-Zend_Registry::set("cache", $cache);
+//Zend_Registry::set("cache", $cache);
 	
 // Static parameters
-$conf = new Zend_Config_Ini("config/config.ini.php");
+$conf = new Zend_Config_Ini(APPLICATION_DIRECTORY . "/config/config.ini.php");
 Zend_Registry::set("conf", $conf);
 
 // Timezone
 date_default_timezone_set($conf->general->timezone);
 	
 // Translation
-$translate = new Zend_Translate('gettext', 'Joobsbox/Languages/main', $conf->general->locale, array('scan' => Zend_Translate::LOCALE_FILENAME));
+$translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/main', $conf->general->locale, array('scan' => Zend_Translate::LOCALE_FILENAME));
 Zend_Registry::set("Zend_Locale", $conf->general->locale);
 Zend_Registry::set("Translation_Hash", $translate->getMessages());
 Zend_Registry::set('Zend_Translate', $translate);
 
 // Database parameters
-if(file_exists('config/db.ini.php')) {
-	$db = Zend_Db::factory('PDO_MYSQL', new Zend_Config_Ini('config/db.ini.php'));
+if(file_exists(APPLICATION_DIRECTORY . '/config/db.ini.php')) {
+	$db = Zend_Db::factory('PDO_MYSQL', new Zend_Config_Ini(APPLICATION_DIRECTORY . '/config/db.ini.php'));
 	Zend_Db_Table_Abstract::setDefaultAdapter($db);
 	Zend_Registry::set("db", $db);
 	$db->query('SET NAMES "utf8"');
@@ -83,11 +83,15 @@ function getStaticSalt() {
 
 if(isset($joobsbox_base_url)) {
 	$baseUrl = $joobsbox_base_url;
+	if($baseUrl[strlen($baseUrl)-1] == '/') {
+	  $baseUrl = substr($baseUrl, 0, strlen($baseUrl)-1);
+	}
 } else {
 	$baseUrl = str_replace("\\", "/", dirname($_SERVER['PHP_SELF']));
 	if($baseUrl == "/")
 		$baseUrl = "";
 }
+
 
 define("BASE_URL", $baseUrl);
 define("APPLICATION_THEME", "joobsbox");
