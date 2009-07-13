@@ -53,7 +53,7 @@
 							echo $this->baseUrl . '/' . $this->pluginPath . $pluginName . '/' . $pluginOptions->main->image; 
 						else:
 							echo $this->themeImages . '/adminPluginNoImage.png'; 
-						endif;?>);" />
+						endif;?>);" >
 					<?php 
 						if(isset($pluginOptions->main) && isset($pluginOptions->main->{"title_" . $this->locale})) {
 							echo ucfirst($pluginOptions->main->{"title_" . $this->locale});
