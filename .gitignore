@@ -1,3 +1,4 @@
 cache/*
 config/db.ini.php
 design
+Joobsbox/SearchIndexes/*

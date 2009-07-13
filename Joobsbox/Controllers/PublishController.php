@@ -174,7 +174,7 @@ class PublishController extends Zend_Controller_Action
 						'Company'		  => $values['company'],
 						'Location'		=> $values['location'],
 						'PostedAt'		=> new Zend_Db_Expr('NOW()'),
-						'ExpirationDate' => strftime("+" . $this->_conf->general->posting_ttl . " days"),
+						'ExpirationDate' => strtotime("+" . $this->_conf->general->posting_ttl . " days"),
 						'Public'		  => 0
 					));
 
