@@ -1,4 +1,4 @@
-cache/*
 config/db.ini.php
+config/passwordHash.php
 design
-Joobsbox/SearchIndexes/*
+Joobsbox/SearchIndexes/*/*
