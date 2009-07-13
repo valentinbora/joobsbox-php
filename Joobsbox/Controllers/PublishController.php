@@ -163,15 +163,19 @@ class PublishController extends Zend_Controller_Action
 			} else {
 				// Ok, here we go: insert the job into the database --- bombs away!
 				try {
+				  // Needs posting_ttl configuration directive
+				  $this->_conf = Zend_Registry::get("conf");
+				  
 					$values['id'] = $jobOperations->insert(array(
-						'CategoryID'	=> $values['category'],
-						'Title'			=> $values['title'],
+						'CategoryID'  => $values['category'],
+						'Title'			  => $values['title'],
 						'Description'	=> $this->_helper->filter("purify_html", $values['description']),
-						'ToApply'		=> $values['application'],
-						'Company'		=> $values['company'],
+						'ToApply'		  => $values['application'],
+						'Company'		  => $values['company'],
 						'Location'		=> $values['location'],
 						'PostedAt'		=> new Zend_Db_Expr('NOW()'),
-						'Public'		=> 0
+						'ExpirationDate' => strftime("+" . $this->_conf->general->posting_ttl . " days"),
+						'Public'		  => 0
 					));
 
 					$this->view->addSuccess = 1;
