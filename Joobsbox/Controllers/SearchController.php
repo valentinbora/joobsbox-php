@@ -25,6 +25,10 @@ class SearchController extends Zend_Controller_Action {
 		
 		$query = $this->getRequest()->getParam("txtSearch");
 		
+		if(!strlen($query)) {
+		  throw new Exception($this->view->translate("You cannot search for nothing!"));
+		}
+		
 		$results = $this->_model->search($query);
 		
 		$resultsArray = array();
