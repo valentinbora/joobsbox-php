@@ -1,0 +1,44 @@
+#main {
+	padding: 0px;
+}
+#header {
+	height:		49px;
+}
+
+body, #wrapper, #main {
+	width:		100%;
+}
+
+#postJob {
+	width:		40%;
+}
+
+#search {
+	padding-top:5px;
+	width:		60%;
+}
+
+#main #tools #postJob a {
+	width: 					50px;
+	background-image: 		none;
+	background-color: 		#2d7fa5;
+	-webkit-border-radius: 	15px;
+	font-size:				150% !important;
+}
+/* USER LOGIN */
+dl.zend_form {
+	font-size:				15px;
+}
+
+#username-label, #username-element, #password-label, #password-element {
+	float:					left;
+	width:					40%;
+}
+
+#submit-element {
+	padding-left:				80pui px;
+}
+
+#submit {
+	font-size:					120% !important;
+}

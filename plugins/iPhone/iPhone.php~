@@ -1,0 +1,16 @@
+<?php
+class iPhone extends Joobsbox_Plugin_Base {
+	public function init() {
+		$this->view->headScript("jqtouch");
+	
+	}
+
+/*	function event_app_init () {
+//		dd("Shiiiit");
+
+		configureTheme(APPLICATION_THEME, 'iphoneindex');
+	} */
+	public function filter_head_html(){
+		echo "bla";
+	}
+}

@@ -17,6 +17,7 @@
 	$this->doctype('XHTML1_TRANSITIONAL');
 	$this->headTitle($this->conf->general->common_title);
 	$this->headTitle()->setSeparator(' - ');
+	echo $this->filter('head_html');
 	echo $this->headTitle();
 ?>
 
@@ -28,10 +29,12 @@
 		->prependFile($this->baseUrl . '/public/js/lib/jquery.js', 'text/javascript')
 		->appendFile($this->baseUrl . '/public/js/lib/jquery.corner.js', 'text/javascript')
 		->appendFile($this->baseUrl . '/public/js/lib/jquery.pngFix.pack.js', 'text/javascript')		
-		->appendFile($this->baseUrl . '/public/js/global.js', 'text/javascript');
+		->appendFile($this->baseUrl . '/public/js/global.js', 'text/javascript')
+		->appendFile($this->baseUrl . '/plugins/iPhone/js/iphone.js', 'text/javascript');
 	echo $this->headLink();
 	echo $this->headStyle();
 ?>
+<link media="only screen and (max-device-width: 480px)" href="<?php echo $this->baseUrl ?>/plugins/iPhone/css/iphone.css" type= "text/css" rel="stylesheet">
 </head>
 <body>
 	<h1 class="site-title"><?php echo implode($this->headTitle()->getSeparator(), (array)$this->headTitle()->getContainer()); ?></h1>
