@@ -1,11 +1,11 @@
-#main {
+#joobsbox-main {
 	padding: 0px;
 }
-#header {
+#joobsbox-header {
 	height:		49px;
 }
 
-body, #wrapper, #main {
+body, #wrapper, #joobsbox-main {
 	width:		100%;
 }
 
@@ -18,13 +18,21 @@ body, #wrapper, #main {
 	width:		60%;
 }
 
-#main #tools #postJob a {
+#joobsbox-main #tools #postJob a {
 	width: 					50px;
 	background-image: 		none;
 	background-color: 		#2d7fa5;
 	-webkit-border-radius: 	15px;
 	font-size:				150% !important;
 }
+
+
+
+/* ADD JOB */
+#description {
+	width:		100%;
+}
+
 /* USER LOGIN */
 dl.zend_form {
 	font-size:				15px;

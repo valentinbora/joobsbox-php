@@ -1,7 +1,7 @@
 <?php
 class iPhone extends Joobsbox_Plugin_Base {
 	public function init() {
-	
+		
 	}
 
 /*	function event_app_init () {
@@ -15,4 +15,5 @@ class iPhone extends Joobsbox_Plugin_Base {
 		
 		return array($meta);
 	}
+	
 }
