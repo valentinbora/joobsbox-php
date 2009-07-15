@@ -4,11 +4,11 @@ jobs_per_categ = "10"
 standalone = "1"
 admin_theme = "joobsbox grey"
 theme = "joobsro"
-common_title = "Manuels Desktop Joobsy"
+common_title = "Joobsbox PHP Demo"
 locale = "ro"
-timezone = "Europe/Bucharest"
+timezone = "Europe/Berlin"
 posting_ttl = "30"
-restrict_install = 1
+restrict_install = "1"
 
 [rss]
 all_jobs_count = "15"

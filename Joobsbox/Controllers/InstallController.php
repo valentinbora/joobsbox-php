@@ -57,6 +57,8 @@ class InstallController extends Zend_Controller_Action {
 				$this->view->dberror = 1;
 			}
 			
+			@chmod("config/config.ini.php", 0666);
+			
 			if(!isset($this->view->dberror)) {
 				// Connection works - we save the data
 				$config = parse_ini_file('config/config.ini.php', true);

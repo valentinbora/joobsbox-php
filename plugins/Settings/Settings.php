@@ -69,6 +69,21 @@ class Settings extends Joobsbox_Plugin_AdminBase
          'legend' => ucfirst($category)
       ));
 		}
+		
+		
+		// Timezone select
+		$tzfile = file("config/timezones.ini.php");
+		$timezones = array();
+		foreach($tzfile as $value) {
+		  $value = trim($value);
+		  $value = str_replace('"', '', $value);
+		  $timezones[$value] = $value;
+		}
+		$timezone = $form->createElement('select', 'site_timezone')
+		  ->setMultiOptions($timezones)
+		  ->setLabel($this->view->translate("Timezone"))
+		  ->setValue($config->general->timezone);
+		$form->getDisplayGroup('general')->addElement($timezone);
 			
 		$form->addElement($submit);
 		
@@ -87,26 +102,30 @@ class Settings extends Joobsbox_Plugin_AdminBase
 		$form = $this->form;
 		
     if($form->isValid($_POST)) {
+      chmod("config/config.ini.php", 0755);
+      
 			$values = $form->getValues();
 			$conf = new Zend_Config_Ini("config/config.ini.php", null, array(
 			  'skipExtends'        => true,
         'allowModifications' => true)
       );
       
-      dd($form->getDisplayGroup("general"));
-      
       foreach($this->textItems as $category => $items) {
   		  foreach($items as $key => $label) {
-  		    dd($values[$category][$key]);
+  		    $conf->$category->$key = $values[$key];
   		  }
   		}
+  		
+  		$conf->general->timezone = $_POST['site_timezone'];
       
       // Write the configuration file
       $writer = new Zend_Config_Writer_Ini(array(
-        'config'   => $config,
+        'config'   => $conf,
         'filename' => 'config/config.ini.php')
       );
       $writer->write();
+      header("Location: " . $_SERVER['REQUEST_URI']);
+      exit();
 		} else {
 			$values = $form->getValues();
 			$messages = $form->getMessages();
