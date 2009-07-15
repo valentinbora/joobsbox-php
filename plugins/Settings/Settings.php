@@ -88,8 +88,25 @@ class Settings extends Joobsbox_Plugin_AdminBase
 		
     if($form->isValid($_POST)) {
 			$values = $form->getValues();
-			$configWriter = new Zend_Config_Writer_Ini();
-			$configWriter->write('config/config.ini.php', $config);
+			$conf = new Zend_Config_Ini("config/config.ini.php", null, array(
+			  'skipExtends'        => true,
+        'allowModifications' => true)
+      );
+      
+      dd($form->getDisplayGroup("general"));
+      
+      foreach($this->textItems as $category => $items) {
+  		  foreach($items as $key => $label) {
+  		    dd($values[$category][$key]);
+  		  }
+  		}
+      
+      // Write the configuration file
+      $writer = new Zend_Config_Writer_Ini(array(
+        'config'   => $config,
+        'filename' => 'config/config.ini.php')
+      );
+      $writer->write();
 		} else {
 			$values = $form->getValues();
 			$messages = $form->getMessages();
