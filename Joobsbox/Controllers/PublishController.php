@@ -29,7 +29,7 @@ class PublishController extends Zend_Controller_Action
 		$this->_model = new Joobsbox_Model_Jobs;
 		
 		// <createForm>
-        $form = new Zend_Form;
+    $form = new Zend_Form;
 		$form->setAction($_SERVER['REQUEST_URI'])->setMethod('post')->setAttrib("id", "formPublish");
 	
 		$title = $form->createElement('text', 'title')
@@ -127,9 +127,9 @@ class PublishController extends Zend_Controller_Action
 		$this->view->form = $form->render;
 		
 		if ($this->getRequest()->isPost()) {
-            $this->validateForm();
-			return;
-        }
+        $this->validateForm();
+		    return;
+    }
 		
 		$this->view->form = $this->form->render();	
     }

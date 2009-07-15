@@ -1,0 +1,35 @@
+/* ======================================= */
+/* = Settings admin plugin main css file = */
+/* ======================================= */
+
+.tab-content {
+  -webkit-border-radius-topleft: 6px;
+}
+.tab-content table {
+  width: 100%;
+}
+
+/* Dashboard */
+h1.dashboard-title {
+  background-image: url('../images/icons/settings_48.png');
+}
+
+tr.next	{
+  display: none;
+}
+a.expand {
+  text-decoration: none;
+}
+
+/* Form */
+.joobsbox-plugin-content legend {
+  display: block;
+  padding: 5px 23px;
+
+  background-image: url('../images/settings_18.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  
+  text-transform: uppercase;
+  font-size: 90%;
+}
