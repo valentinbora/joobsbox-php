@@ -19,6 +19,7 @@
 	$this->headTitle()->setSeparator(' - ');
 	echo $this->filter('head_html');
 	echo $this->headTitle();
+	echo $this->headMeta();
 ?>
 
 <?php
@@ -29,8 +30,7 @@
 		->prependFile($this->baseUrl . '/public/js/lib/jquery.js', 'text/javascript')
 		->appendFile($this->baseUrl . '/public/js/lib/jquery.corner.js', 'text/javascript')
 		->appendFile($this->baseUrl . '/public/js/lib/jquery.pngFix.pack.js', 'text/javascript')		
-		->appendFile($this->baseUrl . '/public/js/global.js', 'text/javascript')
-		->appendFile($this->baseUrl . '/plugins/iPhone/js/iphone.js', 'text/javascript');
+		->appendFile($this->baseUrl . '/public/js/global.js', 'text/javascript');
 	echo $this->headLink();
 	echo $this->headStyle();
 ?>
