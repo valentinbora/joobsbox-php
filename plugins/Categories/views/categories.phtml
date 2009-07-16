@@ -58,7 +58,7 @@
 	$this->headLink()->appendStylesheet($this->path . 'css/categories.css');
 	$this->headScript()
 		->appendFile($this->path . 'js/jsTree/_lib.js', 'text/javascript')
-		->appendFile($this->path . 'js/jsTree/tree_component.js', 'text/javascript')
+		->appendFile($this->path . 'js/jsTree/tree_component.min.js', 'text/javascript')
 		->appendFile($this->path . 'js/jquery.json-1.3.min.js')
 		->appendScript('var pluginUrl="' . $this->pluginUrl . '";')
 		->appendFile($this->path . 'js/categories.js', 'text/javascript')
