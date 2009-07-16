@@ -72,7 +72,9 @@ class Joobsbox_Model_Search {
 		$job->addField(Zend_Search_Lucene_Field::Text('Company', $jobData['Company'], 'utf-8'));
 		$job->addField(Zend_Search_Lucene_Field::Keyword('CategoryID', $jobData['CategoryID'], 'utf-8'));
 		$job->addField(Zend_Search_Lucene_Field::Text('Location', $jobData['Location'], 'utf-8'));
+		
 		$this->_index->addDocument($job);
+		$this->_index->commit();
 	}
 	
 	public function resetIndex() {

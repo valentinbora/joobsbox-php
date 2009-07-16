@@ -42,7 +42,11 @@ class RssController extends Zend_Controller_Action {
 									 ->limit($conf->rss->all_jobs_count, 0)
 									 ->fetch();
 				$jobs = $jobs->toArray();
-				$lastUpdate = strtotime($jobs[0]['ChangedDate']);
+				if(count($jobs)) {
+				  $lastUpdate = strtotime($jobs[0]['ChangedDate']);
+				} else {
+				  $lastUpdate = strtotime("today");
+				}
 			} else {
 				header("HTTP/1.0 404 Not Found", true, 404);
                 header("Status: 404 Not Found", true, 404);
@@ -55,7 +59,11 @@ class RssController extends Zend_Controller_Action {
 								 ->limit($conf->rss->all_jobs_count, 0)
 								 ->fetch();
 			$jobs = $jobs->toArray();
-			$lastUpdate = strtotime($jobs[0]['ChangedDate']);
+			if(count($jobs)) {
+			  $lastUpdate = strtotime($jobs[0]['ChangedDate']);
+			} else {
+			  $lastUpdate = strtotime("today");
+			}
 		}
 		
 		// Generate the feed
@@ -68,6 +76,7 @@ class RssController extends Zend_Controller_Action {
 			'description'	  => $conf->rss->description,
 			'entries'		  => array()
 		);
+		if(count($jobs))
 		foreach($jobs as $job) {
 			$data['entries'][] = array(
 				'title'		  => html_entity_decode($job['Title'], ENT_QUOTES, "UTF-8"),

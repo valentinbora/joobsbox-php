@@ -44,7 +44,7 @@ class Postings extends Joobsbox_Plugin_AdminBase
 			$this->$method();
 		}
 
-		$pending = $this->jobsModel->fetchAllJobs(0, Joobsbox_Model_Jobs::INCLUDE_NON_PUBLIC)->order('ID DESC')->fetch()->toArray();
+		$pending = $this->jobsModel->fetchAllJobs(0, Joobsbox_Model_Jobs::INCLUDE_NON_PUBLIC)->where('Public = 0')->order('ID DESC')->fetch()->toArray();
 		
 		$this->view->pending  = $pending;
 		$this->view->postings = $this->jobsModel->fetchAllJobs(0)->order('ID DESC')->fetch()->toArray();
