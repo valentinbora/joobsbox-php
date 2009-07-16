@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `{#prefix#}jobs` (
 `Company` varchar(120) collate utf8_unicode_ci NOT NULL,
 `Location` varchar(120) collate utf8_unicode_ci NOT NULL,
 `Public` tinyint(1) NOT NULL default '0',
-`ExpirationDate` datetime NOT NULL default '0000-00-00 00:00:00',
+`ExpirationDate` int unsigned NOT NULL,
 `ChangedBy` varchar(100) collate utf8_unicode_ci NOT NULL,
 `ChangedDate` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 `STATUS` tinyint(1) unsigned NOT NULL default '0',

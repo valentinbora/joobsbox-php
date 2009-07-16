@@ -54,7 +54,6 @@ class InstallController extends Zend_Controller_Action {
 			try {
 				$db->query("SET NAMES 'utf8'");
 			} catch(Exception $e) {
-			  dd($e);
 				$this->view->dberror = $this->view->translate("There was an error connecting to the database. Make sure the connection information you provided is correct.");
 			}
 			

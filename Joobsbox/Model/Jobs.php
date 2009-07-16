@@ -60,7 +60,7 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
   		if($checkExpiration) {
   		  $select->where('ExpirationDate >= ?', time());
   		}
-		
+
   		$this->fireEvent("retrieve_jobs");
 		
   		if($returnImmediately) {

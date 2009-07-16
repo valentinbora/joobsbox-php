@@ -139,7 +139,8 @@ class AdminController extends Zend_Controller_Action
 
     $translate = Zend_Registry::get("Zend_Translate");
     $locale	   = Zend_Registry::get("Zend_Locale");
-    $translate->addTranslation($this->pluginPath . $pluginName . '/languages/' . $locale . '.mo', $locale);
+    if(file_exists($this->pluginPath . $pluginName . '/languages/' . $locale . '.mo'))
+      $translate->addTranslation($this->pluginPath . $pluginName . '/languages/' . $locale . '.mo', $locale);
     Zend_Registry::set("Translation_Hash", $translate->getMessages());
     Zend_Registry::get("TranslationHelper")->regenerateHash();
 
