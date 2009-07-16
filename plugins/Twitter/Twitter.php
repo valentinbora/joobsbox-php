@@ -5,6 +5,15 @@ class Twitter extends Joobsbox_Plugin_Base {
 	}
 	
 	function event_job_accepted($jobId) {
+	  /******* CONFIGURATION **********/
+	  $username = "";
+	  $password = "";
+	  /********************************/
+	  
+	  if(!(strlen($username) && strlen($password))) { // Don't even try to post it without username and pass
+	    return;
+	  }
+	  
 		$jobData = $this->getModel("Jobs")->fetchJobById($jobId);
 		
 		// Make a tiny URL
@@ -28,7 +37,7 @@ class Twitter extends Joobsbox_Plugin_Base {
 		curl_setopt($ch, CURLOPT_URL, "http://twitter.com/statuses/update.json?status=" . urlencode($jobData['Title'] . ' @ ' . $jobData['Company'] . ' - ' . $jobData['Location'] . '   ' . $url));
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_USERPWD, "joobsbox:silviusavin");
+		curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		
 		curl_exec($ch);

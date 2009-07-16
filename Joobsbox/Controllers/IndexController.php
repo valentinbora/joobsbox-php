@@ -22,7 +22,7 @@ class IndexController extends Zend_Controller_Action {
 	protected $_model;
 	
 	public function indexAction(){
-		if(!file_exists("config/db.ini.php")) {
+		if(!file_exists(APPLICATION_DIRECTORY . "/config/db.ini.php")) {
 			$this->_redirect('install/step1');
 		}
 		
