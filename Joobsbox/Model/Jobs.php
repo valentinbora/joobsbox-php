@@ -47,13 +47,18 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 	 * 
 	 * @param integer $returnImmediately if set to 1, it returns a jobIterator. Else it returns a jobFetchObject which enables further manipulation
 	 * @param boolean $includeNonPublic if true, it includes non public jobs as well
+	 * @param boolean $checkExpiration if true, checks if jobs have expired
 	 * @returns jobFetchObject
 	 */
-    public function fetchAllJobs($returnImmediately=1, $includeNonPublic=false) {
+    public function fetchAllJobs($returnImmediately=1, $includeNonPublic=false, $checkExpiration = true) {
 		  $select = $this->_db->select()->from($this->_postings_table);
 		
 		  if(!$includeNonPublic) {
-  			$select->where('Public = 1')->where('ExpirationDate >= ?', time());
+  			$select->where('Public = 1');
+  		}
+  		
+  		if($checkExpiration) {
+  		  $select->where('ExpirationDate >= ?', time());
   		}
 		
   		$this->fireEvent("retrieve_jobs");

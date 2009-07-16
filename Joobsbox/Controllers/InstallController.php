@@ -54,9 +54,11 @@ class InstallController extends Zend_Controller_Action {
 			try {
 				$db->query("SET NAMES 'utf8'");
 			} catch(Exception $e) {
-				$this->view->dberror = 1;
+			  dd($e);
+				$this->view->dberror = $this->view->translate("There was an error connecting to the database. Make sure the connection information you provided is correct.");
 			}
 			
+			@chmod("config/", 0666);
 			@chmod("config/config.ini.php", 0666);
 			
 			if(!isset($this->view->dberror)) {
@@ -66,17 +68,25 @@ class InstallController extends Zend_Controller_Action {
 				$config->general->common_title = $sitename;
 				$config->db->prefix = $dbprefix;
 				
+				if(!is_writable("config/config.ini.php")) {
+				  $this->view->dberror = $this->view->translate("config/config.ini.php is not writable. Please adjust the file permissions using FTP or SSH.");
+				  return;
+				}
 				$configWriter = new Zend_Config_Writer_Ini();
 				$configWriter->write('config/config.ini.php', $config);
 				
 				// Save database info
 				$config = new Zend_Config(array(
-					"host"		=> $dbhost,
+					"host"		  => $dbhost,
 					"username"	=> $dbuser,
 					"password"	=> $dbpass,
-					"dbname"	=> $dbname
+					"dbname"  	=> $dbname
 				));
 				
+				if(!is_writable("config/")) {
+				  $this->view->dberror = $this->view->translate("config directory is not writable. Please adjust the directory permissions using FTP or SSH.");
+				  return;
+				}
 				$configWriter = new Zend_Config_Writer_Ini();
 				$configWriter->write('config/db.ini.php', $config);
 				$this->_redirect('install/step2');
@@ -150,5 +160,8 @@ class InstallController extends Zend_Controller_Action {
 		$authAdapter->setIdentity($username)->setCredential($password);
 		$auth = Zend_Auth::getInstance();
 		$result = $auth->authenticate($authAdapter);
+		
+		@chmod("Joobsbox/SearchIndexes", 0666);
+		@chmod("cache/", 0666);
 	}
 }
