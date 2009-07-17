@@ -48,7 +48,7 @@
 			
 			<?php if(isset($this->dberror)): ?>
 			<div class="fieldpair error">
-				<?php echo $this->translate("There was an error connecting to the database. Make sure the connection information you provided is correct."); ?>
+				<?php echo $this->dberror; ?>
 			</div>
 			<?php endif; ?>
 			<input type="submit" name="step1" value="Done" />
