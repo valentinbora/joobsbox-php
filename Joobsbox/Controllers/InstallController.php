@@ -57,8 +57,8 @@ class InstallController extends Zend_Controller_Action {
 				$this->view->dberror = $this->view->translate("There was an error connecting to the database. Make sure the connection information you provided is correct.");
 			}
 			
-			@chmod("config/", 0666);
-			@chmod("config/config.ini.php", 0666);
+			@chmod("config/", 0766);
+			@chmod("config/config.ini.php", 0766);
 			
 			if(!isset($this->view->dberror)) {
 				// Connection works - we save the data
@@ -160,7 +160,7 @@ class InstallController extends Zend_Controller_Action {
 		$auth = Zend_Auth::getInstance();
 		$result = $auth->authenticate($authAdapter);
 		
-		@chmod("Joobsbox/SearchIndexes", 0666);
-		@chmod("cache/", 0666);
+		@chmod("Joobsbox/SearchIndexes", 0766);
+		@chmod("cache/", 0766);
 	}
 }
