@@ -6,8 +6,8 @@
  * @version 1.0
  * @category Joobsbox
  * @package Joobsbox_Plugin
- * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
- * @license	   http://www.joobsbox.com/joobsbox-php-license
+ * @copyright Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license http://www.joobsbox.com/joobsbox-php-license
  */
 
  /**
@@ -18,7 +18,7 @@
  * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
  * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
-class Joobsbox_Plugin_AdminBase
+class Joobsbox_Plugin_AdminBase extends Joobsbox_Plugin_Base
 {
 	protected function getModel($modelName) {
 		$modelName = "Joobsbox_Model_$modelName";

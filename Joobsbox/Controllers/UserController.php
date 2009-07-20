@@ -49,16 +49,11 @@ class UserController extends Zend_Controller_Action {
 			->addValidator('notEmpty')
 			->setRequired(true);
 		
-		$remember = $this->loginForm->createElement('checkbox', 'remember')
-			->setDescription("Do not check if on a public computer")
-			->setLabel('Remember me:');
-		
 		$submit = $this->loginForm->createElement('submit', 'submit')
 			->setLabel("Login");
 			
 		$this->loginForm->addElement($username)
 			 ->addElement($password)
-			 ->addElement($remember)
 			 ->addElement($submit)
 			 ->addElement($submit);
 			 

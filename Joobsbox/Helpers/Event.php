@@ -6,7 +6,6 @@
  * @version 1.0
  * @package Joobsbox_Helpers
  * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
- 
  */
  
 /**
@@ -14,14 +13,13 @@
  *
  * Example usage:
  * <code>
- * $this->Event('event_name');
+ * $this->Event('event_name'[, $some_data]);
  * </code>
  *
  * @package Joobsbox_Helpers
  * @category Joobsbox
  * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
  * @license	   http://www.joobsbox.com/joobsbox-php-license)
- * @license	   New BSD License
  * 
  */
 class Joobsbox_Helpers_Event extends Zend_Controller_Action_Helper_Abstract

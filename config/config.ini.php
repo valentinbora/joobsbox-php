@@ -8,7 +8,6 @@ common_title = "Joobsbox PHP Demo"
 locale = "en"
 timezone = "Europe/Berlin"
 posting_ttl = "30"
-restrict_install = "1"
 
 [rss]
 all_jobs_count = "15"

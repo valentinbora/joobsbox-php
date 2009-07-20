@@ -41,17 +41,17 @@ class AdminController extends Zend_Controller_Action
     foreach(new DirectoryIterator($this->pluginPath) as $plugin) {
       $name = $plugin->getFilename();
       if($plugin->isDir() && $name[0] != '.') {
-	require_once "plugins/$name/$name.php";
-	$class = new ReflectionClass(ucfirst($name));
-	if($class->hasMethod('init')) {
-	  $this->plugins[$name] = array();
-	  if(file_exists($this->pluginPath . $name . '/config.ini.php')) {
-	    $this->plugins[$name] = new Zend_Config_Ini($this->pluginPath . $name . '/config.ini.php');
-	  }
-	}
-	if($class->hasMethod('dashboard')) {
-	  $this->dashboardCandidates[$name] = 1;
-	}
+	      require_once "plugins/$name/$name.php";
+      	$class = new ReflectionClass(ucfirst($name));
+      	if($class->hasMethod('init')) {
+      	  $this->plugins[$name] = array();
+      	  if(file_exists($this->pluginPath . $name . '/config.ini.php')) {
+      	    $this->plugins[$name] = new Zend_Config_Ini($this->pluginPath . $name . '/config.ini.php');
+      	  }
+      	}
+      	if($class->hasMethod('dashboard')) {
+      	  $this->dashboardCandidates[$name] = 1;
+      	}
       }
     }
 
@@ -82,15 +82,15 @@ class AdminController extends Zend_Controller_Action
     foreach($dashboardPlugins as $pluginName) {
       $pluginName = trim($pluginName);
       if(isset($this->dashboardCandidates[$pluginName])) {
-	$plugin = $this->loadPlugin($pluginName, true);
-	if(method_exists($plugin, "dashboard")) {
-	  $plugin->dashboard();
-	}
-	$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-	$this->view->dashboard[$pluginName] = array(
-	    "options"	=> $this->plugins[ucfirst($pluginName)],
-	    "content" 	=> $viewRenderer->view->render('dashboard.phtml')
-	    );
+	      $plugin = $this->loadPlugin($pluginName, true);
+      	if(method_exists($plugin, "dashboard")) {
+      	  $plugin->dashboard();
+      	}
+      	$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+      	$this->view->dashboard[$pluginName] = array(
+  	      "options"	=> $this->plugins[ucfirst($pluginName)],
+    	    "content" 	=> $viewRenderer->view->render('dashboard.phtml')
+  	    );
       }
     }
   }
@@ -127,13 +127,13 @@ class AdminController extends Zend_Controller_Action
       $controllerAction = $this->getRequest()->getParam('action');
       $action = substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], $controllerAction)+strlen($controllerAction)+1);
       if($pos = strpos($action, '/') !== FALSE) {
-	$action = substr($action, 0, strpos($action, '/'));
+	      $action = substr($action, 0, strpos($action, '/'));
       }
       $action .= "Action";
       if(method_exists($plugin, $action)) {
-	call_user_func(array($plugin, $action));
+	      call_user_func(array($plugin, $action));
       } elseif(method_exists($plugin, "indexAction")) {
-	call_user_func(array($plugin, "indexAction"));
+	      call_user_func(array($plugin, "indexAction"));
       }
     }
 

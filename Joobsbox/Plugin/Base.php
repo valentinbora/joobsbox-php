@@ -24,18 +24,18 @@
  */
 class Joobsbox_Plugin_Base {
 	public $_helper;
-	private $_pluginName;
+	protected $_pluginName;
 	
 	/**
-     * Retrieves the specified plugin option(s) from the database
-     *
+   * Retrieves the specified plugin option(s) from the database
+   *
 	 * @param string $name the option name to retrieve
 	 * @returns array indexed array of database rows as associative arrays
-     */
+  */
 	final function getConfiguration($name) {
 		$db = Zend_Registry::get("db");
 		$pf = Zend_Registry::get("conf");
-		$pf = $pf['db']['prefix'];
+		$pf = $pf->db->prefix;
 		$data = $db->fetchAll("SELECT * FROM {$pf}plugin_data WHERE plugin_name=? AND option_name=?", array($this->_pluginName, $name));
 		return $data;
 	}
@@ -49,7 +49,7 @@ class Joobsbox_Plugin_Base {
 	final function deleteConfigurationById($id) {
 		$db = Zend_Registry::get("db");
 		$pf = Zend_Registry::get("conf");
-		$pf = $pf['db']['prefix'];
+		$pf = $pf->db->prefix;
 		$id = (int)$id;
 		return $db->delete($pf . "plugin_data", array("plugin_name='" . $this->_pluginName . "'", "id='" . $id . "'"));
 	}
@@ -63,8 +63,8 @@ class Joobsbox_Plugin_Base {
 	final function deleteConfigurationByName($name) {
 		$db = Zend_Registry::get("db");
 		$pf = Zend_Registry::get("conf");
-		$pf = $pf['db']['prefix'];
-		$id = (int)$id;
+		$pf = $pf->db->prefix;
+
 		return $db->delete($pf . "plugin_data", array("plugin_name='" . $this->_pluginName . "'", "option_name=" . $db->quote($name) . ""));
 	}
 	
@@ -78,7 +78,10 @@ class Joobsbox_Plugin_Base {
 	final function addConfiguration($name, $value) {
 		$db = Zend_Registry::get("db");
 		$pf = Zend_Registry::get("conf");
-		$pf = $pf['db']['prefix'];
+		$pf = $pf->db->prefix;
+		
+		// Make sure each key per plugin is unique
+		$this->deleteConfigurationByName($name);
 		
 		return $db->query("INSERT INTO {$pf}plugin_data (plugin_name, option_name, option_value) VALUES (?, ?, ?)", array(
 			$this->_pluginName,
@@ -88,10 +91,11 @@ class Joobsbox_Plugin_Base {
 	}
 	
 	/**
-     * pluginLoader means of securely configuring the plugin name so that plugins can't say they are someone else
-     */
+    * pluginLoader means of securely configuring the plugin name so that plugins can't say they are someone else
+    */
 	final function setPluginName($pluginName) {
 		$protection = debug_backtrace();
+
 		if($protection[1]['class'] == 'Joobsbox_Plugin_Loader') {
 			$this->_pluginName = $pluginName;
 		}
