@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Joobsbox PHP 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-14 00:59+0200\n"
+"POT-Creation-Date: 2009-07-21 01:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Joobsbox\n"
@@ -17,6 +17,18 @@ msgstr ""
 
 #: Joobsbox/Controllers/CategoryController.php:38
 msgid "This category does not exist."
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:57
+msgid "There was an error connecting to the database. Make sure the connection information you provided is correct."
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:71
+msgid "config/config.ini.php is not writable. Please adjust the file permissions using FTP or SSH."
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:86
+msgid "config directory is not writable. Please adjust the directory permissions using FTP or SSH."
 msgstr ""
 
 #: Joobsbox/Controllers/JobController.php:33
@@ -84,36 +96,35 @@ msgstr ""
 msgid "Password:"
 msgstr ""
 
-#: Joobsbox/Controllers/UserController.php:54
-msgid "Remember me:"
-msgstr ""
-
-#: Joobsbox/Controllers/UserController.php:57
+#: Joobsbox/Controllers/UserController.php:53
 msgid "Login"
 msgstr ""
 
-#: Joobsbox/Controllers/UserController.php:100
+#: Joobsbox/Controllers/UserController.php:95
 msgid "Username and/or password incorrect"
 msgstr ""
 
-#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:43
+#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:42
 msgid "Back to site"
 msgstr ""
 
-#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:48
+#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:47
 msgid "Dashboard"
 msgstr ""
 
-#: Joobsbox/Themes/joobsbox/layouts/index.phtml:47
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:51
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:33
 #, php-format
 msgid "Post a job for %d days"
 msgstr ""
 
-#: Joobsbox/Themes/joobsbox/layouts/index.phtml:52
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:56
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:38
 msgid "Search here"
 msgstr ""
 
-#: Joobsbox/Themes/joobsbox/layouts/index.phtml:59
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:63
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:45
 #, php-format
 msgid "Subscribe to the full <a href=\"%s\">RSS Feed</a> and be notified when when new jobs are posted."
 msgstr ""
@@ -130,7 +141,6 @@ msgstr ""
 #: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:13
 #: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:22
 #: Joobsbox/Themes/joobsbox/views/scripts/jobs-at/index.phtml:22
-#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:22
 msgid "at"
 msgstr ""
 
@@ -138,7 +148,6 @@ msgstr ""
 #: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:15
 #: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:24
 #: Joobsbox/Themes/joobsbox/views/scripts/jobs-at/index.phtml:24
-#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:24
 msgid "in"
 msgstr ""
 
@@ -190,10 +199,6 @@ msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:45
 msgid "Table prefix"
-msgstr ""
-
-#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:51
-msgid "There was an error connecting to the database. Make sure the connection information you provided is correct."
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:13
@@ -267,5 +272,21 @@ msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:15
 msgid "Search"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:31
+msgid "Nothing to be found for your searched criteria."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:33
+msgid "Look for typos in the searched word(s) and, if found, correct them."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:34
+msgid "Be less specific. Try \"web designer\" instead of \"senior web designer\"."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:35
+msgid "Try similar words. If \"designer\" doesn't return anything, try \"design\"."
 msgstr ""
 
