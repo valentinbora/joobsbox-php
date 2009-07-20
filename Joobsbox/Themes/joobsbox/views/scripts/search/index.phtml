@@ -15,6 +15,7 @@
 				<?php echo $this->translate("Search") . ': ' . $this->searchedString; ?>
 			</a>
 		</div>
+		  <?php if(count($this->jobs)): ?>
 			<ul>
 				<?php foreach($this->jobs as $a => $job): ?>
 				<li <?php if($a%2):?>class="alternate"<?php endif;?>>
@@ -26,4 +27,12 @@
 				</li>
 				<?php endforeach; ?>
 			</ul>
+			<?php else: ?>
+			  <div class="info"><?php echo $this->translate('Nothing to be found for your searched criteria.'); ?></div>
+        <ul>
+          <li><?php echo $this->translate('Look for typos in the searched word(s) and, if found, correct them.'); ?></li>
+          <li><?php echo $this->translate('Be less specific. Try "web designer" instead of "senior web designer".'); ?></li>
+          <li><?php echo $this->translate('Try similar words. If "designer" doesn\'t return anything, try "design".'); ?></li>
+        </ul>        
+		  <?php endif; ?>
 	</div>

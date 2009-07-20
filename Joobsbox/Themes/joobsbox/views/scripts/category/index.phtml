@@ -7,6 +7,7 @@
  * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
  * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
+ $this->headLink()->appendAlternate($this->baseUrl . '/rss/categorie/' . $this->MakeLink($this->category['Name']), 'application/rss+xml', $this->conf->general->common_title . ' RSS - ' . $this->category['Name']);
 ?>
 <?php $this->headTitle()->prepend($this->category['Name']); ?>
 <div class="list">

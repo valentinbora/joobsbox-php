@@ -1,26 +1,100 @@
-body												{font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;}
+body {
+  font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+}
 
 /* Header */
-#admin-header										{width: 100%; height: 65px; background-color: #464646; background-image: url('../images/logo.png'); background-repeat: no-repeat; background-position: 17px 40%;}
-#admin-header a										{color: #EEE; font-size: 80%; position: relative; top: 30px; left: 170px;}
+#admin-header {
+  width: 100%; 
+  height: 80px;
+  border-bottom: 2px solid #464646; 
+  background-image: url('../images/logo.png'); 
+  background-repeat: no-repeat; 
+  background-position: 17px 40%;
+}
+#admin-header a {
+  font-size: 80%; 
+  position: relative; 
+  top: 50px; 
+  left: 170px;
+}
 
 /* Main area */
-#admin-main											{margin-left: 175px;}
-	/* Left menu */
-	#admin-menu										{display: block; position: relative; width: 145px; clear: left; float: left; list-style: none; margin: 15px 5px 15px -160px; padding: 0;}
-	#admin-menu li.item								{list-style: none; height: 30px; line-height: 32px; -moz-border-radius: 6px; -webkit-border-radius: 6px; background-color: #F1F1F1; background-image: url('../images/admin-menu-background.jpg'); border-color: #E3E3E3; padding: 5px; margin-bottom: 7px; color: #444; font-weight: bold;}
-	#admin-menu li.hover								{background-image: url('../images/admin-menu-background-hover.jpg');}
-	#admin-menu li.current							{background-image: url('../images/admin-menu-background-current.jpg'); cursor: default;}
-	#admin-menu li.separator							{height: 20px; list-style: none;}
-	#admin-menu li a									{display: block; height: 100%; padding-left: 30px; text-decoration: none; color: inherit; background-position: 3% 50%; background-repeat: no-repeat; outline: none;}
-	/* Menu icons */
-	#menu-dashboard	a								{background-image: url('../images/icons/home_24.png');}
-	#menu-postings a									{background-image: url('../images/icons/postings_24.png');}
-	#menu-categories a								{background-image: url('../images/icons/categories_24.png');}
+#admin-main {
+  margin-left: 175px;
+}
+
+/* Left menu */
+#admin-menu	{
+  display: block; 
+  position: relative; 
+  width: 145px; 
+  clear: left; 
+  float: left; 
+  list-style: none; 
+  margin: 15px 5px 15px -160px; 
+  padding: 0;
+
+}
+#admin-menu li.item	{
+  list-style: none; 
+  height: 30px; 
+  line-height: 32px; 
+  -moz-border-radius: 6px; 
+  -webkit-border-radius: 6px; 
+  background-color: #F1F1F1; 
+  background-image: url('../images/admin-menu-background.jpg'); 
+  border-color: #E3E3E3; 
+  padding: 5px; 
+  margin-bottom: 7px; 
+  color: #444; 
+  font-weight: bold;
+}
+
+#admin-menu li.hover {
+  background-image: url('../images/admin-menu-background-hover.jpg');
+}
+
+#admin-menu li.current {
+  background-image: url('../images/admin-menu-background-current.jpg'); 
+  cursor: default;
+}
+
+#admin-menu li.separator {
+  height: 20px; 
+  list-style: none;
+}
+
+#admin-menu li a {
+  display: block; 
+  height: 100%; 
+  padding-left: 30px; 
+  text-decoration: none; 
+  color: inherit; 
+  background-position: 3% 50%; 
+  background-repeat: no-repeat; 
+  outline: none;
+}
+
+/* Menu icons */
+#menu-dashboard	a	{
+  background-image: url('../images/icons/home_24.png');
+}
+#menu-postings a {
+  background-image: url('../images/icons/postings_24.png');
+}
+#menu-categories a {
+  background-image: url('../images/icons/categories_24.png');
+}
 	
-	/* Content area */
-	#admin-content									{float: left; width: 100%; overflow: hidden;}
-		#admin-content-wrap							{margin: 0 40px 0 5px;}
+/* Content area */
+#admin-content {
+  float: left; 
+  width: 100%; 
+  overflow: hidden;
+}
+	#admin-content-wrap {
+	  margin: 0 40px 0 5px;
+	}
 		
 		
 /* Dashboard */

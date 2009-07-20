@@ -54,7 +54,7 @@ class PublishController extends Zend_Controller_Action
 			->addFilter('StringTrim')
 			->addFilter('HtmlEntities')
 			->addValidator('notEmpty')
-			->setDescription('Ex: "Iaşi, Bucureşti"')
+			->setDescription('Example: "London, Paris, Berlin, New York"')
 			->setRequired(true);
 			
 		$categories[0] = $this->view->translate("Choose...");
