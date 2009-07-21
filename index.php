@@ -29,7 +29,10 @@ if(!isset($testing)) {
 	configureTheme();
 	
 	if(isset($joobsbox_render_var)) {
-	  configureTheme(APPLICATION_THEME, 'integration');
+	  setLayout('integration');
+	  if(isset($joobsbox_integration_text)) {
+	    $viewRenderer->view->integrationText = $joobsbox_integration_text;
+	  }
 		$front->returnResponse(true);
 	}
 

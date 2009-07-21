@@ -8,6 +8,18 @@
  * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<?php 
+	$this->doctype('XHTML1_TRANSITIONAL');
+	$this->headTitle($this->conf->general->common_title);
+	$this->headTitle()->setSeparator(' - ');
+	echo $this->headTitle();
+	echo $this->headMeta();
+?>
 
 <?php
 	$this->headLink()->appendStylesheet($this->themeUrl . "/css/global.css");
@@ -17,36 +29,62 @@
 		->prependFile($this->baseUrl . '/public/js/lib/jquery.js', 'text/javascript')
 		->appendFile($this->baseUrl . '/public/js/lib/jquery.corner.js', 'text/javascript')
 		->appendFile($this->baseUrl . '/public/js/lib/jquery.pngFix.pack.js', 'text/javascript')		
-		->appendFile($this->baseUrl . '/public/js/global.js', 'text/javascript')
-		->appendFile($this->baseUrl . '/plugins/iPhone/js/iphone.js', 'text/javascript');
+		->appendFile($this->baseUrl . '/public/js/global.js', 'text/javascript');
+	
+	// Link the main RSS file
+  $this->headLink()->appendAlternate($this->baseUrl . '/rss', 'application/rss+xml', $this->conf->general->common_title . ' RSS');
+  
 	echo $this->headLink();
 	echo $this->headStyle();
 ?>
 
-<h1 class="site-title"><?php echo implode($this->headTitle()->getSeparator(), (array)$this->headTitle()->getContainer()); ?></h1>
+</head>
+<body>
+  <div class="integration">
+    <?php echo $this->integrationText; ?>
+  </div>
+	<h1 class="site-title"><?php echo implode($this->headTitle()->getSeparator(), (array)$this->headTitle()->getContainer()); ?></h1>
 	<div id="wrapper">
-	<div id="joobsbox-main">
-		<div id="joobsbox-header"><a href="<?php echo $this->baseUrl; ?>"></a></div>
-		<div id="tools">
-			<div id="postJob">
-				<a href="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('publish'); ?>">
-					<?php printf($this->translate("Post a job for %d days"), $this->conf->general->posting_ttl); ?>
-				</a>
+		<div id="joobsbox-main">
+			<div id="joobsbox-header"><a href="<?php echo $this->baseUrl; ?>"><?php echo $this->conf->general->common_title; ?></a></div>
+			<div id="tools">
+				<div id="postJob">
+					<a class="button" href="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('publish'); ?>">
+						<?php printf($this->translate("Post a job for %d days"), $this->conf->general->posting_ttl); ?>
+					</a>
+				</div>
+				<div id="search">
+					<form action="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('search'); ?>" method="get">
+						<input name="txtSearch" type="text" id="searchInput" value="<?php echo $this->translate("Search here"); ?>" />
+						<input class="button" type="submit" value="<?php echo $this->translate('Search'); ?>" />
+					</form>
+				</div>
 			</div>
-			<div id="search">
-				<form action="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('search'); ?>" method="get">
-					<div id="searchInputContainer"><input name="txtSearch" type="text" id="searchInput" value="<?php echo $this->translate("Search here"); ?>" /></div>
-					<div id="searchButtonContainer"><input type="image" src="<?php echo $this->themeImages; ?>/search.jpg" /></div>
-				</form>
+			<?php echo $this->layout()->content;?>
+			<div id="full-rss">
+				<?php printf($this->translate('Subscribe to the full <a href="%s">RSS Feed</a> and be notified when new jobs are posted.'), $this->baseUrl . '/rss'); ?>
 			</div>
-		</div>
-		<?php echo $this->layout()->content;?>
-		<div id="full-rss">
-			<?php printf($this->translate('Subscribe to the full <a href="%s">RSS Feed</a> and be notified when when new jobs are posted.'), $this->baseUrl . '/rss'); ?>
-		</div>
-		<div id="footer">
-			powered by <a href="http://www.joobsbox.com" rel="external" target="_blank">joobsbox</a> + <a href="http://www.joobs.ro" rel="external" target="_blank">joobs.ro</a> + <a href="http://framework.zend.com" rel="external" target="_blank">zend framework</a>
+			<div id="footer">
+				powered by <a href="http://www.joobsbox.com" rel="external" target="_blank">joobsbox</a> + <a href="http://www.joobs.ro" rel="external" target="_blank">joobs.ro</a> + <a href="http://framework.zend.com" rel="external" target="_blank">zend framework</a>
+			</div>
 		</div>
 	</div>
-</div>
-<?php echo $this->headScript(); ?>
+	<?php echo $this->headScript(); ?>
+	<script type="text/javascript">
+    var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
+    document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
+  </script>
+  <script type="text/javascript">
+  UserVoice.Tab.show({ 
+    key: 'joobsbox',
+    host: 'joobsbox.uservoice.com', 
+    forum: 'general', 
+    alignment: 'left',
+    background_color:'#f00', 
+    text_color: 'white',
+    hover_color: '#06C',
+    lang: 'en'
+  })
+  </script>
+</body>
+</html>
