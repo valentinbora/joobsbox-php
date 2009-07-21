@@ -19,6 +19,8 @@
 class UserController extends Zend_Controller_Action {
 	
 	public function loginAction(){
+	  setLayout("login");
+
 		$referer = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'';
 		$sess = new Zend_Session_Namespace("auth");
 

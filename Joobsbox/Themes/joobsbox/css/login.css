@@ -1,0 +1,36 @@
+#wrapper {
+  padding-top: 100px;
+  background-image: url('../images/logo.png');
+  background-repeat: no-repeat;
+  background-position: 50% 10%;
+  text-align: center;
+}
+
+#loginForm {
+  display: block;
+  width: 350px;
+  margin: 0 auto;
+  padding: 5px;
+  background-color: #CCC;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#loginForm dd, #loginForm dt, #loginForm dt label {
+  margin: 0;
+}
+
+#loginForm dt {
+  text-align: left;
+  padding-left: 15px;
+  margin-bottom: 3px;
+}
+
+#loginForm dd input[type="text"], #loginForm dd input[type="password"] {
+  width: 90%;
+  font-size: 18px;
+}
+
+#loginForm dd {
+  margin-bottom: 8px;
+}

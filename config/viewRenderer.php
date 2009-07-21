@@ -40,3 +40,7 @@ function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 		}
 	}
 }
+
+function setLayout($layout) {
+  configureTheme(APPLICATION_THEME, $layout);
+}

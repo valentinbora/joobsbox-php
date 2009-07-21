@@ -40,6 +40,8 @@
 <body>
 	<div id="admin-header">
 		<a href="<?php echo $this->baseUrl; ?>"> <?php echo $this->translate("Back to site"); ?></a>
+		
+		<a class="right" href="<?php echo $this->baseUrl . '/user/logout' ?>"><?php echo $this->translate("Logout"); ?></a>
 	</div>
 	
 	<div id="admin-main">
@@ -77,5 +79,26 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="joobsbox-admin-footer">
+      &copy;2009 JoobsBox. All rights reserved. powered by <a href="http://www.joobsbox.com" rel="external" target="_blank">joobsbox</a> + <a href="http://www.joobs.ro" rel="external" target="_blank">joobs.ro</a> + <a href="http://framework.zend.com" rel="external" target="_blank">zend framework</a>
+  </div>
+  
+  <script type="text/javascript">
+    var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
+    document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
+  </script>
+  <script type="text/javascript">
+  UserVoice.Tab.show({ 
+    key: 'joobsbox',
+    host: 'joobsbox.uservoice.com', 
+    forum: 'general', 
+    alignment: 'right',
+    background_color:'#f00', 
+    text_color: 'white',
+    hover_color: '#06C',
+    lang: 'en'
+  })
+  </script>
 </body>
 </html>
