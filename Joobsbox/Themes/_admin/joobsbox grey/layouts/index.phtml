@@ -49,6 +49,7 @@
 			
 			<?php /************ Here come the plugins ****************/ ?>
 			<?php foreach($this->plugins as $pluginName => $pluginOptions): ?>
+			
 			<li class="item <?php if($pluginName == $this->currentPluginName):?>current<?php endif; ?>">
 				<a href="<?php echo $this->baseUrl . strtolower("/admin/$pluginName"); ?>" style="background-image: url(<?php 
 						if(isset($pluginOptions->main) && isset($pluginOptions->main->image)): 

@@ -23,6 +23,7 @@ class AdminController extends Zend_Controller_Action
 {
   private $pluginPath = "plugins/";
   private $currentPlugin;
+  private $corePlugins = array("Categories", "Postings");
 
   public function init() {
     $session = new Zend_Session_Namespace("Admin");
@@ -55,6 +56,7 @@ class AdminController extends Zend_Controller_Action
       }
     }
 
+    $this->view->corePlugins = $this->corePlugins;
     $this->view->pluginPath = $this->pluginPath;
     $this->view->plugins = $this->plugins;
     $this->view->locale  = Zend_Registry::get("Zend_Locale");

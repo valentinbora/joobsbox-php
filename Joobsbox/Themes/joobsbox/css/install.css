@@ -1,8 +1,8 @@
 #joobsbox-header {
   width: 100%; 
-  height: 65px; 
-  background-color: #464646; 
-  background-image: url('../images/logo.png'); 
+  height: 75px; 
+  background-color: #333333; 
+  background-image: url('../images/logo_dark.png'); 
   background-repeat: no-repeat; 
   background-position: 17px 40%; 
   font-size: 110%; 

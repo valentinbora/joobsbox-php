@@ -17,7 +17,7 @@
 	$this->doctype('XHTML1_TRANSITIONAL');
 	$this->headTitle($this->conf->general->common_title);
 	$this->headTitle()->setSeparator(' - ');
-	echo $this->filter('head_html');
+//	echo $this->filter('head_html');
 	echo $this->headTitle();
 	echo $this->headMeta();
 ?>
@@ -44,7 +44,7 @@
 	<h1 class="site-title"><?php echo implode($this->headTitle()->getSeparator(), (array)$this->headTitle()->getContainer()); ?></h1>
 	<div id="wrapper">
 		<div id="joobsbox-main">
-			<div id="joobsbox-header"><a href="<?php echo $this->baseUrl; ?>"></a></div>
+			<div id="joobsbox-header"><a href="<?php echo $this->baseUrl; ?>"><?php echo $this->conf->general->common_title; ?></a></div>
 			<div id="tools">
 				<div id="postJob">
 					<a class="button" href="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('publish'); ?>">

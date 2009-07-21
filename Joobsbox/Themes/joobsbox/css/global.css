@@ -88,11 +88,7 @@ div.outer {
 
 #joobsbox-header {
   width: 100%; 
-  height: 130px; 
-  background-image: url('../images/logo.png'); 
-  background-repeat: no-repeat; 
   background-position: 5px 40%; 
-  font-size: 110%; 
   text-transform: uppercase; 
   line-height: 80px; 
   color: #DDD; 
@@ -100,9 +96,11 @@ div.outer {
 
 #joobsbox-header a {
   display: block; 
-  width: 150px; 
-  height: 100%; 
   outline: none;
+  color: #000;
+  text-decoration: none;
+  margin-left: 13px;
+  font-size: 18px;
 }
 
 .site-title								{
