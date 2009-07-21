@@ -47,20 +47,20 @@
 			<div id="joobsbox-header"><a href="<?php echo $this->baseUrl; ?>"></a></div>
 			<div id="tools">
 				<div id="postJob">
-					<a href="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('publish'); ?>">
+					<a class="button" href="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('publish'); ?>">
 						<?php printf($this->translate("Post a job for %d days"), $this->conf->general->posting_ttl); ?>
 					</a>
 				</div>
 				<div id="search">
 					<form action="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('search'); ?>" method="get">
-						<div id="searchInputContainer"><input name="txtSearch" type="text" id="searchInput" value="<?php echo $this->translate("Search here"); ?>" /></div>
-						<div id="searchButtonContainer"><input type="image" src="<?php echo $this->themeImages; ?>/search.jpg" /></div>
+						<input name="txtSearch" type="text" id="searchInput" value="<?php echo $this->translate("Search here"); ?>" />
+						<input class="button" type="submit" value="<?php echo $this->translate('Search'); ?>" />
 					</form>
 				</div>
 			</div>
 			<?php echo $this->layout()->content;?>
 			<div id="full-rss">
-				<?php printf($this->translate('Subscribe to the full <a href="%s">RSS Feed</a> and be notified when when new jobs are posted.'), $this->baseUrl . '/rss'); ?>
+				<?php printf($this->translate('Subscribe to the full <a href="%s">RSS Feed</a> and be notified when new jobs are posted.'), $this->baseUrl . '/rss'); ?>
 			</div>
 			<div id="footer">
 				powered by <a href="http://www.joobsbox.com" rel="external" target="_blank">joobsbox</a> + <a href="http://www.joobs.ro" rel="external" target="_blank">joobs.ro</a> + <a href="http://framework.zend.com" rel="external" target="_blank">zend framework</a>

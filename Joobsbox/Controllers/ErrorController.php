@@ -33,12 +33,12 @@ class ErrorController extends Zend_Controller_Action
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION: 
 
                 $this->getResponse()->setHttpResponseCode(404); 
-                $this->view->message = 'Pagina ceruta nu a putut fi gasita.'; 
+                $this->view->message = $this->view->translate('The page could not be found!'); 
                 break; 
             default: 
                 // application error 
                 $this->getResponse()->setHttpResponseCode(500); 
-                $this->view->message = 'A aparut o eroare in aplicatie.'; 
+                $this->view->message = $this->view->translate('An error has occured within the application'); 
                 break; 
         } 
 

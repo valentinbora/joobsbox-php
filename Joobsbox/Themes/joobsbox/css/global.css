@@ -1,9 +1,13 @@
-body, div, h1, p { font-family: verdana, arial; margin: 0 auto; padding: 0 }
+body, div, h1, p {
+  font-family: verdana, arial; margin: 0 auto; padding: 0 
+}
+
 body {
 	width: 100%;
 	text-align: center;
 	font-size: 14px;
 }
+
 h1 { padding: 10px; margin: 0; font-size: large; float: left; }
 h2 {
 	color: black;
@@ -60,7 +64,6 @@ div.outer {
 	list-style-type: none;
 	border-bottom: solid 1px;
 	border-bottom-color: #EAEAEA;
-	font-weight: bold;
 	color: #000000;
 }
 .list li a {
@@ -78,11 +81,12 @@ div.outer {
 /*****************************************/
 #joobsbox-main {
 	padding: 10px;
-	width: 70%;
+	width: 890px;
 	text-align: left;
 	background-color: #FFFFFF;
 }
-#joobsbox-header					{
+
+#joobsbox-header {
   width: 100%; 
   height: 130px; 
   background-image: url('../images/logo.png'); 
@@ -92,7 +96,6 @@ div.outer {
   text-transform: uppercase; 
   line-height: 80px; 
   color: #DDD; 
-  font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif; 
 }
 
 #joobsbox-header a {
@@ -154,20 +157,20 @@ div.outer {
 	float: left;
 }
 
-#tools #postJob a {
-	display: block;
-	width: 100%;
-	background-image: url('../images/postJobBackground.jpg');
-	background-repeat: no-repeat;
-	width: 200px;
-	height: 35px;
-	text-align: center;
-	color: #FFF;
+.button {
+	-moz-border-radius-bottomleft:12px;
+	-moz-border-radius-bottomright:12px;
+	-moz-border-radius-topleft:12px;
+	-moz-border-radius-topright:12px;
+	background:#21759B url(../images/button-grad.png) repeat-x scroll left top;
+	border-color:#298CBA !important;
+	color:#FFFFFF !important;
+	font-size:16px;
+	font-weight:bold;
+	padding:5px 10px 5px 10px !important;
 	text-decoration: none;
-	line-height: 35px;
-	font-weight: bold;
-	font-size: 90%;
 }
+
 
 #alert{
 	padding-bottom: 5px;
@@ -187,13 +190,11 @@ div.outer {
 
 #searchInputContainer {
 	float: left;
-	width: 150px;
-	height: 25px;
 	border: 1px solid #CCC;
 }
 
 #searchButtonContainer {
-	float: left;
+	float: right;
 	width: 25px;
 	height: 25px;
 	border: 1px solid #CCC;
@@ -201,16 +202,13 @@ div.outer {
 }
 
 #searchInput {
-	width: 100%;
-	height: 20px;
-	display: block;
+	width: 200px;
+	padding: 2px;
 	color: #666666;
-	padding-left: 5px;
-	padding-top: 5px;
-	border: none;
-	outline: none;
-	font-weight: bold;
-	background: transparent;
+	font-size: 16px;
+	margin: 0;
+	height: 24px;
+	vertical-align: middle;
 }
 #ok{
 	padding-bottom: 5px;
