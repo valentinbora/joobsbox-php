@@ -1,0 +1,367 @@
+body, div, h1, p, form {
+	font-family: helvetica, arial;
+	margin: 0 auto;
+	padding: 0;
+	line-height: 125%;
+}
+
+body {
+	background: #FFFFFF url(../images/topbluefade.gif) repeat-x scroll 0 0;
+	width: 100%;
+	text-align: center;
+	font-size: 14px;
+}
+
+h1 {
+  padding: 10px; 
+  margin: 0; 
+  font-size: large;
+}
+
+h2 {
+	color: black;
+	margin: 0;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 10px 0 3px 0;
+	text-transform: none;
+}
+
+a:link, a:visited {
+  color: #000;
+}
+
+a:hover {
+  color: #FFF;
+  background-color: #000;
+  text-decoration: underline;
+}
+
+/************* ROUND **************************************/
+
+div.inner {
+	margin: 0;
+	border:0;
+	background-color: #f7f5e7;
+	font-size: 14px;
+	color: #333333;
+	padding: 5px;
+	text-align: left;
+	font-weight: bold;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+div.outer {
+	margin: 10px;
+	padding: 4px;
+	background-color: #f0edda;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+/*********** LIST **********************************/
+.list ul {
+	clear: both;
+	padding: 0;
+	margin-left: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.list .alternate {
+	background-color: #EDF3FE;
+}
+
+.list {
+	width: 100%;
+	margin-top: 15px;
+}
+
+.list li {
+	padding: 5px;
+	list-style-type: none;
+	border-bottom: solid 1px;
+	border-bottom-color: #EAEAEA;
+	color: #000000;
+	font-size: 14px;
+}
+
+.list li strong {
+  font-weight: bolder;
+}
+
+.list .category-link {
+  color: #339933;
+  text-decoration: none;
+}
+
+/*****************************************/
+
+#joobsbox-main {
+	padding: 10px;
+	width: 890px;
+	text-align: left;
+}
+
+#joobsbox-header {
+	margin-bottom: 20px;
+	padding-bottom: 5px;
+	clear: both;
+	border-bottom: 1px dotted #CCC;
+}
+
+.site-title	{
+  text-indent: -1800px; 
+  font-size: 1px;
+}
+
+#joobsbox-header h1 {
+	color:#000;
+	font-family: helvetica;
+	font-size:28px;
+	letter-spacing:-1px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	font-weight: bold;
+}
+
+#joobsbox-header h1 a {
+  color: #000;
+  text-decoration: none;
+}
+
+#joobsbox-header h1 a:hover {
+  color: #FFF;
+  background-color: #000;
+}
+
+#joobsbox-footer {
+	border-top: 1px solid #ddd;
+	color: #888;
+	margin-top: 30px;
+	padding: 10px;
+	text-align: center;
+	background-color: #FFC;
+	border-bottom: 1px solid #ddd;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+#wrapper {
+	text-align: center;
+	width: 100%;
+}
+
+#jobContent {
+	padding: 20px;
+	padding-top: 0px;
+}
+#tools {
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	height: 28px;
+	clear: both;
+}
+#tools #search {
+	float: right;
+	position: relative;
+	top: -5px;
+}
+
+#tools #postJob {
+	float: left;
+}
+
+#alert {
+	padding: 7px 0;
+	font-weight: bold;
+	color: #CC0000;
+  margin: 5px auto;
+	font-size: 14px;
+	background-image: url(../images/icon-error-flat.gif);
+	background-repeat: no-repeat;
+	background-position: 7px;
+	background-color: #FFE1E1;
+	margin-left: 20px;
+	width: 80%;
+}
+
+#searchInput {
+	width: 200px;
+	padding: 2px;
+	color: #666666;
+	font-size: 16px;
+	margin: 0;
+	height: 24px;
+	vertical-align: middle;
+}
+#ok{
+	padding-bottom: 5px;
+	font-weight: bold;
+	color: #489E14;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	font-size: 14px;
+	padding-left: 40px;
+	background-image: url(../images/icon-ok-flat.gif);
+	background-repeat: no-repeat;
+	background-position: 7px;
+	text-align: left;
+	background-color: #D9F8C7;
+	margin-left: 20px;
+	width: 80%;
+}
+#abs {
+	position: absolute;
+	width: 200px;
+	padding: 5px;
+	margin: 8px;
+	top: 0;
+	right: 0;
+	text-align: center;
+	background-color: #CC3300;
+}
+
+
+/************** FORM ***********************/
+
+#jobForm fieldset {
+	border: 0;
+	padding: 20px;
+}
+#jobForm label {
+	padding-bottom: 5px;
+	font-weight: bold;
+	color: #333333;
+}
+#jobForm #publicChck {
+	width: auto;
+}
+
+#jobForm #txtDescription {
+	width: 90%;
+	height: 200px;
+	font-size: 12px;
+}
+#jobForm #btnSend {
+	width: 150px;
+	font-weight: bold;
+}
+#jobForm .info {
+	color: #999999;
+	font-size: 9px;
+	clear: both;
+}
+#jobForm #txtToApply {
+	width: 90%;
+}
+#jobForm input, #jobForm textarea, #jobForm select {
+	padding: 5px;
+	width: 50%;
+	margin-top: 5px;
+}
+#jobForm .error {
+	color: #F00000;
+	font-size: 11px;
+	font-style: italic;
+}
+
+/*********** OTHERS ********************************/
+
+.toRight img {
+	vertical-align: text-bottom;
+	border: none;
+	outline: none;
+}
+.admin, .toRight {
+	float:right;
+	font-size:12px;
+	padding: 3px;
+	padding-left: 7px;
+}
+.admin {
+	color: #8CC16C;
+}
+.lighterSmall {
+	font-size: 80%;
+	color: #999999;
+}
+
+div.info {
+  color: #7E5812;
+  font-weight: bold;
+  background-color: #FFFFCC;
+  background-image: url('../images/icon-att-flat.gif');
+  background-position: 7px 50%;
+  background-repeat: no-repeat;
+  padding: 10px 0;
+  margin: 10px;
+  padding-left: 40px;
+}
+
+/*============================*/
+.button {
+	-moz-border-radius-bottomleft:12px;
+	-moz-border-radius-bottomright:12px;
+	-moz-border-radius-topleft:12px;
+	-moz-border-radius-topright:12px;
+	background:#21759B url(../images/button-grad.png) repeat-x scroll left top;
+	border-color:#298CBA !important;
+	border-style: none;
+	color:#FFFFFF !important;
+	font-size:16px;
+	font-weight:bold;
+	padding:5px 10px 5px 10px !important;
+	text-decoration: none;
+}
+#joobsbox-header h2 {
+	color:#666;
+	font-family:helvetica,arial,sans-serif;
+	font-size:12px;
+	width: 450px;
+	padding: 5px;
+	margin: 0;
+	padding-left: 10px;
+	font-weight: normal;
+}
+
+#joobsbox-header h2 a {
+ color: #666;
+ text-decoration: underline; 
+}
+
+#joobsbox-license {
+	color: #333;
+	padding: 10px;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 10px;
+}
+
+#topRight {
+	float: right;
+}
+
+#joobsbox-footer {
+  background-color: #FFF9D8; 
+  border-bottom: 1px solid #FFE8CD;
+  text-align: center; 
+  font-weight: bold;
+  padding: 10px 0px; 
+  border-top: 1px solid #FFE8CD;
+  color: #000; 
+  font-size: 18px;
+}
+
+
+.integration {
+  width: 100%;
+  background-color: #333;
+  font-size: 80%;
+  padding: 5px 0;
+  color: #CCC;
+}
+
+.integration a {
+  color: #CCC;
+}
