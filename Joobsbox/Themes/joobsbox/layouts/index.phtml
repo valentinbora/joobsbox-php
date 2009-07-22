@@ -30,7 +30,8 @@
 		->prependFile($this->baseUrl . '/public/js/lib/jquery.js', 'text/javascript')
 		->appendFile($this->baseUrl . '/public/js/lib/jquery.corner.js', 'text/javascript')
 		->appendFile($this->baseUrl . '/public/js/lib/jquery.pngFix.pack.js', 'text/javascript')		
-		->appendFile($this->baseUrl . '/public/js/global.js', 'text/javascript');
+		->appendFile($this->baseUrl . '/public/js/global.js', 'text/javascript')
+		->appendFile($this->themeUrl . '/js/functions.js', 'text/javascript');
 	
 	// Link the main RSS file
   $this->headLink()->appendAlternate($this->baseUrl . '/rss', 'application/rss+xml', $this->conf->general->common_title . ' RSS');
