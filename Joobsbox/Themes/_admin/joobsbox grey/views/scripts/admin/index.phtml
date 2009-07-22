@@ -12,6 +12,13 @@
     $this->headTitle()->prepend($this->translate("Dashboard"));
 ?>
 <h1 class="dashboard-title"><?php echo $this->translate("Dashboard"); ?></h1>
+<?php if(count($this->alerts)): ?>
+<div id="alert">
+<?php foreach($this->alerts as $alert):
+        echo $alert . '<br/>';
+      endforeach; ?>
+</div>
+<?php endif; ?>
 <ul id="dashboard">
 <?php
 	foreach($this->dashboard as $pluginName => $pluginDashboardContent):

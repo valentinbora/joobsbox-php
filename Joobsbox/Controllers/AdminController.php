@@ -96,6 +96,7 @@ class AdminController extends Zend_Controller_Action
   }
 
   private function prepareDashboard() {
+    $alerts = array();
     $dashboardPlugins = file("config/adminDashboard.php");
     $this->view->dashboard = array();
 
@@ -113,6 +114,14 @@ class AdminController extends Zend_Controller_Action
   	    );
       }
     }
+    
+    // Make some checks
+    $search = new Joobsbox_Model_Search;
+    if(!$search->_enabled) {
+      // Oopsie
+      $alerts[] = $this->view->translate("Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!");
+    }
+    $this->view->alerts = $alerts;
   }
 
   private function router() {

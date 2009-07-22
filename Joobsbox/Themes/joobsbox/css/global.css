@@ -157,13 +157,11 @@ a:hover {
 }
 
 #alert {
-	padding-bottom: 5px;
+	padding: 7px 0;
 	font-weight: bold;
 	color: #CC0000;
-	margin-bottom: 5px;
-	padding-top: 5px;
+  margin: 5px auto;
 	font-size: 14px;
-	padding-left: 40px;
 	background-image: url(../images/icon-error-flat.gif);
 	background-repeat: no-repeat;
 	background-position: 7px;
