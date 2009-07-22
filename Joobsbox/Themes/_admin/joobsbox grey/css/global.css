@@ -85,7 +85,7 @@ body {
 #admin-menu li a {
   display: block; 
   height: 100%; 
-  padding-left: 30px; 
+  padding-left: 35px; 
   text-decoration: none; 
   color: inherit; 
   background-position: 3% 50%; 
@@ -136,18 +136,77 @@ body {
   list-style: none;
 }
 
-h1.dashboard-title								{display: block; background-image: url('../images/icons/dashboard_48.png'); background-repeat: no-repeat; padding-left: 50px; background-position: left center; height: 50px; line-height: 55px; margin-left: 40px;}
-	#dashboard li.dashboard-item						{list-style: none; display: block; width: 48%; float: left; margin-left: 15px;}
-	#dashboard li .dashboard-item-title				{background-color: #848484; padding: 5px; color: #FFF; font-weight: bold; -moz-border-radius-topleft: 6px; -webkit-border-radius-topleft: 6px;}
-	#dashboard li .dashboard-item-content				{border: 1px solid #e3e3e3; padding: 5px; -moz-border-radius-bottomright: 10px; -webkit-border-radius-bottomright: 10px; line-height: 1.5em;}
-	.dashboard-item-content 	a						{color: #111; text-decoration: none; border-bottom: 1px solid #CCC;}
-	.dashboard-item-content 	a:visited				{color: #333; text-decoration: none; border-bottom: 1px solid #CCC;}
-	.dashboard-item-content 	a:hover					{color: #FFF; text-decoration: none; padding: 3px; background-color: #444;}	
-	#dashboard li .dashboard-item-content .info		{width: 100%; color: #EEE; font-size: 80%;}
-	#dashboard li .dashboard-item-content .info-item	{background-color: #848484; border-right: 1px solid #DDD; padding: 5px;}
-	
-#dashboard li.clear									{clear: both; list-style-type: none; display: block;}
+h1.dashboard-title {
+  display: block; 
+  background-image: url('../images/icons/dashboard_48.png'); 
+  background-repeat: no-repeat; 
+  padding-left: 50px; 
+  background-position: left center; 
+  height: 50px; 
+  line-height: 55px; 
+  margin-left: 40px;
+}
+#dashboard li.dashboard-item {
+  list-style: none; 
+  display: block; 
+  width: 48%; 
+  float: left; 
+  margin-left: 15px;
+}
 
+#dashboard li .dashboard-item-title	{
+  background-color: #848484; 
+  padding: 5px; 
+  color: #FFF; 
+  font-weight: bold; 
+  -moz-border-radius-topleft: 6px; 
+  -webkit-border-radius-topleft: 6px;
+}
+
+#dashboard li .dashboard-item-content	{
+  border: 1px solid #e3e3e3; 
+  padding: 5px; 
+  -moz-border-radius-bottomright: 10px; 
+  -webkit-border-radius-bottomright: 10px; 
+  line-height: 1.5em;
+}
+
+.dashboard-item-content a	{
+  color: #111; 
+  text-decoration: none; 
+  border-bottom: 1px solid #CCC;
+}
+
+.dashboard-item-content a:visited	{
+  color: #333; 
+  text-decoration: none; 
+  border-bottom: 1px solid #CCC;
+}
+
+.dashboard-item-content a:hover {
+  color: #FFF; 
+  text-decoration: none; 
+  padding: 3px; 
+  background-color: #444;
+}	
+
+#dashboard li .dashboard-item-content .info	{
+  width: 100%; 
+  color: #EEE; 
+  font-size: 80%;
+}
+
+#dashboard li .dashboard-item-content .info-item	{
+  background-color: #848484; 
+  border-right: 1px solid #DDD; 
+  padding: 5px;
+}
+	
+#dashboard li.clear	{
+  clear: both; 
+  list-style-type: none; 
+  display: block;
+}
 
 /* Footer */
 #joobsbox-admin-footer {
