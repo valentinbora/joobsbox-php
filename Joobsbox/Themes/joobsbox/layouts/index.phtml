@@ -44,7 +44,10 @@
 	<h1 class="site-title"><?php echo implode($this->headTitle()->getSeparator(), (array)$this->headTitle()->getContainer()); ?></h1>
 	<div id="wrapper">
 		<div id="joobsbox-main">
-			<div id="joobsbox-header"><a href="<?php echo $this->baseUrl; ?>"><?php echo $this->conf->general->common_title; ?></a></div>
+			<div id="joobsbox-header">
+			  <h1><a href="<?php echo $this->baseUrl; ?>"><?php echo $this->conf->general->common_title; ?></a></h1>
+			  <h2>This is the php demo of the most flexible open source job board application. <br/>Follow <a href="http://twitter.com/joobsbox">@joobsbox</a> to know when we launch next version. Check the <a href="<?php echo $this->baseUrl; ?>/admin">Administration</a></h2>
+			</div>
 			<div id="tools">
 				<div id="postJob">
 					<a class="button" href="<?php echo $this->baseUrl . '/' . $this->TranslateUrl('publish'); ?>">
@@ -59,10 +62,10 @@
 				</div>
 			</div>
 			<?php echo $this->layout()->content;?>
-			<div id="full-rss">
+			<div id="joobsbox-footer">
 				<?php printf($this->translate('Subscribe to the full <a href="%s">RSS Feed</a> and be notified when new jobs are posted.'), $this->baseUrl . '/rss'); ?>
 			</div>
-			<div id="footer">
+			<div id="joobsbox-license">
 				powered by <a href="http://www.joobsbox.com" rel="external" target="_blank">joobsbox</a> + <a href="http://www.joobs.ro" rel="external" target="_blank">joobs.ro</a> + <a href="http://framework.zend.com" rel="external" target="_blank">zend framework</a>
 			</div>
 		</div>
@@ -78,9 +81,9 @@
     host: 'joobsbox.uservoice.com', 
     forum: 'general', 
     alignment: 'left',
-    background_color:'#f00', 
+    background_color:'#0069BF', 
     text_color: 'white',
-    hover_color: '#06C',
+    hover_color: '#0881E4',
     lang: 'en'
   })
   </script>

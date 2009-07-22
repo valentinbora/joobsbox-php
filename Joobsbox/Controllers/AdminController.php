@@ -23,7 +23,23 @@ class AdminController extends Zend_Controller_Action
 {
   private $pluginPath = "plugins/";
   private $currentPlugin;
-  private $corePlugins = array("Categories", "Postings");
+  private $corePlugins = array("Categories", "Postings", "Settings");
+
+  function sortFunction($x, $y) {
+    if(in_array($x, $this->corePlugins) && in_array($y, $this->corePlugins)) {
+      if(array_search($x, $this->corePlugins) < array_search($y, $this->corePlugins)) {
+        return -1;
+      } else {
+        return 1;
+      }
+    } else {
+      if(in_array($x, $this->corePlugins)) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+  }
 
   public function init() {
     $session = new Zend_Session_Namespace("Admin");
@@ -55,6 +71,8 @@ class AdminController extends Zend_Controller_Action
       	}
       }
     }
+    
+    uksort($this->plugins, array($this, "sortFunction"));
 
     $this->view->corePlugins = $this->corePlugins;
     $this->view->pluginPath = $this->pluginPath;

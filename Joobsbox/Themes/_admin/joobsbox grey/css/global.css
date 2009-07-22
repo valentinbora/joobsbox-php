@@ -58,6 +58,21 @@ body {
   font-weight: bold;
 }
 
+#admin-menu li.separator {
+  height: auto;
+  height: 15px;
+  text-align: center;
+  list-style: none;
+  border-top: 1px solid #CCC;
+  margin-top: 12px;
+  font-size: 80%;
+  text-transform: uppercase;
+}
+
+#admin-menu li.text {
+ padding: 5px 0; 
+}
+
 #admin-menu li.hover {
   background-image: url('../images/admin-menu-background-hover.jpg');
 }
@@ -65,11 +80,6 @@ body {
 #admin-menu li.current {
   background-image: url('../images/admin-menu-background-current.jpg'); 
   cursor: default;
-}
-
-#admin-menu li.separator {
-  height: 20px; 
-  list-style: none;
 }
 
 #admin-menu li a {

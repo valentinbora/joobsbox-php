@@ -34,3 +34,23 @@
 #loginForm dd {
   margin-bottom: 8px;
 }
+
+.error {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+ul.errors {
+  font-size: 80%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.errors {
+  list-style: none;
+  padding: 2px 4px;
+  margin: 0;
+  text-align: left;
+  text-indent: 14px;
+}
