@@ -1,0 +1,13 @@
+/* ========================================= */
+/* = Themes admin plugin main css file = */
+/* ========================================= */
+
+/* Dashboard */
+h1.dashboard-title {
+  background-image: url('../images/icons/themes_40.png');
+}
+
+div.info {
+  padding-left: 40px;
+  font-size: 150%;
+}

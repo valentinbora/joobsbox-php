@@ -94,6 +94,6 @@ if(isset($joobsbox_base_url)) {
 
 
 define("BASE_URL", $baseUrl);
-define("APPLICATION_THEME", "joobsbox");
+define("APPLICATION_THEME", $conf->general->theme);
 
 unset($conf, $db, $translate);

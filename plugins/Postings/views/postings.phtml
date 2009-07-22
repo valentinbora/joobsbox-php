@@ -6,8 +6,8 @@
 	</ul>
 	
 	<div id="pending" class="tab-content postings-container">
-		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="form-pending">
 		<?php if(count($this->pending)): ?>
+	  <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="form-pending">
 		<div id="toolbar">
 			<?php echo $this->translate("Actions:"); ?>
 			<a id="acceptPostingsPending" class="accept"><?php echo $this->translate('Accept selected postings'); ?></a>
@@ -47,6 +47,7 @@
 	
 	<div id="approved" class="tab-content postings-container">
 		<?php if(count($this->postings)): ?>
+	  <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="form-approved">
 		<div id="toolbar">
 			<?php echo $this->translate("Actions:"); ?>
 			<a id="deletePostingsApproved" class="delete"><?php echo $this->translate('Delete selected postings'); ?></a>
@@ -78,6 +79,8 @@
 				<?php endforeach; ?>
 			</tbody>
 		</table>
+		<input type="hidden" id="actionApproved" name="action" value="delete" />
+		</form>
 		<?php else: echo $this->translate("No active postings."); endif; ?>
 	</div>
 </div>

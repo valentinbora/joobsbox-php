@@ -23,7 +23,7 @@ class AdminController extends Zend_Controller_Action
 {
   private $pluginPath = "plugins/";
   private $currentPlugin;
-  private $corePlugins = array("Categories", "Postings", "Settings");
+  private $corePlugins = array("Categories", "Postings", "Themes", "Settings");
 
   function sortFunction($x, $y) {
     if(in_array($x, $this->corePlugins) && in_array($y, $this->corePlugins)) {

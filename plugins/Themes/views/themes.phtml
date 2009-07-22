@@ -1,0 +1,12 @@
+<h1 class="dashboard-title"><?php echo $this->translate("Themes"); ?></h1>
+
+<div class="info">
+  <?php echo $this->translate("Your current theme is:") . ' <strong>' . $this->conf->general->theme; ?></strong><br/>
+  <?php echo $this->translate("Your current admin theme is:") . ' <strong>' . $this->conf->general->admin_theme; ?></strong>
+</div>
+
+<?php echo $this->form; ?>
+
+<?php
+	$this->headLink()->appendStylesheet($this->path . 'css/themes.css');
+?>

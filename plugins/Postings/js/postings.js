@@ -82,7 +82,7 @@ $(function() {
 		$.ajax({
 			type: "POST",
 			url: window.location.href,
-			data: $("#form-pending").serialize(),
+			data: $("#form-approved").serialize(),
 			success: function(msg){
 				$("#approved-postings tbody tr.selected").each(function() {
 					$(this).fadeOut("slow", function(el) {
