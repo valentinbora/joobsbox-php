@@ -77,6 +77,7 @@ class Categories extends Joobsbox_Plugin_AdminBase
 				$categoryModel->insert(array(
 					"Name"		=> $category['name'],
 					"OrderIndex"=> $orderIndex,
+					"Link"     => $this->view->MakeLink($category['name']),
 					"Parent"	=> $parentId
 				));
 				$mustReload = true;

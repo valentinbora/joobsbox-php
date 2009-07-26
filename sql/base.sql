@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS `{#prefix#}categories` (
 `ID` int(10) unsigned NOT NULL auto_increment,
-`Name` varchar(100) collate utf8_unicode_ci NOT NULL,
+`Name` varchar(255) collate utf8_unicode_ci NOT NULL,
+`Link` varchar(255) collate utf8_unicode_ci NOT NULL,
 `OrderIndex` tinyint(4) NOT NULL,
 `Parent` tinyint(4) NOT NULL,
 PRIMARY KEY  (`ID`),
