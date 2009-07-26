@@ -1,15 +1,119 @@
 <?php
 class Google_Analytics extends Joobsbox_Plugin_AdminBase
 {
-  private $analyticsId, $form, $email, $password, $admin = false;
+  private $analyticsId, $form, $email, $password, $profileId, $admin = false, $lastQuery;
+  
+  public function dashboard() {
+    if(!$this->ajax) return;
+    
+    $lastQuery = $this->lastQuery;
+    if(!strlen($lastQuery)) {
+      $lastQuery = array('lastQueryTime' => 0);
+    } else {
+      $lastQuery = unserialize($lastQuery);
+    }
+    
+    if(time() - $lastQuery['lastQueryTime'] > 3 * 60 * 60) {
+      require "lib/gapi-1.3/gapi.class.php";
+      $ga = new gapi($this->email, $this->password);
+      $ga->requestReportData($this->profileId, array('month'), array('pageviews','visits'), "", "", date("Y-m-d", strtotime("-30 days")), date("Y-m-d"));
+      $results = $ga->getResults();
+    
+      $data = array(
+        'visits'    => 0,
+        'pageviews' => 0
+      );
+      
+      foreach($results as $result) {
+        $data['visits'] += $result->getVisits();
+        $data['pageviews'] += $result->getPageviews();
+      }
+      
+      $this->addConfiguration("lastQuery", serialize(array("lastQueryTime" => time(), "data" => $data)));
+    } else {
+      $data = $lastQuery['data'];
+    }
+    
+    $this->view->data = $data;
+  }
+  
+  private function assignCredentials() {
+    $this->analyticsId = $this->getConfiguration("analyticsId");
+    $this->email = $this->getConfiguration("email");
+    $this->password = $this->getConfiguration("password");
+    $this->profileId = $this->getConfiguration("profileId");
+    $this->lastQuery = $this->getConfiguration("lastQuery");
+  }
   
 	function init() {
+	    $this->view->tops = array();
+	    $this->view->data = array();
+	  
+	    $this->assignCredentials();
+	  
+	    if(isset($_POST['ajax'])) {
+	      $this->view->ajax = true;
+	      $this->ajax = true;
+	      $this->dashboard();
+	    }
+	    
+	    /********* Display metrics *********/
+	    $lastQuery = $this->lastQuery;
+      if(!strlen($lastQuery)) {
+        $lastQuery = array('lastQueryTime' => 0);
+      } else {
+        $lastQuery = unserialize($lastQuery);
+      }
+      
+	    if(time() - $lastQuery['lastQueryTime'] > 3 * 60 * 60 && strlen($this->email)) {
+        require "lib/gapi-1.3/gapi.class.php";
+        $this->assignCredentials();
+        $ga = new gapi($this->email, $this->password);
+        $ga->requestReportData($this->profileId, array('month'), array('pageviews','visits'), "", "", date("Y-m-d", strtotime("-30 days")), date("Y-m-d"));
+        $results = $ga->getResults();
+
+        $data = array(
+          'visits'    => 0,
+          'pageviews' => 0
+        );
+
+        foreach($results as $result) {
+          $data['visits'] += $result->getVisits();
+          $data['pageviews'] += $result->getPageviews();
+        }
+        
+        $lastQuery['lastQueryTime'] = time();
+        
+        $this->addConfiguration("lastQuery", serialize(array("lastQueryTime" => time(), "data" => $data)));
+        
+        $ga->requestReportData($this->profileId, array('pagePath', 'pageTitle'), array('pageviews'), array('-pageviews'), "", date("Y-m-d", strtotime("-30 days")), date("Y-m-d"));
+        $results = $ga->getResults();
+        $tops = array();
+        foreach($results as $result) {
+          $tops[] = array(
+            "pageViews"   => $result->getPageviews(),
+            "pagePath"    => $result->getPagepath(),
+            "pageTitle"   => $result->getPagetitle()
+          );
+        }
+        
+        file_put_contents($this->dirPath . "export.txt", serialize(array("countData" => $data, "tops" => $tops)));
+      } else {
+        if(file_exists($this->dirPath . "export.txt")) {
+          $file = unserialize(file_get_contents($this->dirPath . "export.txt"));
+          $data = $file['countData'];
+          $tops = $file['tops'];
+        }
+      }
+      
+      if(isset($tops)) {
+        $this->view->tops = $tops;
+        $this->view->data = $data;
+        $this->view->lastQuery = date("r", $lastQuery['lastQueryTime']);
+      }
+	  
       $this->form = new Zend_Form();
       $this->form->setAction($_SERVER['REQUEST_URI'])->setMethod('post');
-      
-      $this->analyticsId = $this->getConfiguration("analyticsId");
-      $this->email = $this->getConfiguration("email");
-      $this->password = $this->getConfiguration("password");
       
       $analyticsId = $this->form->createElement('text', 'analyticsId')
         ->setLabel($this->view->translate("Web Property ID"))
@@ -72,6 +176,8 @@ class Google_Analytics extends Joobsbox_Plugin_AdminBase
   }
   
   private function validateForm() {
+    if(isset($_POST['ajax'])) return;
+    
     if ($this->form->isValid($_POST)) {
 	    $values = $this->form->getValues();
 	    if(isset($values['analyticsId'])) {

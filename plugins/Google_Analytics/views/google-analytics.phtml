@@ -1,5 +1,37 @@
 <h1 class="dashboard-title"><?php echo $this->translate("Google Analytics"); ?></h1>
 
+<?php if(isset($this->lastQuery)): ?>
+<div id="reports">
+  <h2><?php echo $this->translate("Reports for last month"); ?></h2>
+  
+  <h3><?php echo $this->translate("Numbers"); ?></h3>
+  <?php echo $this->translate("Visits") . ": " . $this->data['visits']; ?><br/>
+  <?php echo $this->translate("Page views") . ": " . $this->data['pageviews']; ?><br/>
+  
+  <h3><?php echo $this->translate("Content"); ?></h3>
+  <table>
+    <thead>
+      <tr>
+        <th><?php echo $this->translate("URL"); ?></th>
+        <th><?php echo $this->translate("Title"); ?></th>
+        <th><?php echo $this->translate("Views"); ?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($this->tops as $top): ?>
+        <tr>
+          <td><?php echo $top['pagePath']; ?></td>
+          <td><?php echo $top['pageTitle']; ?></td>
+          <td><?php echo $top['pageViews']; ?></td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+  
+  <h3><?php echo $this->translate("Last query") . ': ' . $this->lastQuery; ?>
+</div>
+<?php endif; ?>
+
 <div id="configuration">
   <?php echo $this->form; ?>
 </div>

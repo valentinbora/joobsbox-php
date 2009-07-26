@@ -158,10 +158,12 @@ class AdminController extends Zend_Controller_Action
     $this->view->currentPluginName = $pluginName;
     $plugin->view = $this->view;
     $plugin->path = $plugin->view->path = $this->view->baseUrl . '/' . $this->pluginPath . $pluginName . "/";
+    $plugin->dirPath = $this->pluginPath . $pluginName . '/';
     $plugin->_helper = $this->_helper;
     $plugin->alerts  = &$this->alerts;
     $plugin->corePlugins = $this->corePlugins;
     $plugin->request = $this->getRequest();
+    $plugin->ajax = false;
     if(method_exists($plugin, "init")) {
       $plugin->init();
     }
@@ -198,6 +200,9 @@ class AdminController extends Zend_Controller_Action
       $viewRenderer->setNoRender();
     }
 
+    if($plugin->ajax) {
+      echo $viewRenderer->view->render('dashboard.phtml'); die();
+    }
     return $plugin;
   }
 

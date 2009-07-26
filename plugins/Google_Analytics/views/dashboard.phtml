@@ -1,0 +1,8 @@
+<div id="google_analytics_wrapper">
+<?php if($this->ajax): ?>
+<span class="bigger"><?php echo $this->translate("Last month");?></span><br/>
+<?php echo $this->translate("Visits") . ": " . $this->data['visits']; ?><br/>
+<?php echo $this->translate("Page views") . ": " . $this->data['pageviews']; ?><br/>
+  </div>
+<?php endif; ?>
+<?php $this->headScript()->appendFile($this->path . '/js/dashboard.js'); ?>

@@ -1,0 +1,58 @@
+<?php
+/**
+ * @package Joobsbox_Themes
+ * @category Joobsbox
+ * @author Valentin Bora <contact@valentinbora.com>
+ * @version 1.0
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
+ */
+?>
+<?php $this->headTitle()->prepend($this->translate('Installation - Step ') . 1); ?>
+<div id="installation">
+	<h1><?php echo $this->translate('Welcome to Joobsbox installation!'); ?></h1>
+	<p>
+	<?php echo $this->translate('I need some information and then we\'re ready to go.'); ?><br/>
+	
+	<form action="step1" method="post">
+		<fieldset>
+			<legend><?php echo $this->translate('Site information'); ?></legend>
+			<div class="fieldpair">
+				<label for="sitename"><?php echo $this->translate('Site name'); ?></label>
+				<input type="text" name="sitename" value="<?php if(isset($_POST['sitename'])): echo $_POST['sitename']; endif; ?>" />
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend><?php echo $this->translate('Database information'); ?></legend>
+			
+			<div class="fieldpair">
+				<label for="dbname"><?php echo $this->translate('Database name'); ?>*</label>
+				<input type="text" name="dbname" value="<?php if(isset($_POST['dbname'])): echo $_POST['dbname']; endif; ?>"/>
+			</div>
+			<div class="fieldpair">
+				<label for="dbuser"><?php echo $this->translate('Database username'); ?>*</label>
+				<input type="text" name="dbuser" value="<?php if(isset($_POST['dbuser'])): echo $_POST['dbuser']; endif; ?>"/>
+			</div>
+			<div class="fieldpair">
+				<label for="dbpass"><?php echo $this->translate('Database password'); ?>*</label>
+				<input type="text" name="dbpass" value="<?php if(isset($_POST['dbpass'])): echo $_POST['dbpass']; endif; ?>"/>
+			</div>
+			<div class="fieldpair">
+				<label for="dbhost"><?php echo $this->translate('Database host'); ?>*</label>
+				<input type="text" name="dbhost" value="<?php if(isset($_POST['dbhost'])): echo $_POST['dbhost']; else: echo "localhost"; endif; ?>" />
+			</div>
+			<div class="fieldpair">
+				<label for="dbprefix"><?php echo $this->translate('Table prefix'); ?></label>
+				<input type="text" name="dbprefix" value="<?php if(isset($_POST['dbprefix'])): echo $_POST['dbprefix']; endif; ?>" />
+			</div>
+			
+			<?php if(isset($this->dberror)): ?>
+			<div class="fieldpair error">
+				<?php echo $this->dberror; ?>
+			</div>
+			<?php endif; ?>
+			<input type="submit" name="step1" value="Done" />
+		</fieldset>
+	</form>
+	</p>
+</div>

@@ -175,11 +175,33 @@ h1.dashboard-title {
 }
 
 #dashboard li .dashboard-item-content	{
+  min-height: 100px;
+  margin-bottom: 10px;
   border: 1px solid #e3e3e3; 
   padding: 5px; 
   -moz-border-radius-bottomright: 10px; 
-  -webkit-border-radius-bottomright: 10px; 
+  -webkit-border-bottom-right-radius: 10px; 
   line-height: 1.5em;
+}
+
+#dashboard li .dashboard-item-content	h1,
+#dashboard li .dashboard-item-content	h2,
+#dashboard li .dashboard-item-content	h3,
+#dashboard li .dashboard-item-content	h4,
+#dashboard li .dashboard-item-content	h5 {
+  padding: 0;
+  margin: 2px 0;
+}
+
+.loading {
+  background-image: url('../images/ajaxloader.gif');
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.dashboard-item-content .bigger	{
+  font-weight: bolder;
+  font-size: 110%;
 }
 
 .dashboard-item-content a	{

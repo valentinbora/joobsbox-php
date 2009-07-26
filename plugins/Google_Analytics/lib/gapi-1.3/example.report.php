@@ -7,7 +7,7 @@ require 'gapi.class.php';
 
 $ga = new gapi(ga_email,ga_password);
 
-$ga->requestReportData(ga_profile_id,array('browser','browserVersion'),array('pageviews','visits'));
+$ga->requestReportData(ga_profile_id, array('browser','browserVersion'), array('pageviews','visits'), "", date("Y-m-d", strtotime("-30 days")), date("Y-m-d"));
 ?>
 <table>
 <tr>
