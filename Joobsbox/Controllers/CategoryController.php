@@ -26,6 +26,7 @@ class CategoryController extends Zend_Controller_Action
 		$categoryName = $this->getRequest()->getParam("action");
 		$categoryName = explode(".", $categoryName);
 		$categoryName = $categoryName[0];
+		$categoryName = str_replace("-", " ", $categoryName);
 		
 		$category   = $this->_model->fetchCategories()->getCategory($categoryName);
 		
