@@ -138,7 +138,7 @@ class PublishController extends Zend_Controller_Action
 		$form = $this->form;
 		$publishNamespace = new Zend_Session_Namespace('PublishJob');
 		
-        if ($form->isValid($_POST)) {
+    if ($form->isValid($_POST)) {
 			$jobOperations = new Joobsbox_Model_JobOperations;
 			$searchModel = new Joobsbox_Model_Search;
 			$values = $form->getValues();

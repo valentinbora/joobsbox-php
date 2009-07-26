@@ -1,5 +1,5 @@
 <?php
-class Logger {
+class Logger extends Joobsbox_Plugin_Base {
 	function __construct() {
 		$this->writer = new Zend_Log_Writer_Firebug();
 		$this->logger = new Zend_Log($this->writer);

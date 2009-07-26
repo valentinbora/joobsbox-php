@@ -131,7 +131,9 @@ class AdminController extends Zend_Controller_Action
     if(!$this->verifyAccess()) {
       $this->_redirect("user/login");
     }
-
+    
+    Zend_Registry::get("EventHelper")->fireEvent("log", "Reset plugin names");
+    
     $action = $this->getRequest()->getParam('action');
     $pluginNames = array_keys($this->plugins);
     if(($pluginIndex = array_search($action, array_map('strtolower', array_keys($this->plugins)))) !== FALSE) {
@@ -150,6 +152,9 @@ class AdminController extends Zend_Controller_Action
 
     require_once $this->pluginPath . $pluginName . '/' . $pluginName . '.php';
     $plugin = new $pluginName;
+    
+    $plugin->setPluginName($pluginName);
+    
     $this->view->currentPluginName = $pluginName;
     $plugin->view = $this->view;
     $plugin->path = $plugin->view->path = $this->view->baseUrl . '/' . $this->pluginPath . $pluginName . "/";
@@ -175,7 +180,7 @@ class AdminController extends Zend_Controller_Action
 
     $translate = Zend_Registry::get("Zend_Translate");
     $locale	   = Zend_Registry::get("Zend_Locale");
-    if(file_exists($this->pluginPath . $pluginName . '/languages/' . $locale . '.mo'))
+    if(file_exists($this->pluginPath . $pluginName . '/languages/' . $locale . '.mo') && substr($locale, 0, 2) != 'en')
       $translate->addTranslation($this->pluginPath . $pluginName . '/languages/' . $locale . '.mo', $locale);
     Zend_Registry::set("Translation_Hash", $translate->getMessages());
     Zend_Registry::get("TranslationHelper")->regenerateHash();

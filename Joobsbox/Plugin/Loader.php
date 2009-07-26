@@ -35,7 +35,9 @@ class Joobsbox_Plugin_Loader {
 				if(file_exists("plugins/$className/$className.php") && file_exists("plugins/$className/config.ini.php")) {
 					Zend_Loader::loadFile("plugins/$className/$className.php");
 					$class = new ReflectionClass($className);
+
 					if($class->getParentClass() && ($class->getParentClass()->getName() == "Joobsbox_Plugin_Base" || $class->getParentClass()->getName() == "Joobsbox_Plugin_AdminBase")) {
+					  
 						foreach($class->getMethods() as $method) {
 							$methodName = $method->getName();
 
@@ -65,6 +67,13 @@ class Joobsbox_Plugin_Loader {
 		Zend_Registry::set("event_handler_plugins", $event_handlers);
 		Zend_Registry::set("filter_plugins", $filters);
 		Zend_Registry::set("plugins", $plugins);
+	}
+	
+	public function resetPluginNames() {
+	  $plugins = Zend_Registry::get("plugins");
+	  foreach($plugins as $key => $plugin) {
+	    $plugin->setPluginName($key);
+	  }
 	}
 	
 	public function retrieveInactivePlugins() {

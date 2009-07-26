@@ -34,7 +34,8 @@ if(!isset($testing)) {
 	  }
 		$front->returnResponse(true);
 	}
-
+  Zend_Registry::get("EventHelper")->fireEvent("joobsbox_init");
+  
 	$response = $front->dispatch();
 
 	if(isset($joobsbox_render_var)) {
