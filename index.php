@@ -23,7 +23,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('Joobsbox_Helpers');
 
 if(!isset($testing)) {
 	$front = Zend_Controller_Front::getInstance();
-	$front->setBaseUrl(BASE_URL)->setParam('disableOutputBuffering', true);
+	$front->setBaseUrl(BASE_URL)->setParam('disableOutputBuffering', true)->registerPlugin(new Joobsbox_Plugin_Controller);
 
 	configureTheme();
 	

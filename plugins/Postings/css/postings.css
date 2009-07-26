@@ -6,7 +6,7 @@
   list-style: none; 
   margin: 0; 
   padding: 0; 
-  background-color: #546375;
+  background-color: #333333;
   border-top: 1px dotted #EEE;
   width: 100%;
 }
@@ -69,7 +69,7 @@ td.operations a	{
   text-align: left; 
   width: 100%; 
   color: #EEE;
-  background-color: #546375; 
+  background-color: #333333; 
   background-position: left top; 
   background-repeat: repeat-x; 
   padding: 25px 5px 20px 25px; 

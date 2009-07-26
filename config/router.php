@@ -1,9 +1,6 @@
 <?php
 $conf = Zend_Registry::get("conf");
-$translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/url', null, array("clear" => true, 'disableNotices' => true));
-if(substr($conf->general->locale, 0, 2) != "en") {
-  $translateUrl->addTranslation(APPLICATION_DIRECTORY . '/Joobsbox/Languages/url/' . $conf->general->locale . '.mo', $conf->general->locale); 
-}
+$translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/url', null, array('disableNotices' => true, 'scan' => Zend_Translate::LOCALE_FILENAME, 'ignore' => '$'));
 $translateUrl->setLocale(Zend_Registry::get("conf")->general->locale);
 Zend_Registry::set("Joobsbox_Translate_URL", $translateUrl);
 Zend_Controller_Router_Route::setDefaultTranslator($translateUrl);

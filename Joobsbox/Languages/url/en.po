@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-26 03:05+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: ROMANIA\n"
+"X-Poedit-KeywordsList: TranslateUrl\n"
+"X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:54
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:52
+msgid "publish"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:59
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:57
+msgid "search"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:18
+#: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:19
+#: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:21
+msgid "category"
+msgstr ""
+

@@ -40,11 +40,8 @@ Zend_Registry::set("conf", $conf);
 date_default_timezone_set($conf->general->timezone);
 	
 // Translation
-$translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/main', null, array("clear" => true, 'disableNotices' => true));
+$translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/main', null, array('disableNotices' => true, 'scan' => Zend_Translate::LOCALE_FILENAME, 'ignore' => '$'));
 
-if(substr($conf->general->locale, 0, 2) != "en") {
-  $translate->addTranslation(APPLICATION_DIRECTORY . '/Joobsbox/Languages/main/' . $conf->general->locale . '.mo', $conf->general->locale);
-}
 Zend_Registry::set("Zend_Locale", new Zend_Locale($conf->general->locale));
 Zend_Registry::set("Translation_Hash", $translate->getMessages());
 Zend_Registry::set('Zend_Translate', $translate);

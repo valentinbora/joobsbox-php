@@ -1,5 +1,6 @@
 body {
   font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+  background-color: #333333;
 }
 
 /* Header */
@@ -28,7 +29,6 @@ body {
 #admin-main {
   margin-left: 175px;
   height: auto;
-  min-height: 550px;
 }
 
 /* Left menu */
@@ -91,6 +91,7 @@ body {
   background-position: 3% 50%; 
   background-repeat: no-repeat; 
   outline: none;
+  white-space: nowrap;
 }
 
 /* Menu icons */
@@ -123,11 +124,21 @@ body {
   float: left; 
   width: 100%; 
   height: 100%;
+  min-height: 450px;
+  margin-bottom: 30px;
   overflow: hidden;
   padding-bottom: 50px;
+  background-color: #FFF;
+  -moz-border-radius-topleft: 7px;
+  -moz-border-radius-bottomleft: 7px;
+  -webkit-border-top-left-radius: 7px;
+  -webkit-border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
 }
 	#admin-content-wrap {
-	  margin: 0 40px 0 5px;
+	  margin: 0 4px 0 5px;
+	  padding-left: 10px;
 	}
 		
 		
@@ -214,6 +225,7 @@ h1.dashboard-title {
   clear: both;
   width: 100%;
   height: 40px;
+  border-top: 1px dotted #CCC;
   background-color: #333333;
   color: #DDD;
   font-size: 80%;

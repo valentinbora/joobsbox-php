@@ -43,6 +43,8 @@ class AdminController extends Zend_Controller_Action
   }
 
   public function init() {
+    $this->_helper->Event("admin_panel_init");
+    
     $session = new Zend_Session_Namespace("Admin");
     if(!isset($session->rand)) {
       $session->rand = time();
@@ -114,11 +116,11 @@ class AdminController extends Zend_Controller_Action
       	$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
       	$this->view->dashboard[$pluginName] = array(
   	      "options"	=> $this->plugins[ucfirst($pluginName)],
-    	    "content" 	=> $viewRenderer->view->render('dashboard.phtml')
+    	    "content" => $viewRenderer->view->render('dashboard.phtml')
   	    );
       }
     }
-    
+  
     // Make some checks
     $search = new Joobsbox_Model_Search;
     if(!$search->_enabled) {
@@ -131,8 +133,6 @@ class AdminController extends Zend_Controller_Action
     if(!$this->verifyAccess()) {
       $this->_redirect("user/login");
     }
-    
-    Zend_Registry::get("EventHelper")->fireEvent("log", "Reset plugin names");
     
     $action = $this->getRequest()->getParam('action');
     $pluginNames = array_keys($this->plugins);
@@ -162,7 +162,9 @@ class AdminController extends Zend_Controller_Action
     $plugin->alerts  = &$this->alerts;
     $plugin->corePlugins = $this->corePlugins;
     $plugin->request = $this->getRequest();
-    $plugin->init();
+    if(method_exists($plugin, "init")) {
+      $plugin->init();
+    }
 
     if($return) {
       $controllerAction = $this->getRequest()->getParam('action');
