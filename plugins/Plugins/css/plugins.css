@@ -17,42 +17,78 @@ div.info {
   padding: 7px 5px 3px 5px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
+  margin-bottom: 10px;
 }
 
-#active-plugins {
+.plugin-container h2 {
+  color: #EEE;
+  margin: 0;
+  padding: 2px 0;
+  display: block;
+  text-indent: 10px;
+  border-bottom: 1px dotted #CCC;
+}
+
+.plugin-container table {
   width: 100%;
   text-align: left;
   border: none;
   background-color: #FFF;
 }
 
-#active-plugins thead tr {
-  
+.plugin-container table thead tr th {
+  border: none;
 }
 
-#active-plugins th {
+.plugin-container th {
   background-color: #546375;
   color: #EEE;
 }
 
-#active-plugins th {
+v th {
   border: none;
 }
 
-#active-plugins td{
+.plugin-container td {
   padding: 5px;
   border: solid 1px #CCC;
 }
 
-#active-plugins thead tr th {
+.plugin-container td.description {
+  font-size: 11px;
+}
+
+.plugin-container thead tr th {
   text-align: left;
 }
 
 
-#active-plugins th.check {
+.plugin-container th.check {
   width: 15px;
 }
 
-#active-plugins th.plugin {
+.plugin-container th.version {
+  width: 7%;
+}
+
+.plugin-container th.plugin {
  width: 20%; 
+}
+
+.plugin-container .tools {
+  color: #EEE;
+  padding: 4px;
+}
+
+.plugin-container .tools a:link, .plugin-container .tools a:visited {
+  color: #CCC;
+  text-decoration: underline;
+}
+
+.plugin-container .tools a:hover {
+  color: #FFF;
+}
+
+#dialog {
+  display: none;
 }

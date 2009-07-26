@@ -66,4 +66,23 @@ class Joobsbox_Plugin_Loader {
 		Zend_Registry::set("filter_plugins", $filters);
 		Zend_Registry::set("plugins", $plugins);
 	}
+	
+	public function retrieveInactivePlugins() {
+	  $dir = new DirectoryIterator(APPLICATION_DIRECTORY . "/plugins");
+		$plugins = array();
+		foreach($dir as $file) {
+			$className = $file->getFilename();
+			if($file->isDir() && $className[0] == '_') {
+				if(file_exists("plugins/$className/config.ini.php")) {
+					  $plugins[$className] = new Joobsbox_Plugin_Base;
+						$plugins[$className]->conf = new Zend_Config_Ini("plugins/$className/config.ini.php");
+						
+						if(method_exists($plugins[$className], 'setPluginName')) {
+							$plugins[$className]->setPluginName($className);
+						}
+				}
+			}
+		}
+		return $plugins;
+	}
 }

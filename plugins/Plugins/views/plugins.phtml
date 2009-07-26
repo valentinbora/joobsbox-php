@@ -1,31 +1,83 @@
 <h1 class="dashboard-title"><?php echo $this->translate("Plugins"); ?></h1>
 
 <div class="plugin-container">
-<h2><?php echo $this->translate("Active plugins"); ?>
-<?php if(count($this->plugins)): ?>
-<table id="active-plugins" border="0">
-  <thead>
-    <tr>
-    <th class="check"><input type="checkbox" id="check-all-active" checked="" /></th>
-    <th class="plugin"><?php echo $this->translate("Plugin"); ?></th>
-    <th><?php echo $this->translate("Description"); ?></th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($this->aPlugins as $id => $plugin): ?>
+<h2><?php echo $this->translate("Active plugins"); ?></h2>
+<?php if(count($this->aPlugins)): ?>
+<form action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post" id="active_form">
+  <table id="active-plugins" border="0">
+    <thead>
       <tr>
-        <td><input type="checkbox" name="check[<?php echo $id;?>]" class="active-plugin-checkbox" /></td>
-        <td><?php echo $plugin->conf->main->title_en; ?></td>
-        <td><?php echo $plugin->conf->main->description; ?></td>
+      <th class="check"><input type="checkbox" id="check-all-active" /></th>
+      <th class="plugin"><?php echo $this->translate("Plugin"); ?></th>
+      <th class="version"><?php echo $this->translate("Version"); ?></th>
+      <th><?php echo $this->translate("Description"); ?></th>
       </tr>
-    <?php endforeach; ?>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <?php foreach($this->aPlugins as $id => $plugin): ?>
+        <tr>
+          <td><input type="checkbox" name="check[<?php echo $id;?>]" class="active-plugin-checkbox" /></td>
+          <td><?php echo $plugin->conf->main->title_en; ?></td>
+          <td><?php echo $plugin->conf->main->version; ?></td>
+          <td class="description"><?php echo $plugin->conf->main->description; ?></td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+  <div class="tools">
+    <?php echo $this->translate("With selected:"); ?>
+    <a href="#" id="btnDeactivate"><?php echo $this->translate("Deactivate"); ?></a>
+  </div>
+  <input type="hidden" name="form_action" value="deactivate" id="active_form_action"/>
+</form>
 <?php else:
   echo $this->translate("Joobsbox doesn't have any active plugins right now.");
 endif; ?>
 </div>
 
+<?php if(count($this->inactivePlugins)): ?>
+<div class="plugin-container">
+<h2><?php echo $this->translate("Inactive plugins"); ?></h2>
+<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="inactive_form">
+  <table id="inactive-plugins">
+    <thead>
+      <tr>
+      <th class="check"><input type="checkbox" id="check-all-inactive" /></th>
+      <th class="plugin"><?php echo $this->translate("Plugin"); ?></th>
+      <th class="version"><?php echo $this->translate("Version"); ?></th>
+      <th><?php echo $this->translate("Description"); ?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($this->inactivePlugins as $id => $plugin): ?>
+        <tr>
+          <td><input type="checkbox" name="check[<?php echo $id;?>]" class="inactive-plugin-checkbox" /></td>
+          <td><?php echo $plugin->conf->main->title_en; ?></td>
+          <td><?php echo $plugin->conf->main->version; ?></td>
+          <td class="description"><?php echo $plugin->conf->main->description; ?></td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+  <div class="tools">
+    <?php echo $this->translate("With selected:"); ?>
+    <a href="#" id="btnActivate"><?php echo $this->translate("Activate"); ?></a>
+    <a href="#" id="btnDelete"><?php echo $this->translate("Delete"); ?></a>
+  </div>
+  <input type="hidden" name="form_action" value="activate" id="inactive_form_action"/>
+</form>
+</div>
+<?php endif;
+
+$this->asset->load("jqueryui");
+$this->headScript()->appendFile($this->path . '/js/plugins.js'); 
+?>
+
+
 <?php
 	$this->headLink()->appendStylesheet($this->path . 'css/plugins.css');
 ?>
+
+<div id="dialog">
+  <?php echo $this->translate('Are you sure you want to delete this plugin?'); ?>
+</div>

@@ -24,7 +24,7 @@ class AdminController extends Zend_Controller_Action
   private $alerts = array();
   private $pluginPath = "plugins/";
   private $currentPlugin;
-  private $corePlugins = array("Categories", "Postings", "Themes", "Settings");
+  private $corePlugins = array("Categories", "Postings", "Themes", "Settings", "Plugins");
 
   function sortFunction($x, $y) {
     if(in_array($x, $this->corePlugins) && in_array($y, $this->corePlugins)) {
@@ -58,7 +58,7 @@ class AdminController extends Zend_Controller_Action
     $this->dashboardCandidates = array();
     foreach(new DirectoryIterator($this->pluginPath) as $plugin) {
       $name = $plugin->getFilename();
-      if($plugin->isDir() && $name[0] != '.') {
+      if($plugin->isDir() && $name[0] != '.' && $name[0] != '_') {
 	      require_once "plugins/$name/$name.php";
       	$class = new ReflectionClass(ucfirst($name));
       	if($class->hasMethod('init')) {
