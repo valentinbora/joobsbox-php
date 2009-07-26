@@ -285,10 +285,8 @@ div.info {
 
 /*============================*/
 .button {
-	-moz-border-radius-bottomleft:12px;
-	-moz-border-radius-bottomright:12px;
-	-moz-border-radius-topleft:12px;
-	-moz-border-radius-topright:12px;
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
 	background:#21759B url(../images/button-grad.png) repeat-x scroll left top;
 	border-color:#298CBA !important;
 	border-style: none;

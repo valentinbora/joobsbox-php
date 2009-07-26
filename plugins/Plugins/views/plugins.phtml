@@ -1,0 +1,31 @@
+<h1 class="dashboard-title"><?php echo $this->translate("Plugins"); ?></h1>
+
+<div class="plugin-container">
+<h2><?php echo $this->translate("Active plugins"); ?>
+<?php if(count($this->plugins)): ?>
+<table id="active-plugins" border="0">
+  <thead>
+    <tr>
+    <th class="check"><input type="checkbox" id="check-all-active" checked="" /></th>
+    <th class="plugin"><?php echo $this->translate("Plugin"); ?></th>
+    <th><?php echo $this->translate("Description"); ?></th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($this->aPlugins as $id => $plugin): ?>
+      <tr>
+        <td><input type="checkbox" name="check[<?php echo $id;?>]" class="active-plugin-checkbox" /></td>
+        <td><?php echo $plugin->conf->main->title_en; ?></td>
+        <td><?php echo $plugin->conf->main->description; ?></td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+<?php else:
+  echo $this->translate("Joobsbox doesn't have any active plugins right now.");
+endif; ?>
+</div>
+
+<?php
+	$this->headLink()->appendStylesheet($this->path . 'css/plugins.css');
+?>

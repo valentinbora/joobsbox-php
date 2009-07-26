@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Joobsbox PHP 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 01:01+0200\n"
+"POT-Creation-Date: 2009-07-26 02:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Joobsbox\n"
@@ -14,9 +14,22 @@ msgstr ""
 "X-Poedit-KeywordsList: translate;setLabel\n"
 "X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php\n"
 "X-Poedit-SearchPath-0: Joobsbox\n"
+"X-Poedit-SearchPath-1: core\n"
+
+#: Joobsbox/Controllers/AdminController.php:126
+msgid "Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!"
+msgstr ""
 
 #: Joobsbox/Controllers/CategoryController.php:38
 msgid "This category does not exist."
+msgstr ""
+
+#: Joobsbox/Controllers/ErrorController.php:36
+msgid "The page could not be found!"
+msgstr ""
+
+#: Joobsbox/Controllers/ErrorController.php:41
+msgid "An error has occured within the application"
 msgstr ""
 
 #: Joobsbox/Controllers/InstallController.php:57
@@ -29,6 +42,10 @@ msgstr ""
 
 #: Joobsbox/Controllers/InstallController.php:86
 msgid "config directory is not writable. Please adjust the directory permissions using FTP or SSH."
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:141
+msgid "You have to enter an admin username and password"
 msgstr ""
 
 #: Joobsbox/Controllers/JobController.php:33
@@ -88,45 +105,60 @@ msgstr ""
 msgid "You cannot search for nothing!"
 msgstr ""
 
-#: Joobsbox/Controllers/UserController.php:37
+#: Joobsbox/Controllers/UserController.php:39
 msgid "Username:"
 msgstr ""
 
-#: Joobsbox/Controllers/UserController.php:45
+#: Joobsbox/Controllers/UserController.php:47
 msgid "Password:"
 msgstr ""
 
-#: Joobsbox/Controllers/UserController.php:53
+#: Joobsbox/Controllers/UserController.php:55
 msgid "Login"
 msgstr ""
 
-#: Joobsbox/Controllers/UserController.php:95
+#: Joobsbox/Controllers/UserController.php:97
 msgid "Username and/or password incorrect"
+msgstr ""
+
+#: core/translation.php:3
+msgid "Value is required and can't be empty"
 msgstr ""
 
 #: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:42
 msgid "Back to site"
 msgstr ""
 
-#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:47
+#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:44
+msgid "Logout"
+msgstr ""
+
+#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:49
+#: grey/views/scripts/admin/index.phtml:12
+#: grey/views/scripts/admin/index.phtml:14
 msgid "Dashboard"
 msgstr ""
 
-#: Joobsbox/Themes/joobsbox/layouts/index.phtml:51
-#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:33
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:55
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:53
 #, php-format
 msgid "Post a job for %d days"
 msgstr ""
 
-#: Joobsbox/Themes/joobsbox/layouts/index.phtml:56
-#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:38
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:60
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:58
 msgid "Search here"
 msgstr ""
 
-#: Joobsbox/Themes/joobsbox/layouts/index.phtml:63
-#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:45
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:61
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:59
+msgid "Search"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:67
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:65
 #, php-format
-msgid "Subscribe to the full <a href=\"%s\">RSS Feed</a> and be notified when when new jobs are posted."
+msgid "Subscribe to the full <a href=\"%s\">RSS Feed</a> and be notified when new jobs are posted."
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/layouts/install.phtml:40
@@ -138,16 +170,10 @@ msgid "Administration Dashboard"
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:29
-#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:13
-#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:22
-#: Joobsbox/Themes/joobsbox/views/scripts/jobs-at/index.phtml:22
 msgid "at"
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:31
-#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:15
-#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:24
-#: Joobsbox/Themes/joobsbox/views/scripts/jobs-at/index.phtml:24
 msgid "in"
 msgstr ""
 
@@ -268,10 +294,6 @@ msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:11
 msgid "Job search"
-msgstr ""
-
-#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:15
-msgid "Search"
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:31

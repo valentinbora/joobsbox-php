@@ -3,8 +3,6 @@ CREATE TABLE IF NOT EXISTS `{#prefix#}categories` (
 `Name` varchar(100) collate utf8_unicode_ci NOT NULL,
 `OrderIndex` tinyint(4) NOT NULL,
 `Parent` tinyint(4) NOT NULL,
-`lft` int(11) NOT NULL,
-`rgt` int(11) NOT NULL,
 PRIMARY KEY  (`ID`),
 KEY `OrderIndex` (`OrderIndex`),
 KEY `Parent` (`Parent`)

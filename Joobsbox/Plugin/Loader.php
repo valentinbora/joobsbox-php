@@ -32,7 +32,7 @@ class Joobsbox_Plugin_Loader {
 		foreach($dir as $file) {
 			$className = $file->getFilename();
 			if($file->isDir() && $className[0] != '.' && $className[0] != '_') {
-				if(file_exists("plugins/$className/$className.php")) {
+				if(file_exists("plugins/$className/$className.php") && file_exists("plugins/$className/config.ini.php")) {
 					Zend_Loader::loadFile("plugins/$className/$className.php");
 					$class = new ReflectionClass($className);
 					if($class->getParentClass() && ($class->getParentClass()->getName() == "Joobsbox_Plugin_Base" || $class->getParentClass()->getName() == "Joobsbox_Plugin_AdminBase")) {
@@ -47,7 +47,9 @@ class Joobsbox_Plugin_Loader {
 								$filters[$filterName][] = $className;
 							}
 						}
+						
 						$plugins[$className] = new $className;
+						$plugins[$className]->conf = new Zend_Config_Ini("plugins/$className/config.ini.php");
 						
 						if(method_exists($plugins[$className], 'setPluginName')) {
 							$plugins[$className]->setPluginName($className);

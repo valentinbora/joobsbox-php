@@ -1,0 +1,58 @@
+/* ========================================= */
+/* = Themes admin plugin main css file = */
+/* ========================================= */
+
+/* Dashboard */
+h1.dashboard-title {
+  background-image: url('../images/icons/plugins_48.png');
+}
+
+div.info {
+  padding-left: 40px;
+  font-size: 150%;
+}
+
+.plugin-container {
+  background-color: #546375;
+  padding: 7px 5px 3px 5px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+#active-plugins {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background-color: #FFF;
+}
+
+#active-plugins thead tr {
+  
+}
+
+#active-plugins th {
+  background-color: #546375;
+  color: #EEE;
+}
+
+#active-plugins th {
+  border: none;
+}
+
+#active-plugins td{
+  padding: 5px;
+  border: solid 1px #CCC;
+}
+
+#active-plugins thead tr th {
+  text-align: left;
+}
+
+
+#active-plugins th.check {
+  width: 15px;
+}
+
+#active-plugins th.plugin {
+ width: 20%; 
+}

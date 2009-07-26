@@ -30,7 +30,7 @@ class JobController extends Zend_Controller_Action
 		$job	= $jobs->fetchJobById($jobId);
 		
 		if(!$job) {
-			throw new Zend_Controller_Action_Exception(_('The requested job does not exist!'));
+			throw new Zend_Controller_Action_Exception($this->view->translate('The requested job does not exist!'));
 		}
 		
 		$this->view->job = $job;

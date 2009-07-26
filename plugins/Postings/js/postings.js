@@ -1,23 +1,8 @@
 $(function() {
 	var lastJobTrSelected = null;
-	$("#posting-tabs").tabs();
 	
-	// For each job, make the whole line clickable
-	// Also checks the respective checkbox
-	$("tbody tr.job").click(function(ev) {
-		if($(ev.target).attr("tagName") == "A") {
-			return;
-		}
-		
-		lastJobTrSelected = $(this);
-		
-		var cb = $(this).find("input[type=checkbox]");
-		cb = cb[0];
-		$(this).toggleClass("selected");
-		if($(ev.target).attr("tagName") != "INPUT") {
-			$(cb).attr("checked", $(this).hasClass("selected"));
-		}
-	});
+	$('input[type="checkbox"]').attr("checked", false);
+	restoreEvents();
 	
 	// Select all button
 	$("#selectAllPending").click(function(){
@@ -57,6 +42,7 @@ $(function() {
 					});
 				});
 				$('#operationDialog').dialog('open');
+				setTimeout(checkPending, 1000);
 			}
 		 });
 	});
@@ -69,11 +55,15 @@ $(function() {
 			success: function(msg){
 				$("#pending-postings tbody tr.selected").each(function() {
 					$(this).fadeOut("slow", function(el) {
-						$(this).next('tr.next').remove();
-						$(this).remove().prepend("#approved-postings tbody tr:first");
+						$(this).next('tr.next').prependTo("#approved-postings tbody");
+						var a = $(this);
+						$(a).css("display", "table-row").removeClass("selected").contents('input[type="checkbox"]').checked = false;
+						$(a).prependTo("#approved-postings tbody");
+						restoreEvents();
 					});
 				});
 				$('#operationDialog').dialog('open');
+        setTimeout(checkPending, 1000);
 			}
 		 });
 	});
@@ -111,6 +101,33 @@ $(function() {
 		}
 	});
 });
+
+function checkPending() {
+  if($("#pending-postings tbody tr").length == 0) {
+	  $("#pending").remove();
+	}
+}
+
+function restoreEvents() {
+  $('input[type="checkbox"]').attr("checked", false);
+  $('.selected').removeClass('selected');
+  // For each job, make the whole line clickable
+	// Also checks the respective checkbox
+	$("tbody tr.job").click(function(ev) {
+		if($(ev.target).attr("tagName") == "A") {
+			return;
+		}
+		
+		lastJobTrSelected = $(this);
+		
+		var cb = $(this).find("input[type=checkbox]");
+		cb = cb[0];
+		$(this).toggleClass("selected");
+		if($(ev.target).attr("tagName") != "INPUT") {
+			$(cb).attr("checked", $(this).hasClass("selected"));
+		}
+	});
+}
 
 function expandJob(job) {
 	var x = job.closest('tr').next('tr.next');

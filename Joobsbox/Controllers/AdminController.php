@@ -21,6 +21,7 @@
  */
 class AdminController extends Zend_Controller_Action
 {
+  private $alerts = array();
   private $pluginPath = "plugins/";
   private $currentPlugin;
   private $corePlugins = array("Categories", "Postings", "Themes", "Settings");
@@ -78,6 +79,9 @@ class AdminController extends Zend_Controller_Action
     $this->view->pluginPath = $this->pluginPath;
     $this->view->plugins = $this->plugins;
     $this->view->locale  = Zend_Registry::get("Zend_Locale");
+    
+    $this->alerts = array_merge($this->alerts, $this->_helper->FlashMessenger->getMessages());
+    $this->view->alerts = $this->alerts;
   }
 
   public function indexAction() {
@@ -93,10 +97,10 @@ class AdminController extends Zend_Controller_Action
     $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
     $viewRenderer->setNoController(false);
     $viewRenderer->setNoRender(false);
+    
   }
 
   private function prepareDashboard() {
-    $alerts = array();
     $dashboardPlugins = file("config/adminDashboard.php");
     $this->view->dashboard = array();
 
@@ -119,9 +123,8 @@ class AdminController extends Zend_Controller_Action
     $search = new Joobsbox_Model_Search;
     if(!$search->_enabled) {
       // Oopsie
-      $alerts[] = $this->view->translate("Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!");
+      $this->alerts[] = $this->view->translate("Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!");
     }
-    $this->view->alerts = $alerts;
   }
 
   private function router() {
@@ -134,6 +137,8 @@ class AdminController extends Zend_Controller_Action
     if(($pluginIndex = array_search($action, array_map('strtolower', array_keys($this->plugins)))) !== FALSE) {
       $this->loadPlugin($pluginNames[$pluginIndex]);
     }
+
+    $this->view->alerts = $this->alerts;
   }
 
   private function loadPlugin($pluginName, $return = true) {
@@ -149,6 +154,8 @@ class AdminController extends Zend_Controller_Action
     $plugin->view = $this->view;
     $plugin->path = $plugin->view->path = $this->view->baseUrl . '/' . $this->pluginPath . $pluginName . "/";
     $plugin->_helper = $this->_helper;
+    $plugin->alerts  = &$this->alerts;
+    $plugin->corePlugins = $this->corePlugins;
     $plugin->request = $this->getRequest();
     $plugin->init();
 

@@ -1,88 +1,83 @@
 <h1 class="dashboard-title"><?php echo $this->translate("Postings"); ?></h1>
-<div id="posting-tabs">
-	<ul>
-		<li><a href="#pending"><?php echo $this->translate("Pending"); ?></a></li>
-		<li><a href="#approved"><?php echo $this->translate("Approved"); ?></a></li>
-	</ul>
-	
-	<div id="pending" class="tab-content postings-container">
-		<?php if(count($this->pending)): ?>
-	  <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="form-pending">
-		<div id="toolbar">
-			<?php echo $this->translate("Actions:"); ?>
-			<a id="acceptPostingsPending" class="accept"><?php echo $this->translate('Accept selected postings'); ?></a>
-			<a id="deletePostingsPending" class="delete"><?php echo $this->translate('Delete selected postings'); ?></a>
-		</div>
-		<table id="pending-postings" class="postings">
-			<thead>
-				<tr>
-					<th></th>
-					<th><input type="checkbox" id="selectAllPending" /></th>
-					<th><?php echo $this->translate('Title'); ?></th>
-					<th><?php echo $this->translate('Company'); ?></th>
-					<th><?php echo $this->translate('Location'); ?></th>
-					<th><?php echo $this->translate('Posted at'); ?></th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php foreach($this->pending as $posting): ?>
-				<tr id="job_<?php echo $posting['ID']; ?>" class="job">
-					<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $_SERVER['REQUEST_URI'] . '/edit/' . $posting['ID']; ?>" class="editBtn"></a></td>
-					<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
-					<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></td>
-					<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
-					<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
-					<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
-				</tr>
-				<tr class="next">
-					<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
-				</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
-		<input type="hidden" id="actionPending" name="action" value="approve" />
-		</form>
-		<?php else: echo $this->translate("No pending postings."); endif; ?>
+	<?php if(count($this->pending)): ?>
+  <div id="pending" class="postings-container">
+    <h2><?php echo $this->translate('Pending postings'); ?></h2>
+    <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="form-pending">
+  	<div id="toolbar">
+  		<?php echo $this->translate("Actions:"); ?>
+  		<a id="acceptPostingsPending" class="accept"><?php echo $this->translate('Accept selected postings'); ?></a>
+  		<a id="deletePostingsPending" class="delete"><?php echo $this->translate('Delete selected postings'); ?></a>
+  	</div>
+  	<table id="pending-postings" class="postings">
+  		<thead>
+  			<tr>
+  				<th></th>
+  				<th><input type="checkbox" id="selectAllPending" /></th>
+  				<th><?php echo $this->translate('Title'); ?></th>
+  				<th><?php echo $this->translate('Company'); ?></th>
+  				<th><?php echo $this->translate('Location'); ?></th>
+  				<th><?php echo $this->translate('Posted at'); ?></th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<?php foreach($this->pending as $posting): ?>
+  			<tr id="job_<?php echo $posting['ID']; ?>" class="job">
+  				<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $_SERVER['REQUEST_URI'] . '/edit/' . $posting['ID']; ?>" class="editBtn"></a></td>
+  				<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
+  				<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></td>
+  				<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
+  				<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
+  				<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
+  			</tr>
+  			<tr class="next">
+  				<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
+  			</tr>
+  			<?php endforeach; ?>
+  		</tbody>
+  	</table>
+  	<input type="hidden" id="actionPending" name="action" value="approve" />
+  	</form>
 	</div>
-	
-	<div id="approved" class="tab-content postings-container">
-		<?php if(count($this->postings)): ?>
-	  <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="form-approved">
-		<div id="toolbar">
-			<?php echo $this->translate("Actions:"); ?>
-			<a id="deletePostingsApproved" class="delete"><?php echo $this->translate('Delete selected postings'); ?></a>
-		</div>
-		<table id="approved-postings" class="postings">
-			<thead>
-				<tr>
-					<th></th>
-					<th></th>
-					<th><?php echo $this->translate('Title'); ?></th>
-					<th><?php echo $this->translate('Company'); ?></th>
-					<th><?php echo $this->translate('Location'); ?></th>
-					<th><?php echo $this->translate('Posted at'); ?></th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php foreach($this->postings as $posting): ?>
-				<tr id="job_<?php echo $posting['ID']; ?>" class="job">
-					<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $this->pluginUrl . 'edit/' . $posting['ID']; ?>" class="editBtn"></a></td>
-					<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
-					<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></a></td>
-					<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
-					<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
-					<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
-				</tr>
-				<tr class="next">
-					<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
-				</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
-		<input type="hidden" id="actionApproved" name="action" value="delete" />
-		</form>
-		<?php else: echo $this->translate("No active postings."); endif; ?>
+	<?php endif; ?>
+
+<div id="approved" class="postings-container">
+  <h2><?php echo $this->translate("Active postings"); ?></h2>
+	<?php if(count($this->postings)): ?>
+  <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="form-approved">
+	<div id="toolbar">
+		<?php echo $this->translate("Actions:"); ?>
+		<a id="deletePostingsApproved" class="delete"><?php echo $this->translate('Delete selected postings'); ?></a>
 	</div>
+	<table id="approved-postings" class="postings">
+		<thead>
+			<tr>
+				<th></th>
+				<th></th>
+				<th><?php echo $this->translate('Title'); ?></th>
+				<th><?php echo $this->translate('Company'); ?></th>
+				<th><?php echo $this->translate('Location'); ?></th>
+				<th><?php echo $this->translate('Posted at'); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($this->postings as $posting): ?>
+			<tr id="job_<?php echo $posting['ID']; ?>" class="job">
+				<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $this->pluginUrl . 'edit/' . $posting['ID']; ?>" class="editBtn"></a></td>
+				<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
+				<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></a></td>
+				<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
+				<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
+				<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
+			</tr>
+			<tr class="next">
+				<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	<input type="hidden" id="actionApproved" name="action" value="delete" />
+	</form>
+	<?php else: echo $this->translate("No active postings."); endif; ?>
 </div>
 
 <div id="operationDialog">

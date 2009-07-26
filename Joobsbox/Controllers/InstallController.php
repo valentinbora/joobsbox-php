@@ -134,10 +134,11 @@ class InstallController extends Zend_Controller_Action {
 		$username = trim($_POST['username']);
 		$password = $_POST['password'];
 		$realname = $_POST['realname'];
+
 		$config = new Zend_Config_Ini('config/config.ini.php');
 		
 		if(trim($password) == "" || trim($username) == "") {
-		    $this->view->error = 1;
+		    $this->view->error = $this->view->translate("You have to enter an admin username and password");
 		} else {
 		    $db = Zend_Registry::get("db");
 		    $db->delete($config->db->prefix . 'users', array("username='$username'"));
@@ -147,20 +148,18 @@ class InstallController extends Zend_Controller_Action {
 			'password_salt' => sha1($password),
 			'realname' => $realname
 		    ));
-		}
-		$config = parse_ini_file('config/config.ini.php', true);
-		$config = new Zend_Config($config, true);
-		$config->general->restrict_install = 1;
 		
-		$configWriter = new Zend_Config_Writer_Ini();
-		$configWriter->write('config/config.ini.php', $config);
+		  $config = parse_ini_file('config/config.ini.php', true);
+  		$config = new Zend_Config($config, true);
+  		$config->general->restrict_install = 1;
+		
+  		$configWriter = new Zend_Config_Writer_Ini();
+  		$configWriter->write('config/config.ini.php', $config);
 
-		$authAdapter = Zend_Registry::get("authAdapter");
-		$authAdapter->setIdentity($username)->setCredential($password);
-		$auth = Zend_Auth::getInstance();
-		$result = $auth->authenticate($authAdapter);
-		
-		@chmod("Joobsbox/SearchIndexes", 0766);
-		@chmod("cache/", 0766);
+  		$authAdapter = Zend_Registry::get("authAdapter");
+  		$authAdapter->setIdentity($username)->setCredential($password);
+  		$auth = Zend_Auth::getInstance();
+  		$result = $auth->authenticate($authAdapter);
+  	}
 	}
 }
