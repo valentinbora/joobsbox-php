@@ -33,6 +33,13 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
      * @var array
     */
 	protected $_contentsNames;
+	/**
+     * Contains the Category collection as key => value pairs, indexed by category links
+     *
+     * @access public
+     * @var array
+    */
+	protected $_contentsLinks;
 	protected $_key;
 	
 	/**
@@ -52,6 +59,7 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 			    
 			    $this->_contents[$category['ID']] = new Joobsbox_Iterator_Categories_CategoryObject($category);
 			    $this->_contentsNames[$category['ID']] = $category['Name'];
+			    $this->_contentsLinks[$category['ID']] = $category['Link'];
 		    }
 		
 		    ksort($this->_contents);
@@ -78,14 +86,18 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 	function getCategory() {
 		$args = func_get_args();
 		if(!count($args)) {
-			throw new Exception("You must provide a category name or id");
+			throw new Exception("You must provide a category name, id or link");
 		}
+
 		foreach($args as $arg) {
 			if(isset($this->_contents[$arg])) {
 				return $this->_contents[$arg];
 			}
 			if(($id = array_search($arg, $this->_contentsNames)) !== FALSE) {
 				return $this->_contents[$id];
+			}
+			if(($id = array_search($arg, $this->_contentsLinks)) !== FALSE) {
+			  return $this->_contents[$id];
 			}
 		}
 		return FALSE;
@@ -101,13 +113,16 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 		$result = array();
 		$args = func_get_args();
 		if(!count($args)) {
-			throw new Exception("You must provide at least a category name or id");
+			throw new Exception("You must provide at least a category name, id or link");
 		}
 		foreach($args as $index => $arg) {
 			if(isset($this->_contents[$arg])) {
 				$result[] = $this->_contents[$arg];
 			} else 
 			if(($id = array_search($arg, $this->_contentsNames)) !== FALSE) {
+				$result[] = $this->_contents[$id];
+			}
+			if(($id = array_search($arg, $this->_contentsLinks)) !== FALSE) {
 				$result[] = $this->_contents[$id];
 			}
 		}

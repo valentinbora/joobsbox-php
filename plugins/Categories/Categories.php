@@ -60,6 +60,7 @@ class Categories extends Joobsbox_Plugin_AdminBase
 						$data = array(
 							"OrderIndex" => $orderIndex,
 							"Name"		 => $category['name'],
+							"Link"     => $this->view->MakeLink($category['name']),
 							"Parent"	 => $parentId
 						);
 						$where = $db->quoteInto('ID = ?', $id);

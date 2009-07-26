@@ -92,6 +92,7 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 			SELECT 
 				ID, 
 				Name,
+				Link,
 				OrderIndex,
 				Parent,
 				(SELECT COUNT(*) FROM " . $this->_postings_table . " WHERE CategoryID=" . $this->_categories_table . ".ID) nrPostings
