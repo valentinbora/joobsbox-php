@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Categories Operations Model definition
  * 

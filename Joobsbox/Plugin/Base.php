@@ -34,6 +34,8 @@ class Joobsbox_Plugin_Base {
 	 * @returns array indexed array of database rows as associative arrays
   */
 	final function getConfiguration($name) {
+	  if(!Zend_Registry::isRegistered("db")) return "";
+	  
 		$db = Zend_Registry::get("db");
 		$pf = Zend_Registry::get("conf");
 		$pf = $pf->db->prefix;

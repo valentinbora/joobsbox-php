@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Postings Operations Model definition
  * 

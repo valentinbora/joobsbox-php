@@ -37,7 +37,7 @@ class InstallController extends Zend_Controller_Action {
 	 */
 	public function step1Action() {
 		configureTheme(APPLICATION_THEME, 'install');
-		
+
 		if(isset($_POST['step1'])) {
 			// Gather site data
 			$sitename = trim($_POST['sitename']);
@@ -49,16 +49,19 @@ class InstallController extends Zend_Controller_Action {
 			$dbhost   = $_POST['dbhost'];
 			$dbprefix = trim($_POST['dbprefix']);
 			
+			if(!strlen($dbhost) || !strlen($dbhost) || !strlen($dbpass)) {
+			  $this->view->dberror = $this->view->translate("Joobsbox really needs a database. Please let it have one.");
+			}
+			
 			// Try connecting to the database
 			$db = Zend_Db::factory('PDO_MYSQL', array("host" => $dbhost, "username" => $dbuser, "password" => $dbpass, "dbname" => $dbname));
 			try {
-				$db->query("SET NAMES 'utf8'");
-			} catch(Exception $e) {
-				$this->view->dberror = $this->view->translate("There was an error connecting to the database. Make sure the connection information you provided is correct.");
-			}
-			
-			@chmod("config/", 0766);
-			@chmod("config/config.ini.php", 0766);
+          $db->query('SHOW DATABASES');
+      } catch (Zend_Db_Adapter_Exception $e) {
+          $this->view->dberror = $this->view->translate("There was an error connecting to the database. Make sure the connection information you provided is correct.");
+      } catch (Zend_Exception $e) {
+          $this->view->dberror = $this->view->translate("There was an error connecting to the database. Make sure the connection information you provided is correct.");
+      }
 			
 			if(!isset($this->view->dberror)) {
 				// Connection works - we save the data
