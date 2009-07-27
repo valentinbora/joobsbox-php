@@ -1,0 +1,129 @@
+/* ========================================= */
+/* = Themes admin plugin main css file = */
+/* ========================================= */
+
+/* Dashboard */
+h1.dashboard-title {
+  background-image: url('../images/icons/plugins_48.png');
+}
+
+div.info {
+  padding-left: 40px;
+  font-size: 150%;
+}
+
+.plugin-container {
+  background-color: #333333;
+  padding: 7px 5px 3px 5px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.plugin-container h2 {
+  color: #EEE;
+  margin: 0;
+  padding: 2px 0;
+  display: block;
+  text-indent: 10px;
+  border-bottom: 1px dotted #CCC;
+}
+
+.plugin-container table {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background-color: #FFF;
+}
+
+.plugin-container table thead tr th {
+  border: none;
+}
+
+.plugin-container th {
+  background-color: #333333;
+  color: #EEE;
+}
+
+v th {
+  border: none;
+}
+
+.plugin-container td {
+  padding: 5px;
+  border: solid 1px #CCC;
+}
+
+.plugin-container td.description {
+  font-size: 11px;
+}
+
+.plugin-container thead tr th {
+  text-align: left;
+}
+
+
+.plugin-container th.check {
+  width: 15px;
+}
+
+.plugin-container th.version {
+  width: 7%;
+}
+
+.plugin-container th.plugin {
+ width: 20%; 
+}
+
+.plugin-container .tools {
+  color: #EEE;
+  padding: 4px;
+}
+
+.plugin-container .tools a:link, .plugin-container .tools a:visited {
+  color: #CCC;
+  text-decoration: underline;
+}
+
+.plugin-container .tools a:hover {
+  color: #FFF;
+}
+
+#dialog {
+  display: none;
+}
+
+.plugin-name {
+  background-repeat: no-repeat;
+  background-position: 2% 50%;
+  text-indent: 30px;
+  line-height: 25px;
+}
+
+.plugin-name a:link, .plugin-name a:visited{
+  color: #000;
+  text-decoration: none;
+  border-bottom: 1px dotted #777 ;
+}
+
+.plugin-name a:hover {
+ border-bottom: 1px solid #444; 
+}
+
+a.settings {
+  display: block;
+  width: 100%;
+  padding: 2px 0;
+  background-color: #C4BDBD;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  text-align: center;
+  color: #000;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+a.settings:hover {
+ background-color: #9C8989; 
+}

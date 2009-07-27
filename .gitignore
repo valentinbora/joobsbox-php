@@ -1,4 +1,6 @@
 config/db.ini.php
+todo/
+docs/
 config/passwordHash.php
 design
 Joobsbox/SearchIndexes/*/*

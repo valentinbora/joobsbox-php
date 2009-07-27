@@ -1,0 +1,4 @@
+host = "localhost"
+username = "joobsbox"
+password = "joobsbox"
+dbname = "joobsbox"

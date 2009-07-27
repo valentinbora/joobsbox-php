@@ -1,0 +1,10 @@
+<h1 class="dashboard-title"><?php echo $this->translate("Twitter"); ?></h1>
+
+<div id="configuration">
+  <?php if($this->credentialsOk): echo $this->translate("The username/password combination is correct."); endif; ?>
+  <?php echo $this->form; ?>
+</div>
+
+<?php
+	$this->headLink()->appendStylesheet($this->path . 'css/twitter.css');
+?>

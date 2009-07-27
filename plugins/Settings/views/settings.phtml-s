@@ -1,0 +1,7 @@
+<h1 class="dashboard-title"><?php echo $this->translate("Settings"); ?></h1>
+<div class="joobsbox-plugin-content">
+  <?php echo $this->form; ?>
+</div>
+<?php
+	$this->headLink()->appendStylesheet($this->path . 'css/settings.css');
+?>

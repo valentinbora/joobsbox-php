@@ -38,8 +38,11 @@ class Joobsbox_Helpers_Filter extends Zend_Controller_Action_Helper_Abstract
 				}
 			}
 		}
+
 		if(count($args) == 1)
 			return $args[0];
+		if(count($args) == 0)
+		  return "";
 		return $args;
 	}
 	

@@ -1,0 +1,50 @@
+<h1 class="dashboard-title"><?php echo $this->translate("Themes"); ?></h1>
+
+<div class="current-theme">
+  <h2><?php echo $this->translate("Current theme"); ?></h2>
+  <img src="<?php echo $this->baseUrl . '/Joobsbox/Themes/' . $this->conf->general->theme; ?>/screenshot.png" class="current-screenshot" />
+  
+  <div class="info">
+    <strong><?php echo ucfirst($this->conf->general->theme); ?></strong>  
+  </div>
+  
+  <div style="clear: both"></div>
+</div>
+
+<div class="available-themes">
+  <h2><?php echo $this->translate("Available themes"); ?></h2>
+  <?php if(count($this->themes)): ?>
+  <table class="available-themes">
+    <tbody>
+      <tr>
+      <?php foreach($this->themes as $index => $theme): ?>
+        <?php if($theme == $this->conf->general->theme): continue; endif; ?>
+        <td>
+          <img src="<?php echo $this->baseUrl . '/Joobsbox/Themes/' . $theme; ?>/screenshot.png" class="theme-screenshot" /><br/>
+          <strong><?php echo ucfirst($theme); ?></strong>  
+          <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+            <input type="submit" class="activateButton" name="activate" value="<?php echo $this->translate("Activate"); ?>" />
+            <input type="submit" class="deleteButton" name="delete" value="<?php echo $this->translate("Delete"); ?>" />
+            <input type="hidden" name="theme_name" value="<?php echo $theme; ?>" />
+            <input type="hidden" name="form_action" class="action" value="activate" />
+          </form>
+        </td>
+      <?php endforeach; ?>
+      </tr>
+    </tbody>
+  </table>
+  <?php endif; ?>
+</div>
+
+<div id="dialog">
+  <?php echo $this->translate('Are you sure you want to delete this theme?'); ?>
+</div>
+<?php echo $this->translate("Your current admin theme is:") . ' <strong>' . $this->conf->general->admin_theme; ?></strong>
+
+<?php echo $this->form; ?>
+
+<?php
+	$this->headLink()->appendStylesheet($this->path . 'css/themes.css');
+	$this->asset->load("jqueryui");
+	$this->headScript()->appendFile($this->path . '/js/themes.js');
+?>

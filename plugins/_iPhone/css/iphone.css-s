@@ -1,0 +1,128 @@
+#joobsbox-main {
+	padding: 0px !important;
+	width:		100% !important;
+	
+}
+#joobsbox-header {
+	height:		49px;
+}
+
+body, #wrapper, #joobsbox-main {
+	width:		100%;
+}
+
+#postJob {
+	width:		40%;
+}
+
+#search {
+	padding-top:5px;
+	width:		60%;
+}
+
+#joobsbox-main #tools #postJob a {
+	width: 					50px;
+	background-image: 		none;
+	background-color: 		#2d7fa5;
+	-webkit-border-radius: 	15px;
+	font-size:				150% !important;
+}
+
+
+
+/* ADD JOB */
+#description {
+	width:		100%;
+}
+
+/* USER LOGIN */
+dl.zend_form {
+	font-size:				15px;
+}
+
+#username-label, #username-element, #password-label, #password-element {
+	float:					left;
+	width:					40%;
+}
+
+#submit-element {
+	padding-left:				80pui px;
+}
+
+#submit {
+	font-size:					120% !important;
+}
+
+/* ADMIN INTERFACE */
+#admin-header a {
+    font-size:      120%;
+}
+
+#admin-menu {
+    width:  50px;
+    padding-left:0px;
+    margin-left:-180px;
+    pozition: relative;
+    left:0px;
+}
+
+#admin-menu li.item {
+    overflow:hidden;
+}
+
+#admin-content {
+    width:      260px;
+    margin-left:-120px;
+    padding: 0px;
+}
+
+#admin-content #admin-content-wrap h1 {
+    margin:0;
+    padding-left:50px;
+}
+
+#dashboard {
+    padding:0;
+    margin:0;
+    width:250px;
+}
+
+.dashboard-item {
+    width: 250px !important;
+    margin-left: -3px !important;
+    padding-left:   0px;
+    margin-bottom:  10px;
+}
+
+.dashboard-item-title {
+    -webkit-border-top-left-radius:7px;
+}
+
+.dashboard-item-content .info-item {
+    display:            block;
+    font-size:          130%;
+}
+
+#posting-tabs, #tree-controls {
+    width:  250px !important;
+}
+
+#tree-controls {
+    padding-left: 0px !important;
+}
+
+#tree-controls a {
+    width:      70% !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 4px;
+}
+
+#saveConfiguration {
+    position:   static !important;
+    left:0px;
+}
+
+#instructions {
+    width:  250px;
+}

@@ -1,0 +1,314 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Joobsbox PHP 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-26 02:27+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Joobsbox\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: translate;setLabel\n"
+"X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php\n"
+"X-Poedit-SearchPath-0: Joobsbox\n"
+"X-Poedit-SearchPath-1: core\n"
+
+#: Joobsbox/Controllers/AdminController.php:126
+msgid "Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!"
+msgstr ""
+
+#: Joobsbox/Controllers/CategoryController.php:38
+msgid "This category does not exist."
+msgstr ""
+
+#: Joobsbox/Controllers/ErrorController.php:36
+msgid "The page could not be found!"
+msgstr ""
+
+#: Joobsbox/Controllers/ErrorController.php:41
+msgid "An error has occured within the application"
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:57
+msgid "There was an error connecting to the database. Make sure the connection information you provided is correct."
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:71
+msgid "config/config.ini.php is not writable. Please adjust the file permissions using FTP or SSH."
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:86
+msgid "config directory is not writable. Please adjust the directory permissions using FTP or SSH."
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:141
+msgid "You have to enter an admin username and password"
+msgstr ""
+
+#: Joobsbox/Controllers/JobController.php:33
+msgid "The requested job does not exist!"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:36
+msgid "Job title:"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:45
+msgid "Company:"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:52
+msgid "Location:"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:60
+msgid "Choose..."
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:66
+msgid "Category:"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:72
+msgid "Job description:"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:80
+msgid "Means of application:"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:88
+msgid "Add"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:108
+msgid "Expiration date:"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:116
+msgid "Modify"
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:148
+msgid "You are not allowed to add the same job multiple times."
+msgstr ""
+
+#: Joobsbox/Controllers/PublishController.php:174
+#: Joobsbox/Controllers/PublishController.php:198
+msgid "An error occured while saving the job. Please try again."
+msgstr ""
+
+#: Joobsbox/Controllers/SearchController.php:29
+msgid "You cannot search for nothing!"
+msgstr ""
+
+#: Joobsbox/Controllers/UserController.php:39
+msgid "Username:"
+msgstr ""
+
+#: Joobsbox/Controllers/UserController.php:47
+msgid "Password:"
+msgstr ""
+
+#: Joobsbox/Controllers/UserController.php:55
+msgid "Login"
+msgstr ""
+
+#: Joobsbox/Controllers/UserController.php:97
+msgid "Username and/or password incorrect"
+msgstr ""
+
+#: core/translation.php:3
+msgid "Value is required and can't be empty"
+msgstr ""
+
+#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:42
+msgid "Back to site"
+msgstr ""
+
+#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:44
+msgid "Logout"
+msgstr ""
+
+#: Joobsbox/Themes/_admin/joobsbox grey/layouts/index.phtml:49
+#: grey/views/scripts/admin/index.phtml:12
+#: grey/views/scripts/admin/index.phtml:14
+msgid "Dashboard"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:55
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:53
+#, php-format
+msgid "Post a job for %d days"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:60
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:58
+msgid "Search here"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:61
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:59
+msgid "Search"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/layouts/index.phtml:67
+#: Joobsbox/Themes/joobsbox/layouts/integration.phtml:65
+#, php-format
+msgid "Subscribe to the full <a href=\"%s\">RSS Feed</a> and be notified when new jobs are posted."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/layouts/install.phtml:40
+msgid "Installation"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/admin/index.phtml:12
+msgid "Administration Dashboard"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:29
+msgid "at"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:31
+msgid "in"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:38
+msgid "No jobs postings are available at this time. Be the first to publish one!"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:11
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:11
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step3.phtml:11
+msgid "Installation - Step "
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:13
+msgid "Welcome to Joobsbox installation!"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:15
+msgid "I need some information and then we're ready to go."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:19
+msgid "Site information"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:21
+msgid "Site name"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:26
+msgid "Database information"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:29
+msgid "Database name"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:33
+msgid "Database username"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:37
+msgid "Database password"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:41
+msgid "Database host"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:45
+msgid "Table prefix"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:13
+msgid "Joobsbox installation complete!"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:15
+msgid "Congratulations. You finished installing Joobsbox. Now please configure your administrator username and password."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:18
+msgid "Administrator credentials"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:20
+msgid "Your name"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:24
+msgid "Username"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:28
+msgid "Password"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:34
+msgid "Please provide a valid username and password."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:37
+msgid "Done"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/install/step3.phtml:13
+msgid "Everything went well!"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:29
+msgid "Description:"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/job/job.phtml:31
+msgid "To apply:"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/jobs-at/index.phtml:11
+#: Joobsbox/Themes/joobsbox/views/scripts/jobs-at/index.phtml:15
+msgid "Jobs at"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:11
+msgid "Publish a job posting"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:13
+msgid "Publish a job"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:17
+msgid "The job has been saved. It now has to be accepted by a moderator in order to appear publicly on the site."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:19
+msgid "The job has been modified and saved."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:11
+msgid "Job search"
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:31
+msgid "Nothing to be found for your searched criteria."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:33
+msgid "Look for typos in the searched word(s) and, if found, correct them."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:34
+msgid "Be less specific. Try \"web designer\" instead of \"senior web designer\"."
+msgstr ""
+
+#: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:35
+msgid "Try similar words. If \"designer\" doesn't return anything, try \"design\"."
+msgstr ""
+

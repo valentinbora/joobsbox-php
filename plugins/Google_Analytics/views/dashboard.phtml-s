@@ -1,0 +1,12 @@
+<div id="google_analytics_wrapper">
+<?php if($this->ajax): ?>
+<?php if(isset($this->data)): ?>
+  <span class="bigger"><?php echo $this->translate("Last month");?></span><br/>
+  <?php echo $this->translate("Visits") . ": " . $this->data['visits']; ?><br/>
+  <?php echo $this->translate("Page views") . ": " . $this->data['pageviews']; ?><br/>
+<?php else: ?>
+  <?php echo $this->translate("Your Google Analytics plugin is not yet configured properly, hence it can't request data."); ?>
+<?php endif; ?>
+  </div>
+<?php endif; ?>
+<?php $this->headScript()->appendFile($this->path . '/js/dashboard.js'); ?>

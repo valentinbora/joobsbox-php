@@ -1,0 +1,34 @@
+/* ========================================= */
+/* = Themes admin plugin main css file = */
+/* ========================================= */
+
+/* Dashboard */
+h1.dashboard-title {
+  background-image: url('../images/icons/themes_40.png');
+}
+
+.current-theme h2 {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.current-theme .info {
+  float: left;
+  font-size: 120%;
+}
+
+.current-screenshot, .theme-screenshot {
+  padding: 5px;
+  border: 1px dotted #CCC;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.available-themes table th, .available-themes table td{
+  border: 0;
+  text-align: center;
+  font-size: 18px;
+}
+
+#dialog	{display: none;}

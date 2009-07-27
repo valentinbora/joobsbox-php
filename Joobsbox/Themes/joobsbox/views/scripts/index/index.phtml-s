@@ -1,0 +1,41 @@
+<?php
+/**
+ * @package Joobsbox_Themes
+ * @category Joobsbox
+ * @author Valentin Bora <contact@valentinbora.com>
+ * @version 1.0
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
+ */
+?>
+	<div class="list">
+		<?php if(count($this->jobs)) :
+		foreach($this->jobs as $category => $jobs):
+		  if(count($jobs)):
+		?>
+		<div class="inner">
+			<div class="toRight">
+				<a href="<?php echo $this->baseUrl . '/rss/' . $this->TranslateUrl("category") . '/' . $this->MakeLink($category);?>/">RSS</a>
+				<a href="<?php echo $this->baseUrl . '/rss/' . $this->TranslateUrl("category") . '/' . $this->MakeLink($category);?>/"><img src="<?php echo $this->themeImages;?>/icon-rss.gif" alt="RSS" /></a>
+			</div>
+			<a href="<?php echo $this->baseUrl . '/' . $this->TranslateUrl("category") . '/' . $this->MakeLink($category);?>.html">
+				<?php echo $category; ?>
+			</a>
+		</div>
+			<ul>
+				<?php foreach($jobs as $a => $job): ?>
+				<li <?php if($a%2):?>class="alternate"<?php endif;?>>
+					<a href="<?php echo $this->baseUrl;?>/job/<?php echo $this->MakeLink($job['Title']) . "-" . $job['ID']; ?>.html"><?php echo $this->filter("job_title", $job['Title']); ?></a>
+					<span class="lighterSmall"> <?php echo $this->translate("at"); ?> </span>
+					<?php echo $this->filter("job_company", $job['Company']); ?>
+					<span class="lighterSmall"> <?php echo $this->translate("in"); ?> </span>
+					<?php echo $this->filter("job_location", $job['Location']); ?>
+				</li>
+				<?php endforeach; endif; ?>
+			</ul>
+		<?php endforeach; 
+		else: 
+			echo $this->translate("No jobs postings are available at this time. Be the first to publish one!");
+		endif;
+		?>
+	</div>
