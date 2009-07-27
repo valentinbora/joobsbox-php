@@ -57,6 +57,7 @@ class AdminController extends Zend_Controller_Action
     configureTheme("_admin/" . $this->_conf->general->admin_theme);
 
     $this->plugins = array();
+    $this->menuPlugins = array();
     $this->dashboardCandidates = array();
     foreach(new DirectoryIterator($this->pluginPath) as $plugin) {
       $name = $plugin->getFilename();
@@ -68,6 +69,9 @@ class AdminController extends Zend_Controller_Action
       	  if(file_exists($this->pluginPath . $name . '/config.ini.php')) {
       	    $this->plugins[$name] = new Zend_Config_Ini($this->pluginPath . $name . '/config.ini.php');
       	  }
+      	  if(in_array($name, $this->corePlugins)) {
+      	    $this->menuPlugins[$name] = $this->plugins[$name];
+      	  }
       	}
       	if($class->hasMethod('dashboard')) {
       	  $this->dashboardCandidates[$name] = 1;
@@ -75,11 +79,11 @@ class AdminController extends Zend_Controller_Action
       }
     }
     
-    uksort($this->plugins, array($this, "sortFunction"));
+    uksort($this->menuPlugins, array($this, "sortFunction"));
 
     $this->view->corePlugins = $this->corePlugins;
     $this->view->pluginPath = $this->pluginPath;
-    $this->view->plugins = $this->plugins;
+    $this->view->plugins = $this->menuPlugins;
     $this->view->locale  = Zend_Registry::get("Zend_Locale");
     
     $this->alerts = array_merge($this->alerts, $this->_helper->FlashMessenger->getMessages());
@@ -109,7 +113,7 @@ class AdminController extends Zend_Controller_Action
     foreach($dashboardPlugins as $pluginName) {
       $pluginName = trim($pluginName);
       if(isset($this->dashboardCandidates[$pluginName])) {
-	      $plugin = $this->loadPlugin($pluginName, true);
+	      $plugin = $this->loadPlugin($pluginName, false);
       	if(method_exists($plugin, "dashboard")) {
       	  $plugin->dashboard();
       	}

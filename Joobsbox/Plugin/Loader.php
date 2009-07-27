@@ -51,6 +51,10 @@ class Joobsbox_Plugin_Loader {
 						}
 						
 						$plugins[$className] = new $className;
+						if(($class->getParentClass()->getName() == "Joobsbox_Plugin_AdminBase")) {
+						  $plugins[$className]->isAdmin = true;
+						}
+
 						$plugins[$className]->conf = new Zend_Config_Ini("plugins/$className/config.ini.php");
 						
 						if(method_exists($plugins[$className], 'setPluginName')) {

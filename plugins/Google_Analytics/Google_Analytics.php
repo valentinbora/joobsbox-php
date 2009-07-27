@@ -14,7 +14,7 @@ class Google_Analytics extends Joobsbox_Plugin_AdminBase
     }
     
     if(time() - $lastQuery['lastQueryTime'] > 3 * 60 * 60) {
-      require "lib/gapi-1.3/gapi.class.php";
+      require_once "lib/gapi-1.3/gapi.class.php";
       $ga = new gapi($this->email, $this->password);
       $ga->requestReportData($this->profileId, array('month'), array('pageviews','visits'), "", "", date("Y-m-d", strtotime("-30 days")), date("Y-m-d"));
       $results = $ga->getResults();
@@ -56,7 +56,9 @@ class Google_Analytics extends Joobsbox_Plugin_AdminBase
 	      $this->ajax = true;
 	      $this->dashboard();
 	    }
-	    
+  }
+
+  public function indexAction() {
 	    /********* Display metrics *********/
 	    $lastQuery = $this->lastQuery;
       if(!strlen($lastQuery)) {
@@ -66,7 +68,7 @@ class Google_Analytics extends Joobsbox_Plugin_AdminBase
       }
       
 	    if(time() - $lastQuery['lastQueryTime'] > 3 * 60 * 60 && strlen($this->email)) {
-        require "lib/gapi-1.3/gapi.class.php";
+        require_once "lib/gapi-1.3/gapi.class.php";
         $this->assignCredentials();
         $ga = new gapi($this->email, $this->password);
         $ga->requestReportData($this->profileId, array('month'), array('pageviews','visits'), "", "", date("Y-m-d", strtotime("-30 days")), date("Y-m-d"));

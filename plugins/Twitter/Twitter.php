@@ -2,6 +2,10 @@
 class Twitter extends Joobsbox_Plugin_Base {
   private $username, $password;
 
+  public function __construct() {
+    $this->isAdmin = true;
+  }
+  
 	public function init() {
 	  $this->assignCredentials();
 	  $this->view->credentialsOk = $this->checkCredentials();

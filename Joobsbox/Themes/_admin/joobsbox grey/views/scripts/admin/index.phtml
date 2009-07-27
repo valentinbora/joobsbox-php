@@ -8,7 +8,7 @@
 	foreach($this->dashboard as $pluginName => $pluginDashboardContent):
 ?>
 		<li class="dashboard-item">
-			<div class="dashboard-item-title"><?php echo $pluginDashboardContent['options']->main->{'title_' . $this->locale}; ?></div>
+			<div class="dashboard-item-title"><a href="<?php echo $this->baseUrl . strtolower("/admin/$pluginName"); ?>"><?php echo $pluginDashboardContent['options']->main->{'title_' . $this->locale}; ?></a></div>
 			<div class="dashboard-item-content">
 				<?php
 					echo $pluginDashboardContent['content'];

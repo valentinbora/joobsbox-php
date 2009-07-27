@@ -24,6 +24,7 @@
  */
 class Joobsbox_Plugin_Base {
 	public $_helper;
+	public $isAdmin = false;
 	protected $_pluginName;
 	
 	/**

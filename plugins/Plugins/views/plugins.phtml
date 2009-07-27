@@ -11,15 +11,27 @@
       <th class="plugin"><?php echo $this->translate("Plugin"); ?></th>
       <th class="version"><?php echo $this->translate("Version"); ?></th>
       <th><?php echo $this->translate("Description"); ?></th>
+      <th></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($this->aPlugins as $id => $plugin): ?>
         <tr>
           <td><input type="checkbox" name="check[<?php echo $id;?>]" class="active-plugin-checkbox" /></td>
-          <td><?php echo $plugin->conf->main->title_en; ?></td>
+          <td class="plugin-name" style="background-image: url(<?php echo $this->baseUrl . '/plugins/' . $id . '/' . $plugin->conf->main->image; ?>); ">
+            <?php if($plugin->isAdmin): ?>
+              <a href="<?php echo $this->baseUrl . strtolower("/admin/$id"); ?>"><?php echo $plugin->conf->main->title_en; ?></a>
+            <?php else: ?>
+              <?php echo $plugin->conf->main->title_en; ?>
+            <?php endif; ?>
+          </td>
           <td><?php echo $plugin->conf->main->version; ?></td>
           <td class="description"><?php echo $plugin->conf->main->description; ?></td>
+          <td>
+            <?php if($plugin->isAdmin): ?>
+              <a class="settings" href="<?php echo $this->baseUrl . strtolower("/admin/$id"); ?>"><?php echo $this->translate("Settings"); ?></a>
+            <?php endif; ?>
+          </td>
         </tr>
       <?php endforeach; ?>
     </tbody>
@@ -52,7 +64,9 @@ endif; ?>
       <?php foreach($this->inactivePlugins as $id => $plugin): ?>
         <tr>
           <td><input type="checkbox" name="check[<?php echo $id;?>]" class="inactive-plugin-checkbox" /></td>
-          <td><?php echo $plugin->conf->main->title_en; ?></td>
+          <td class="plugin-name" style="background-image: url(<?php echo $this->baseUrl . '/plugins/' . $id . '/' . $plugin->conf->main->image; ?>); ">
+            <?php echo $plugin->conf->main->title_en; ?>
+          </td>
           <td><?php echo $plugin->conf->main->version; ?></td>
           <td class="description"><?php echo $plugin->conf->main->description; ?></td>
         </tr>

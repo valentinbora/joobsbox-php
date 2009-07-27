@@ -28,7 +28,10 @@ class Postings extends Joobsbox_Plugin_AdminBase
 	}
 	
 	public function dashboard() {
-	
+	  $pending = $this->jobsModel->fetchAllJobs(0, true, false)->where('Public = 0')->order('ID DESC')->fetch()->toArray();
+		
+		$this->view->pending  = $pending;
+		$this->view->postings = $this->jobsModel->fetchAllJobs(0, false, false)->order('ID DESC')->fetch()->toArray();
 	}
 	
 	function editAction() {
