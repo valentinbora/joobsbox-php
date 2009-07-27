@@ -1,7 +1,0 @@
-<ul class="categories">
-	<?php foreach($this->categories as $category): ?>
-	<li>
-		<?php echo $category['Name'] . ' (' . $category['nrPostings'] . ')'; ?>
-	</li>
-	<?php endforeach; ?>
-</ul>
