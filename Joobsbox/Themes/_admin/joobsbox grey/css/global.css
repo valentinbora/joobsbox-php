@@ -268,3 +268,40 @@ h1.dashboard-title {
 #joobsbox-admin-footer a {
   color: #EEE;
 }
+
+/* Plugins */
+li.plugins, ul.plugins, ul.plugins li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.plugins {
+  background-color: #F1F1F1;
+  border: 1px dotted #E3E3E3;
+  position: relative;
+  top: -7px;
+  width: 80%;
+  margin: 0 auto;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+}
+
+li.plugin {
+  text-align: center;
+  font-size: 90%;
+  height: 20px;
+  line-height: 20px;
+  border-top: 1px dotted #333;
+}
+
+#admin-menu ul.plugins li a {
+  text-indent: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#admin-menu ul.plugins li a:hover {
+  text-decoration: underline;
+  font-size: 105%;
+}

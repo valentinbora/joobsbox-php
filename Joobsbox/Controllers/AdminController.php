@@ -80,8 +80,16 @@ class AdminController extends Zend_Controller_Action
     }
     
     uksort($this->menuPlugins, array($this, "sortFunction"));
+    
+    $otherPlugins = Zend_Registry::get("plugins");
+    foreach($otherPlugins as $pluginName => $plugin) {
+      if(in_array($pluginName, $this->corePlugins) || !$plugin->isAdmin) {
+        unset($otherPlugins[$pluginName]);
+      }
+    }
 
     $this->view->corePlugins = $this->corePlugins;
+    $this->view->otherPlugins= $otherPlugins;
     $this->view->pluginPath = $this->pluginPath;
     $this->view->plugins = $this->menuPlugins;
     $this->view->locale  = Zend_Registry::get("Zend_Locale");

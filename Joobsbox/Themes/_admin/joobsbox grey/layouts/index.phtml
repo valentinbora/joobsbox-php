@@ -69,6 +69,32 @@
 					?>
 				</a>
 			</li>
+			<?php if($pluginName == "Plugins" && count($this->otherPlugins)): ?>
+			<li class="plugins">
+			  <ul class="plugins">
+			    <?php foreach($this->otherPlugins as $pluginName => $pluginOptions): ?>
+			      <li class="plugin">
+			      <a href="<?php echo $this->baseUrl . strtolower("/admin/$pluginName"); ?>" style="background-image: url(<?php 
+    						if(isset($pluginOptions->main) && isset($pluginOptions->main->image)): 
+    							echo $this->baseUrl . '/' . $this->pluginPath . $pluginName . '/' . $pluginOptions->main->image; 
+    						else:
+    							echo $this->themeImages . '/adminPluginNoImage.png'; 
+    						endif;?>);" >
+    					<?php
+    						if(isset($pluginOptions->conf->main) && isset($pluginOptions->conf->main->{"title_" . $this->locale})) {
+    							echo ucfirst($pluginOptions->conf->main->{"title_" . $this->locale});
+    						} elseif(isset($pluginOptions->conf->main) && isset($pluginOptions->conf->main->title)) {
+    							echo ucfirst($pluginOptions->conf->main->title);
+    						} else {
+    							echo ucfirst($pluginName); 
+    						}
+    					?>
+    				</a>
+    				</li>
+			    <?php endforeach; ?>
+			  </ul>
+			</li>
+			<?php endif; ?>
 			<?php endforeach; ?>
 		</ul>
 		
