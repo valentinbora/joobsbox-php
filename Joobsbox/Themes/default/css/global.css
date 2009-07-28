@@ -110,8 +110,18 @@ div.outer {
 }
 
 .site-title	{
-  text-indent: -1800px; 
-  font-size: 1px;
+  text-align: left;
+}
+
+.site-title a {
+  color: #000;
+  text-decoration: none;
+  text-align: left;
+  font-size: 28px;
+}
+
+.site-title a:hover {
+  color: #FFF;
 }
 
 #joobsbox-header h1 {

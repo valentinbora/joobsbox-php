@@ -41,11 +41,10 @@
 
 </head>
 <body>
-	<h1 class="site-title"><?php echo implode($this->headTitle()->getSeparator(), (array)$this->headTitle()->getContainer()); ?></h1>
 	<div id="wrapper">
 		<div id="joobsbox-main">
+		  <h1 class="site-title"><a href="<?php echo $this->baseUrl; ?>"><?php echo $this->conf->general->common_title; ?></a></h1>
 			<div id="joobsbox-header">
-			  <h1><a href="<?php echo $this->baseUrl; ?>"><?php echo $this->conf->general->common_title; ?></a></h1>
 			  <h2>This is the php demo of the most flexible open source job board application. <br/>Follow <a href="http://twitter.com/joobsbox">@joobsbox</a> to know when we launch next version. Check the <a href="<?php echo $this->baseUrl; ?>/admin">Administration</a></h2>
 			  <div class="temporary" style="margin-left: 10px; font-size: 12px; color: #E38C09;">Note: this theme is a work in progress</div>
 			  <div class="temporary" style="margin-left: 10px; font-size: 12px; color: #E38C09;">Disclaimer: The jobs listed here have demonstration purposes only</div>
