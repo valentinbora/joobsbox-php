@@ -1,7 +1,7 @@
 <?php
 $conf = Zend_Registry::get("conf");
-$translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/url', null, array('disableNotices' => true, 'scan' => Zend_Translate::LOCALE_FILENAME, 'ignore' => '$'));
-$translateUrl->setLocale(Zend_Registry::get("conf")->general->locale);
+$translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages', null, array('disableNotices' => true, 'scan' => Zend_Translate::LOCALE_DIRECTORY, 'ignore' => '$'));
+$translateUrl->setLocale(Zend_Registry::get("Zend_Locale"));
 Zend_Registry::set("Joobsbox_Translate_URL", $translateUrl);
 Zend_Controller_Router_Route::setDefaultTranslator($translateUrl);
 $front = Zend_Controller_Front::getInstance();

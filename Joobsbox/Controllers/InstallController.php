@@ -123,6 +123,7 @@ class InstallController extends Zend_Controller_Action {
 		$db->insert($config->db->prefix . "categories", array(
 		    'ID'    => 0,
 		    'Name'  => 'Uncategorized',
+		    'Link'  => 'Uncategorized',
 		    'OrderIndex' => 100,
 		    'Parent'=> 0
 		));

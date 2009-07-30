@@ -38,11 +38,21 @@ Zend_Registry::set("conf", $conf);
 
 // Timezone
 date_default_timezone_set($conf->general->timezone);
-	
-// Translation
-$translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/main', null, array('disableNotices' => true, 'scan' => Zend_Translate::LOCALE_FILENAME, 'ignore' => '$'));
 
-Zend_Registry::set("Zend_Locale", new Zend_Locale($conf->general->locale));
+$locale = $conf->general->locale;
+if(!file_exists(APPLICATION_DIRECTORY . "/Joobsbox/Languages/$locale")) {
+  $locale = "en";
+}
+
+try {	
+// Translation
+$translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages', $locale, array('disableNotices' => true, 'scan' => Zend_Translate::LOCALE_DIRECTORY, 'ignore' => '$'));
+  Zend_Registry::set("Zend_Locale", new Zend_Locale($locale));
+} catch(Exception $e) {
+  Zend_Registry::set("Zend_Locale", new Zend_Locale("en"));
+  $translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages', "en", array('disableNotices' => true, 'scan' => Zend_Translate::LOCALE_DIRECTORY, 'ignore' => '$'));
+}
+
 Zend_Registry::set("Translation_Hash", $translate->getMessages());
 Zend_Registry::set('Zend_Translate', $translate);
 

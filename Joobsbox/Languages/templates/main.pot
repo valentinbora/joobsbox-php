@@ -1,24 +1,29 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Joobsbox PHP 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-26 02:27+0200\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: Joobsbox\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-07-29 19:32+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"X-Poedit-SearchPath-1: core\n"
 "X-Poedit-Language: English\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: translate;setLabel\n"
-"X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php\n"
 "X-Poedit-SearchPath-0: Joobsbox\n"
-"X-Poedit-SearchPath-1: core\n"
+"X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php\n"
+"X-Poedit-KeywordsList: translate;setLabel\n"
 
 #: Joobsbox/Controllers/AdminController.php:126
-msgid "Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!"
-msgstr "Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!"
+msgid ""
+"Search doesn't work because Joobsbox/SearchIndexes doesn't have write "
+"permissions. Please allow the server to write to that folder!"
+msgstr ""
 
 #: Joobsbox/Controllers/CategoryController.php:38
 msgid "This category does not exist."
@@ -33,15 +38,21 @@ msgid "An error has occured within the application"
 msgstr ""
 
 #: Joobsbox/Controllers/InstallController.php:57
-msgid "There was an error connecting to the database. Make sure the connection information you provided is correct."
+msgid ""
+"There was an error connecting to the database. Make sure the connection "
+"information you provided is correct."
 msgstr ""
 
 #: Joobsbox/Controllers/InstallController.php:71
-msgid "config/config.ini.php is not writable. Please adjust the file permissions using FTP or SSH."
+msgid ""
+"config/config.ini.php is not writable. Please adjust the file permissions "
+"using FTP or SSH."
 msgstr ""
 
 #: Joobsbox/Controllers/InstallController.php:86
-msgid "config directory is not writable. Please adjust the directory permissions using FTP or SSH."
+msgid ""
+"config directory is not writable. Please adjust the directory permissions "
+"using FTP or SSH."
 msgstr ""
 
 #: Joobsbox/Controllers/InstallController.php:141
@@ -158,7 +169,9 @@ msgstr ""
 #: Joobsbox/Themes/joobsbox/layouts/index.phtml:67
 #: Joobsbox/Themes/joobsbox/layouts/integration.phtml:65
 #, php-format
-msgid "Subscribe to the full <a href=\"%s\">RSS Feed</a> and be notified when new jobs are posted."
+msgid ""
+"Subscribe to the full <a href=\"%s\">RSS Feed</a> and be notified when new "
+"jobs are posted."
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/layouts/install.phtml:40
@@ -178,7 +191,8 @@ msgid "in"
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/index/index.phtml:38
-msgid "No jobs postings are available at this time. Be the first to publish one!"
+msgid ""
+"No jobs postings are available at this time. Be the first to publish one!"
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/install/step1.phtml:11
@@ -232,7 +246,9 @@ msgid "Joobsbox installation complete!"
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:15
-msgid "Congratulations. You finished installing Joobsbox. Now please configure your administrator username and password."
+msgid ""
+"Congratulations. You finished installing Joobsbox. Now please configure your "
+"administrator username and password."
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/install/step2.phtml:18
@@ -285,7 +301,9 @@ msgid "Publish a job"
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:17
-msgid "The job has been saved. It now has to be accepted by a moderator in order to appear publicly on the site."
+msgid ""
+"The job has been saved. It now has to be accepted by a moderator in order to "
+"appear publicly on the site."
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/publish/index.phtml:19
@@ -305,10 +323,11 @@ msgid "Look for typos in the searched word(s) and, if found, correct them."
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:34
-msgid "Be less specific. Try \"web designer\" instead of \"senior web designer\"."
+msgid ""
+"Be less specific. Try \"web designer\" instead of \"senior web designer\"."
 msgstr ""
 
 #: Joobsbox/Themes/joobsbox/views/scripts/search/index.phtml:35
-msgid "Try similar words. If \"designer\" doesn't return anything, try \"design\"."
+msgid ""
+"Try similar words. If \"designer\" doesn't return anything, try \"design\"."
 msgstr ""
-
