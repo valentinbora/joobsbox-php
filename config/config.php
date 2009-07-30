@@ -47,6 +47,7 @@ if(!file_exists(APPLICATION_DIRECTORY . "/Joobsbox/Languages/$locale")) {
 try {	
 // Translation
 $translate = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages', $locale, array('disableNotices' => true, 'scan' => Zend_Translate::LOCALE_DIRECTORY, 'ignore' => '$'));
+  $translate->addTranslation("Joobsbox/Languages/$locale/LC_MESSAGES/main.mo", $locale);
   Zend_Registry::set("Zend_Locale", new Zend_Locale($locale));
 } catch(Exception $e) {
   Zend_Registry::set("Zend_Locale", new Zend_Locale("en"));

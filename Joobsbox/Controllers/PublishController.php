@@ -62,9 +62,12 @@ class PublishController extends Zend_Controller_Action
 			$categories[$key] = $value;
 		}
 		
+		$greaterThan = new Zend_Validate_GreaterThan(false, array('0'));
+		$greaterThan->setMessage($this->view->translate("Choosing a category is mandatory."));
 		$category = $form->createElement('select', 'category')
 			->setLabel('Category:')
 			->addValidator('notEmpty')
+			->addValidator($greaterThan)
 			->setRequired(true)
 			->setMultiOptions($categories);
 			
@@ -137,11 +140,11 @@ class PublishController extends Zend_Controller_Action
 	private function validateForm() {
 		$form = $this->form;
 		$publishNamespace = new Zend_Session_Namespace('PublishJob');
-		
+		$values = $form->getValues();
+
     if ($form->isValid($_POST)) {
-			$jobOperations = new Joobsbox_Model_JobOperations;
-			$searchModel = new Joobsbox_Model_Search;
-			$values = $form->getValues();
+		  $jobOperations = new Joobsbox_Model_JobOperations;
+			$searchModel = new Joobsbox_Model_Search;	
 			$hash = md5(implode("", $values));
 			
 			if(isset($publishNamespace->jobHash) && $publishNamespace->jobHash == $hash) {
@@ -202,8 +205,8 @@ class PublishController extends Zend_Controller_Action
 			$values = $form->getValues();
 			$messages = $form->getMessages();
 			$form->populate($values);
-			$this->view->form = $form;
+			$this->form = $form;
+			$this->view->form = $this->form->render();	
 		}
-		
 	}
 }

@@ -5,7 +5,7 @@ standalone = "1"
 admin_theme = "joobsbox grey"
 theme = "default"
 common_title = "JoobsBox PHP Demo"
-locale = "en"
+locale = "ro"
 timezone = "Europe/Berlin"
 posting_ttl = "30"
 

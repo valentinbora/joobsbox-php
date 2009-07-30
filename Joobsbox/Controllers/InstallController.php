@@ -22,6 +22,23 @@ class InstallController extends Zend_Controller_Action {
 	protected $_model;
 	
 	public function init() {
+	    $params = $this->getRequest()->getParams();
+	    if(isset($params['lang'])) {
+	      $conf = new Zend_Config_Ini("config/config.ini.php", null, array(
+  			  'skipExtends'        => true,
+          'allowModifications' => true)
+        );
+
+    		$conf->general->locale = $params['lang'];
+
+        // Write the configuration file
+        $writer = new Zend_Config_Writer_Ini(array(
+          'config'   => $conf,
+          'filename' => 'config/config.ini.php')
+        );
+        $writer->write();
+        $this->_redirect("install");
+	    }
 	    $config = new Zend_Config_Ini("config/config.ini.php");
 	    if(isset($config->general->restrict_install) && $config->general->restrict_install && file_exists("config/db.ini.php")) {
 		      $this->_redirect("");
@@ -37,6 +54,13 @@ class InstallController extends Zend_Controller_Action {
 	 */
 	public function step1Action() {
 		configureTheme(APPLICATION_THEME, 'install');
+		$locale = Zend_Registry::get("Zend_Locale")->getTranslationList('language', 'en');
+		foreach($locale as $key => $value) {
+		  if(!file_exists("Joobsbox/Languages/$key")) {
+		    unset($locale[$key]);
+		  }
+		}
+		$this->view->locales = $locale;
 
 		if(isset($_POST['step1'])) {
 			// Gather site data

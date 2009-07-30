@@ -21,6 +21,14 @@
 				<label for="sitename"><?php echo $this->translate('Site name'); ?></label>
 				<input type="text" name="sitename" value="<?php if(isset($_POST['sitename'])): echo $_POST['sitename']; endif; ?>" />
 			</div>
+			<div class="fieldpair">
+				<label for="sitename"><?php echo $this->translate('Language'); ?></label>
+				<select name="locale" id="locale_selector">
+          <?php foreach($this->locales as $locale => $language): ?>
+            <option value="<?php echo $locale; ?>" <?php if($this->conf->general->locale == $locale):?>selected="selected"<? endif; ?>><?php echo $language; ?></option>
+          <?php endforeach; ?>
+				</select>
+			</div>
 		</fieldset>
 		<fieldset>
 			<legend><?php echo $this->translate('Database information'); ?></legend>
