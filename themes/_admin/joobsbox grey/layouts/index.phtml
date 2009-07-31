@@ -1,0 +1,96 @@
+<?php
+/**
+ * @package Joobsbox_Themes
+ * @category Joobsbox
+ * @author Valentin Bora <contact@valentinbora.com>
+ * @version 1.0
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<?php 
+	echo $this->filter('head_html');
+	$this->headTitle($this->conf->general->common_title);
+	$this->headTitle()->prepend("Admin");
+	$this->headTitle()->setSeparator(' - ');
+	echo $this->headTitle();
+	echo $this->headMeta();
+?>
+
+<?php
+	$this->headLink()->prependStylesheet($this->themeUrl . "/css/global.css");
+	$this->headLink()->prependStylesheet($this->themeUrl . "/css/reset.css");
+	$this->headScript()
+		->prependScript($this->translateHash . 'var baseUrl = "' . $this->baseUrl . '";', 'text/javascript', array('charset' => 'UTF-8'))
+		->prependFile($this->themeUrl . '/js/functions.js', 'text/javascript')
+		->prependFile($this->baseUrl . '/public/js/lib/jquery.js', 'text/javascript')
+		->appendFile($this->baseUrl . '/public/js/lib/jquery.corner.js', 'text/javascript')
+		->appendFile($this->baseUrl . '/public/js/lib/jquery.pngFix.pack.js', 'text/javascript');
+	$this->asset->load("jqueryui");
+	$this->headScript()->appendFile($this->themeUrl . '/js/global.js', 'text/javascript');
+
+  echo $this->headLink();
+	echo $this->headScript(); 
+?>
+</head>
+<body>
+	<div id="admin-header">
+		<a href="<?php echo $this->baseUrl; ?>"> <?php echo $this->translate("Back to site"); ?></a>
+		
+		<a class="right" href="<?php echo $this->baseUrl . '/user/logout' ?>"><?php echo $this->translate("Logout"); ?></a>
+	</div>
+	
+	<div id="admin-main">
+		<ul id="admin-menu">
+			<li class="item <?php if($this->currentPluginName == "dashboard"):?>current<?php endif;?>" id="menu-dashboard"><a href="<?php echo $this->baseUrl . '/admin'; ?>"><?php echo $this->translate("Dashboard"); ?></a></li>
+			<li class="separator"></li>
+			
+			<?php /************ Here come the plugins ****************/ ?>
+			<?php foreach($this->plugins as $pluginName => $pluginOptions): ?>
+			
+			<li id="item_<?php echo $pluginName; ?>" class="item <?php if($pluginName == $this->currentPluginName):?>current<?php endif; ?>">
+				<a href="<?php echo $this->baseUrl . strtolower("/admin/$pluginName"); ?>" style="background-image: url(<?php 
+						if(isset($pluginOptions->main) && isset($pluginOptions->main->image)): 
+							echo $this->pluginsThemePath . '/' . $this->pluginPath . $pluginName . '/' . $pluginOptions->main->image; 
+						else:
+							echo $this->themeImages . '/adminPluginNoImage.png'; 
+						endif;?>);" >
+					<?php 
+						if(isset($pluginOptions->main) && isset($pluginOptions->main->{"title_" . $this->locale})) {
+							echo ucfirst($pluginOptions->main->{"title_" . $this->locale});
+						} elseif(isset($pluginOptions->main) && isset($pluginOptions->main->title)) {
+							echo ucfirst($pluginOptions->main->title);
+						} else {
+							echo ucfirst($pluginName); 
+						}
+					?>
+				</a>
+			<?php endforeach; ?>
+		</ul>
+		
+		<div id="admin-content">
+			<div id="admin-content-wrap">
+			  <?php if(count($this->alerts)): ?>
+        <div id="alert">
+        <?php foreach($this->alerts as $alert):
+                echo $alert . '<br/>';
+              endforeach; ?>
+        </div>
+        <?php endif; ?>
+        
+				<?php echo $this->layout()->content;?>
+			</div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	
+	<div id="joobsbox-admin-footer">
+      &copy;2009 JoobsBox. All rights reserved. powered by <a href="http://www.joobsbox.com" rel="external" target="_blank">joobsbox</a> + <a href="http://www.joobs.ro" rel="external" target="_blank">joobs.ro</a> + <a href="http://framework.zend.com" rel="external" target="_blank">zend framework</a>
+  </div>
+</body>
+</html>
