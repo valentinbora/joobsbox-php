@@ -2,7 +2,7 @@
 
 <div class="current-theme">
   <h2><?php echo $this->translate("Current theme"); ?></h2>
-  <img src="<?php echo $this->baseUrl . '/Joobsbox/Themes/' . $this->conf->general->theme; ?>/screenshot.png" class="current-screenshot" />
+  <img src="<?php echo $this->themesUrl . '/' . $this->conf->general->theme; ?>/screenshot.png" class="current-screenshot" />
   
   <div class="info">
     <strong><?php echo ucfirst($this->conf->general->theme); ?></strong>  
@@ -20,7 +20,7 @@
       <?php foreach($this->themes as $index => $theme): ?>
         <?php if($theme == $this->conf->general->theme): continue; endif; ?>
         <td>
-          <img src="<?php echo $this->baseUrl . '/Joobsbox/Themes/' . $theme; ?>/screenshot.png" class="theme-screenshot" /><br/>
+          <img src="<?php echo $this->themesUrl . '/' . $theme; ?>/screenshot.png" class="theme-screenshot" /><br/>
           <strong><?php echo ucfirst($theme); ?></strong>  
           <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
             <input type="submit" class="activateButton" name="activate" value="<?php echo $this->translate("Activate"); ?>" />
@@ -44,7 +44,7 @@
 <?php echo $this->form; ?>
 
 <?php
-	$this->headLink()->appendStylesheet($this->path . 'css/themes.css');
+	$this->headLink()->appendStylesheet($this->themePath . 'css/themes.css');
 	$this->asset->load("jqueryui");
-	$this->headScript()->appendFile($this->path . '/js/themes.js');
+	$this->headScript()->appendFile($this->themePath . '/js/themes.js');
 ?>

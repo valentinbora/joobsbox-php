@@ -53,14 +53,13 @@
 </div>
 
 <?php
-	$this->headLink()->appendStylesheet($this->path . 'js/jsTree/tree_component.css');
-	$this->headLink()->appendStylesheet($this->baseUrl . '/public/js/lib/jquery-ui/css/cupertino/jquery-ui-1.7.1.custom.css');
-	$this->headLink()->appendStylesheet($this->path . 'css/categories.css');
+	$this->headLink()->appendStylesheet($this->themePath . 'js/jsTree/tree_component.css');
+  $this->asset->load("jqueryui");
+	$this->headLink()->appendStylesheet($this->themePath . 'css/categories.css');
 	$this->headScript()
-		->appendFile($this->path . 'js/jsTree/_lib.js', 'text/javascript')
-		->appendFile($this->path . 'js/jsTree/tree_component.min.js', 'text/javascript')
-		->appendFile($this->path . 'js/jquery.json-1.3.min.js')
+		->appendFile($this->themePath . 'js/jsTree/_lib.js', 'text/javascript')
+		->appendFile($this->themePath . 'js/jsTree/tree_component.min.js', 'text/javascript')
+		->appendFile($this->themePath . 'js/jquery.json-1.3.min.js')
 		->appendScript('var pluginUrl="' . $this->pluginUrl . '";')
-		->appendFile($this->path . 'js/categories.js', 'text/javascript')
-		->appendFile($this->baseUrl . '/public/js/lib/jquery-ui/js/jquery-ui-1.7.custom.min.js');
+		->appendFile($this->themePath . 'js/categories.js', 'text/javascript');
 ?>

@@ -18,7 +18,7 @@
       <?php foreach($this->aPlugins as $id => $plugin): ?>
         <tr>
           <td><input type="checkbox" name="check[<?php echo $id;?>]" class="active-plugin-checkbox" /></td>
-          <td class="plugin-name" style="background-image: url(<?php echo $this->baseUrl . '/plugins/' . $id . '/' . $plugin->conf->main->image; ?>); ">
+          <td class="plugin-name" style="background-image: url(<?php echo $this->noScriptBaseUrl . '/plugins/' . $id . '/' . $plugin->conf->main->image; ?>); ">
             <?php if($plugin->isAdmin): ?>
               <a href="<?php echo $this->baseUrl . strtolower("/admin/$id"); ?>"><?php echo $plugin->conf->main->title_en; ?></a>
             <?php else: ?>
@@ -64,7 +64,7 @@ endif; ?>
       <?php foreach($this->inactivePlugins as $id => $plugin): ?>
         <tr>
           <td><input type="checkbox" name="check[<?php echo $id;?>]" class="inactive-plugin-checkbox" /></td>
-          <td class="plugin-name" style="background-image: url(<?php echo $this->baseUrl . '/plugins/' . $id . '/' . $plugin->conf->main->image; ?>); ">
+          <td class="plugin-name" style="background-image: url(<?php echo $this->noScriptBaseUrl . '/plugins/' . $id . '/' . $plugin->conf->main->image; ?>); ">
             <?php echo $plugin->conf->main->title_en; ?>
           </td>
           <td><?php echo $plugin->conf->main->version; ?></td>
@@ -84,12 +84,12 @@ endif; ?>
 <?php endif;
 
 $this->asset->load("jqueryui");
-$this->headScript()->appendFile($this->path . '/js/plugins.js'); 
+$this->headScript()->appendFile($this->themePath . '/js/plugins.js'); 
 ?>
 
 
 <?php
-	$this->headLink()->appendStylesheet($this->path . 'css/plugins.css');
+	$this->headLink()->appendStylesheet($this->themePath . 'css/plugins.css');
 ?>
 
 <div id="dialog">

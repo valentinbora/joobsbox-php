@@ -20,7 +20,7 @@ class Themes extends Joobsbox_Plugin_AdminBase
     $config = Zend_Registry::get("conf");
     
     $themes = array();
-    foreach(new DirectoryIterator('Joobsbox/Themes') as $theme) {
+    foreach(new DirectoryIterator('themes') as $theme) {
       $name = $theme->getFilename();
       if($name[0] != '.' && $theme->isDir() && $name != '_admin') {
         $themes[$theme->getFilename()] = $theme->getFilename();
@@ -29,7 +29,7 @@ class Themes extends Joobsbox_Plugin_AdminBase
     $this->view->themes = $themes;
     
     $adminThemes = array();
-    foreach(new DirectoryIterator('Joobsbox/Themes/_admin') as $theme) {
+    foreach(new DirectoryIterator('themes/_admin') as $theme) {
       $name = $theme->getFilename();
       if(!$theme->isDot() && $theme->isDir()) {
         $adminThemes[$theme->getFilename()] = $theme->getFilename();
@@ -58,22 +58,22 @@ class Themes extends Joobsbox_Plugin_AdminBase
 	
 	private function deleteTheme($theme) {
 	  if(in_array($theme, $this->view->themes)) {
-	    $this->currentlyProcessedTheme = realpath("Joobsbox/Themes/" . $theme) . '/';
-	    if(!file_exists("Joobsbox/Themes/.Trash")) {
-	      @mkdir("Joobsbox/Themes/.Trash");
-	      @exec("chmod go+w Joobsbox/Themes/.Trash");
+	    $this->currentlyProcessedTheme = realpath("themes/" . $theme) . '/';
+	    if(!file_exists("themes/.Trash")) {
+	      @mkdir("themes/.Trash");
+	      @exec("chmod go+w themes/.Trash");
 	    }
 	    
-	    if(file_exists("Joobsbox/Themes/.Trash")) {  
-	      @exec(escapeshellcmd('mv "Joobsbox/Themes/' . $theme . '" "Joobsbox/Themes/.Trash/"'));
-	      if(file_exists("Joobsbox/Themes/" . $theme)) {
-	        $this->alerts[] = $this->view->translate("Could not move the selected theme to trash. Maybe the directory 'Joobsbox/Themes/.Trash/' doesn't have the required permissions.");
+	    if(file_exists("themes/.Trash")) {  
+	      @exec(escapeshellcmd('mv "themes/' . $theme . '" "themes/.Trash/"'));
+	      if(file_exists("themes/" . $theme)) {
+	        $this->alerts[] = $this->view->translate("Could not move the selected theme to trash. Maybe the directory 'themes/.Trash/' doesn't have the required permissions.");
 		    } else {
 		      header("Location: " . $_SERVER['REQUEST_URI']);
 		      exit();
 		    }
 		  } else {
-		    $this->alerts[] = $this->view->translate("The directory 'Joobsbox/Themes/.Trash/' doesn't exist and I couldn't create it. I tried, but still didn't succeed.");
+		    $this->alerts[] = $this->view->translate("The directory 'themes/.Trash/' doesn't exist and I couldn't create it. I tried, but still didn't succeed.");
 		  }
 		} else {
 		  $this->alerts[] = $this->view->translate("The theme you are trying to delete doesn't exist!");

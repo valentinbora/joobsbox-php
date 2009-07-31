@@ -1,6 +1,6 @@
 <?php
 /**
- * Joobsbox Settings plugin
+ * Joobsbox Users plugin
  *
  * LICENSE
  *
@@ -14,48 +14,44 @@
  */
  
 /**
- * Setings plugin class
+ * Users plugin class
  * @package	Joobsbox_Plugins
  * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
  * @license	   http://joobsbox.com/joobsbox-php-license
  */
 
-class Settings extends Joobsbox_Plugin_AdminBase
+class Users extends Joobsbox_Plugin_AdminBase
 {
   public $textItems, $checkItems; 
   
 	function init() {
-		$this->textItems = array(
-      "general" => array(
-        "jobs_per_categ"  => $this->view->translate("#Jobs per category (homepage)"), 
-        "common_title"    => $this->view->translate("Site title"),
-        "posting_ttl"     => $this->view->translate("Job time to live (days)")
-      ),
-      "rss"     => array(
-        "all_jobs_count"      => $this->view->translate("Number of jobs in general RSS feed"),
-        "category_jobs_count" => $this->view->translate("Number of jobs per category feed")
-      )
-    );
-    $this->checkItems = array(
-      "general" => array(
-        "cache"           => $this->view->translate("Enable site wide caching")
-      )
-    );
+	}
+	
+	public function addAction() {
+    
 	}
 	
 	function indexAction() {
+	  // Edit your current profile
+	  $currentUsername = Zend_Auth::getInstance()->getIdentity();
+	  
 		$form = new Zend_Form;
-		$form->setAction($_SERVER['REQUEST_URI'])->setMethod('post')->setAttrib("id", "formPublish");
+		$form->setAction($_SERVER['REQUEST_URI'])->setMethod('post');
 	
-		$jobs_per_categ = $form->createElement('text', 'jobs_per_categ')
-			->setLabel('Job title:')
+		$username = $form->createElement('text', 'username')
+			->setLabel('Username:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
-			->addFilter('HtmlEntities')
 			->addValidator('notEmpty')
-			->setDescription('Ex: "Flash Designer" or "ASP.NET Programmer"')
 			->setRequired(true);
 			
+		$password = $form->createElement('password', 'password')
+		  ->setLabel('Password:');
+		  
+		$password_v = $form->createElement('password', 'password_v')
+		  ->setLabel('Password (verification):');
+    
+		
 		$submit = $form->createElement('submit', 'submit')
 			->setLabel("Set");
 			
