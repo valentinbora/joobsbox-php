@@ -146,6 +146,7 @@ class PublishController extends Zend_Controller_Action
 		  $jobOperations = new Joobsbox_Model_JobOperations;
 			$searchModel = new Joobsbox_Model_Search;	
 			$hash = md5(implode("", $values));
+			$values = $form->getValues();
 			
 			if(isset($publishNamespace->jobHash) && $publishNamespace->jobHash == $hash) {
 				throw new Exception($this->view->translate("You are not allowed to add the same job multiple times."));
@@ -174,10 +175,13 @@ class PublishController extends Zend_Controller_Action
 					$publishNamespace->jobHash = $hash;
 					Joobsbox_Helpers_Cache::clearAllCache();
 				} catch (Exception $e) {
+				  dd("tralala");
 					throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
 				}
 			} else {
 				// Ok, here we go: insert the job into the database --- bombs away!
+				$values = $form->getValues();
+
 				try {
 				  // Needs posting_ttl configuration directive
 				  $this->_conf = Zend_Registry::get("conf");
@@ -198,6 +202,7 @@ class PublishController extends Zend_Controller_Action
 					$this->_helper->event("job_posted", $values);
 					$publishNamespace->jobHash = $hash;
 				} catch (Exception $e) {
+				  dd($e);
 					throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
 				}
 			}

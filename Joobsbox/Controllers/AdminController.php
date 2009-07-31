@@ -24,7 +24,7 @@ class AdminController extends Zend_Controller_Action
   private $alerts = array();
   private $pluginPath = "plugins/";
   private $currentPlugin;
-  private $corePlugins = array("Categories", "Postings", "Themes", "Settings", "Plugins");
+  private $corePlugins = array("Postings", "Categories", "Themes", "Settings", "Plugins");
 
   function sortFunction($x, $y) {
     if(in_array($x, $this->corePlugins) && in_array($y, $this->corePlugins)) {
@@ -55,6 +55,10 @@ class AdminController extends Zend_Controller_Action
 
     $this->_conf = Zend_Registry::get("conf");
     configureTheme("_admin/" . $this->_conf->general->admin_theme);
+    
+    if(isset($this->_conf->admin->menu)) {
+      $this->corePlugins = explode(",", $this->_conf->admin->menu);
+    }
 
     $this->plugins = array();
     $this->menuPlugins = array();
@@ -92,10 +96,30 @@ class AdminController extends Zend_Controller_Action
     $this->view->otherPlugins= $otherPlugins;
     $this->view->pluginPath = $this->pluginPath;
     $this->view->plugins = $this->menuPlugins;
+    $this->view->pluginsThemePath = str_replace("index.php", "", $this->view->baseUrl);
     $this->view->locale  = Zend_Registry::get("Zend_Locale");
     
     $this->alerts = array_merge($this->alerts, $this->_helper->FlashMessenger->getMessages());
     $this->view->alerts = $this->alerts;
+  }
+  
+  public function sortmenuAction() {
+    $conf = new Zend_Config_Ini("config/config.ini.php", null, array(
+		  'skipExtends'        => true,
+      'allowModifications' => true)
+    );
+    
+    $order = implode(",", $_POST['item']);
+		
+		$conf->admin->menu = $order;
+		
+		// Write the configuration file
+    $writer = new Zend_Config_Writer_Ini(array(
+      'config'   => $conf,
+      'filename' => 'config/config.ini.php')
+    );
+    $writer->write();
+    exit(0);
   }
 
   public function indexAction() {
@@ -115,7 +139,7 @@ class AdminController extends Zend_Controller_Action
   }
 
   private function prepareDashboard() {
-    $dashboardPlugins = file("config/adminDashboard.php");
+    $dashboardPlugins = explode(",", $this->_conf->admin->dashboar);
     $this->view->dashboard = array();
 
     foreach($dashboardPlugins as $pluginName) {
@@ -170,6 +194,7 @@ class AdminController extends Zend_Controller_Action
     $this->view->currentPluginName = $pluginName;
     $plugin->view = $this->view;
     $plugin->path = $plugin->view->path = $this->view->baseUrl . '/' . $this->pluginPath . $pluginName . "/";
+    $plugin->view->themePath =  str_replace("index.php", "", $plugin->path); 
     $plugin->dirPath = $this->pluginPath . $pluginName . '/';
     $plugin->_helper = $this->_helper;
     $plugin->alerts  = &$this->alerts;
@@ -180,6 +205,11 @@ class AdminController extends Zend_Controller_Action
       $plugin->init();
     }
 
+    $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
+    $viewRenderer->view->addScriptPath($this->pluginPath . $pluginName . '/views');
+    $viewRenderer->setNoController(true);
+    $viewRenderer->setViewScriptPathNoControllerSpec(':action.:suffix');
+    
     if($return) {
       $controllerAction = $this->getRequest()->getParam('action');
       $action = substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], $controllerAction)+strlen($controllerAction)+1);
@@ -189,22 +219,21 @@ class AdminController extends Zend_Controller_Action
       $action .= "Action";
       if(method_exists($plugin, $action)) {
 	      call_user_func(array($plugin, $action));
-      } elseif(method_exists($plugin, "indexAction")) {
+	       $this->render('add', null, true);
+	    } elseif(method_exists($plugin, "indexAction")) {
 	      call_user_func(array($plugin, "indexAction"));
       }
     }
 
     $translate = Zend_Registry::get("Zend_Translate");
     $locale	   = Zend_Registry::get("Zend_Locale");
+    
     if(file_exists($this->pluginPath . $pluginName . '/languages/' . $locale . '.mo') && substr($locale, 0, 2) != 'en')
       $translate->addTranslation($this->pluginPath . $pluginName . '/languages/' . $locale . '.mo', $locale);
+    
     Zend_Registry::set("Translation_Hash", $translate->getMessages());
     Zend_Registry::get("TranslationHelper")->regenerateHash();
 
-    $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
-    $viewRenderer->view->addScriptPath($this->pluginPath . $pluginName . '/views');
-    $viewRenderer->setNoController(true);
-    $viewRenderer->setViewScriptPathNoControllerSpec(':action.:suffix');
     $tit = "title_" . Zend_Registry::get("Zend_Locale");
     $this->view->headTitle()->prepend($this->plugins[$pluginName]->main->$tit);
 

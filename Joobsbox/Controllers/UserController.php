@@ -47,9 +47,7 @@ class UserController extends Zend_Controller_Action {
 			->setLabel('Password:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
-			->addFilter('HtmlEntities')
-			->addValidator('notEmpty')
-			->setRequired(true);
+			->addFilter('HtmlEntities');
 		
 		$submit = $this->loginForm->createElement('submit', 'submit')
 			->setLabel("Login");
@@ -62,9 +60,9 @@ class UserController extends Zend_Controller_Action {
 		// </createForm>
 		
 		if ($this->getRequest()->isPost()) {
-            $this->login();
+		  $this->login();
 			return;
-        } else {
+    } else {
 			if(Zend_Auth::getInstance()->hasIdentity()) {
 				$this->_redirect("");
 			}

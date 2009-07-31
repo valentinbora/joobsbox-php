@@ -22,10 +22,6 @@ class Joobsbox_Helpers_Cache
 {
 	
 	public static function clearAllCache() {
-		foreach(new DirectoryIterator("cache") as $file) {
-			if(!$file->isDot()) {
-				@unlink("cache/" . $file->getFilename());
-			}
-		}
+	  Zend_Registry::get("cache")->clean();
 	}
 }

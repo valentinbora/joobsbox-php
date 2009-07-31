@@ -24,7 +24,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler'); 
 	
         switch ($errors->type) { 
-			// Mesaj primit de la aplicatie
+			// Message received from the application
 			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER:
 				$this->view->message = $errors->exception->getMessage();
 				$this->getResponse()->setHttpResponseCode(404);
