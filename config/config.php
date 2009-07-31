@@ -8,33 +8,36 @@ $loader = Zend_Loader_Autoloader::getInstance()->registerNamespace('Joobsbox_');
 	
 // Timezone default
 date_default_timezone_set("GMT");
-// Set up caching
-$frontendOptions = array(
-	'default_options' => array(
-		'cache_with_session_variables' => true,
-		'cache_with_cookie_variables' => true,
-		'make_id_with_session_variables' => false,
-		'make_id_with_cookie_variables' => false
-	),
-	'regexps' => array(
-		'/$' => array("cache" => true)
-	)
-);
 
-$backendOptions = array('cache_dir' => 'cache/');
-
-//$cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
-
-$urlChunks = explode("/", $_SERVER['REQUEST_URI']);
-if(!in_array("admin", $urlChunks)) {
-//	$cache->start();
-}	
-
-//Zend_Registry::set("cache", $cache);
-	
 // Static parameters
 $conf = new Zend_Config_Ini(APPLICATION_DIRECTORY . "/config/config.ini.php");
 Zend_Registry::set("conf", $conf);
+
+// Set up caching
+if($conf->general->cache) {
+  $frontendOptions = array(
+  	'default_options' => array(
+  		'cache_with_session_variables' => true,
+  		'cache_with_cookie_variables' => true,
+  		'make_id_with_session_variables' => false,
+  		'make_id_with_cookie_variables' => false
+  	),
+  	'regexps' => array(
+  		'/$' => array("cache" => true)
+  	)
+  );
+
+  $backendOptions = array('cache_dir' => 'Joobsbox/Cache/');
+
+  $cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
+
+  $urlChunks = explode("/", $_SERVER['REQUEST_URI']);
+  if(!in_array("admin", $urlChunks)) {
+  	$cache->start();
+  }	
+
+  Zend_Registry::set("cache", $cache);
+}
 
 // Timezone
 date_default_timezone_set($conf->general->timezone);
@@ -81,15 +84,27 @@ if(file_exists(APPLICATION_DIRECTORY . '/config/db.ini.php')) {
 }
 
 function getStaticSalt() {
-	if(!file_exists(APPLICATION_DIRECTORY . "/config/passwordSalt.php")) {
+  global $conf;
+	if(!isset($conf->db->passwordSalt)) {
 		$salt = "";
 		for ($i = 0; $i < 50; $i++) {
 			$salt .= chr(rand(97, 122));
 		}
-		file_put_contents("config/passwordSalt.php", $salt);
+		$tempConf = new Zend_Config_Ini("config/config.ini.php", null, array(
+		  'skipExtends'        => true,
+      'allowModifications' => true)
+    );
+		
+		$tempConf->db->passwordSalt = $salt;
+		
+    $writer = new Zend_Config_Writer_Ini(array(
+      'config'   => $tempConf,
+      'filename' => 'config/config.ini.php')
+    );
+    $writer->write();
 		Zend_Registry::set('staticSalt', $salt);
 	} else {
-		Zend_Registry::set('staticSalt', file_get_contents(APPLICATION_DIRECTORY . "/config/passwordSalt.php"));
+		Zend_Registry::set('staticSalt', $conf->db->passwordSalt);
 	}
 }
 
@@ -99,11 +114,25 @@ if(isset($joobsbox_base_url)) {
 	  $baseUrl = substr($baseUrl, 0, strlen($baseUrl)-1);
 	}
 } else {
-	$baseUrl = str_replace("\\", "/", dirname($_SERVER['PHP_SELF']));
-	if($baseUrl == "/")
-		$baseUrl = "";
-}
+  // Generate base url to build from
+	$baseUrl = str_replace("\\", "/", $_SERVER['SCRIPT_NAME']);
+	if(strpos($_SERVER['REQUEST_URI'], "index.php") !== FALSE) {
 
+  } else {
+	  $baseUrl = substr($baseUrl, 0, strpos($baseUrl, "index.php"));
+    $baseUrl = explode("/", $baseUrl);
+
+    foreach($baseUrl as $key => $value) {
+      if($value == "") {
+        unset($baseUrl[$key]);
+      }
+    }
+    $baseUrl = array_values($baseUrl);
+    $baseUrl = "/" . implode("/", $baseUrl);
+  }
+  
+  if($baseUrl == "/") $baseUrl = "";
+}
 
 define("BASE_URL", $baseUrl);
 define("APPLICATION_THEME", $conf->general->theme);

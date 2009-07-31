@@ -1,4 +1,5 @@
 <?php
+
 $conf = Zend_Registry::get("conf");
 $translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages', null, array('disableNotices' => true, 'scan' => Zend_Translate::LOCALE_DIRECTORY, 'ignore' => '$'));
 $translateUrl->setLocale(Zend_Registry::get("Zend_Locale"));
@@ -23,10 +24,22 @@ $mainRoute = new Zend_Controller_Router_Route(
     )
 );
 
+$mainRoute2 = new Zend_Controller_Router_Route(
+    'index.php/:@controller/:@action/*',
+    array(
+        'controller' => 'index',
+        'action'     => 'index'
+    )
+);
+
 $router->addRoute("main", $mainRoute);
+$router->addRoute("main2", $mainRoute2);
 $router->addRoute("rss", $rssRoute);
 
 $mainRoute->assemble(array());
 $mainRoute->assemble(array());
+
+$mainRoute2->assemble(array());
+$mainRoute2->assemble(array());
 
 $front->setRouter($router);

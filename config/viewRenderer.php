@@ -3,7 +3,8 @@ $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRender
 $viewRenderer->setNoRender();
 $viewRenderer->initView(); 
 $viewRenderer->view->baseUrl = BASE_URL;
-$viewRenderer->view->publicUrl = BASE_URL . "/public";
+$viewRenderer->view->noScriptBaseUrl = str_replace("index.php", "", BASE_URL);
+$viewRenderer->view->publicUrl = str_replace("index.php", "", BASE_URL) . "/public";
 
 function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 	global $baseUrl;
@@ -11,15 +12,16 @@ function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 	$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
 
   if($layoutName == 'integration') {
-	  $viewRenderer->view->themeUrl		  = BASE_URL . '/public/' . $theme;
-	  $viewRenderer->view->themeImages	= BASE_URL . '/public/' . $theme . "/images";
+	  $viewRenderer->view->themeUrl		  = str_replace("index.php", "", BASE_URL) . '/public/' . $theme;
+	  $viewRenderer->view->themeImages	= $viewRenderer->view->themeUrl . "/images";
 	} else {
-	  $viewRenderer->view->themeUrl		  = BASE_URL . "/Joobsbox/Themes/" . $theme;
-	  $viewRenderer->view->themeImages	= BASE_URL . "/Joobsbox/Themes/" . $theme . "/images";
+	  $viewRenderer->view->themeUrl		  = str_replace("index.php", "", BASE_URL) . "/themes/" . $theme;
+	  $viewRenderer->view->themesUrl	  = str_replace("index.php", "", BASE_URL) . "/themes/";
+	  $viewRenderer->view->themeImages	= $viewRenderer->view->themeUrl . "/images";
 	}
 	$viewRenderer->view->theme			  = $theme;
 	$viewRenderer->view->asset        = new Joobsbox_Helpers_AssetHelper;
-	$viewRenderer->view->setScriptPath(APPLICATION_DIRECTORY . '/Joobsbox/Themes/' . $theme . '/views/scripts');
+	$viewRenderer->view->setScriptPath(APPLICATION_DIRECTORY . '/themes/' . $theme . '/views/scripts');
 
 	$viewRenderer->view->setEncoding("UTF-8");
 	$viewRenderer->view->setHelperPath(APPLICATION_DIRECTORY . "/Joobsbox/Helpers/");
@@ -30,11 +32,11 @@ function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 	
 	if($conf->general->standalone) {
 		if($layout = Zend_Layout::getMvcInstance()) {
-			$layout->setLayoutPath(APPLICATION_DIRECTORY . '/Joobsbox/Themes/' . $theme . '/layouts');
+			$layout->setLayoutPath(APPLICATION_DIRECTORY . '/themes/' . $theme . '/layouts');
 			$layout->setLayout($layoutName);
 		} else {
 			Zend_Layout::startMvc(array(
-				'layoutPath' => APPLICATION_DIRECTORY . '/Joobsbox/Themes/' . $theme . '/layouts',
+				'layoutPath' => APPLICATION_DIRECTORY . '/themes/' . $theme . '/layouts',
 				'layout' => $layoutName
 			));
 		}
