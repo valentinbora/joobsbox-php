@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,9 +30,9 @@ require_once 'Zend/Validate/Interface.php';
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Element.php 13615 2009-01-13 19:52:10Z norm2782 $
+ * @version    $Id: Element.php 16859 2009-07-20 00:55:03Z yoshida@zend.co.jp $
  */
 class Zend_Form_Element implements Zend_Validate_Interface
 {
@@ -1860,7 +1860,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Remove a single decorator
      *
      * @param  string $name
-     * @return bool
+     * @return Zend_Form_Element
      */
     public function removeDecorator($name)
     {
