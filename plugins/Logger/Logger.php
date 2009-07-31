@@ -1,12 +1,16 @@
 <?php
 class Logger extends Joobsbox_Plugin_Base {
 	function __construct() {
-		$this->writer = new Zend_Log_Writer_Firebug();
-		$this->logger = new Zend_Log($this->writer);
+		$firebugWriter = new Zend_Log_Writer_Firebug();
+		$this->firebugLogger = new Zend_Log($firebugWriter);
+		
+		$fileWriter = new Zend_Log_Writer_Stream(APPLICATION_DIRECTORY . '/Joobsbox/Logs/messages');
+    $this->fileLogger = new Zend_Log($fileWriter);
 	}
 	
 	function log($what) {
-		$this->logger->log($what, Zend_Log::INFO);
+		$this->firebugLogger->log($what, Zend_Log::INFO);
+		$this->fileLogger->log($what, Zend_Log::INFO);
 	}
 	
 	function event_error($what) {
