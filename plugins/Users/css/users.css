@@ -19,10 +19,6 @@ a.expand {
   display: block;
   padding: 5px 23px;
 
-  background-image: url('../images/settings_18.png');
-  background-repeat: no-repeat;
-  background-position: left center;
-  
   text-transform: uppercase;
   font-size: 120%;
 }
@@ -31,7 +27,7 @@ fieldset {
   margin: 0;
 }
 
-fieldset > dl {
+dl {
   background-color: #FAFAFA;
   padding: 10px;
   margin-left: 0;
@@ -44,4 +40,8 @@ dl dd {
 dd input {
   margin: 5px;
   width: 30%;
+}
+
+dt label {
+  padding-left: 10px;
 }

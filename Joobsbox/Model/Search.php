@@ -64,7 +64,8 @@ class Joobsbox_Model_Search {
 	}
 	
 	public function addJob($jobData) {
-	  if(!$this->_enabled) return false();
+	  if(!$this->_enabled) return false;
+	  
 		// Delete old job with the same id from index
 		$term = new Zend_Search_Lucene_Index_Term($jobData['ID'], 'ID');
 		$hits  = $this->_index->termDocs($term);

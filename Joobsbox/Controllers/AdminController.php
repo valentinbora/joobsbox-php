@@ -139,7 +139,7 @@ class AdminController extends Zend_Controller_Action
   }
 
   private function prepareDashboard() {
-    $dashboardPlugins = explode(",", $this->_conf->admin->dashboar);
+    $dashboardPlugins = explode(",", $this->_conf->admin->dashboard);
     $this->view->dashboard = array();
 
     foreach($dashboardPlugins as $pluginName) {
@@ -219,7 +219,7 @@ class AdminController extends Zend_Controller_Action
       $action .= "Action";
       if(method_exists($plugin, $action)) {
 	      call_user_func(array($plugin, $action));
-	       $this->render('add', null, true);
+	      $this->render('add', null, true);
 	    } elseif(method_exists($plugin, "indexAction")) {
 	      call_user_func(array($plugin, "indexAction"));
       }

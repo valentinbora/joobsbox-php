@@ -9,6 +9,10 @@ class Logger extends Joobsbox_Plugin_Base {
 		$this->logger->log($what, Zend_Log::INFO);
 	}
 	
+	function event_error($what) {
+	  $this->log($what);
+	}
+	
 	function event_retrieve_jobs() {
 		$this->log("Retrieved jobs");
 	}

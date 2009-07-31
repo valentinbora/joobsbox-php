@@ -22,6 +22,8 @@ class Joobsbox_Helpers_Cache
 {
 	
 	public static function clearAllCache() {
-	  Zend_Registry::get("cache")->clean();
+	  if(Zend_Registry::isRegistered("cache")) {
+	    Zend_Registry::get("cache")->clean();
+	  }
 	}
 }

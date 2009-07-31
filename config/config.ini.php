@@ -1,5 +1,6 @@
 [general]
 dev = "1"
+demo = "0"
 jobs_per_categ = "10"
 standalone = "1"
 admin_theme = "joobsbox grey"
@@ -26,5 +27,5 @@ users = "users"
 
 [admin]
 dashboard = "Categories,Postings"
-menu = "Postings,Themes,Settings,Categories,Users,Plugins"
+menu = "Postings,Settings,Themes,Categories,Users,Plugins"
 
