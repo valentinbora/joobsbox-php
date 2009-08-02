@@ -22,6 +22,7 @@ function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 	$viewRenderer->view->theme			  = $theme;
 	$viewRenderer->view->asset        = new Joobsbox_Helpers_AssetHelper;
 	$viewRenderer->view->setScriptPath(APPLICATION_DIRECTORY . '/themes/' . $theme . '/views/scripts');
+	$viewRenderer->view->addScriptPath(APPLICATION_DIRECTORY . '/themes/core/views/scripts');
 
 	$viewRenderer->view->setEncoding("UTF-8");
 	$viewRenderer->view->setHelperPath(APPLICATION_DIRECTORY . "/Joobsbox/Helpers/");

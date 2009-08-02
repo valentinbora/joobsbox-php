@@ -19,7 +19,8 @@ Zend_Registry::get("TranslationHelper")->regenerateHash();
 
 require "core/errorHandler.php";
 
-Zend_Controller_Action_HelperBroker::addPrefix('Joobsbox_Helpers');
+Zend_Controller_Action_HelperBroker::addPrefix("Joobsbox_Helpers");
+Zend_Controller_Action_HelperBroker::addPrefix("Zend_Controller_Action_Helper");
 
 if(!isset($testing)) {
 	$front = Zend_Controller_Front::getInstance();

@@ -253,6 +253,22 @@ h1.dashboard-title {
   display: block;
 }
 
+.button {
+	-moz-border-radius-bottomleft:12px;
+	-moz-border-radius-bottomright:12px;
+	-moz-border-radius-topleft:12px;
+	-moz-border-radius-topright:12px;
+	background:#21759B url(../images/button-grad.png) repeat-x scroll left top;
+	border-color:#298CBA !important;
+	border-style: none;
+	color:#FFFFFF !important;
+	font-size:16px;
+	font-weight:bold;
+	padding:5px 10px 5px 10px !important;
+	text-decoration: none;
+	margin: 5px;
+}
+
 /* Footer */
 #joobsbox-admin-footer {
   position: relative;

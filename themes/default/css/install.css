@@ -13,6 +13,10 @@
   text-align: center;
 }
 
+dl.zend_form, dl.zend_form dt {
+  text-align: center;
+}
+
 #installation	{
   padding: 10px; 
   color: #333;
@@ -27,18 +31,40 @@
   font-size: 90%; 
   font-weight: bold;
 }
+
+#installation dl {
+  border: 1px dotted #464646;
+  padding: 5px;
+}
+
+ul.errors {
+  background-color: #EF1A14; 
+  color: #FFF;
+}
+
+#installation dt {
+  padding-top: 5px;
+  background-color: #464646;
+}
+
+#installation dd {
+  background-color: #464646; 
+  width: 100%;
+  margin: 0;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
 #installation .fieldpair {
   padding: 5px; 
   margin: 5px; 
   background-color: #464646; 
   line-height: 1.8em;
 }
+
 #installation label	{
   font-size: 90%; 
   font-weight: bold; 
-  width: 35%; 
-  display: block; 
-  float: left; 
   color: #EEE;
 }
 #installation .error {

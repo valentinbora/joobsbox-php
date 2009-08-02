@@ -22,7 +22,7 @@ class Themes extends Joobsbox_Plugin_AdminBase
     $themes = array();
     foreach(new DirectoryIterator('themes') as $theme) {
       $name = $theme->getFilename();
-      if($name[0] != '.' && $theme->isDir() && $name != '_admin') {
+      if($name[0] != '.' && $theme->isDir() && $name != '_admin' && $name != 'core') {
         $themes[$theme->getFilename()] = $theme->getFilename();
       }
     }
@@ -79,15 +79,4 @@ class Themes extends Joobsbox_Plugin_AdminBase
 		  $this->alerts[] = $this->view->translate("The theme you are trying to delete doesn't exist!");
 		}
 	}
-	
-	/*private function traverseAndDelete($path) {
-    foreach(new DirectoryIterator($path) as $file) {
-      if(!$file->isDot()) {
-        echo str_replace($this->currentlyProcessedTheme, "", $file->getPathname()) . '<br/>';
-        if($file->isDir()) {
-          $this->traverseAndDelete($file->getPathname());
-        }
-      }
-    }
-  }*/
 }

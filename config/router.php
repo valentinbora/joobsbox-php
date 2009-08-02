@@ -13,7 +13,7 @@ $front = Zend_Controller_Front::getInstance();
 $router = $front->getRouter();
 
 $rssRoute = new Zend_Controller_Router_Route(  
-	'rss/@category/:category',  
+	'rss/@category/:category',
     array(
 		'controller' => 'rss',  
 		'action' => 'index'

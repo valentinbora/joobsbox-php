@@ -1,0 +1,18 @@
+<h1 class="dashboard-title"><?php echo $this->translate("Upgrades"); ?></h1>
+
+<h2><?php echo $this->translate("Application core"); ?></h2>
+<div class="info">
+  <?php if($this->coreUpgrade): ?>
+  <?php echo $this->translate("There's a new version of JoobsBox available."); ?><br/>
+  
+  <a href="upgradecore" class="button" id="upgradecore"><?php echo $this->translate('Click here to upgrade to version ') . $this->latestVersion; ?></a>
+  <?php else: ?>
+  <?php echo $this->translate("Your JoobsBox installation is up to date."); ?>
+  <?php endif; ?>
+</div>
+
+<?php
+	$this->headLink()->appendStylesheet($this->themePath . 'css/upgrades.css');
+	$this->headScript()
+		->appendFile($this->themePath . 'js/upgrades.js', 'text/javascript');
+?>

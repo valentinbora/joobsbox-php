@@ -126,68 +126,102 @@ class InstallController extends Zend_Controller_Action {
 	 */
 	public function step2Action() {
 		configureTheme(APPLICATION_THEME, 'install');
+		$session = new Zend_Session_Namespace('Install');
 		
-		$config = new Zend_Config_Ini('config/config.ini.php');
-		$db = Zend_Registry::get("db");
-		$sql = file_get_contents("sql/base.sql");
-		$sql = str_replace("{#prefix#}", $config->db->prefix, $sql);
-		$sql = str_replace("\r\n", "\n", $sql);
-		$sql = explode("\n", $sql);
-		$qry = "";
-		foreach($sql as $line) {
-		    if(trim($line) != "" && strpos($line, "--") === FALSE) {
-			$qry .= $line;
-			if(preg_match("/;[\040]*\$/", $line)) {
-			    $db->query($qry);
-			    $qry = "";
-			}
-		    }
-		}
-		$db->delete($config->db->prefix . "categories", array("ID=0"));
-		$db->insert($config->db->prefix . "categories", array(
-		    'ID'    => 0,
-		    'Name'  => 'Uncategorized',
-		    'Link'  => 'Uncategorized',
-		    'OrderIndex' => 100,
-		    'Parent'=> 0
-		));
+		if(!isset($session->populated_db)) {
+		  $config = new Zend_Config_Ini('config/config.ini.php');
+  		$db = Zend_Registry::get("db");
+  		$sql = file_get_contents("sql/base.sql");
+  		$sql = str_replace("{#prefix#}", $config->db->prefix, $sql);
+  		$sql = str_replace("\r\n", "\n", $sql);
+  		$sql = explode("\n", $sql);
+  		$qry = "";
+  		foreach($sql as $line) {
+  		    if(trim($line) != "" && strpos($line, "--") === FALSE) {
+  			$qry .= $line;
+  			if(preg_match("/;[\040]*\$/", $line)) {
+  			    $db->query($qry);
+  			    $qry = "";
+  			}
+  		    }
+  		}
+  		$db->delete($config->db->prefix . "categories", array("ID=0"));
+  		$db->insert($config->db->prefix . "categories", array(
+  		    'ID'    => 0,
+  		    'Name'  => 'Uncategorized',
+  		    'Link'  => 'Uncategorized',
+  		    'OrderIndex' => 100,
+  		    'Parent'=> 0
+  		));
+  		
+  		$session->populated_db = true;
+	  } 
+		
+		// Make the form
+		$this->adminForm = new Zend_Form;
+		$this->adminForm->setAction("step2/")->setMethod('post')->setLegend('Administrator credentials');
+	
+		$realname = $this->adminForm->createElement('text', 'realname')
+			->setLabel('Your name:')
+			->addFilter('StripTags')
+			->addFilter('StringTrim')
+			->addFilter('HtmlEntities')
+			->addValidator('notEmpty')
+			->setRequired(true);
+			
+		$username = $this->adminForm->createElement('text', 'username')
+			->setLabel('Username:')
+			->addFilter('StripTags')
+			->addFilter('StringTrim')
+			->addFilter('HtmlEntities')
+			->addValidator('notEmpty')
+			->setRequired(true);
+			
+		$password = $this->adminForm->createElement('text', 'password')
+			->setLabel('Password:')
+			->addFilter('StripTags')
+			->addFilter('StringTrim')
+			->addFilter('HtmlEntities')
+			->addValidator('notEmpty')
+			->setRequired(true);
+		
+		$email = $this->adminForm->createElement('text', 'email')
+			->setLabel('Email:')
+			->addFilter('StripTags')
+			->addFilter('StringTrim')
+			->addFilter('HtmlEntities')
+			->addValidator('notEmpty')
+			->addValidator('EmailAddress')
+			->setRequired(true);
+			
+		$submit = $this->adminForm->createElement('submit', 'Save')
+			->setLabel('Save');
+			
+		$this->adminForm
+		  ->addElement($realname)
+		  ->addElement($username)
+		  ->addElement($password)
+		  ->addElement($email)
+		  ->addElement($submit);
+		
+		if ($this->getRequest()->isPost()) {
+        $this->validateAdminUser();
+		    return;
+    }
+		$this->view->form = $this->adminForm->render();
 	}
+	
+	public function validateAdminUser() {
+	  $form = $this->adminForm;
+		$values = $form->getValues();
 
-	/**
-	 * 
-	 */
-	public function step3Action() {
-		configureTheme(APPLICATION_THEME, 'install');
-
-		$username = trim($_POST['username']);
-		$password = $_POST['password'];
-		$realname = $_POST['realname'];
-
-		$config = new Zend_Config_Ini('config/config.ini.php');
-		
-		if(trim($password) == "" || trim($username) == "") {
-		    $this->view->error = $this->view->translate("You have to enter an admin username and password");
-		} else {
-		    $db = Zend_Registry::get("db");
-		    $db->delete($config->db->prefix . 'users', array("username='$username'"));
-		    $db->insert($config->db->prefix . 'users', array(
-			'username' => $username,
-			'password' => md5(Zend_Registry::get('staticSalt') . $password . sha1($password)),
-			'password_salt' => sha1($password),
-			'realname' => $realname
-		    ));
-		
-		  $config = parse_ini_file('config/config.ini.php', true);
-  		$config = new Zend_Config($config, true);
-  		$config->general->restrict_install = 1;
-		
-  		$configWriter = new Zend_Config_Writer_Ini();
-  		$configWriter->write('config/config.ini.php', $config);
-
-  		$authAdapter = Zend_Registry::get("authAdapter");
-  		$authAdapter->setIdentity($username)->setCredential($password);
-  		$auth = Zend_Auth::getInstance();
-  		$result = $auth->authenticate($authAdapter);
+    if ($form->isValid($_POST)) {
+			dd("ok");
+  	} else {
+  		$values = $form->getValues();
+  		$messages = $form->getMessages();
+  		$form->populate($values);
+  		$this->view->form = $form->render();
   	}
 	}
 }

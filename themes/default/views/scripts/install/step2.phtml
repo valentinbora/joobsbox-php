@@ -13,29 +13,6 @@
 	<h1><?php echo $this->translate('Joobsbox installation complete!'); ?></h1>
 	<p>
 		<?php echo $this->translate('Congratulations. You finished installing Joobsbox. Now please configure your administrator username and password.'); ?>
-		<form action="step3" method="post">
-		    <fieldset>
-			    <legend><?php echo $this->translate('Administrator credentials'); ?></legend>
-			    <div class="fieldpair">
-				    <label for="realname"><?php echo $this->translate('Your name'); ?></label>
-				    <input type="text" name="realname" value="<?php if(isset($_POST['realname'])): echo $_POST['realname']; endif; ?>" />
-			    </div>
-			    <div class="fieldpair">
-				    <label for="username"><?php echo $this->translate('Username'); ?></label>
-				    <input type="text" name="username" value="<?php if(isset($_POST['username'])): echo $_POST['username']; endif; ?>" />
-			    </div>
-			    <div class="fieldpair">
-				    <label for="password"><?php echo $this->translate('Password'); ?></label>
-				    <input type="text" name="password" value="<?php if(isset($_POST['password'])): echo $_POST['password']; endif; ?>" />
-			    </div>
-
-			    <?php if(isset($this->error)): ?>
-			    <div class="fieldpair error">
-				    <?php echo $this->translate("Please provide a valid username and password."); ?>
-			    </div>
-			    <?php endif; ?>
-			    <input type="submit" name="step3" value="<?php echo $this->translate('Done');?>" />
-		    </fieldset>
-		</form>
+		<?php echo $this->form; ?>
 	</p>
 </div>

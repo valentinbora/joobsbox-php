@@ -35,7 +35,7 @@ class Joobsbox_Model_Users {
 	 * @returns array
 	 */
 	public function getData($username) {
-	  $sql 	= "SELECT ID, username, realname, email FROM " . $this->_users_table . " WHERE username = ?";
+	  $sql 	= "SELECT ID, username, realname, email, password, password_salt FROM " . $this->_users_table . " WHERE username = ?";
 		return $this->_db->fetchRow($sql, $username);
 	}
 	
@@ -48,16 +48,19 @@ class Joobsbox_Model_Users {
 	public function updateData($data) {
 	  // Treat data well
 	  unset($data['ID']); // No messing up with the IDs
+	  unset($data['submit']);
+	  unset($data['old_password']);
 	  // Password salting
 
 	  if(isset($data['password'])) {
 	    $data['password'] = trim($data['password']);
+
 	    if($data['password'] != "") {
-	      $data['password'] = md5(Zend_Registry::get('staticSalt') . $data['password'] . sha1($data['password']));
 	      $data['password_salt'] = sha1($data['password']);
+	      $data['password'] = md5(Zend_Registry::get('staticSalt') . $data['password'] . sha1($data['password']));
 	    }
 	  }
 	  
-	  $this->_db->update($this->_users_table, $data, $this->jobOperationsModel->getAdapter()->quoteInto('username = ?', Zend_Auth::getInstance()->getIdentity()));
+	  $this->_db->update($this->_users_table, $data, $this->_db->quoteInto('username = ?', Zend_Auth::getInstance()->getIdentity()));
 	}
 }

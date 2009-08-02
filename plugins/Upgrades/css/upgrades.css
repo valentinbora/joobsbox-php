@@ -1,0 +1,11 @@
+/* ========================================= */
+/* = Upgrades admin plugin main css file = */
+/* ========================================= */
+
+/* Dashboard */
+h1.dashboard-title {background-image: url('../images/icons/upgrades_48.png');}
+
+.button {
+	position: relative;
+	top: 5px;
+}
