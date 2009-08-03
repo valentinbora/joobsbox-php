@@ -25,6 +25,10 @@ Class Joobsbox_Db_Migrate {
   function __construct() {
     // get the database version
     $this->db = Zend_Registry::get("db");
-    dd($this->db);
+  }
+  
+  public function getCurrentVersion() {
+    $row = $this->db->fetchRow("SELECT value FROM info WHERE option = 'db_version'");
+    dd($row);
   }
 }

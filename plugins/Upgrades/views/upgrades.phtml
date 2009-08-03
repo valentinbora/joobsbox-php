@@ -3,12 +3,20 @@
 <h2><?php echo $this->translate("Application core"); ?></h2>
 <div class="info">
   <?php if($this->coreUpgrade): ?>
-  <?php echo $this->translate("There's a new version of JoobsBox available."); ?><br/>
+    <?php echo $this->translate("There's a new version of JoobsBox available."); ?><br/>
   
-  <a href="upgradecore" class="button" id="upgradecore"><?php echo $this->translate('Click here to upgrade to version ') . $this->latestVersion; ?></a>
+    <a href="upgradecore" class="button" id="upgradecore"><?php echo $this->translate('Click here to upgrade to version ') . $this->latestVersion; ?></a>
   <?php else: ?>
-  <?php echo $this->translate("Your JoobsBox installation is up to date."); ?>
+    <?php if(isset($this->error)): ?>
+      <?php echo $this->error; ?>
+    <?php else: ?>
+      <?php echo $this->translate("Your JoobsBox installation is up to date."); ?>
+    <?php endif; ?>
   <?php endif; ?>
+</div>
+
+<div id="core-upgrade">
+  
 </div>
 
 <?php

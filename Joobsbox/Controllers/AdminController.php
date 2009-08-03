@@ -201,25 +201,27 @@ class AdminController extends Zend_Controller_Action
     $plugin->corePlugins = $this->corePlugins;
     $plugin->request = $this->getRequest();
     $plugin->ajax = false;
-    if(method_exists($plugin, "init")) {
-      $plugin->init();
-    }
-
-    $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
+    
+    $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
     $viewRenderer->view->addScriptPath($this->pluginPath . $pluginName . '/views');
     $viewRenderer->setNoController(true);
     $viewRenderer->setViewScriptPathNoControllerSpec(':action.:suffix');
     
+    if(method_exists($plugin, "init")) {
+      $plugin->init();
+    }
+
     if($return) {
       $controllerAction = $this->getRequest()->getParam('action');
       $action = substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], $controllerAction)+strlen($controllerAction)+1);
       if($pos = strpos($action, '/') !== FALSE) {
 	      $action = substr($action, 0, strpos($action, '/'));
       }
-      $action .= "Action";
-      if(method_exists($plugin, $action)) {
-	      call_user_func(array($plugin, $action));
-	      $this->render('add', null, true);
+      $fullAction = $action . "Action";
+
+      if(method_exists($plugin, $fullAction)) {
+	      call_user_func(array($plugin, $fullAction));
+        $viewRenderer->render($action, null, true);
 	    } elseif(method_exists($plugin, "indexAction")) {
 	      call_user_func(array($plugin, "indexAction"));
       }

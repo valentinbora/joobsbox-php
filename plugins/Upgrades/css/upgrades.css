@@ -6,6 +6,10 @@
 h1.dashboard-title {background-image: url('../images/icons/upgrades_48.png');}
 
 .button {
-	position: relative;
-	top: 5px;
+  line-height: 40px;
+}
+
+#core-upgrade {
+  background-color: #E7E7E7;
+  
 }
