@@ -143,7 +143,6 @@ body {
 	  padding-left: 10px;
 	}
 		
-		
 /* Dashboard */
 #dashboard {
   list-style: none;
@@ -159,6 +158,7 @@ h1.dashboard-title {
   line-height: 55px; 
   margin-left: 40px;
 }
+
 #dashboard li.dashboard-item {
   list-style: none; 
   display: block; 
