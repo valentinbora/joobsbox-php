@@ -161,37 +161,42 @@ class InstallController extends Zend_Controller_Action {
 		$this->adminForm = new Zend_Form;
 		$this->adminForm->setAction("step2/")->setMethod('post')->setLegend('Administrator credentials');
 	
+	  $notEmpty = new Zend_Validate_NotEmpty();
 		$realname = $this->adminForm->createElement('text', 'realname')
 			->setLabel('Your name:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
 			->addFilter('HtmlEntities')
-			->addValidator('notEmpty')
+			->addValidator($notEmpty->setMessage($this->view->translate("Real name is mandatory")))
 			->setRequired(true);
 			
+		$notEmpty = clone $notEmpty;
 		$username = $this->adminForm->createElement('text', 'username')
 			->setLabel('Username:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
 			->addFilter('HtmlEntities')
-			->addValidator('notEmpty')
+			->addValidator($notEmpty->setMessage($this->view->translate("Username is mandatory")))
 			->setRequired(true);
 			
+		$notEmpty = clone $notEmpty;
 		$password = $this->adminForm->createElement('text', 'password')
 			->setLabel('Password:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
 			->addFilter('HtmlEntities')
-			->addValidator('notEmpty')
+			->addValidator($notEmpty->setMessage($this->view->translate("Password is mandatory")))
 			->setRequired(true);
 		
+		$notEmpty = clone $notEmpty;
+		$emailValidator    = new Zend_Validate_EmailAddress();
 		$email = $this->adminForm->createElement('text', 'email')
 			->setLabel('Email:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
 			->addFilter('HtmlEntities')
-			->addValidator('notEmpty')
-			->addValidator('EmailAddress')
+			->addValidator($notEmpty->setMessage($this->view->translate("Email is mandatory")))
+			->addValidator($emailValidator->setMessage($this->view->translate("Email is invalid")))
 			->setRequired(true);
 			
 		$submit = $this->adminForm->createElement('submit', 'Save')
