@@ -16,6 +16,7 @@ class Upgrades extends Joobsbox_Plugin_AdminBase
 	}
 	
 	public function upgradecoreAction() {
+	  global $log;
 	  @ini_set('memory_limit', '256M');
 	  
 // Must set timeout !!!!!
@@ -88,18 +89,20 @@ class Upgrades extends Joobsbox_Plugin_AdminBase
 	  $log['messageLog'][] = $this->view->translate("Backing up and upgrading files as needed");
 	  
     $this->updateLogFile($log);
-    
+
     $this->recurseAndUpgrade(0, $files);
     
 	  die();
 	}
 	
 	private function recurseAndUpgrade($index, $files) {
+	  global $log;
+	  
 	  if(!isset($files[$index])) return;
 	  
 	  // Get rid of joobsbox/ from the filename
-	  $name = str_replace("joobsbox/", "", $files[$index]['filename']);
-	  
+	  $name = trim(substr($files[$index]['filename'], strpos($files[$index]['filename'], '/')+1));
+
 	  if($files[$index]['folder']) {// If it's a folder
 	    if(!file_exists($name)) {     // That doesn't exist
 	      mkdir($name);               // Create it
@@ -108,13 +111,18 @@ class Upgrades extends Joobsbox_Plugin_AdminBase
 	      mkdir(APPLICATION_DIRECTORY . "/Joobsbox/Temp/backup/" . $name);
 	    }
 	  } else {                      // If it's a file
-	  	if(file_exists($name) && $files[$index]['contents'] != file_get_contents(APPLICATION_DIRECTORY . '/' . $name)) {    // That already exists
+	  	if(file_exists($name) && $files[$index]['content'] != file_get_contents(APPLICATION_DIRECTORY . '/' . $name)) {    // That already exists
 	      // Back it up
 	      copy(APPLICATION_DIRECTORY . '/' . $name, APPLICATION_DIRECTORY . "/Joobsbox/Temp/backup/" . $name);
 	      // Write it
-	      file_put_contents($name, $files[$index]['contents']);
+	      if(is_writable($name)) {
+	        file_put_contents($name, $files[$index]['content']);
+	      } else {
+	        $log['messageLog'][] = "Could not write file " . $name;
+	      }
 	    }
 	  }
+	  $this->updateLogFile($log);
 	  // Life goes on
 	  $this->recurseAndUpgrade($index + 1, $files);
 	}
@@ -127,7 +135,7 @@ class Upgrades extends Joobsbox_Plugin_AdminBase
     if(file_exists(APPLICATION_DIRECTORY . "/Joobsbox/Temp/Core_Upgrade_Log")) {
       // Read file and split per lines
       $log = unserialize(file_get_contents(APPLICATION_DIRECTORY . "/Joobsbox/Temp/Core_Upgrade_Log"));
-      echo end($log['messageLog']);
+      echo implode('<br/>', $log['messageLog']);
     } else {
       echo $this->view->translate("Couldn't find core upgrade log.");
     }

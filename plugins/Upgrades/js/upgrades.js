@@ -3,8 +3,11 @@ $(document).ready(function(){
     ev.preventDefault();
     $("#upgradecore").remove();
     $("#core-upgrade").load(href + 'upgradecore', {"ajax": 1});
-    setInterval(function() {
-      $("#core-upgrade").load(href + 'upgradecoreprogress', {"ajax": 1});
-    }, 3000);
+    upgradeProgress();
   });
 });
+
+function upgradeProgress() {
+   $("#core-upgrade").load(href + 'upgradecoreprogress', {"ajax": 1});
+   setTimeout(upgradeProgress, 3000);
+}
