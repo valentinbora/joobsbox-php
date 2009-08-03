@@ -30,6 +30,9 @@
 	
 	// Link the main RSS file
   $this->headLink()->appendAlternate($this->baseUrl . '/rss', 'application/rss+xml', $this->conf->general->common_title . ' RSS');
+  // Favicon
+  $this->headLink()->headLink(array('rel' => 'shortcut icon', 'href' => $this->baseUrl . '/favicon.ico'));
+  $this->headLink()->headLink(array('rel' => 'icon', 'href' => $this->baseUrl . '/favicon.ico'));
   
   echo $this->filter('head_html');
   
