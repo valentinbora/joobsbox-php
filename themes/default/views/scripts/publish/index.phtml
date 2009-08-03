@@ -21,7 +21,6 @@ if($this->addSuccess) {
 	echo $this->form;
 }
 
-$this->asset->load("jquery");
-$this->asset->load("jquery-ui");
-$this->headScript()->appendFile($this->themeUrl . '/js/publish.js');
+$this->asset->load("jquery", "jquery-ui");
+$this->js->load('publish.js');
 ?>

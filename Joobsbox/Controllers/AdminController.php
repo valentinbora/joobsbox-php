@@ -54,7 +54,7 @@ class AdminController extends Zend_Controller_Action
     }
 
     $this->_conf = Zend_Registry::get("conf");
-    configureTheme("_admin/" . $this->_conf->general->admin_theme);
+    configureTheme("_admin/" . $this->_conf->general->admin_theme, 'index', '/themes/_admin/' . $this->_conf->general->admin_theme . '/layouts');
     
     if(isset($this->_conf->admin->menu)) {
       $this->corePlugins = explode(",", $this->_conf->admin->menu);

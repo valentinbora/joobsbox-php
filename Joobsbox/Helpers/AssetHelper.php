@@ -25,17 +25,27 @@
  */
 class Joobsbox_Helpers_AssetHelper extends Zend_Controller_Action_Helper_Abstract
 {
-   public function load($what) {
-     $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
-     switch($what) {
-        case 'jquery':
-          $view->headScript()->appendFile($view->baseUrl . '/public/js/lib/jquery.js');
-          break;
-        case 'jquery-ui':
-        case 'jqueryui':
-          $view->headScript()->appendFile($view->baseUrl . '/public/js/lib/jquery-ui/js/jquery-ui-1.7.custom.min.js');
-          $view->headLink()->appendStylesheet($view->baseUrl . '/public/js/lib/jquery-ui/css/cupertino/jquery-ui-1.7.1.custom.css');
-          break;
-     }
+   public function load() {
+ 		 $args = func_get_args();
+ 		 $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
+
+ 		 foreach($args as $what) {
+       switch($what) {
+            case 'jquery':
+              $view->js->load('/public/js/lib/jquery.js');
+              break;
+            case 'jquery-ui':
+            case 'jqueryui':
+              $view->js->load('/public/js/lib/jquery-ui/js/jquery-ui-1.7.custom.min.js');
+              $view->css->load('/public/js/lib/jquery-ui/css/cupertino/jquery-ui-1.7.1.custom.css');
+              break;
+            case 'jquery-corner':
+              $view->js->load('/public/js/lib/jquery.corner.js', 'text/javascript');
+              break;
+            case 'jquery-pngfix':
+              $view->js->load('/public/js/lib/jquery.pngFix.pack.js', 'text/javascript');
+              break;
+      }
+    }
   }
 }

@@ -6,7 +6,7 @@ $viewRenderer->view->baseUrl = BASE_URL;
 $viewRenderer->view->noScriptBaseUrl = str_replace("index.php", "", BASE_URL);
 $viewRenderer->view->publicUrl = str_replace("index.php", "", BASE_URL) . "/public";
 
-function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
+function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index', $layoutPath = '/themes/core/layouts') {
 	global $baseUrl;
 	
 	$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
@@ -21,6 +21,9 @@ function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 	}
 	$viewRenderer->view->theme			  = $theme;
 	$viewRenderer->view->asset        = new Joobsbox_Helpers_AssetHelper;
+	$viewRenderer->view->css          = new Joobsbox_Helpers_CssHelper;
+	$viewRenderer->view->js           = new Joobsbox_Helpers_JsHelper;
+	
 	$viewRenderer->view->setScriptPath(APPLICATION_DIRECTORY . '/themes/' . $theme . '/views/scripts');
 	$viewRenderer->view->addScriptPath(APPLICATION_DIRECTORY . '/themes/core/views/scripts');
 
@@ -33,11 +36,11 @@ function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index') {
 	
 	if($conf->general->standalone) {
 		if($layout = Zend_Layout::getMvcInstance()) {
-			$layout->setLayoutPath(APPLICATION_DIRECTORY . '/themes/' . $theme . '/layouts');
+			$layout->setLayoutPath(APPLICATION_DIRECTORY . $layoutPath);
 			$layout->setLayout($layoutName);
 		} else {
 			Zend_Layout::startMvc(array(
-				'layoutPath' => APPLICATION_DIRECTORY . '/themes/' . $theme . '/layouts',
+				'layoutPath' => APPLICATION_DIRECTORY . $layoutPath,
 				'layout' => $layoutName
 			));
 		}
