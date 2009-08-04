@@ -310,12 +310,16 @@ div.info {
 }
 
 /*============================*/
+#publishBtn {
+  width: 95%;
+  display: block;
+}
+
 .button {
-	-moz-border-radius-bottomleft:12px;
-	-moz-border-radius-bottomright:12px;
-	-moz-border-radius-topleft:12px;
-	-moz-border-radius-topright:12px;
-	background:#21759B url(../images/button-grad.png) repeat-x scroll left top;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-webkit-border-radius: 12px;
+	background: #21759B url(../images/button-grad.png) repeat-x scroll left top;
 	border-color:#298CBA !important;
 	border-style: none;
 	color:#FFFFFF !important;

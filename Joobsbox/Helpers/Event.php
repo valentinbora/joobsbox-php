@@ -24,19 +24,23 @@
  */
 class Joobsbox_Helpers_Event extends Zend_Controller_Action_Helper_Abstract
 {
+    public $disabled = false;
+    
     public function fireEvent() {
-		$args = func_get_args();
-		$eventName = $args[0];
-		array_shift($args); // delete eventName from arguments array
-		$plugins = Zend_Registry::get("plugins");
-		$eventHandlers = Zend_Registry::get("event_handler_plugins");
-		if(isset($eventHandlers[$eventName])) {
-			foreach($eventHandlers[$eventName] as $pluginClassName) {
-				if(method_exists($plugins[$pluginClassName], "event_$eventName")) {
-					call_user_func_array(array($plugins[$pluginClassName], "event_$eventName"), $args);
-				}
-			}
-		}
+      if($this->disabled) return;
+      
+		  $args = func_get_args();
+  		$eventName = $args[0];
+  		array_shift($args); // delete eventName from arguments array
+  		$plugins = Zend_Registry::get("plugins");
+  		$eventHandlers = Zend_Registry::get("event_handler_plugins");
+  		if(isset($eventHandlers[$eventName])) {
+  			foreach($eventHandlers[$eventName] as $pluginClassName) {
+  				if(method_exists($plugins[$pluginClassName], "event_$eventName")) {
+  					call_user_func_array(array($plugins[$pluginClassName], "event_$eventName"), $args);
+  				}
+  			}
+  		}
 	}
 		
 	public function direct($eventName) {

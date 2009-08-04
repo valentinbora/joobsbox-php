@@ -4,6 +4,7 @@ class Google_Analytics extends Joobsbox_Plugin_AdminBase
   private $analyticsId, $form, $email, $password, $profileId, $admin = false, $lastQuery;
   
   public function dashboard() {
+    $this->assignCredentials();
     if(!$this->ajax) return;
     
     $lastQuery = $this->lastQuery;
@@ -49,8 +50,6 @@ class Google_Analytics extends Joobsbox_Plugin_AdminBase
 	    $this->view->tops = array();
 	    $this->view->data = array();
 	  
-	    $this->assignCredentials();
-	  
 	    if(isset($_POST['ajax'])) {
 	      $this->view->ajax = true;
 	      $this->ajax = true;
@@ -59,6 +58,7 @@ class Google_Analytics extends Joobsbox_Plugin_AdminBase
   }
 
   public function indexAction() {
+      $this->assignCredentials();
 	    /********* Display metrics *********/
 	    $lastQuery = $this->lastQuery;
       if(!strlen($lastQuery)) {

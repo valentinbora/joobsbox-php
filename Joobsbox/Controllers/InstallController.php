@@ -39,9 +39,10 @@ class InstallController extends Zend_Controller_Action {
         $writer->write();
         $this->_redirect("install");
 	    }
+	    
 	    $config = new Zend_Config_Ini("config/config.ini.php");
 	    if(isset($config->general->restrict_install) && $config->general->restrict_install && file_exists("config/db.ini.php")) {
-		      $this->_redirect("");
+		      throw new Exception($this->view->translate("This JoobsBox is already installed. Manually remove the restrict_install line from config/config.ini.php if you want to reinstall it."));
 	    }
 	}
 	
@@ -49,9 +50,6 @@ class InstallController extends Zend_Controller_Action {
 		$this->_redirect("install/step1");
 	}
 	
-	/**
-	 * @todo add timezone box using timezone_identifiers_list()
-	 */
 	public function step1Action() {
 		configureTheme(APPLICATION_THEME, 'install');
 		$locale = Zend_Registry::get("Zend_Locale")->getTranslationList('language', 'en');
@@ -89,18 +87,27 @@ class InstallController extends Zend_Controller_Action {
 			
 			if(!isset($this->view->dberror)) {
 				// Connection works - we save the data
-				$config = parse_ini_file('config/config.ini.php', true);
-				$config = new Zend_Config($config, true);
-				$config->general->common_title = $sitename;
+				$conf = new Zend_Config_Ini("config/config.ini.php", null, array(
+  			  'skipExtends'        => true,
+          'allowModifications' => true)
+        );
+
+    		$config->general->common_title = $sitename;
 				$config->db->prefix = $dbprefix;
+
+        // Write the configuration file
+        $writer = new Zend_Config_Writer_Ini(array(
+          'config'   => $conf,
+          'filename' => 'config/config.ini.php')
+        );
+        
+        try {
+          $writer->write();
+        } catch (Exception $e) {
+          $this->view->dberror = $this->view->translate("config/config.ini.php is not writable. Please adjust the file permissions using FTP or SSH.");
+        }
 				
-				if(!is_writable("config/config.ini.php")) {
-				  $this->view->dberror = $this->view->translate("config/config.ini.php is not writable. Please adjust the file permissions using FTP or SSH.");
-				  return;
-				}
-				$configWriter = new Zend_Config_Writer_Ini();
-				$configWriter->write('config/config.ini.php', $config);
-				
+				  
 				// Save database info
 				$config = new Zend_Config(array(
 					"host"		  => $dbhost,
@@ -125,9 +132,10 @@ class InstallController extends Zend_Controller_Action {
 	 * @todo install first user
 	 */
 	public function step2Action() {
+	  
 		configureTheme(APPLICATION_THEME, 'install');
 		$session = new Zend_Session_Namespace('Install');
-		
+
 		if(!isset($session->populated_db)) {
 		  $config = new Zend_Config_Ini('config/config.ini.php');
   		$db = Zend_Registry::get("db");
@@ -159,7 +167,7 @@ class InstallController extends Zend_Controller_Action {
 		
 		// Make the form
 		$this->adminForm = new Zend_Form;
-		$this->adminForm->setAction("step2/")->setMethod('post')->setLegend('Administrator credentials');
+		$this->adminForm->setAction($this->view->baseUrl . "/install/step2")->setMethod('post')->setLegend('Administrator credentials');
 	
 	  $notEmpty = new Zend_Validate_NotEmpty();
 		$realname = $this->adminForm->createElement('text', 'realname')
@@ -219,9 +227,38 @@ class InstallController extends Zend_Controller_Action {
 	public function validateAdminUser() {
 	  $form = $this->adminForm;
 		$values = $form->getValues();
-
+    
     if ($form->isValid($_POST)) {
-			dd("ok");
+      $db = Zend_Registry::get("db");
+      $values = $form->getValues();
+
+      $username = $values['username'];
+      $password = $values['password'];
+      
+	    $db->delete($config->db->prefix . 'users', array("username='$username'"));
+	    $db->insert($config->db->prefix . 'users', array(
+		    'username' => $values['username'],
+    		'password' => md5(Zend_Registry::get('staticSalt') . $values['password'] . sha1($password)),
+    		'password_salt' => sha1($values['password']),
+    		'realname' => $values['realname'],
+    		'email' => $values['email']
+	    ));
+	    
+	    $config = parse_ini_file('config/config.ini.php', true);
+  		$config = new Zend_Config($config, true);
+  		$config->general->restrict_install = 1;
+
+  		$configWriter = new Zend_Config_Writer_Ini();
+  		$configWriter->write('config/config.ini.php', $config);
+
+  		$authAdapter = Zend_Registry::get("authAdapter");
+  		$authAdapter->setIdentity($username)->setCredential($password);
+  		$auth = Zend_Auth::getInstance();
+  		$result = $auth->authenticate($authAdapter);
+  		
+  		$session = new Zend_Session_Namespace('Admin_Notices');
+  		$session->message[] = $this->view->translate("Congratulations! Your JoobsBox is working now. Feel free to configure some categories.");
+  		$this->_redirect("admin");
   	} else {
   		$values = $form->getValues();
   		$messages = $form->getMessages();

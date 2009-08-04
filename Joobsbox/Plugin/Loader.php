@@ -23,9 +23,17 @@
  * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 class Joobsbox_Plugin_Loader {
+  
+  public function disablePlugins() {
+    Zend_Registry::get("EventHelper")->disabled = true;
+    Zend_Registry::set("FilterHelper")->disabled = true;
+  }
+  
 	function __construct() {
+	  $front = Zend_Controller_Front::getInstance();
+	  
 		$event_handlers = array();
-		$filters		= array();
+		$filters		    = array();
 		
 		$dir = new DirectoryIterator(APPLICATION_DIRECTORY . "/plugins");
 		$plugins = array();

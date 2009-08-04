@@ -26,10 +26,15 @@ class IndexController extends Zend_Controller_Action {
 			$this->_redirect('install/step1');
 		}
 		
-		$this->_model = new Joobsbox_Model_Jobs();
+		try {
+		  $this->_model = new Joobsbox_Model_Jobs();
 				
-		$this->view->jobs = $this->_model->fetchNJobsPerCategory();
+		  $this->view->jobs = $this->_model->fetchNJobsPerCategory();
 		
-		$this->_helper->event("received_jobs");
+		  $this->_helper->event("received_jobs");
+		} catch(Exception $e) {
+		  rename(APPLICATION_DIRECTORY . "/config/db.ini.php", APPLICATION_DIRECTORY . "/config/db.ini.php.bak");
+      $this->_redirect('install/step1');
+		}
 	}
 }

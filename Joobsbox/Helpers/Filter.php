@@ -25,25 +25,29 @@
  */
 class Joobsbox_Helpers_Filter extends Zend_Controller_Action_Helper_Abstract
 {
+    public $disabled = false;
     public function filter() {
-		$args = func_get_args();
-		$filterName = $args[0];
-		array_shift($args); // delete filterName from arguments array
-		$plugins = Zend_Registry::get("plugins");
-		$filters = Zend_Registry::get("filter_plugins");
-		if(isset($filters[$filterName])) {
-			foreach($filters[$filterName] as $pluginClassName) {
-				if(method_exists($plugins[$pluginClassName], "filter_$filterName")) {
-					$args = call_user_func_array(array($plugins[$pluginClassName], "filter_$filterName"), $args);
-				}
-			}
-		}
+	  	$args = func_get_args();
+  		$filterName = $args[0];
+  		array_shift($args); // delete filterName from arguments array
+  		
+  		if($this->disabled) return $args;
+  		
+  		$plugins = Zend_Registry::get("plugins");
+  		$filters = Zend_Registry::get("filter_plugins");
+  		if(isset($filters[$filterName])) {
+  			foreach($filters[$filterName] as $pluginClassName) {
+  				if(method_exists($plugins[$pluginClassName], "filter_$filterName")) {
+  					$args = call_user_func_array(array($plugins[$pluginClassName], "filter_$filterName"), $args);
+  				}
+  			}
+  		}
 
-		if(count($args) == 1)
-			return $args[0];
-		if(count($args) == 0)
-		  return "";
-		return $args;
+  		if(count($args) == 1)
+  			return $args[0];
+  		if(count($args) == 0)
+  		  return "";
+  		return $args;
 	}
 	
 	public function direct($eventName) {

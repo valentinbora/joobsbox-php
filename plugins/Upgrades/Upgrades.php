@@ -1,7 +1,7 @@
 <?php
 class Upgrades extends Joobsbox_Plugin_AdminBase
 {
-  private $requestBase = 'http://localhost/joobsbox-downloads';
+  private $requestBase = 'http://downloads.joobsbox.com/';
   
 	function indexAction() {
 	  $this->checkCore();

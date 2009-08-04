@@ -135,7 +135,6 @@ class AdminController extends Zend_Controller_Action
     $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
     $viewRenderer->setNoController(false);
     $viewRenderer->setNoRender(false);
-    
   }
 
   private function prepareDashboard() {
@@ -156,7 +155,7 @@ class AdminController extends Zend_Controller_Action
   	    );
       }
     }
-  
+    
     // Make some checks
     $search = new Joobsbox_Model_Search;
     if(!$search->_enabled) {

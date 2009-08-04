@@ -33,6 +33,7 @@ class JobController extends Zend_Controller_Action
 			throw new Zend_Controller_Action_Exception($this->view->translate('The requested job does not exist!'));
 		}
 		
+		$this->_helper->event("display_job", $job);
 		$this->view->job = $job;
 	}
 	

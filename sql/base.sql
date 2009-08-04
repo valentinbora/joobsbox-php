@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `{#prefix#}users` (
 `realname` varchar(100) collate utf8_unicode_ci NOT NULL,
 `password` varchar(256) collate utf8_unicode_ci NOT NULL,
 `password_salt` varchar(51) collate utf8_unicode_ci NOT NULL,
+`email` varchar(320) collate utf8_unicode_ci NULL,
 PRIMARY KEY  (`ID`),
 UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;

@@ -1,19 +1,18 @@
-<phpunit>
-    <testsuite name="My Test Suite">
-        <directory>./</directory>
-    </testsuite>
-
-    <filter>
-        <whitelist>
-            <directory suffix=".php">../Application/</directory>
-            <exclude>
-                <directory suffix=".phtml">../Application/</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-
-    <logging>
-        <log type="coverage-html" target="./log/report" charset="UTF-8" yui="true" highlight="true" lowUpperBound="50" highLowerBound="80"/>
-        <log type="testdox-html" target="./log/testdox.html" />
-    </logging>
+<phpunit colors="true">
+	<testsuite name="Whatever">
+		<directory>./</directory>
+	</testsuite>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../Joobsbox</directory>
+			<exclude>
+				<directory suffix=".phtml">../Joobsbox</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+	
+	<logging>
+		<log type="coverage-html" target="./log/report" charset="UTF=-8" yui="true" highlight="true" lowUpperBound="50" highUpperbound="80" />
+		<log type="textdox" target="./log/testdox.html" />
+	</logging>
 </phpunit>

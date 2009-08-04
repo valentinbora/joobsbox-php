@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ERROR);
+error_reporting(E_ALL);
 define('APPLICATION_DIRECTORY', dirname(__FILE__));
 
 ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . APPLICATION_DIRECTORY);
@@ -17,10 +17,9 @@ Zend_Registry::set("FilterHelper", 		  new Joobsbox_Helpers_Filter);
 Zend_Registry::set("TranslationHelper", new Joobsbox_Helpers_TranslationHash);
 Zend_Registry::get("TranslationHelper")->regenerateHash();
 
-require "core/errorHandler.php";
+//require "core/errorHandler.php";
 
-Zend_Controller_Action_HelperBroker::addPrefix("Joobsbox_Helpers");
-Zend_Controller_Action_HelperBroker::addPrefix("Zend_Controller_Action_Helper");
+Zend_Controller_Action_HelperBroker::addPath(APPLICATION_DIRECTORY . '/Joobsbox/Helpers', 'Joobsbox_Helpers');
 
 if(!isset($testing)) {
 	$front = Zend_Controller_Front::getInstance();

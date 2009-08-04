@@ -32,7 +32,9 @@ class PublicController extends Zend_Controller_Action
 	);
 	
 	public function init() {
-		if(strlen(BASE_URL)) {
+	  return 0;
+	  
+		/*if(strlen(BASE_URL)) {
 		    $path = str_replace(BASE_URL . '/', '', $_SERVER['REQUEST_URI']);
 		} else {
 		    $path = $_SERVER['REQUEST_URI'];
@@ -49,7 +51,7 @@ class PublicController extends Zend_Controller_Action
 				header("HTTP/1.0 404 Not Found", true, 404);
 			}
 		}
-		exit(0);
+		exit(0);*/
 	}
 	
 	private function serveFile($path) {

@@ -61,29 +61,38 @@ Zend_Registry::set('Zend_Translate', $translate);
 
 // Database parameters
 if(file_exists(APPLICATION_DIRECTORY . '/config/db.ini.php')) {
-	$db = Zend_Db::factory('PDO_MYSQL', new Zend_Config_Ini(APPLICATION_DIRECTORY . '/config/db.ini.php'));
-	Zend_Db_Table_Abstract::setDefaultAdapter($db);
-	Zend_Registry::set("db", $db);
-	$db->query('SET NAMES "utf8"');
+  try {
+	  $db = Zend_Db::factory('PDO_MYSQL', new Zend_Config_Ini(APPLICATION_DIRECTORY . '/config/db.ini.php'));
+  	Zend_Db_Table_Abstract::setDefaultAdapter($db);
+  	Zend_Registry::set("db", $db);
+	  $db->query('SET NAMES "utf8"');
+	} catch (Exception $e) {
+	  rename(APPLICATION_DIRECTORY . "/config/db.ini.php", APPLICATION_DIRECTORY . "/config/db.ini.php.bak");
+    header("Location: install");
+    exit();
+	}
+
+	getStaticSalt($conf);
 	
-	getStaticSalt();
-	
-	// Authentication
-	$auth = Zend_Auth::getInstance();
-	$authAdapter = new Zend_Auth_Adapter_DbTable(
-		Zend_Registry::get("db"),
-		$conf->db->prefix . 'users',
-		'username',
-		'password',
-		"MD5(CONCAT('"
-		. Zend_Registry::get('staticSalt')
-		. "', ?, password_salt))"
-	);
-	Zend_Registry::set("authAdapter", $authAdapter);
+	try {
+  	// Authentication
+  	$auth = Zend_Auth::getInstance();
+  	$authAdapter = new Zend_Auth_Adapter_DbTable(
+  		Zend_Registry::get("db"),
+  		$conf->db->prefix . 'users',
+  		'username',
+  		'password',
+  		"MD5(CONCAT('"
+  		. Zend_Registry::get('staticSalt')
+  		. "', ?, password_salt))"
+  	);
+  	Zend_Registry::set("authAdapter", $authAdapter);
+  } catch(Exception $e) {
+
+  }
 }
 
-function getStaticSalt() {
-  global $conf;
+function getStaticSalt($conf) {
 	if(!isset($conf->db->passwordSalt)) {
 		$salt = "";
 		for ($i = 0; $i < 50; $i++) {
@@ -100,6 +109,7 @@ function getStaticSalt() {
       'config'   => $tempConf,
       'filename' => 'config/config.ini.php')
     );
+    
     $writer->write();
 		Zend_Registry::set('staticSalt', $salt);
 	} else {
@@ -107,33 +117,34 @@ function getStaticSalt() {
 	}
 }
 
-if(isset($joobsbox_base_url)) {
-	$baseUrl = $joobsbox_base_url;
-	if($baseUrl[strlen($baseUrl)-1] == '/') {
-	  $baseUrl = substr($baseUrl, 0, strlen($baseUrl)-1);
-	}
-} else {
-  // Generate base url to build from
-	$baseUrl = str_replace("\\", "/", $_SERVER['SCRIPT_NAME']);
-	if(strpos($_SERVER['REQUEST_URI'], "index.php") !== FALSE) {
-
+if(!isset($testing)) {
+  if(isset($joobsbox_base_url)) {
+  	$baseUrl = $joobsbox_base_url;
+  	if($baseUrl[strlen($baseUrl)-1] == '/') {
+  	  $baseUrl = substr($baseUrl, 0, strlen($baseUrl)-1);
+  	}
   } else {
-	  $baseUrl = substr($baseUrl, 0, strpos($baseUrl, "index.php"));
-    $baseUrl = explode("/", $baseUrl);
+    // Generate base url to build from
+  	$baseUrl = str_replace("\\", "/", $_SERVER['SCRIPT_NAME']);
+  	if(strpos($_SERVER['REQUEST_URI'], "index.php") !== FALSE) {
 
-    foreach($baseUrl as $key => $value) {
-      if($value == "") {
-        unset($baseUrl[$key]);
+    } else {
+  	  $baseUrl = substr($baseUrl, 0, strpos($baseUrl, "index.php"));
+      $baseUrl = explode("/", $baseUrl);
+
+      foreach($baseUrl as $key => $value) {
+        if($value == "") {
+          unset($baseUrl[$key]);
+        }
       }
+      $baseUrl = array_values($baseUrl);
+      $baseUrl = "/" . implode("/", $baseUrl);
     }
-    $baseUrl = array_values($baseUrl);
-    $baseUrl = "/" . implode("/", $baseUrl);
-  }
   
-  if($baseUrl == "/") $baseUrl = "";
+    if($baseUrl == "/") $baseUrl = "";
+  }
+  define("BASE_URL", $baseUrl);
 }
-
-define("BASE_URL", $baseUrl);
 define("APPLICATION_THEME", $conf->general->theme);
 
 unset($conf, $db, $translate);
