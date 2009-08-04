@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Joobsbox PHP 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-03 21:58+0200\n"
-"PO-Revision-Date: 2009-08-03 21:58+0200\n"
+"POT-Creation-Date: 2009-08-04 20:01+0200\n"
+"PO-Revision-Date: 2009-08-04 20:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: Joobsbox\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: Joobsbox\n"
 "X-Poedit-SearchPath-1: core\n"
 
-#: Joobsbox/Controllers/AdminController.php:164
+#: Joobsbox/Controllers/AdminController.php:163
 msgid "Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!"
 msgstr ""
 
@@ -34,63 +34,71 @@ msgstr ""
 msgid "An error has occured within the application"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:77
+#: Joobsbox/Controllers/InstallController.php:45
+msgid "This JoobsBox is already installed. Manually remove the restrict_install line from config/config.ini.php if you want to reinstall it."
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:75
 msgid "Joobsbox really needs a database. Please let it have one."
 msgstr ""
 
+#: Joobsbox/Controllers/InstallController.php:83
 #: Joobsbox/Controllers/InstallController.php:85
-#: Joobsbox/Controllers/InstallController.php:87
 msgid "There was an error connecting to the database. Make sure the connection information you provided is correct."
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:98
+#: Joobsbox/Controllers/InstallController.php:107
 msgid "config/config.ini.php is not writable. Please adjust the file permissions using FTP or SSH."
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:113
+#: Joobsbox/Controllers/InstallController.php:120
 msgid "config directory is not writable. Please adjust the directory permissions using FTP or SSH."
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:166
+#: Joobsbox/Controllers/InstallController.php:174
 msgid "Your name:"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:170
+#: Joobsbox/Controllers/InstallController.php:178
 msgid "Real name is mandatory"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:175
+#: Joobsbox/Controllers/InstallController.php:183
 #: Joobsbox/Controllers/UserController.php:39
 msgid "Username:"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:179
+#: Joobsbox/Controllers/InstallController.php:187
 msgid "Username is mandatory"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:184
+#: Joobsbox/Controllers/InstallController.php:192
 #: Joobsbox/Controllers/UserController.php:47
 msgid "Password:"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:188
+#: Joobsbox/Controllers/InstallController.php:196
 msgid "Password is mandatory"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:194
+#: Joobsbox/Controllers/InstallController.php:202
 msgid "Email:"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:198
+#: Joobsbox/Controllers/InstallController.php:206
 msgid "Email is mandatory"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:199
+#: Joobsbox/Controllers/InstallController.php:207
 msgid "Email is invalid"
 msgstr ""
 
-#: Joobsbox/Controllers/InstallController.php:203
+#: Joobsbox/Controllers/InstallController.php:211
 msgid "Save"
+msgstr ""
+
+#: Joobsbox/Controllers/InstallController.php:260
+msgid "Congratulations! Your JoobsBox is working now. Feel free to configure some categories."
 msgstr ""
 
 #: Joobsbox/Controllers/JobController.php:33
