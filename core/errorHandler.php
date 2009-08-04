@@ -16,8 +16,8 @@ function customErrorHandler($errNo, $errStr, $errFile, $errLine) {
               E_STRICT             => 'Runtime Notice',
               E_RECOVERABLE_ERROR  => 'Catchable Fatal Error'
           );
-
+  
+  return false;
 	Zend_Registry::get("EventHelper")->fireEvent("error", $errStr . " - " . $errFile . " - " . $errLine);
-	return false;
 }
-set_error_handler("customErrorHandler");
+//set_error_handler("customErrorHandler");

@@ -27,5 +27,5 @@ users = "users"
 
 [admin]
 dashboard = "Categories,Postings"
-menu = "Postings,Settings,Themes,Categories,Users,Plugins,Upgrades"
+menu = "Postings,Categories,Settings,Themes,Users,Plugins,Upgrades"
 

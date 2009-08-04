@@ -28,7 +28,7 @@ function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index', $layo
 	$viewRenderer->view->addScriptPath(APPLICATION_DIRECTORY . '/themes/core/views/scripts');
 
 	$viewRenderer->view->setEncoding("UTF-8");
-  $viewRenderer->view->addHelperPath(APPLICATION_DIRECTORY . '/Joobsbox/Helpers', 'Joobsbox_Helpers');
+  $viewRenderer->view->setHelperPath(APPLICATION_DIRECTORY . '/Joobsbox/Helpers');
 	
 	$conf = Zend_Registry::get("conf");
 	Zend_Registry::set("theme", $theme);

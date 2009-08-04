@@ -83,7 +83,15 @@
         </div>
         <?php endif; ?>
         
-				<?php echo $this->layout()->content;?>
+        <?php if(count($this->notices)): ?>
+        <div id="notice">
+        <?php foreach($this->notices as $notice):
+                echo $notice . '<br/>';
+              endforeach; ?>
+        </div>
+        <?php endif; ?>
+        
+				<?php echo $this->layout()->content; ?>
 			</div>
 		</div>
 		<div style="clear: both;"></div>

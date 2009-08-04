@@ -21,10 +21,11 @@
  */
 class AdminController extends Zend_Controller_Action
 {
-  private $alerts = array();
+  private $alerts     = array();
+  private $notices    = array();
   private $pluginPath = "plugins/";
   private $currentPlugin;
-  private $corePlugins = array("Postings", "Categories", "Themes", "Settings", "Plugins");
+  private $corePlugins = array("Postings", "Categories", "Themes", "Settings", "Plugins", "Users");
 
   function sortFunction($x, $y) {
     if(in_array($x, $this->corePlugins) && in_array($y, $this->corePlugins)) {
@@ -100,7 +101,6 @@ class AdminController extends Zend_Controller_Action
     $this->view->locale  = Zend_Registry::get("Zend_Locale");
     
     $this->alerts = array_merge($this->alerts, $this->_helper->FlashMessenger->getMessages());
-    $this->view->alerts = $this->alerts;
   }
   
   public function sortmenuAction() {
@@ -135,6 +135,8 @@ class AdminController extends Zend_Controller_Action
     $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
     $viewRenderer->setNoController(false);
     $viewRenderer->setNoRender(false);
+    $this->view->alerts = $this->alerts;
+    $this->view->notices = $this->notices;
   }
 
   private function prepareDashboard() {
@@ -155,12 +157,23 @@ class AdminController extends Zend_Controller_Action
   	    );
       }
     }
-    
+
     // Make some checks
-    $search = new Joobsbox_Model_Search;
-    if(!$search->_enabled) {
-      // Oopsie
-      $this->alerts[] = $this->view->translate("Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!");
+    try {
+      $search = new Joobsbox_Model_Search;
+      if(!$search->_enabled) {
+        // Oopsie
+        $this->alerts[] = $this->view->translate("Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!");
+      }
+    } catch(Exception $e) {
+      
+    }
+
+    // Coming from elsewhere
+    $session = new Zend_Session_Namespace('Admin_Notices');
+    if(isset($session->message)) {
+      $this->notices = array_merge($this->notices, $session->message);
+      unset($session->message);
     }
   }
 
@@ -176,6 +189,7 @@ class AdminController extends Zend_Controller_Action
     }
 
     $this->view->alerts = $this->alerts;
+    $this->view->notices = $this->notices;
   }
 
   private function loadPlugin($pluginName, $return = true) {
@@ -197,6 +211,7 @@ class AdminController extends Zend_Controller_Action
     $plugin->dirPath = $this->pluginPath . $pluginName . '/';
     $plugin->_helper = $this->_helper;
     $plugin->alerts  = &$this->alerts;
+    $plugin->notices  = &$this->notices;
     $plugin->corePlugins = $this->corePlugins;
     $plugin->request = $this->getRequest();
     $plugin->ajax = false;

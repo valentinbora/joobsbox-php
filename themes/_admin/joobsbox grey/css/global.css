@@ -121,6 +121,20 @@ body {
 	background-color: #FFE1E1;
 	width: 80%;
 }
+
+#notice {
+	padding: 10px 0;
+	padding-left: 40px;
+	font-weight: bold;
+	color: #000000;
+  margin: 5px auto;
+	font-size: 90%;
+	background-image: url(../images/icon-att-flat.gif);
+	background-repeat: no-repeat;
+	background-position: 7px;
+	background-color: #FFEDA7;
+	width: 80%;
+}
 	
 /* Content area */
 #admin-content {

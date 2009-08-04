@@ -1,6 +1,7 @@
 <?php
 set_magic_quotes_runtime(false);
 ini_set('magic_quotes_gpc', false);
+ini_set("memory_limit", "64M");
 
 // Class autoload functionality
 require_once 'Zend/Loader/Autoloader.php';
