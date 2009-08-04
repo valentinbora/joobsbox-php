@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Joobsbox PHP 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 20:01+0200\n"
-"PO-Revision-Date: 2009-08-04 20:01+0200\n"
+"POT-Creation-Date: 2009-08-05 00:13+0200\n"
+"PO-Revision-Date: 2009-08-05 00:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: Joobsbox\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,9 @@ msgstr ""
 "X-Poedit-KeywordsList: translate;setLabel;setDescription\n"
 "X-Poedit-SearchPath-0: Joobsbox\n"
 "X-Poedit-SearchPath-1: core\n"
+"X-Poedit-SearchPath-2: themes\n"
 
-#: Joobsbox/Controllers/AdminController.php:163
+#: Joobsbox/Controllers/AdminController.php:166
 msgid "Search doesn't work because Joobsbox/SearchIndexes doesn't have write permissions. Please allow the server to write to that folder!"
 msgstr ""
 
@@ -188,5 +189,182 @@ msgstr ""
 
 #: core/translation.php:3
 msgid "Value is required and can't be empty"
+msgstr ""
+
+#: themes/_admin/joobsbox grey/layouts/index.phtml:43
+msgid "Back to site"
+msgstr ""
+
+#: themes/_admin/joobsbox grey/layouts/index.phtml:45
+msgid "Logout"
+msgstr ""
+
+#: themes/_admin/joobsbox grey/layouts/index.phtml:50
+#: grey/views/scripts/admin/index.phtml:2
+#: grey/views/scripts/admin/index.phtml:4
+msgid "Dashboard"
+msgstr ""
+
+#: themes/core/images/install.phtml:34
+msgid "Installation"
+msgstr ""
+
+#: themes/core/images/integration.phtml:53
+#, php-format
+msgid "Post a job for %d days"
+msgstr ""
+
+#: themes/core/images/integration.phtml:58
+msgid "Search here"
+msgstr ""
+
+#: themes/core/images/integration.phtml:59
+msgid "Search"
+msgstr ""
+
+#: themes/core/images/integration.phtml:65
+#, php-format
+msgid "Subscribe to the full <a href=\"%s\">RSS Feed</a> and be notified when new jobs are posted."
+msgstr ""
+
+#: themes/core/views/scripts/footer.phtml:5
+msgid "powered by"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:11
+#: themes/core/views/scripts/install/step2.phtml:11
+#: themes/core/views/scripts/install/step3.phtml:11
+msgid "Installation - Step "
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:13
+msgid "Welcome to Joobsbox installation!"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:15
+msgid "I need some information and then we're ready to go."
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:19
+msgid "Site information"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:21
+msgid "Site name"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:25
+msgid "Language"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:34
+msgid "Database information"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:37
+msgid "Database name"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:41
+msgid "Database username"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:45
+msgid "Database password"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:49
+msgid "Database host"
+msgstr ""
+
+#: themes/core/views/scripts/install/step1.phtml:53
+msgid "Table prefix"
+msgstr ""
+
+#: themes/core/views/scripts/install/step2.phtml:13
+msgid "Joobsbox installation complete!"
+msgstr ""
+
+#: themes/core/views/scripts/install/step2.phtml:15
+msgid "Congratulations. You finished installing Joobsbox. Now please configure your administrator username and password."
+msgstr ""
+
+#: themes/core/views/scripts/install/step3.phtml:13
+msgid "Everything went well!"
+msgstr ""
+
+#: themes/default/views/scripts/admin/index.phtml:12
+msgid "Administration Dashboard"
+msgstr ""
+
+#: themes/default/views/scripts/index/index.phtml:29
+#: themes/default/views/scripts/job/job.phtml:13
+#: themes/default/views/scripts/job/job.phtml:22
+#: themes/default/views/scripts/jobs-at/index.phtml:22
+msgid "at"
+msgstr ""
+
+#: themes/default/views/scripts/index/index.phtml:36
+msgid "No jobs postings are available at this time. Be the first to publish one!"
+msgstr ""
+
+#: themes/default/views/scripts/job/job.phtml:15
+#: themes/default/views/scripts/job/job.phtml:24
+#: themes/default/views/scripts/jobs-at/index.phtml:24
+msgid "in"
+msgstr ""
+
+#: themes/default/views/scripts/job/job.phtml:29
+msgid "Description:"
+msgstr ""
+
+#: themes/default/views/scripts/job/job.phtml:31
+msgid "To apply:"
+msgstr ""
+
+#: themes/default/views/scripts/jobs-at/index.phtml:11
+#: themes/default/views/scripts/jobs-at/index.phtml:15
+msgid "Jobs at"
+msgstr ""
+
+#: themes/default/views/scripts/publish/index.phtml:11
+msgid "Publish a job posting"
+msgstr ""
+
+#: themes/default/views/scripts/publish/index.phtml:13
+msgid "Publish a job"
+msgstr ""
+
+#: themes/default/views/scripts/publish/index.phtml:17
+msgid "The job has been saved. It now has to be accepted by a moderator in order to appear publicly on the site."
+msgstr ""
+
+#: themes/default/views/scripts/publish/index.phtml:19
+msgid "The job has been modified and saved."
+msgstr ""
+
+#: themes/default/views/scripts/search/index.phtml:11
+#: themes/joobsbox/views/scripts/search/index.phtml:11
+msgid "Job search"
+msgstr ""
+
+#: themes/default/views/scripts/search/index.phtml:31
+#: themes/joobsbox/views/scripts/search/index.phtml:31
+msgid "Nothing to be found for your searched criteria."
+msgstr ""
+
+#: themes/default/views/scripts/search/index.phtml:33
+#: themes/joobsbox/views/scripts/search/index.phtml:33
+msgid "Look for typos in the searched word(s) and, if found, correct them."
+msgstr ""
+
+#: themes/default/views/scripts/search/index.phtml:34
+#: themes/joobsbox/views/scripts/search/index.phtml:34
+msgid "Be less specific. Try \"web designer\" instead of \"senior web designer\"."
+msgstr ""
+
+#: themes/default/views/scripts/search/index.phtml:35
+#: themes/joobsbox/views/scripts/search/index.phtml:35
+msgid "Try similar words. If \"designer\" doesn't return anything, try \"design\"."
 msgstr ""
 
