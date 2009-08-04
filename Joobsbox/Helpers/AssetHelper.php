@@ -36,7 +36,7 @@ class Joobsbox_Helpers_AssetHelper extends Zend_Controller_Action_Helper_Abstrac
               break;
             case 'jquery-ui':
             case 'jqueryui':
-              $view->js->load('/public/js/lib/jquery-ui/js/jquery-ui-1.7.custom.min.js');
+              $view->js->load('/public/js/lib/jquery-ui/js/jquery-ui-1.7.2.custom.min.js');
               $view->css->load('/public/js/lib/jquery-ui/css/cupertino/jquery-ui-1.7.1.custom.css');
               break;
             case 'jquery-corner':

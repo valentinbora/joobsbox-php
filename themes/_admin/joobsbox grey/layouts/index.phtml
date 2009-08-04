@@ -23,16 +23,12 @@
 ?>
 
 <?php
-	$this->headLink()->prependStylesheet($this->themeUrl . "/css/global.css");
-	$this->headLink()->prependStylesheet($this->themeUrl . "/css/reset.css");
+	$this->css->load("reset.css", "global.css");
 	$this->headScript()
-		->prependScript($this->translateHash . 'var baseUrl = "' . $this->baseUrl . '";' . ' var href = "' . $_SERVER['REQUEST_URI'] . '";', 'text/javascript', array('charset' => 'UTF-8'))
-		->prependFile($this->themeUrl . '/js/functions.js', 'text/javascript')
-		->prependFile($this->baseUrl . '/public/js/lib/jquery.js', 'text/javascript')
-		->appendFile($this->baseUrl . '/public/js/lib/jquery.corner.js', 'text/javascript')
-		->appendFile($this->baseUrl . '/public/js/lib/jquery.pngFix.pack.js', 'text/javascript');
-	$this->asset->load("jqueryui");
-	$this->headScript()->appendFile($this->themeUrl . '/js/global.js', 'text/javascript');
+		->prependScript($this->translateHash . 'var baseUrl = "' . $this->baseUrl . '";' . ' var href = "' . $_SERVER['REQUEST_URI'] . '";', 'text/javascript', array('charset' => 'UTF-8'));
+	$this->js->load('functions.js');
+	$this->asset->load("jquery", "jqueryui", "jquery-pngfix");
+	$this->js->load('global.js');
 
   echo $this->headLink();
 	echo $this->headScript(); 

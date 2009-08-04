@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function(){
 	$("li.item").mouseenter(function() {
 		$(this).addClass("hover");
 	});
@@ -9,7 +9,7 @@ $(function(){
 	$("#admin-menu").sortable({
 		distance: 15,
 		cancel: '#menu-dashboard, .separator',
-		stop: function() {
+		update: function() {
 		  $.post(baseUrl + '/admin/sortmenu', $("#admin-menu").sortable("serialize"));
 	  }
 	});

@@ -22,6 +22,8 @@ class InstallController extends Zend_Controller_Action {
 	protected $_model;
 	
 	public function init() {
+	    Zend_Registry::get("PluginLoader")->disablePlugins();
+	  
 	    $params = $this->getRequest()->getParams();
 	    
 	    $config = new Zend_Config_Xml("config/config.xml", null, array(
@@ -30,9 +32,7 @@ class InstallController extends Zend_Controller_Action {
       );
 	    
 	    if(isset($params['lang'])) {
-	      
-
-    		$conf->general->locale = $params['lang'];
+	      $config->general->locale = $params['lang'];
 
         // Write the configuration file
         $writer = new Zend_Config_Writer_Xml(array(
@@ -89,7 +89,7 @@ class InstallController extends Zend_Controller_Action {
 			
 			if(!isset($this->view->dberror)) {
 				// Connection works - we save the data
-				$conf = new Zend_Config_Xml("config/config.xml", null, array(
+				$config = new Zend_Config_Xml("config/config.xml", null, array(
   			  'skipExtends'        => true,
           'allowModifications' => true)
         );
@@ -99,7 +99,7 @@ class InstallController extends Zend_Controller_Action {
 
         // Write the configuration file
         $writer = new Zend_Config_Writer_Xml(array(
-          'config'   => $conf,
+          'config'   => $config,
           'filename' => 'config/config.xml')
         );
         
@@ -155,7 +155,7 @@ class InstallController extends Zend_Controller_Action {
   			}
   		    }
   		}
-  		$db->delete($config->db->prefix . "categories", array("ID=0"));
+  		$db->delete($config->db->prefix . "categories", array("Name='Uncategorized'"));
   		$db->insert($config->db->prefix . "categories", array(
   		    'ID'    => 0,
   		    'Name'  => 'Uncategorized',
@@ -236,6 +236,8 @@ class InstallController extends Zend_Controller_Action {
 
       $username = $values['username'];
       $password = $values['password'];
+      
+      $config = new Zend_Config_Xml("config/config.xml");
       
 	    $db->delete($config->db->prefix . 'users', array("username='$username'"));
 	    $db->insert($config->db->prefix . 'users', array(
