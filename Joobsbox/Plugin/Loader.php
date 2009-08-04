@@ -40,7 +40,7 @@ class Joobsbox_Plugin_Loader {
 		foreach($dir as $file) {
 			$className = $file->getFilename();
 			if($file->isDir() && $className[0] != '.' && $className[0] != '_') {
-				if(file_exists("plugins/$className/$className.php") && file_exists("plugins/$className/config.ini.php")) {
+				if(file_exists("plugins/$className/$className.php") && file_exists("plugins/$className/config.xml")) {
 					Zend_Loader::loadFile("plugins/$className/$className.php");
 					$class = new ReflectionClass($className);
 
@@ -63,7 +63,7 @@ class Joobsbox_Plugin_Loader {
 						  $plugins[$className]->isAdmin = true;
 						}
 
-						$plugins[$className]->conf = new Zend_Config_Ini("plugins/$className/config.ini.php");
+						$plugins[$className]->conf = new Zend_Config_Xml("plugins/$className/config.xml");
 						
 						if(method_exists($plugins[$className], 'setPluginName')) {
 							$plugins[$className]->setPluginName($className);
@@ -94,9 +94,9 @@ class Joobsbox_Plugin_Loader {
 		foreach($dir as $file) {
 			$className = $file->getFilename();
 			if($file->isDir() && $className[0] == '_') {
-				if(file_exists("plugins/$className/config.ini.php")) {
+				if(file_exists("plugins/$className/config.xml")) {
 					  $plugins[$className] = new Joobsbox_Plugin_Base;
-						$plugins[$className]->conf = new Zend_Config_Ini("plugins/$className/config.ini.php");
+						$plugins[$className]->conf = new Zend_Config_Xml("plugins/$className/config.xml");
 						
 						if(method_exists($plugins[$className], 'setPluginName')) {
 							$plugins[$className]->setPluginName($className);

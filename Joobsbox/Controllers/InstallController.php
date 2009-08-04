@@ -23,26 +23,28 @@ class InstallController extends Zend_Controller_Action {
 	
 	public function init() {
 	    $params = $this->getRequest()->getParams();
+	    
+	    $config = new Zend_Config_Xml("config/config.xml", null, array(
+			  'skipExtends'        => true,
+        'allowModifications' => true)
+      );
+	    
 	    if(isset($params['lang'])) {
-	      $conf = new Zend_Config_Ini("config/config.ini.php", null, array(
-  			  'skipExtends'        => true,
-          'allowModifications' => true)
-        );
+	      
 
     		$conf->general->locale = $params['lang'];
 
         // Write the configuration file
-        $writer = new Zend_Config_Writer_Ini(array(
-          'config'   => $conf,
-          'filename' => 'config/config.ini.php')
+        $writer = new Zend_Config_Writer_Xml(array(
+          'config'   => $config,
+          'filename' => 'config/config.xml')
         );
         $writer->write();
         $this->_redirect("install");
 	    }
 	    
-	    $config = new Zend_Config_Ini("config/config.ini.php");
-	    if(isset($config->general->restrict_install) && $config->general->restrict_install && file_exists("config/db.ini.php")) {
-		      throw new Exception($this->view->translate("This JoobsBox is already installed. Manually remove the restrict_install line from config/config.ini.php if you want to reinstall it."));
+      if(isset($config->general->restrict_install) && $config->general->restrict_install && file_exists("config/db.xml")) {
+		      throw new Exception($this->view->translate("This JoobsBox is already installed. Manually remove the restrict_install line from config/config.xml if you want to reinstall it."));
 	    }
 	}
 	
@@ -87,7 +89,7 @@ class InstallController extends Zend_Controller_Action {
 			
 			if(!isset($this->view->dberror)) {
 				// Connection works - we save the data
-				$conf = new Zend_Config_Ini("config/config.ini.php", null, array(
+				$conf = new Zend_Config_Xml("config/config.xml", null, array(
   			  'skipExtends'        => true,
           'allowModifications' => true)
         );
@@ -96,15 +98,15 @@ class InstallController extends Zend_Controller_Action {
 				$config->db->prefix = $dbprefix;
 
         // Write the configuration file
-        $writer = new Zend_Config_Writer_Ini(array(
+        $writer = new Zend_Config_Writer_Xml(array(
           'config'   => $conf,
-          'filename' => 'config/config.ini.php')
+          'filename' => 'config/config.xml')
         );
         
         try {
           $writer->write();
         } catch (Exception $e) {
-          $this->view->dberror = $this->view->translate("config/config.ini.php is not writable. Please adjust the file permissions using FTP or SSH.");
+          $this->view->dberror = $this->view->translate("config/config.xml is not writable. Please adjust the file permissions using FTP or SSH.");
         }
 				
 				  
@@ -120,8 +122,8 @@ class InstallController extends Zend_Controller_Action {
 				  $this->view->dberror = $this->view->translate("config directory is not writable. Please adjust the directory permissions using FTP or SSH.");
 				  return;
 				}
-				$configWriter = new Zend_Config_Writer_Ini();
-				$configWriter->write('config/db.ini.php', $config);
+				$configWriter = new Zend_Config_Writer_Xml();
+				$configWriter->write('config/db.xml', $config);
 				$this->_redirect('install/step2');
 			}
 		}
@@ -137,7 +139,7 @@ class InstallController extends Zend_Controller_Action {
 		$session = new Zend_Session_Namespace('Install');
 
 		if(!isset($session->populated_db)) {
-		  $config = new Zend_Config_Ini('config/config.ini.php');
+		  $config = new Zend_Config_Xml('config/config.xml');
   		$db = Zend_Registry::get("db");
   		$sql = file_get_contents("sql/base.sql");
   		$sql = str_replace("{#prefix#}", $config->db->prefix, $sql);
@@ -244,12 +246,11 @@ class InstallController extends Zend_Controller_Action {
     		'email' => $values['email']
 	    ));
 	    
-	    $config = parse_ini_file('config/config.ini.php', true);
-  		$config = new Zend_Config($config, true);
+	    $config = new Zend_Config_Xml('config/config.xml', null, array('allowModifications' => true));
   		$config->general->restrict_install = 1;
 
-  		$configWriter = new Zend_Config_Writer_Ini();
-  		$configWriter->write('config/config.ini.php', $config);
+      $writer = new Zend_Config_Writer_Xml(array('config' => $config, 'filename' => 'config/config.xml'));
+      $writer->write();
 
   		$authAdapter = Zend_Registry::get("authAdapter");
   		$authAdapter->setIdentity($username)->setCredential($password);

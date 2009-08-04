@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<iPhone>
+  <main>
+    <title_ro>iPhone</title_ro>
+    <title_en>iPhone</title_en>
+    <image>images/iphone_24.png</image>
+    <version>0.1</version>
+    <description>This is the iPhone compatibility and optimization plugin made by &lt;a href="http://manuelciosici.com"&gt;Manuel R. Ciosici&lt;/a&gt;</description>
+  </main>
+</iPhone>

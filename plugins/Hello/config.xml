@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Hello>
+  <main>
+    <title_ro>Hello</title_ro>
+    <title_en>Hello</title_en>
+    <image>hello.png</image>
+    <version>0.1</version>
+    <description>Hello plugin has a crucial importance to Joobsbox. Nothing more to say.</description>
+  </main>
+</Hello>

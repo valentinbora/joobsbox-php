@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR);
 set_magic_quotes_runtime(false);
 ini_set('magic_quotes_gpc', false);
 ini_set("memory_limit", "64M");
@@ -11,7 +12,7 @@ $loader = Zend_Loader_Autoloader::getInstance()->registerNamespace('Joobsbox_');
 date_default_timezone_set("GMT");
 
 // Static parameters
-$conf = new Zend_Config_Ini(APPLICATION_DIRECTORY . "/config/config.ini.php");
+$conf = new Zend_Config_Xml(APPLICATION_DIRECTORY . "/config/config.xml");
 Zend_Registry::set("conf", $conf);
 
 // Set up caching
@@ -61,14 +62,14 @@ Zend_Registry::set("Translation_Hash", $translate->getMessages());
 Zend_Registry::set('Zend_Translate', $translate);
 
 // Database parameters
-if(file_exists(APPLICATION_DIRECTORY . '/config/db.ini.php')) {
+if(file_exists(APPLICATION_DIRECTORY . '/config/db.xml')) {
   try {
-	  $db = Zend_Db::factory('PDO_MYSQL', new Zend_Config_Ini(APPLICATION_DIRECTORY . '/config/db.ini.php'));
+	  $db = Zend_Db::factory('PDO_MYSQL', new Zend_Config_Xml(APPLICATION_DIRECTORY . '/config/db.xml'));
   	Zend_Db_Table_Abstract::setDefaultAdapter($db);
   	Zend_Registry::set("db", $db);
 	  $db->query('SET NAMES "utf8"');
 	} catch (Exception $e) {
-	  rename(APPLICATION_DIRECTORY . "/config/db.ini.php", APPLICATION_DIRECTORY . "/config/db.ini.php.bak");
+	  rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
     header("Location: install");
     exit();
 	}
@@ -99,18 +100,14 @@ function getStaticSalt($conf) {
 		for ($i = 0; $i < 50; $i++) {
 			$salt .= chr(rand(97, 122));
 		}
-		$tempConf = new Zend_Config_Ini("config/config.ini.php", null, array(
+		$tempConf = new Zend_Config_Xml("config/config.xml", null, array(
 		  'skipExtends'        => true,
       'allowModifications' => true)
     );
-		
+    
 		$tempConf->db->passwordSalt = $salt;
 		
-    $writer = new Zend_Config_Writer_Ini(array(
-      'config'   => $tempConf,
-      'filename' => 'config/config.ini.php')
-    );
-    
+    $writer = new Zend_Config_Writer_Xml(array('config'   => $conf, 'filename' => 'config/config.xml'));
     $writer->write();
 		Zend_Registry::set('staticSalt', $salt);
 	} else {

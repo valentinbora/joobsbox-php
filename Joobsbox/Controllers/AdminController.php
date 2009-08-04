@@ -71,8 +71,8 @@ class AdminController extends Zend_Controller_Action
       	$class = new ReflectionClass(ucfirst($name));
       	if($class->hasMethod('init')) {
       	  $this->plugins[$name] = array();
-      	  if(file_exists($this->pluginPath . $name . '/config.ini.php')) {
-      	    $this->plugins[$name] = new Zend_Config_Ini($this->pluginPath . $name . '/config.ini.php');
+      	  if(file_exists($this->pluginPath . $name . '/config.xml')) {
+      	    $this->plugins[$name] = new Zend_Config_Xml($this->pluginPath . $name . '/config.xml');
       	  }
       	  if(in_array($name, $this->corePlugins)) {
       	    $this->menuPlugins[$name] = $this->plugins[$name];
@@ -104,7 +104,7 @@ class AdminController extends Zend_Controller_Action
   }
   
   public function sortmenuAction() {
-    $conf = new Zend_Config_Ini("config/config.ini.php", null, array(
+    $conf = new Zend_Config_Xml("config/config.xml", null, array(
 		  'skipExtends'        => true,
       'allowModifications' => true)
     );
@@ -114,9 +114,9 @@ class AdminController extends Zend_Controller_Action
 		$conf->admin->menu = $order;
 		
 		// Write the configuration file
-    $writer = new Zend_Config_Writer_Ini(array(
+    $writer = new Zend_Config_Writer_Xml(array(
       'config'   => $conf,
-      'filename' => 'config/config.ini.php')
+      'filename' => 'config/config.xml')
     );
     $writer->write();
     exit(0);

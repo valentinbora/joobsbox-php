@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<zend-config>
+  <general>
+    <dev>1</dev>
+    <demo>0</demo>
+    <jobs_per_categ>10</jobs_per_categ>
+    <standalone>1</standalone>
+    <admin_theme>joobsbox grey</admin_theme>
+    <theme>default</theme>
+    <common_title>Joobsbox PHP Demo</common_title>
+    <locale>en</locale>
+    <timezone>Europe/Berlin</timezone>
+    <posting_ttl>30</posting_ttl>
+    <cache>0</cache>
+  </general>
+  <rss>
+    <all_jobs_count>15</all_jobs_count>
+    <category_jobs_count>15</category_jobs_count>
+    <description></description>
+  </rss>
+  <db>
+    <prefix></prefix>
+    <passwordSalt>zypepwvpulajmkupaiowuluofqnfiunisdmizixutydgjyvjgk</passwordSalt>
+  </db>
+  <dbtables>
+    <postings>jobs</postings>
+    <categories>categories</categories>
+    <users>users</users>
+  </dbtables>
+  <admin>
+    <dashboard>Categories,Postings</dashboard>
+    <menu>Postings,Categories,Settings,Themes,Users,Plugins,Upgrades</menu>
+  </admin>
+</zend-config>

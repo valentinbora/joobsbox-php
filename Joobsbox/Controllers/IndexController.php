@@ -22,7 +22,7 @@ class IndexController extends Zend_Controller_Action {
 	protected $_model;
 	
 	public function indexAction(){
-		if(!file_exists(APPLICATION_DIRECTORY . "/config/db.ini.php")) {
+		if(!file_exists(APPLICATION_DIRECTORY . "/config/db.xml")) {
 			$this->_redirect('install/step1');
 		}
 		
@@ -33,7 +33,7 @@ class IndexController extends Zend_Controller_Action {
 		
 		  $this->_helper->event("received_jobs");
 		} catch(Exception $e) {
-		  rename(APPLICATION_DIRECTORY . "/config/db.ini.php", APPLICATION_DIRECTORY . "/config/db.ini.php.bak");
+		  rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
       $this->_redirect('install/step1');
 		}
 	}

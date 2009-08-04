@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Twitter>
+  <main>
+    <title_ro>Twitter</title_ro>
+    <title_en>Twitter</title_en>
+    <image>images/twitter24.png</image>
+    <version>0.1</version>
+    <description>Twitter plugin enables your Joobsbox to post new jobs on Twitter. Made by &lt;a href="http://valentinbora.com"&gt;Valentin Bora&lt;/a&gt;</description>
+  </main>
+</Twitter>
