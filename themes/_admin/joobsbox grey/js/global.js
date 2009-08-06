@@ -5,12 +5,14 @@ $(document).ready(function(){
 	$("li.item").mouseleave(function() {
 		$(this).removeClass("hover");
 	});
-	
-	$("#admin-menu").sortable({
-		distance: 15,
-		cancel: '#menu-dashboard, .separator',
-		update: function() {
-		  $.post(baseUrl + '/admin/sortmenu', $("#admin-menu").sortable("serialize"));
-	  }
-	});
+
+	if(typeof(disableJqueryUI) == "undefined") {
+  	$("#admin-menu").sortable({
+  		distance: 15,
+  		cancel: '#menu-dashboard, .separator',
+  		update: function() {
+  		  $.post(baseUrl + '/admin/sortmenu', $("#admin-menu").sortable("serialize"));
+  	  }
+  	});
+  }
 });

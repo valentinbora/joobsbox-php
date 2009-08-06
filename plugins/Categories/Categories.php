@@ -16,10 +16,10 @@ class Categories extends Joobsbox_Plugin_AdminBase
 		$jobsModel     = $this->jobsModel;
 		
 		$currentCategories = $jobsModel->fetchCategories();
-		
-		$data = stripslashes($_POST['data']);
+
+		$data = stripslashes($_POST['categories']);
 		$categories = Zend_Json::decode($data);
-		$categories = $categories['categories'];
+		$categories = $categories;
 		$mustReload = false;
 		
 		$foundCategories = array();
@@ -28,17 +28,11 @@ class Categories extends Joobsbox_Plugin_AdminBase
 		
 		$orderDirector = array();
 		
-		foreach($categories as $category) {
-			$parentId = str_replace("node_", "", $category['parentId']);
-
-			if(!isset($orderDirectory[$parentId])) {
-				$orderDirectory[$parentId] = 0;
-			}
-			$orderDirectory[$parentId]++;
-			
-			if(strlen($category['id'])) {
-				$id = $category['id'];
-				$id = str_replace("node_", "", $id);
+		foreach($categories as $index => $category) {
+		  $existing = explode("_", $category["existing"]);
+		  
+		  if(($existing[0] == "existing")) {
+				$id = $existing[1];
 				$foundCategories[] = $id;
 
 				if($currentCategories->getCategory($id)) {
@@ -47,10 +41,9 @@ class Categories extends Joobsbox_Plugin_AdminBase
 					////////////////////////////////////////////
 
 					if($category['name'] 				!= $currentCategories->getCategory($id)->getProperty("Name")
-						|| $orderDirectory[$parentId] 	!= $currentCategories->getCategory($id)->getProperty("OrderIndex")
-						|| $parentId					!= $currentCategories->getCategory($id)->getProperty("Parent")) 
+						|| $index 	!= $currentCategories->getCategory($id)->getProperty("OrderIndex")) 
 					{
-						$orderIndex = $orderDirectory[$parentId];
+						$orderIndex = $index;
 						
 						$categoryNameBackup = $category['name'];
 						$category['name'] = preg_replace('%[^\w\.-\s]%', '', $category['name']);
@@ -61,7 +54,7 @@ class Categories extends Joobsbox_Plugin_AdminBase
 							"OrderIndex" => $orderIndex,
 							"Name"		 => $category['name'],
 							"Link"     => $this->view->MakeLink($category['name']),
-							"Parent"	 => $parentId
+							"Parent"	 => 0
 						);
 						$where = $db->quoteInto('ID = ?', $id);
 						$categoryModel->update($data, $where);
@@ -72,13 +65,13 @@ class Categories extends Joobsbox_Plugin_AdminBase
 				// CREATE CATEGORY
 				///////////////////
 				
-				$orderIndex = $orderDirectory[$parentId];
+				$orderIndex = $index;
 				$category['name'] = preg_replace('%[^\w\.-\s]%', '', $category['name']);
 				$categoryModel->insert(array(
 					"Name"		=> $category['name'],
 					"OrderIndex"=> $orderIndex,
 					"Link"     => $this->view->MakeLink($category['name']),
-					"Parent"	=> $parentId
+					"Parent"	=> 0
 				));
 				$mustReload = true;
 			}

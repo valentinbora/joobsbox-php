@@ -26,7 +26,6 @@ class Joobsbox_Model_CategoryOperations extends Zend_Db_Table_Abstract {
 	public function __construct() {
 		$this->_conf = Zend_Registry::get("conf");
 		$this->_name = $this->_conf->db->prefix . $this->_conf->dbtables->categories;
-		dd($this->_name);
 		parent::__construct();
 	}
 }

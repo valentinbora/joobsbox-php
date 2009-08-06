@@ -101,6 +101,15 @@ class AdminController extends Zend_Controller_Action
     $this->view->locale  = Zend_Registry::get("Zend_Locale");
     
     $this->alerts = array_merge($this->alerts, $this->_helper->FlashMessenger->getMessages());
+    
+    /* Load stuff */
+    $this->view->css->load("reset.css", "global.css");
+    
+    $this->view->headScript()
+    	->prependScript($this->view->translateHash . 'var baseUrl = "' . $this->view->baseUrl . '";' . ' var href = "' . $_SERVER['REQUEST_URI'] . '";', 'text/javascript', array('charset' => 'UTF-8'));
+    $this->view->js->load('functions.js');
+    $this->view->asset->load("jquery", "jquery-pngfix");
+    $this->view->js->load(array('global.js', 100));
   }
   
   public function sortmenuAction() {

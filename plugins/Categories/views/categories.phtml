@@ -1,12 +1,13 @@
 <h1 class="dashboard-title"><?php echo $this->translate("Categories"); ?></h1>
 <div id="tree-controls">
 	<a id="createNewNode"><?php echo $this->translate('Create category'); ?></a>
-	<a id="renameNode"><?php echo $this->translate('Rename category'); ?></a>
 	<a id="deleteNode"><?php echo $this->translate('Delete category'); ?></a>
 	<a id="saveConfiguration"><?php echo $this->translate("Save"); ?></a>
+	<span id="info">&nbsp;</span>
 	<div style="clear:both"></div>
 </div>
 
+<?php /* 
 <div id="categ-wrapper">
 	<ul>
 		<li id="node_root" class="open" rel="root">
@@ -16,7 +17,7 @@
 				<?php foreach($this->categories->filterRootNodes() as $category): ?>
 
 							<li id="node_<?php echo $category['ID']; ?>" rel="primary-categ">
-								<a href="#"><?php echo $category['Name']; ?></a>
+								<a href="#" class="editable"><?php echo $category['Name']; ?></a>
 				<?php 			$children = $category->getChildren();
 								if(count($children)): 										?>
 									<ul>
@@ -34,27 +35,28 @@
 		</li>
 	</ul>
 </div>
+ */ ?>
+ 
+<div id="categ-wrapper">
+  <ul id="categories">
+    <?php foreach($this->categories->filterRootNodes() as $index => $category): ?>
+		<li class="editable" id="existing_<?php echo $category['ID']; ?>"><?php echo $category['Name']; ?></li>
+		<?php endforeach; ?>
+  </ul>
+</div>
 
 <div id="instructions">
 	<h2><?php echo $this->translate('Instructions'); ?></h2>
 	<p>
 		<?php echo $this->translate(
 			'To reorder categories, simply drag and drop them.<br/>
-			To create a new category, select the parent category and then click "Create category".<br/>
-			To rename a category, select it and click "Rename category".<br/>
-			<br/>
-			Many of these options are available using right-click/secondary-click on the items.
+			To create a new category, click "Create category".<br/>
+			To rename a category, just click it and modify its text.<br/>
 		'); ?>
 	</p>
 </div>
 
-<div class="dialog" id="saveDialog" title="<?php echo $this->translate("Save successful"); ?>">
-	<?php echo $this->translate("Your category configuration has been saved."); ?>
-</div>
-
 <?php
-	$this->css->load('js/jsTree/tree_component.css', 'categories.css');
-	$this->asset->load("jquery");
-	$this->js->load(array("jsTree/_lib.js", -40), array('jsTree/tree_component.min.js', -39), 'js/jquery.json-1.3.min.js', 'categories.js');
-	echo $this->headScript();
+	$this->css->load(array('categories.css', 50));
+	$this->js->load('jquery.jeditable.mini.js', 'jquery.json-1.3.min.js', 'categories.js');
 ?>

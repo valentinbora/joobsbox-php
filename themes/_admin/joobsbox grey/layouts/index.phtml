@@ -14,22 +14,16 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <?php 
-	echo $this->filter('head_html');
 	$this->headTitle($this->conf->general->common_title);
 	$this->headTitle()->prepend("Admin");
 	$this->headTitle()->setSeparator(' - ');
 	echo $this->headTitle();
 	echo $this->headMeta();
+	
+	echo $this->filter('head_html');
 ?>
 
-<?php
-	$this->css->load("reset.css", "global.css");
-	$this->headScript()
-		->prependScript($this->translateHash . 'var baseUrl = "' . $this->baseUrl . '";' . ' var href = "' . $_SERVER['REQUEST_URI'] . '";', 'text/javascript', array('charset' => 'UTF-8'));
-	$this->js->load('functions.js');
-	$this->asset->load("jquery", "jquery-pngfix");
-	$this->js->load(array('global.js', 100))->write($this->translateHash);
-?>
+
 </head>
 <body>
 	<div id="admin-header">

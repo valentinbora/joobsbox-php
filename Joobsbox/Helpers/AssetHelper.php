@@ -32,7 +32,7 @@ class Joobsbox_Helpers_AssetHelper extends Zend_Controller_Action_Helper_Abstrac
  		 foreach($args as $what) {
        switch($what) {
             case 'jquery':
-              $view->js->load(array('public/js/lib/jquery.js', -50));
+              $view->js->load(array('public/js/lib/jquery.js', -100));
               break;
             case 'jquery-ui':
             case 'jqueryui':

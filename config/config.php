@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ERROR);
 set_magic_quotes_runtime(false);
 ini_set('magic_quotes_gpc', false);
 ini_set("memory_limit", "64M");

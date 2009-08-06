@@ -52,11 +52,23 @@ class Joobsbox_Helpers_CssHelper extends Zend_Controller_Action_Helper_Abstract
      $theme = $view->theme;
 
      foreach($args as $what) {
+       if(is_array($what)) {
+         $prio = $what[1];
+         $what = $what[0];
+       } else {
+         $prio = 0;
+       }
+       
        foreach($this->cssPaths as $path) {
          $path .= '/' . $what;
 
          if(file_exists(APPLICATION_DIRECTORY . $path) && !isset($this->css[$path])) {
-           $view->headLink()->appendStylesheet($view->baseUrl . $path);
+           if($prio == 0) {
+             $view->headLink()->appendStylesheet($view->baseUrl . $path);
+           } else {
+             $view->headLink()->offsetSetStylesheet($prio, $view->baseUrl . $path);
+           }
+          
            $this->css[$path] = 1;
            Zend_Registry::set("css", $this->css);
          }

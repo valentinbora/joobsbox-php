@@ -1,5 +1,74 @@
-var newNodeType = "primary-categ";
+function recreateInteractivity() {
+  // Activate edit in place
+  $(".editable").editable(function(value, settings) {
+       return(value);
+  });
+  
+  // Make them sortable
+  $("#categories").sortable({
+    start: function() {
+      $(".editable").blur();
+    }
+  });
+  
+  // Unselect them when hitting anything on <body>
+  $("body").click(function(){
+    $(".editable").blur();
+  });
+  
+  $(".editable").blur(function(){
+    $(this).removeClass("selected");
+    $("#saveConfiguration").addClass("attention");
+  });
+
+  // Show selections
+  $(".editable").click(function(ev){
+    $(".editable").removeClass("selected");
+    $(this).addClass("selected");
+  });
+}
+
+$(document).ready(function(){
+  recreateInteractivity();
+  $('#createNewNode').click(function(){
+		var a = $("#categories").append('<li class="editable" id="new_' + $(".editable").length + '"></li>');
+		recreateInteractivity();
+		$($("#categories :last").get(0)).click();
+	});
+	
+	$('#deleteNode').click(function(){
+		if(confirm(translate("Are you sure you want to delete this category and all its subcategories?"))) {
+			$("#categories li.selected").remove();
+		}
+	});
+	
+	$('#saveConfiguration').click(function(){
+	  $("#info").fadeIn();
+	  $("#info").text("Wait...");
+	  var categories = [];
+	  $(".editable").each(function(){
+	    categories.push({"name": $(this).text(), "existing": $(this).attr('id')});
+	  });
+	  
+	  $.post(pluginUrl + 'saveConfiguration', {"categories": $.toJSON(categories)},
+		  function(data){
+		      if(data.mustReload) {
+		        $("#info").text("Saved - Going to reload page in a brief");
+		        setTimeout(function() {window.location.reload();}, 1000);
+		      } else {
+		        $("#info").text("Saved");
+		      }
+		    	setTimeout(function(){
+		    	  $("#info").fadeOut();
+		    	  $("#saveConfiguration").removeClass("attention");
+		    	}, 3000);
+		  }, "json");
+	});
+});
+
+/*var newNodeType = "primary-categ";
 var selectedCategNode;
+var disableJqueryUI = 1;
 $(function() {
 	var tree = $.tree_create();
 	tree.init('#categ-wrapper', {
@@ -138,3 +207,4 @@ function traverse(root, list) {
 		}
 	});
 }
+*/
