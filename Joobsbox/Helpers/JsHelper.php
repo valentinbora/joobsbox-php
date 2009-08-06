@@ -25,14 +25,29 @@
  */
 class Joobsbox_Helpers_JsHelper extends Zend_Controller_Action_Helper_Abstract
 {
-   private $js;
+   private $jsCollection;
+   private $paths;
    
    public function __construct() {
-     if(!Zend_Registry::isRegistered("js")) {
-       $this->js = array();
-       Zend_Registry::set("js", $this->js);
+     $view  = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
+     $theme = $view->theme;
+     
+     $this->paths = array(
+       '/themes/' . $theme . '/js', 
+       '/themes/core/js',
+       ''
+     );
+     
+     if(!Zend_Registry::isRegistered("Joobsbox_Js_Loader_MaxPrio")) {
+       Zend_Registry::set("Joobsbox_Js_Loader_MaxPrio", 0);
+       Zend_Registry::set("Joobsbox_Js_Loader_MinPrio", 0);
+     }
+     
+     if(!Zend_Registry::isRegistered("jsCollection")) {
+       $this->jsCollection = array();
+       Zend_Registry::set("jsCollection", $this->jsCollection);
      } else {
-       $this->js = Zend_Registry::get("js");
+       $this->jsCollection = Zend_Registry::get("jsCollection");
      }
    }
    
@@ -40,23 +55,73 @@ class Joobsbox_Helpers_JsHelper extends Zend_Controller_Action_Helper_Abstract
       $args = func_get_args();
       $view  = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
       $theme = $view->theme;
-      $paths = array(
-        '/themes/' . $theme . '/js/', 
-        '/themes/core/js/',
-        ''
-      );
+      
+      $maxPrio = Zend_Registry::get("Joobsbox_Js_Loader_MaxPrio");
+      $minPrio = Zend_Registry::get("Joobsbox_Js_Loader_MinPrio");
       
       foreach($args as $what) {
-        foreach($paths as $path) {
-          $path .= $what;
+        if(is_array($what)) {
+          $prio = $this->getPrio($what[1]);
+          $what = $what[0];
+        } else {
+          $prio = 0;
+        }
+        
+        if($prio < $maxPrio) $maxPrio = $prio;
+        if($prio > $minPrio) $minPrio = $prio;
+        
+        foreach($this->paths as $path) {
+          $path .= '/' . $what;
+
           if(file_exists(APPLICATION_DIRECTORY . $path) && !isset($this->js[$path])) {
-            $view->headScript()->appendFile($view->baseUrl . $path);
-            $this->js[$path] = 1;
-            Zend_Registry::set("js", $this->js);
+            $this->jsCollection[$view->baseUrl . $path] = $prio;
+            if($prio == 0) {
+              $view->headScript()->appendFile($view->baseUrl . $path);
+            } else {
+              $view->headScript()->offsetSetFile($prio, $view->baseUrl . $path);
+            }
+            asort($this->jsCollection);
+            Zend_Registry::set("jsCollection", $this->jsCollection);
             break;
           }
         }
       }
       return $this;
+  }
+  
+  public function getPrio($prio) {
+    if(is_int($prio)) return $prio;
+    
+    $maxPrio = Zend_Registry::get("Joobsbox_Js_Loader_MaxPrio");
+    $minPrio = Zend_Registry::get("Joobsbox_Js_Loader_MinPrio");
+
+    switch($prio) {
+      case "highest":
+        return $maxPrio - 50;
+      case "high":
+        return $maxPrio - 1;
+      case "normal":
+        return 0;
+      case "low":
+        return $minPrio + 1;
+      case "lowest":
+        return $minPrio + 50;
+      default:
+        return 0;
+    }
+  }
+  
+  public function write($script) {
+    $view  = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
+    $view->headScript()->appendScript($script);
+    return $this;
+  }
+  
+  public function addPath($path) {
+    $this->paths[] = $path;
+  }
+  
+  public function getPath() {
+    return $this->paths;
   }
 }

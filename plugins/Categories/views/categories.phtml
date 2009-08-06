@@ -53,13 +53,8 @@
 </div>
 
 <?php
-	$this->headLink()->appendStylesheet($this->themePath . 'js/jsTree/tree_component.css');
-  $this->asset->load("jqueryui");
-	$this->headLink()->appendStylesheet($this->themePath . 'css/categories.css');
-	$this->headScript()
-		->appendFile($this->themePath . 'js/jsTree/_lib.js', 'text/javascript')
-		->appendFile($this->themePath . 'js/jsTree/tree_component.min.js', 'text/javascript')
-		->appendFile($this->themePath . 'js/jquery.json-1.3.min.js')
-		->appendScript('var pluginUrl="' . $this->pluginUrl . '";')
-		->appendFile($this->themePath . 'js/categories.js', 'text/javascript');
+	$this->css->load('js/jsTree/tree_component.css', 'categories.css');
+	$this->asset->load("jquery");
+	$this->js->load(array("jsTree/_lib.js", -40), array('jsTree/tree_component.min.js', -39), 'js/jquery.json-1.3.min.js', 'categories.js');
+	echo $this->headScript();
 ?>

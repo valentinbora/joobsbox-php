@@ -5,7 +5,6 @@ class iPhone extends Joobsbox_Plugin_Base {
   }
   
   public function filter_head_html(){
-    
     $this->_helper->headMeta()->prependName('viewport', 'width = device-width user-scalable = no');
     //<meta name = "viewport" content = "width = device-width user-scalable = no">
     

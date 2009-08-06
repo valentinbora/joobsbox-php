@@ -193,19 +193,26 @@ class AdminController extends Zend_Controller_Action
   }
 
   private function loadPlugin($pluginName, $return = true) {
+    $view  = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
+    $view->js->addPath('/plugins/' . $pluginName . '/js');
+    $view->js->addPath('/plugins/' . $pluginName);
+    $view->css->addPath('/plugins/' . $pluginName . '/css');
+    $view->css->addPath('/plugins/' . $pluginName);
+    
     $pluginUrl = $_SERVER['REQUEST_URI'];
     if($pluginUrl[strlen($pluginUrl)-1] != '/') {
       $pluginUrl .= '/';
     }
-    $this->view->pluginUrl = $pluginUrl;
+    $view->pluginUrl = $pluginUrl;
+    $view->js->write('var pluginUrl="' . $pluginUrl . '";');
 
     require_once $this->pluginPath . $pluginName . '/' . $pluginName . '.php';
     $plugin = new $pluginName;
     
     $plugin->setPluginName($pluginName);
     
-    $this->view->currentPluginName = $pluginName;
-    $plugin->view = $this->view;
+    $view->currentPluginName = $pluginName;
+    $plugin->view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;;
     $plugin->path = $plugin->view->path = $this->view->baseUrl . '/' . $this->pluginPath . $pluginName . "/";
     $plugin->view->themePath =  str_replace("index.php", "", $plugin->path); 
     $plugin->dirPath = $this->pluginPath . $pluginName . '/';
@@ -226,6 +233,8 @@ class AdminController extends Zend_Controller_Action
     }
 
     if($return) {
+      Zend_Registry::get("TranslationHelper")->regenerateHash();
+      
       $controllerAction = $this->getRequest()->getParam('action');
       $action = substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], $controllerAction)+strlen($controllerAction)+1);
       if($pos = strpos($action, '/') !== FALSE) {
@@ -235,7 +244,7 @@ class AdminController extends Zend_Controller_Action
 
       if(method_exists($plugin, $fullAction)) {
 	      call_user_func(array($plugin, $fullAction));
-        $viewRenderer->render($action, null, true);
+        $this->render($action);
 	    } elseif(method_exists($plugin, "indexAction")) {
 	      call_user_func(array($plugin, "indexAction"));
       }

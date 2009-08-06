@@ -83,13 +83,9 @@ endif; ?>
 </div>
 <?php endif;
 
-$this->asset->load("jqueryui");
-$this->headScript()->appendFile($this->themePath . '/js/plugins.js'); 
-?>
-
-
-<?php
-	$this->headLink()->appendStylesheet($this->themePath . 'css/plugins.css');
+  $this->asset->load("jqueryui");
+  $this->js->load('plugins.js');
+	$this->css->load('plugins.css');
 ?>
 
 <div id="dialog">

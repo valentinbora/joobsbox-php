@@ -27,11 +27,8 @@
 	$this->headScript()
 		->prependScript($this->translateHash . 'var baseUrl = "' . $this->baseUrl . '";' . ' var href = "' . $_SERVER['REQUEST_URI'] . '";', 'text/javascript', array('charset' => 'UTF-8'));
 	$this->js->load('functions.js');
-	$this->asset->load("jquery", "jqueryui", "jquery-pngfix");
-	$this->js->load('global.js');
-
-  echo $this->headLink();
-	echo $this->headScript(); 
+	$this->asset->load("jquery", "jquery-pngfix");
+	$this->js->load(array('global.js', 100))->write($this->translateHash);
 ?>
 </head>
 <body>
@@ -96,5 +93,11 @@
 	<div id="joobsbox-admin-footer">
       &copy;2009 JoobsBox. All rights reserved. powered by <a href="http://www.joobsbox.com" rel="external" target="_blank">joobsbox</a> + <a href="http://www.joobs.ro" rel="external" target="_blank">joobs.ro</a> + <a href="http://framework.zend.com" rel="external" target="_blank">zend framework</a>
   </div>
+  
+  <?php
+    $this->asset->load("jquery-ui");
+    echo $this->headLink();
+    echo $this->headScript();
+  ?>
 </body>
 </html>
