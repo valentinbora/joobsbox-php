@@ -137,7 +137,7 @@ class InstallController extends Zend_Controller_Action {
 	  
 		configureTheme(APPLICATION_THEME, 'install');
 		$session = new Zend_Session_Namespace('Install');
-
+unset($session->populated_db);
 		if(!isset($session->populated_db)) {
 		  $config = new Zend_Config_Xml('config/config.xml');
   		$db = Zend_Registry::get("db");
@@ -146,6 +146,7 @@ class InstallController extends Zend_Controller_Action {
   		$sql = str_replace("\r\n", "\n", $sql);
   		$sql = explode("\n", $sql);
   		$qry = "";
+
   		foreach($sql as $line) {
   		    if(trim($line) != "" && strpos($line, "--") === FALSE) {
   			$qry .= $line;

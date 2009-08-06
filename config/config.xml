@@ -12,6 +12,7 @@
     <timezone>Europe/Berlin</timezone>
     <posting_ttl>30</posting_ttl>
     <cache>0</cache>
+    <restrict_install>1</restrict_install>
   </general>
   <rss>
     <all_jobs_count>15</all_jobs_count>
@@ -19,7 +20,7 @@
     <description></description>
   </rss>
   <db>
-    <prefix></prefix>
+    <prefix>jbs_</prefix>
     <passwordSalt>zypepwvpulajmkupaiowuluofqnfiunisdmizixutydgjyvjgk</passwordSalt>
   </db>
   <dbtables>

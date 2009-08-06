@@ -85,10 +85,6 @@
 </div>
 
 <?php
-	$this->headLink()->appendStylesheet($this->themePath . 'css/postings.css');
-	$this->headScript()
-		->appendFile($this->themePath . 'js/jquery.json-1.3.min.js')
-		->appendScript('var pluginUrl="' . $this->pluginUrl . '";')
-		->appendFile($this->themePath . 'js/postings.js', 'text/javascript');
-	$this->asset->load("jqueryui");
+	$this->css->load('postings.css');
+	$this->js->load('js/jquery.json-1.3.min.js', 'js/postings.js');
 ?>

@@ -4,6 +4,7 @@
     <title_ro>XSSandstuff</title_ro>
     <title_en>XSSandstuff</title_en>
     <version>0.1</version>
+    <image>xss.png</image>
     <description>Xssandstuff plugin safeguards yourk JoobsBox from malicious HTML. Made by &lt;a href="http://valentinbora.com"&gt;Valentin Bora&lt;/a&gt;</description>
   </main>
 </Xss>

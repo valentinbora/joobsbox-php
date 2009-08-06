@@ -44,7 +44,6 @@
 <?php echo $this->form; ?>
 
 <?php
-	$this->headLink()->appendStylesheet($this->themePath . 'css/themes.css');
-	$this->asset->load("jqueryui");
-	$this->headScript()->appendFile($this->themePath . '/js/themes.js');
+	$this->css->load('themes.css');
+	$this->js->load('themes.js');
 ?>

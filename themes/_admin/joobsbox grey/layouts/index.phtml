@@ -43,7 +43,7 @@
 			<li id="item_<?php echo $pluginName; ?>" class="item <?php if($pluginName == $this->currentPluginName):?>current<?php endif; ?>">
 				<a href="<?php echo $this->baseUrl . strtolower("/admin/$pluginName"); ?>/" style="background-image: url(<?php 
 						if(isset($pluginOptions->main) && isset($pluginOptions->main->image)): 
-							echo $this->pluginsThemePath . '/' . $this->pluginPath . $pluginName . '/' . $pluginOptions->main->image; 
+							echo $pluginOptions->paths->urlPath . '/' . $pluginName . '/' . $pluginOptions->main->image; 
 						else:
 							echo $this->themeImages . '/adminPluginNoImage.png'; 
 						endif;?>);" >

@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <Logger>
-  <title_en>Logger</title_en>
-  <title_ro>Jurnal</title_ro>
-  <version>0.1</version>
-  <image>logger.png</image>
-  <description>Logger plugin lets developers log stuff through FirePHP easily.</description>
+  <main>
+    <title_en>Logger</title_en>
+    <title_ro>Jurnal</title_ro>
+    <version>0.1</version>
+    <image>logger.png</image>
+    <description>Logger plugin lets developers log stuff through FirePHP easily.</description>
+  </main>
 </Logger>

@@ -20,7 +20,6 @@
 </div>
 
 <?php
-	$this->headLink()->appendStylesheet($this->themePath . 'css/upgrades.css');
-	$this->headScript()
-		->appendFile($this->themePath . 'js/upgrades.js', 'text/javascript');
+	$this->css->load('upgrades.css');
+	$this->js->load('upgrades.js');
 ?>

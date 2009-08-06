@@ -23,9 +23,13 @@ class AdminController extends Zend_Controller_Action
 {
   private $alerts     = array();
   private $notices    = array();
-  private $pluginPath = "plugins/";
   private $currentPlugin;
-  private $corePlugins = array("Postings", "Categories", "Themes", "Settings", "Plugins", "Users");
+  private $corePlugins;
+  private $corePluginPath;
+  private $pluginPath;
+  private $pluginUrl;
+  private $corePluginUrl;
+  private $pluginPaths = array();
 
   function sortFunction($x, $y) {
     if(in_array($x, $this->corePlugins) && in_array($y, $this->corePlugins)) {
@@ -44,57 +48,87 @@ class AdminController extends Zend_Controller_Action
   }
 
   public function init() {
-    $this->_helper->Event("admin_panel_init");
+    $this->corePluginPath = APPLICATION_DIRECTORY . "/Joobsbox/Plugin";
+    $this->corePluginUrl = $this->view->baseUrl . "/Joobsbox/Plugin";
+    $this->pluginPath = APPLICATION_DIRECTORY . "/plugins";
+    $this->pluginUrl = $this->view->baseUrl . "/plugins";
     
-    $session = new Zend_Session_Namespace("Admin");
-    if(!isset($session->rand)) {
-      $session->rand = time();
-      $this->_redirect("/admin");
-    } else {
-      $session->rand = time();
-    }
-
+    $this->_helper->Event("admin_panel_init");
     $this->_conf = Zend_Registry::get("conf");
+    
     configureTheme("_admin/" . $this->_conf->general->admin_theme, 'index', '/themes/_admin/' . $this->_conf->general->admin_theme . '/layouts');
     
+    // Get plugin order from configuration file
     if(isset($this->_conf->admin->menu)) {
       $this->corePlugins = explode(",", $this->_conf->admin->menu);
     }
 
+    // Initialize plugins
     $this->plugins = array();
     $this->menuPlugins = array();
     $this->dashboardCandidates = array();
-    foreach(new DirectoryIterator($this->pluginPath) as $plugin) {
+    
+    // Search for them
+    foreach(new DirectoryIterator($this->corePluginPath) as $plugin) {
       $name = $plugin->getFilename();
+      
       if($plugin->isDir() && $name[0] != '.' && $name[0] != '_') {
-	      require_once "plugins/$name/$name.php";
+	      require_once $this->corePluginPath . "/$name/$name.php";
+	      // Analyze prerequisites
       	$class = new ReflectionClass(ucfirst($name));
-      	if($class->hasMethod('init')) {
-      	  $this->plugins[$name] = array();
-      	  if(file_exists($this->pluginPath . $name . '/config.xml')) {
-      	    $this->plugins[$name] = new Zend_Config_Xml($this->pluginPath . $name . '/config.xml');
-      	  }
-      	  if(in_array($name, $this->corePlugins)) {
-      	    $this->menuPlugins[$name] = $this->plugins[$name];
-      	  }
-      	}
+      	
+    	  if(file_exists($this->corePluginPath . '/' . $name . '/config.xml')) {
+    	    $this->plugins[$name] = new Zend_Config_Xml($this->corePluginPath . '/' . $name . '/config.xml', null, array("allowModifications" => true));
+    	    $this->plugins[$name]->paths = array();
+    	    $this->plugins[$name]->paths->dirPath = $this->corePluginPath;
+    	    $this->plugins[$name]->paths->urlPath = $this->corePluginUrl;
+  	      $this->menuPlugins[$name] = $this->plugins[$name];
+  	      $this->pluginPaths[$name] = $this->corePluginPath . '/' . $name;
+    	  }
+    	  
       	if($class->hasMethod('dashboard')) {
       	  $this->dashboardCandidates[$name] = 1;
       	}
       }
     }
     
-    uksort($this->menuPlugins, array($this, "sortFunction"));
-    
-    $otherPlugins = Zend_Registry::get("plugins");
-    foreach($otherPlugins as $pluginName => $plugin) {
-      if(in_array($pluginName, $this->corePlugins) || !$plugin->isAdmin) {
-        unset($otherPlugins[$pluginName]);
+    // Search for the other plugins - dashboard purposes
+    foreach(new DirectoryIterator($this->pluginPath) as $plugin) {
+      $name = $plugin->getFilename();
+      
+      if($plugin->isDir() && $name[0] != '.' && $name[0] != '_') {
+	      require_once $this->pluginPath . "/$name/$name.php";
+	      // Analyze prerequisites
+      	$class = new ReflectionClass(ucfirst($name));
+      	
+    	  if(file_exists($this->pluginPath . '/' . $name . '/config.xml')) {
+    	    $this->plugins[$name] = new Zend_Config_Xml($this->pluginPath . '/' . $name . '/config.xml', null, array("allowModifications" => true));
+    	    $this->plugins[$name]->paths['dirPath'] = $this->pluginPath;
+    	    $this->plugins[$name]->paths['urlPath'] = $this->pluginUrl;
+    	    $this->pluginPaths[$name] = $this->pluginPath . '/' . $name;
+    	  }
+    	  
+      	if($class->hasMethod('dashboard')) {
+      	  $this->dashboardCandidates[$name] = 1;
+      	}
       }
     }
-
+    
+    if(isset($this->corePlugins) && count(array_diff($this->corePlugins, array_keys($this->plugins)))) {
+      $this->corePlugins = array_keys($this->plugins);
+      // Write it to config so that we don't miss it furtherwise
+      $tmp = new Zend_Config_Xml("config/config.xml", null, array('allowModifications' => true));
+      $tmp->admin->menu = implode(",", $this->corePlugins);
+      
+      $writer = new Zend_Config_Writer_Xml(array('config'   => $tmp, 'filename' => 'config/config.xml'));
+      $writer->write();
+      unset($tmp, $writer);
+    }
+    
+    uksort($this->menuPlugins, array($this, "sortFunction"));
+    
     $this->view->corePlugins = $this->corePlugins;
-    $this->view->otherPlugins= $otherPlugins;
+    $this->view->corePluginPath = $this->corePluginPath;
     $this->view->pluginPath = $this->pluginPath;
     $this->view->plugins = $this->menuPlugins;
     $this->view->pluginsThemePath = str_replace("index.php", "", $this->view->baseUrl);
@@ -208,6 +242,11 @@ class AdminController extends Zend_Controller_Action
     $view->css->addPath('/plugins/' . $pluginName . '/css');
     $view->css->addPath('/plugins/' . $pluginName);
     
+    $view->js->addPath('/Joobsbox/Plugin/' . $pluginName . '/js');
+    $view->js->addPath('/Joobsbox/Plugin/' . $pluginName);
+    $view->css->addPath('/Joobsbox/Plugin/' . $pluginName . '/css');
+    $view->css->addPath('/Joobsbox/Plugin/' . $pluginName);
+    
     $pluginUrl = $_SERVER['REQUEST_URI'];
     if($pluginUrl[strlen($pluginUrl)-1] != '/') {
       $pluginUrl .= '/';
@@ -215,16 +254,16 @@ class AdminController extends Zend_Controller_Action
     $view->pluginUrl = $pluginUrl;
     $view->js->write('var pluginUrl="' . $pluginUrl . '";');
 
-    require_once $this->pluginPath . $pluginName . '/' . $pluginName . '.php';
+    require_once $this->pluginPaths[$pluginName] . '/' . $pluginName . '.php';
     $plugin = new $pluginName;
     
     $plugin->setPluginName($pluginName);
     
     $view->currentPluginName = $pluginName;
     $plugin->view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;;
-    $plugin->path = $plugin->view->path = $this->view->baseUrl . '/' . $this->pluginPath . $pluginName . "/";
-    $plugin->view->themePath =  str_replace("index.php", "", $plugin->path); 
+    $plugin->path = $plugin->view->path = $this->plugins[$pluginName]->paths->urlPath . '/' . $pluginName;
     $plugin->dirPath = $this->pluginPath . $pluginName . '/';
+    $plugin->view->dirPath = $this->pluginPaths[$pluginName] . '/';
     $plugin->_helper = $this->_helper;
     $plugin->alerts  = &$this->alerts;
     $plugin->notices  = &$this->notices;
@@ -233,7 +272,8 @@ class AdminController extends Zend_Controller_Action
     $plugin->ajax = false;
     
     $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-    $viewRenderer->view->addScriptPath($this->pluginPath . $pluginName . '/views');
+    $viewRenderer->view->addScriptPath($this->pluginPath . '/' . $pluginName . '/views');
+    $viewRenderer->view->addScriptPath($this->corePluginPath . '/' . $pluginName . '/views');
     $viewRenderer->setNoController(true);
     $viewRenderer->setViewScriptPathNoControllerSpec(':action.:suffix');
     
