@@ -26,7 +26,7 @@ class Joobsbox_Plugin_Loader {
   
   public function disablePlugins() {
     Zend_Registry::get("EventHelper")->disabled = true;
-    Zend_Registry::set("FilterHelper")->disabled = true;
+    Zend_Registry::get("FilterHelper")->disabled = true;
   }
   
 	function __construct() {
@@ -70,6 +70,9 @@ class Joobsbox_Plugin_Loader {
 						}
 						if(method_exists($plugins[$className], 'initPlugin')) {
 							$plugins[$className]->initPlugin();
+						}
+						if(method_exists($plugins[$className], 'startup')) {
+							$plugins[$className]->startup();
 						}
 					}
 				}

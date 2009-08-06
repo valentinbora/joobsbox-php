@@ -25,6 +25,25 @@ body {
   color: #CCC;
 }
 
+#admin-header .right_container {
+  width: 350px;
+  float: right;
+  position: relative; 
+  top: 40px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+#admin-header .right_container a {
+  position: static;
+}
+
+#admin-header .version, #admin-header .report {
+  color: #999;
+  font-size: 80%;
+  font-style: italic;
+}
+
 /* Main area */
 #admin-main {
   margin-left: 175px;

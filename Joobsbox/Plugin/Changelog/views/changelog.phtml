@@ -1,0 +1,35 @@
+<h1 class="dashboard-title"><?php echo $this->translate("Changelog"); ?></h1>
+
+<div id="changelog">
+  The nightly build containing modifications listed in this changelog can be found at:
+  <a href="http://joobsbox.com/download/nightly">http://joobsbox.com/download/nightly</a>.<br/>
+  <strong>Please report bugs and requested features by email, twitter or at <a href="http://joobsbox.lighthouseapp.com">Lighthouse</a>.</strong><br/>
+  <strong>If you want to contribute, you can write a plugin, make a theme, or even join the core development. Contact us and take a look in our code at <a href="http://github.com/valentinbora/joobsbox-php/tree/master">GitHub</a>.</strong>
+  <hr />
+  <h2>6 August 2009</h2>
+  &gt; refactored plugin handling &gt; core admin plugins are now separated, with intention of coming bundled with the app and not sharing space with the normal plugin
+  &gt; rebuilt categories administration. Got rid of the tree, regressed to one-level categories and simpler editing.
+  <h2>5 August 2009</h2>
+  &gt; upgraded Install controller admin user creation form and other checks
+  &gt; migrated js and css loading to the magic functions that need no path
+  <h2>4 August 2009</h2>
+  &gt; migrated all configuration files to XML in favour of INI, due to compatibility problems. Hoping for a more robust future.
+  <h2>3 August 2009</h2>
+  &gt; moved themes directory into joobsbox root dir, next to plugins
+  &gt; added great helper functions to themes in order to easily load assets, js and css
+  <h2>1-2 August 2009</h2>
+  &gt; Written 90% of the automatic core upgrades plugin
+  <h2>31 July 2009</h2>
+  &gt; Added non mod_rewrite compatibility. Pages now contain /index.php/controller/action if necessary
+  &gt; Fixed admin panel for non mod_rewrite mode
+  &gt; Added language chooser to Settings panel
+  &gt; Admin menu is now sortable
+  &gt; Updated Zend_Form component to ZF 1.9.0
+  <h2>30 July 2009</h2>
+  &gt; Added language chooser to install script
+  &gt; Merged language translations from Launchpad
+</div>
+
+<?php
+	$this->css->load('changelog.css');
+?>

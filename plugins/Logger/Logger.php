@@ -1,6 +1,6 @@
 <?php
 class Logger extends Joobsbox_Plugin_Base {
-	function __construct() {
+	function startup() {
 	  try {
 		  $firebugWriter = new Zend_Log_Writer_Firebug();
 		  $this->firebugLogger = new Zend_Log($firebugWriter);
@@ -8,13 +8,25 @@ class Logger extends Joobsbox_Plugin_Base {
 		  $this->firebugLogDisabled = true;
 		}
 		
-		if(is_writable(APPLICATION_DIRECTORY . '/Joobsbox/Logs/messages')) {
-		  try {
-		    $fileWriter = new Zend_Log_Writer_Stream(APPLICATION_DIRECTORY . '/Joobsbox/Logs/messages');
-        $this->fileLogger = new Zend_Log($fileWriter);
-      } catch(Exception $e) {
-        $this->fileLogDisabled = true;
-      }
+		if(file_exists(APPLICATION_DIRECTORY . '/Joobsbox/Logs/messages')) {
+		  if(!is_writable(APPLICATION_DIRECTORY . '/Joobsbox/Logs/messages')) {
+		    $session = new Zend_Session_Namespace('AdminPanel');
+		    $session->alerts[] = $this->_helper->translate("Your main log file doesn't have write permissions. Please give write permissions to Joobsbox/Logs/messages");
+		    $this->fileLogDisabled = true;
+		  }
+		} else {
+		  if(!is_writable(APPLICATION_DIRECTORY . '/Joobsbox/Logs/')) {
+		    $session = new Zend_Session_Namespace('AdminPanel');
+		    $session->alerts[] = $this->_helper->translate("Your main log file could not be created because directory Joobsbox/Logs is not writable. Please give write permissions.");
+		    $this->fileLogDisabled = true;
+		  }
+		}
+		
+	  try {
+	    $fileWriter = new Zend_Log_Writer_Stream(APPLICATION_DIRECTORY . '/Joobsbox/Logs/messages');
+      $this->fileLogger = new Zend_Log($fileWriter);
+    } catch(Exception $e) {
+      $this->fileLogDisabled = true;
     }
 	}
 	

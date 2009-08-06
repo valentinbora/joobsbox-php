@@ -137,36 +137,32 @@ class InstallController extends Zend_Controller_Action {
 	  
 		configureTheme(APPLICATION_THEME, 'install');
 		$session = new Zend_Session_Namespace('Install');
-unset($session->populated_db);
-		if(!isset($session->populated_db)) {
-		  $config = new Zend_Config_Xml('config/config.xml');
-  		$db = Zend_Registry::get("db");
-  		$sql = file_get_contents("sql/base.sql");
-  		$sql = str_replace("{#prefix#}", $config->db->prefix, $sql);
-  		$sql = str_replace("\r\n", "\n", $sql);
-  		$sql = explode("\n", $sql);
-  		$qry = "";
 
-  		foreach($sql as $line) {
-  		    if(trim($line) != "" && strpos($line, "--") === FALSE) {
-  			$qry .= $line;
-  			if(preg_match("/;[\040]*\$/", $line)) {
-  			    $db->query($qry);
-  			    $qry = "";
-  			}
-  		    }
-  		}
-  		$db->delete($config->db->prefix . "categories", array("Name='Uncategorized'"));
-  		$db->insert($config->db->prefix . "categories", array(
-  		    'ID'    => 0,
-  		    'Name'  => 'Uncategorized',
-  		    'Link'  => 'Uncategorized',
-  		    'OrderIndex' => 100,
-  		    'Parent'=> 0
-  		));
-  		
-  		$session->populated_db = true;
-	  } 
+	  $config = new Zend_Config_Xml('config/config.xml');
+		$db = Zend_Registry::get("db");
+		$sql = file_get_contents("sql/base.sql");
+		$sql = str_replace("{#prefix#}", $config->db->prefix, $sql);
+		$sql = str_replace("\r\n", "\n", $sql);
+		$sql = explode("\n", $sql);
+		$qry = "";
+
+		foreach($sql as $line) {
+		    if(trim($line) != "" && strpos($line, "--") === FALSE) {
+			$qry .= $line;
+			if(preg_match("/;[\040]*\$/", $line)) {
+			    $db->query($qry);
+			    $qry = "";
+			}
+		    }
+		}
+		$db->delete($config->db->prefix . "categories", array("Name='Uncategorized'"));
+		$db->insert($config->db->prefix . "categories", array(
+		    'ID'    => 0,
+		    'Name'  => 'Uncategorized',
+		    'Link'  => 'Uncategorized',
+		    'OrderIndex' => 100,
+		    'Parent'=> 0
+		));
 		
 		// Make the form
 		$this->adminForm = new Zend_Form;
@@ -260,8 +256,8 @@ unset($session->populated_db);
   		$auth = Zend_Auth::getInstance();
   		$result = $auth->authenticate($authAdapter);
   		
-  		$session = new Zend_Session_Namespace('Admin_Notices');
-  		$session->message[] = $this->view->translate("Congratulations! Your JoobsBox is working now. Feel free to configure some categories.");
+  		$session = new Zend_Session_Namespace('AdminPanel');
+  		$session->notices[] = $this->view->translate("Congratulations! Your JoobsBox is working now. Feel free to configure some categories.");
   		$this->_redirect("admin");
   	} else {
   		$values = $form->getValues();

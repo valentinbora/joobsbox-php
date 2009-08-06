@@ -56,6 +56,13 @@ class AdminController extends Zend_Controller_Action
     $this->_helper->Event("admin_panel_init");
     $this->_conf = Zend_Registry::get("conf");
     
+    if(file_exists(APPLICATION_DIRECTORY . "/Joobsbox/Version")) {
+      $this->view->version = file_get_contents(APPLICATION_DIRECTORY . "/Joobsbox/Version");
+    } else{
+      $this->view->version = "0.9.20090701";
+      @file_put_contents(APPLICATION_DIRECTORY . "/Joobsbox/Version", "0.9.20090701");
+    }
+    
     configureTheme("_admin/" . $this->_conf->general->admin_theme, 'index', '/themes/_admin/' . $this->_conf->general->admin_theme . '/layouts');
     
     // Get plugin order from configuration file
@@ -103,8 +110,9 @@ class AdminController extends Zend_Controller_Action
       	
     	  if(file_exists($this->pluginPath . '/' . $name . '/config.xml')) {
     	    $this->plugins[$name] = new Zend_Config_Xml($this->pluginPath . '/' . $name . '/config.xml', null, array("allowModifications" => true));
-    	    $this->plugins[$name]->paths['dirPath'] = $this->pluginPath;
-    	    $this->plugins[$name]->paths['urlPath'] = $this->pluginUrl;
+    	    $this->plugins[$name]->paths = array();
+    	    $this->plugins[$name]->paths->dirPath = $this->pluginPath;
+    	    $this->plugins[$name]->paths->urlPath = $this->pluginUrl;
     	    $this->pluginPaths[$name] = $this->pluginPath . '/' . $name;
     	  }
     	  
@@ -134,8 +142,10 @@ class AdminController extends Zend_Controller_Action
     $this->view->pluginsThemePath = str_replace("index.php", "", $this->view->baseUrl);
     $this->view->locale  = Zend_Registry::get("Zend_Locale");
     
+    $session = new Zend_Session_Namespace("AdminPanel");
     $this->alerts = array_merge($this->alerts, $this->_helper->FlashMessenger->getMessages());
-    
+    $this->alerts = array_merge($this->alerts, array_unique($session->alerts));
+    unset($session->alerts);
     /* Load stuff */
     $this->view->css->load("reset.css", "global.css");
     
@@ -213,10 +223,10 @@ class AdminController extends Zend_Controller_Action
     }
 
     // Coming from elsewhere
-    $session = new Zend_Session_Namespace('Admin_Notices');
-    if(isset($session->message)) {
-      $this->notices = array_merge($this->notices, $session->message);
-      unset($session->message);
+    $session = new Zend_Session_Namespace('AdminPanel');
+    if(isset($session->notices)) {
+      $this->notices = array_merge($this->notices, $session->notices);
+      unset($session->notices);
     }
   }
 

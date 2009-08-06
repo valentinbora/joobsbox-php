@@ -3,7 +3,7 @@ $conf = Zend_Registry::get("conf");
 
 try {	
   // Translation
-  $translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/' . $locale . '/LC_MESSAGES/url.mo', $locale);
+  $translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/' . $locale . '/LC_MESSAGES/url.mo', $locale, array('disableNotices' => true));
 } catch(Exception $e) {
   $translateUrl = new Zend_Translate('gettext', APPLICATION_DIRECTORY . '/Joobsbox/Languages/en/LC_MESSAGES/url.mo', 'en');
 }
