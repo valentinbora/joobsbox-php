@@ -65,11 +65,10 @@ if(file_exists(APPLICATION_DIRECTORY . '/config/db.xml')) {
   try {
 	  $db = Zend_Db::factory('PDO_MYSQL', new Zend_Config_Xml(APPLICATION_DIRECTORY . '/config/db.xml'));
   	Zend_Db_Table_Abstract::setDefaultAdapter($db);
-	Zend_Registry::set("db", $db);
+	  Zend_Registry::set("db", $db);
 	  $db->query('SET NAMES "utf8"');
 	} catch (Exception $e) {
-dt($e);
-	  rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
+	  @rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
     header("Location: install");
     exit();
 	}

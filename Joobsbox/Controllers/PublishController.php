@@ -36,7 +36,6 @@ class PublishController extends Zend_Controller_Action
 			->setLabel('Job title:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
-			->addFilter('HtmlEntities')
 			->addValidator('notEmpty')
 			->setDescription('Ex: "Flash Designer" or "ASP.NET Programmer"')
 			->setRequired(true);
@@ -45,14 +44,12 @@ class PublishController extends Zend_Controller_Action
 			->setLabel('Company:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
-			->addFilter('HtmlEntities')
 			->addValidator('notEmpty')
 			->setRequired(true);
 		$location = $form->createElement('text', 'location')
 			->setLabel('Location:')
 			->addFilter('StripTags')
 			->addFilter('StringTrim')
-			->addFilter('HtmlEntities')
 			->addValidator('notEmpty')
 			->setDescription('Example: "London, Paris, Berlin, New York"')
 			->setRequired(true);
@@ -145,8 +142,8 @@ class PublishController extends Zend_Controller_Action
     if ($form->isValid($_POST)) {
 		  $jobOperations = new Joobsbox_Model_JobOperations;
 			$searchModel = new Joobsbox_Model_Search;	
-			$hash = md5(implode("", $values));
 			$values = $form->getValues();
+			$hash = md5(implode("", $values));
 			
 			if(isset($publishNamespace->jobHash) && $publishNamespace->jobHash == $hash) {
 				throw new Exception($this->view->translate("You are not allowed to add the same job multiple times."));
