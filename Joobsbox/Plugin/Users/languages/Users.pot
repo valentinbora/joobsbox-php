@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-08 12:50+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Plugin/Users\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Users.php:98
+msgid "To change any information you must input your current password."
+msgstr ""
+
+#: Users.php:103
+msgid "This password is not correct."
+msgstr ""
+
+#: Users.php:108
+msgid "To change your password, the new password and its verification must match."
+msgstr ""
+
+#: views/add.phtml:1
+#: views/users.phtml:1
+msgid "Users"
+msgstr ""
+
+# Refers to a new user
+#: views/add.phtml:1
+msgid "Add new"
+msgstr ""
+
+#: views/users.phtml:1
+msgid "Edit your profile"
+msgstr ""
+
+#: views/users.phtml:3
+msgid "To change any of this data you must input your old password."
+msgstr ""
+
+#~ msgid "Settings"
+#~ msgstr "Settings"
+#~ msgid "at"
+#~ msgstr "at"
+#~ msgid "in"
+#~ msgstr "in"
+#~ msgid "Total postings:"
+#~ msgstr "Total postings:"
+#~ msgid "Pending postings:"
+#~ msgstr "Pending postings:"
+#~ msgid "Pending"
+#~ msgstr "Pending"
+#~ msgid "Approved"
+#~ msgstr "Approved"
+#~ msgid "Actions:"
+#~ msgstr "Actions:"
+#~ msgid "Accept selected postings"
+#~ msgstr "Accept selected postings"
+#~ msgid "Delete selected postings"
+#~ msgstr "Delete selected postings"
+#~ msgid "No pending postings."
+#~ msgstr "No pending postings."
+#~ msgid "Save"
+#~ msgstr "Salvează"
+

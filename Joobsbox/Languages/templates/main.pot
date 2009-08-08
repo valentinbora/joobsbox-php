@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Joobsbox PHP 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-05 00:13+0200\n"
-"PO-Revision-Date: 2009-08-05 00:13+0200\n"
+"PO-Revision-Date: 2009-08-08 12:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: Joobsbox\n"
 "MIME-Version: 1.0\n"
@@ -39,6 +39,7 @@ msgstr ""
 msgid "This JoobsBox is already installed. Manually remove the restrict_install line from config/config.ini.php if you want to reinstall it."
 msgstr ""
 
+# Installation/Screen 1 - error for empty database details
 #: Joobsbox/Controllers/InstallController.php:75
 msgid "Joobsbox really needs a database. Please let it have one."
 msgstr ""
@@ -60,6 +61,7 @@ msgstr ""
 msgid "Your name:"
 msgstr ""
 
+# Installation/Screen 2 - error for empty admin real name
 #: Joobsbox/Controllers/InstallController.php:178
 msgid "Real name is mandatory"
 msgstr ""
@@ -69,6 +71,7 @@ msgstr ""
 msgid "Username:"
 msgstr ""
 
+# Installation/Screen 2 - error for empty admin username
 #: Joobsbox/Controllers/InstallController.php:187
 msgid "Username is mandatory"
 msgstr ""
@@ -78,6 +81,7 @@ msgstr ""
 msgid "Password:"
 msgstr ""
 
+# Installation/Screen 2 - error for empty admin password
 #: Joobsbox/Controllers/InstallController.php:196
 msgid "Password is mandatory"
 msgstr ""
@@ -110,6 +114,7 @@ msgstr ""
 msgid "Job title:"
 msgstr ""
 
+# Example job title for publish a job page. Feel free to localize.
 #: Joobsbox/Controllers/PublishController.php:41
 msgid "Ex: \"Flash Designer\" or \"ASP.NET Programmer\""
 msgstr ""
@@ -122,6 +127,7 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
+# Example job location for publish a job page. Feel free to localize.
 #: Joobsbox/Controllers/PublishController.php:57
 msgid "Example: \"London, Paris, Berlin, New York\""
 msgstr ""
@@ -130,6 +136,7 @@ msgstr ""
 msgid "Choose..."
 msgstr ""
 
+# At publish a job -> error message for not choosing any category
 #: Joobsbox/Controllers/PublishController.php:66
 msgid "Choosing a category is mandatory."
 msgstr ""
@@ -142,10 +149,12 @@ msgstr ""
 msgid "Job description:"
 msgstr ""
 
+# At publish a job -> description information
 #: Joobsbox/Controllers/PublishController.php:76
 msgid "HTML code is not accepted. Length must be less than 4000 characters."
 msgstr ""
 
+# At publish a job -> how to apply for the job
 #: Joobsbox/Controllers/PublishController.php:83
 msgid "Means of application:"
 msgstr ""

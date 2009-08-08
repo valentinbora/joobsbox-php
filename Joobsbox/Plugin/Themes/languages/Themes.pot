@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-08 12:40+0200\n"
+"POT-Creation-Date: 2009-08-08 12:47+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,65 +11,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: translate\n"
-"X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Plugin/Plugins\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Plugin/Themes\n"
+"X-Poedit-SearchPath-0: views\n"
+"X-Poedit-SearchPath-1: js\n"
+"X-Poedit-SearchPath-2: .\n"
 
-#: views/plugins.phtml:1
-msgid "Plugins"
+#: Themes.php:55
+msgid "The theme you are trying to activate doesn't exist!"
 msgstr ""
 
-#: views/plugins.phtml:4
-msgid "Active plugins"
+#: Themes.php:70
+msgid "Could not move the selected theme to trash. Maybe the directory 'themes/.Trash/' doesn't have the required permissions."
 msgstr ""
 
-#: views/plugins.phtml:11
-#: views/plugins.phtml:58
-msgid "Plugin"
+#: Themes.php:76
+msgid "The directory 'themes/.Trash/' doesn't exist and I couldn't create it. I tried, but still didn't succeed."
 msgstr ""
 
-#: views/plugins.phtml:12
-#: views/plugins.phtml:59
-msgid "Version"
+#: Themes.php:79
+msgid "The theme you are trying to delete doesn't exist!"
 msgstr ""
 
-#: views/plugins.phtml:13
-#: views/plugins.phtml:60
-msgid "Description"
+#: views/themes.phtml:1
+msgid "Themes"
 msgstr ""
 
-#: views/plugins.phtml:32
-msgid "Settings"
+#: views/themes.phtml:4
+msgid "Current theme"
 msgstr ""
 
-#: views/plugins.phtml:40
-#: views/plugins.phtml:77
-msgid "With selected:"
+#: views/themes.phtml:15
+msgid "Available themes"
 msgstr ""
 
-#: views/plugins.phtml:41
-msgid "Deactivate"
-msgstr ""
-
-#: views/plugins.phtml:46
-msgid "Joobsbox doesn't have any active plugins right now."
-msgstr ""
-
-#: views/plugins.phtml:52
-msgid "Inactive plugins"
-msgstr ""
-
-#: views/plugins.phtml:78
+#: views/themes.phtml:26
 msgid "Activate"
 msgstr ""
 
-#: views/plugins.phtml:79
+#: views/themes.phtml:27
 msgid "Delete"
 msgstr ""
 
-#: views/plugins.phtml:92
-msgid "Are you sure you want to delete this plugin?"
+#: views/themes.phtml:40
+msgid "Are you sure you want to delete this theme?"
 msgstr ""
 
+#: views/themes.phtml:42
+msgid "Your current admin theme is:"
+msgstr ""
+
+#~ msgid "Create category"
+#~ msgstr "Create category"
+#~ msgid "Rename category"
+#~ msgstr "Rename category"
 #~ msgid "Delete category"
 #~ msgstr "Delete category"
 #~ msgid "Save"

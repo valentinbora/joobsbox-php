@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-26 11:53+0200\n"
+"POT-Creation-Date: 2009-08-08 12:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,12 +10,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: translate\n"
-"X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php/plugins/Categories\n"
+"X-Poedit-KeywordsList: translate;setLabel\n"
+"X-Poedit-Basepath: /Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Plugin/Categories\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: views/categories.phtml:1
-#: views/categories.phtml:13
 msgid "Categories"
 msgstr ""
 
@@ -24,37 +23,23 @@ msgid "Create category"
 msgstr ""
 
 #: views/categories.phtml:4
-msgid "Rename category"
-msgstr ""
-
-#: views/categories.phtml:5
 msgid "Delete category"
 msgstr ""
 
-#: views/categories.phtml:6
+#: views/categories.phtml:5
 msgid "Save"
 msgstr ""
 
-#: views/categories.phtml:39
+#: views/categories.phtml:49
 msgid "Instructions"
 msgstr ""
 
-#: views/categories.phtml:42
+#: views/categories.phtml:52
 msgid ""
 "To reorder categories, simply drag and drop them.<br/>\n"
-"\t\t\tTo create a new category, select the parent category and then click \"Create category\".<br/>\n"
-"\t\t\tTo rename a category, select it and click \"Rename category\".<br/>\n"
-"\t\t\t<br/>\n"
-"\t\t\tMany of these options are available using right-click/secondary-click on the items.\n"
+"\t\t\tTo create a new category, click \"Create category\".<br/>\n"
+"\t\t\tTo rename a category, just click it and modify its text.<br/>\n"
 "\t\t"
-msgstr ""
-
-#: views/categories.phtml:51
-msgid "Save successful"
-msgstr ""
-
-#: views/categories.phtml:52
-msgid "Your category configuration has been saved."
 msgstr ""
 
 #~ msgid "You can not create more than level 2 categories."
