@@ -50,6 +50,8 @@ class Joobsbox_Helpers_CssHelper extends Zend_Controller_Action_Helper_Abstract
      $args = func_get_args();
      $view  = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
      $theme = $view->theme;
+     $baseUrl = str_replace("index.php", "", $view->baseUrl);
+     if(substr($baseUrl, -1) == '/') $baseUrl = substr($baseUrl, 0, strlen($baseUrl)-1);
 
      foreach($args as $what) {
        if(is_array($what)) {
@@ -58,15 +60,15 @@ class Joobsbox_Helpers_CssHelper extends Zend_Controller_Action_Helper_Abstract
        } else {
          $prio = 0;
        }
-       
+
        foreach($this->cssPaths as $path) {
          $path .= '/' . $what;
 
          if(file_exists(APPLICATION_DIRECTORY . $path) && !isset($this->css[$path])) {
            if($prio == 0) {
-             $view->headLink()->appendStylesheet($view->baseUrl . $path);
+             $view->headLink()->appendStylesheet($baseUrl . $path);
            } else {
-             $view->headLink()->offsetSetStylesheet($prio, $view->baseUrl . $path);
+             $view->headLink()->offsetSetStylesheet($prio, $baseUrl . $path);
            }
           
            $this->css[$path] = 1;

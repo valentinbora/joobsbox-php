@@ -21,6 +21,9 @@
 	echo $this->headMeta();
 	
 	echo $this->filter('head_html');
+	
+	$this->asset->load("jquery-ui");
+  echo $this->headLink();
 ?>
 
 
@@ -95,8 +98,7 @@
   </div>
   
   <?php
-    $this->asset->load("jquery-ui");
-    echo $this->headLink();
+    
     echo $this->headScript();
   ?>
 </body>

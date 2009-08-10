@@ -4,6 +4,9 @@ $viewRenderer->setNoRender();
 $viewRenderer->initView(); 
 $viewRenderer->view->baseUrl = BASE_URL;
 $viewRenderer->view->noScriptBaseUrl = str_replace("index.php", "", BASE_URL);
+if(substr($viewRenderer->view->noScriptBaseUrl, -1) == "/") {
+  $viewRenderer->view->noScriptBaseUrl = substr($viewRenderer->view->noScriptBaseUrl, 0, strlen($viewRenderer->view->noScriptBaseUrl)-1);
+}
 $viewRenderer->view->publicUrl = str_replace("index.php", "", BASE_URL) . "/public";
 
 function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index', $layoutPath = '/themes/core/layouts') {

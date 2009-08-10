@@ -22,17 +22,11 @@
 ?>
 
 <?php
-	$this->headLink()->appendStylesheet($this->themeUrl . "/css/global.css");
-	$this->headLink()->appendStylesheet($this->themeUrl . "/css/login.css");
-	$this->headScript()
-		->prependFile($this->baseUrl . '/public/js/functions.js')
-		->prependScript($this->translateHash, 'text/javascript', array('charset' => 'UTF-8'))
-		->prependFile($this->baseUrl . '/public/js/lib/jquery.js', 'text/javascript')
-		->appendFile($this->baseUrl . '/public/js/lib/jquery.corner.js', 'text/javascript')
-		->appendFile($this->baseUrl . '/public/js/lib/jquery.pngFix.pack.js', 'text/javascript')		
-		->appendFile($this->baseUrl . '/public/js/global.js', 'text/javascript')
-		->appendFile($this->baseUrl . '/public/js/login.js', 'text/javascript');
-	
+	$this->css->load("global.css", "login.css");
+	$this->asset->load('jquery', 'jquery-corner', 'jquery-pngfix');
+	$this->js->write($this->translateHash);
+	$this->js->load('functions.js', 'global.js', 'login.js');
+
 	echo $this->headLink();
 	echo $this->headStyle();
 ?>

@@ -48,10 +48,16 @@ class AdminController extends Zend_Controller_Action
   }
 
   public function init() {
+    $url = $_SERVER['REQUEST_URI'];
+    if(substr($url, -1) != '/') {
+      header("Location: " . $url . '/');
+      exit();
+    }
+    
     $this->corePluginPath = APPLICATION_DIRECTORY . "/Joobsbox/Plugin";
-    $this->corePluginUrl = $this->view->baseUrl . "/Joobsbox/Plugin";
+    $this->corePluginUrl = $this->view->noScriptBaseUrl . "/Joobsbox/Plugin";
     $this->pluginPath = APPLICATION_DIRECTORY . "/plugins";
-    $this->pluginUrl = $this->view->baseUrl . "/plugins";
+    $this->pluginUrl = $this->view->noScriptBaseUrl . "/plugins";
     
     $this->_helper->Event("admin_panel_init");
     $this->_conf = Zend_Registry::get("conf");
