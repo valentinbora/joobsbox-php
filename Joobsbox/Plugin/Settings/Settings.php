@@ -128,7 +128,7 @@ class Settings extends Joobsbox_Plugin_AdminBase
 		$form = $this->form;
 		
     if($form->isValid($_POST)) {
-      
+
 			$values = $form->getValues();
 			$conf = new Zend_Config_Xml("config/config.xml", null, array(
 			  'skipExtends'        => true,

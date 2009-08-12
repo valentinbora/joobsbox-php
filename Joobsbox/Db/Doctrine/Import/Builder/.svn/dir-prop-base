@@ -1,0 +1,22 @@
+K 16
+bugtraq:logregex
+V 91
+(?:closes|fixes|addresses|references|refs|re)?(#[0-9]+(?:(?:[, &]+| *and *)#[0-9]+)*)
+(\d+)
+K 15
+bugtraq:message
+V 15
+Ticket: %BUGID%
+K 14
+bugtraq:number
+V 4
+true
+K 11
+bugtraq:url
+V 46
+http://doctrine.pengus.net/trac/ticket/%BUGID%
+K 21
+bugtraq:warnifnoissue
+V 3
+yes
+END

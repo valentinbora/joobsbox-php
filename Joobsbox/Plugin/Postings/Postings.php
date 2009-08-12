@@ -28,10 +28,10 @@ class Postings extends Joobsbox_Plugin_AdminBase
 	}
 	
 	public function dashboard() {
-	  $pending = $this->jobsModel->fetchAllJobs(0, true, false)->where('Public = 0')->order('ID DESC')->fetch()->toArray();
+	  $pending = $this->jobsModel->fetchAllJobs(0, true, false)->where('public = 0')->order('id DESC')->fetch()->toArray();
 		
 		$this->view->pending  = $pending;
-		$this->view->postings = $this->jobsModel->fetchAllJobs(0, false, false)->order('ID DESC')->fetch()->toArray();
+		$this->view->postings = $this->jobsModel->fetchAllJobs(0, false, false)->order('id DESC')->fetch()->toArray();
 	}
 	
 	function editAction() {
@@ -47,10 +47,10 @@ class Postings extends Joobsbox_Plugin_AdminBase
 			$this->$method();
 		}
 
-		$pending = $this->jobsModel->fetchAllJobs(0, true, false)->where('Public = 0')->order('ID DESC')->fetch()->toArray();
+		$pending = $this->jobsModel->fetchAllJobs(0, true, false)->where('public = 0')->order('id DESC')->fetch()->toArray();
 		
 		$this->view->pending  = $pending;
-		$this->view->postings = $this->jobsModel->fetchAllJobs(0, false, false)->order('ID DESC')->fetch()->toArray();
+		$this->view->postings = $this->jobsModel->fetchAllJobs(0, false, false)->order('id DESC')->fetch()->toArray();
 	}
 	
 	private function deleteAction() {
@@ -58,7 +58,7 @@ class Postings extends Joobsbox_Plugin_AdminBase
 		
 		foreach($_POST['job'] as $job => $a) {
 			$job = (int)$job;
-			$this->jobOperationsModel->delete($this->jobOperationsModel->getAdapter()->quoteInto('ID = ?', $job));
+			$this->jobOperationsModel->delete($this->jobOperationsModel->getAdapter()->quoteInto('id = ?', $job));
 			$this->searchModel->deleteJob($job);
 		}
 		echo "ok";
@@ -73,7 +73,7 @@ class Postings extends Joobsbox_Plugin_AdminBase
 		foreach($_POST['job'] as $job => $a) {
 			$job = (int)$job;
 			Zend_Registry::get("EventHelper")->fireEvent("job_accepted", $job);
-			$x = $this->jobOperationsModel->update(array('Public' => 1, 'ChangedDate' => new Zend_Db_Expr('NOW()')), $this->jobOperationsModel->getAdapter()->quoteInto('ID = ?', $job));
+			$x = $this->jobOperationsModel->update(array('public' => 1, 'changeddate' => date("Y-m-d")), $this->jobOperationsModel->getAdapter()->quoteInto('id = ?', $job));
 			
 			$this->searchModel->addJob($this->jobsModel->fetchJobById($job));
 			

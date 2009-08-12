@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<zend-config>
-  <host>localhost</host>
-  <username>joobsbox</username>
-  <password>joobsbox</password>
-  <dbname>joobsbox</dbname>
-</zend-config>

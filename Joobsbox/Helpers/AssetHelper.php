@@ -45,6 +45,10 @@ class Joobsbox_Helpers_AssetHelper extends Zend_Controller_Action_Helper_Abstrac
             case 'jquery-pngfix':
               $view->js->load('public/js/lib/jquery.pngFix.pack.js', 'text/javascript');
               break;
+            case 'jquery-validation':
+              $view->js->load('public/js/lib/validation/js/jquery.validationEngine.js');
+              $view->css->load('public/js/lib/validation/css/validationEngine.jquery.css');
+              break;
       }
     }
   }

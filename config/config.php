@@ -63,13 +63,16 @@ Zend_Registry::set('Zend_Translate', $translate);
 // Database parameters
 if(file_exists(APPLICATION_DIRECTORY . '/config/db.xml')) {
   try {
-	  $db = Zend_Db::factory('PDO_MYSQL', new Zend_Config_Xml(APPLICATION_DIRECTORY . '/config/db.xml'));
+    $dbconf = new Zend_Config_Xml(APPLICATION_DIRECTORY . '/config/db.xml', 'zend_db');
+	  $db = Zend_Db::factory($dbconf->dbadapter, $dbconf);
   	Zend_Db_Table_Abstract::setDefaultAdapter($db);
 	  Zend_Registry::set("db", $db);
-	  $db->query('SET NAMES "utf8"');
+	  if(strlen($dbconf->start)) {
+	    $db->query($dbconf->start);
+	  }
 	} catch (Exception $e) {
 	  @rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
-    header("Location: install");
+	  throw $e;
     exit();
 	}
 
@@ -82,10 +85,7 @@ if(file_exists(APPLICATION_DIRECTORY . '/config/db.xml')) {
   		Zend_Registry::get("db"),
   		$conf->db->prefix . 'users',
   		'username',
-  		'password',
-  		"MD5(CONCAT('"
-  		. Zend_Registry::get('staticSalt')
-  		. "', ?, password_salt))"
+  		'password'
   	);
   	Zend_Registry::set("authAdapter", $authAdapter);
   } catch(Exception $e) {

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Hook
+END
+Parser.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Hook/Parser.php
+END
+Integer.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Hook/Integer.php
+END
+WordLike.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Hook/WordLike.php
+END
+Equal.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Hook/Equal.php
+END

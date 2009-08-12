@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/6131/branches/1.2/lib/Doctrine/Connection
+END
+Mock.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Connection/Mock.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Connection/Exception.php
+END
+Mssql.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Connection/Mssql.php
+END
+Sqlite.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Connection/Sqlite.php
+END
+Profiler.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/5927/branches/1.2/lib/Doctrine/Connection/Profiler.php
+END
+Statement.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Connection/Statement.php
+END
+Mysql.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Connection/Mysql.php
+END
+Oracle.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/6131/branches/1.2/lib/Doctrine/Connection/Oracle.php
+END
+Module.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Connection/Module.php
+END
+Pgsql.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/6026/branches/1.2/lib/Doctrine/Connection/Pgsql.php
+END
+UnitOfWork.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/6126/branches/1.2/lib/Doctrine/Connection/UnitOfWork.php
+END
+Db2.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Connection/Db2.php
+END
+Common.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Connection/Common.php
+END

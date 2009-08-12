@@ -32,6 +32,7 @@ class IndexController extends Zend_Controller_Action {
 		  $this->view->jobs = $this->_model->fetchNJobsPerCategory();
 		
 		  $this->_helper->event("received_jobs");
+		  
 		} catch(Exception $e) {
 		  rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
       $this->_redirect('install/step1');

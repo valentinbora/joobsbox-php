@@ -54,11 +54,11 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 		  $select = $this->_db->select()->from($this->_postings_table);
 		
 		  if(!$includeNonPublic) {
-  			$select->where('Public = 1');
+  			$select->where('public = 1');
   		}
   		
   		if($checkExpiration) {
-  		  $select->where('ExpirationDate >= ?', time());
+  		  $select->where('expirationdate >= ?', time());
   		}
 
   		$this->fireEvent("retrieve_jobs");
@@ -78,7 +78,7 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 	 * @returns array
 	 */
 	public function fetchJobById($id) {
-		$sql 	= "SELECT * FROM " . $this->_postings_table . " WHERE ID = ?";
+		$sql 	= "SELECT * FROM " . $this->_postings_table . " WHERE id = ?";
 		return $this->_db->fetchRow($sql, $id);
 	}
 	
@@ -90,18 +90,18 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 	public function fetchCategories() {
 		$sql	= "
 			SELECT 
-				ID, 
-				Name,
-				Link,
-				OrderIndex,
-				Parent,
-				(SELECT COUNT(*) FROM " . $this->_postings_table . " WHERE CategoryID=" . $this->_categories_table . ".ID) nrPostings
+				id, 
+				name,
+				link,
+				orderindex,
+				parent,
+				(SELECT COUNT(*) FROM " . $this->_postings_table . " WHERE categoryid=" . $this->_categories_table . ".id) nrPostings
 			FROM 
 				" . $this->_categories_table . "
 			GROUP BY 
-				ID
+				id
 			ORDER BY
-				OrderIndex";
+				orderindex";
 		$categories = $this->_db->fetchAll($sql);
 		
 		return new Joobsbox_Iterator_Categories($categories);
@@ -125,21 +125,21 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 		foreach($cats as $index => $category) {
 			$categId = $category['ID'];
 			
-			while($categoriesById[$categId]['Parent'] != 0) {
-				$categId = $categoriesById[$categId]['Parent'];
+			while($categoriesById[$categId]['parent'] != 0) {
+				$categId = $categoriesById[$categId]['parent'];
 			}
-			$result[$categoriesById[$categId]['Name']] = array();
+			$result[$categoriesById[$categId]['name']] = array();
 		}
 		foreach($jobs as $job) {
-			$categId = $job['CategoryID'];
+			$categId = $job['categoryid'];
 			
-			while($cats[$categId]['Parent'] != 0) {
-				$categId = $cats[$categId]['Parent'];
+			while($cats[$categId]['parent'] != 0) {
+				$categId = $cats[$categId]['parent'];
 			}
 			
-			$categName = $cats[$categId]['Name'];
+			$categName = $cats[$categId]['name'];
 			if(!isset($result[$categName])) {
-				$result[$cats[$job['CategoryID']]['Name']] = array();
+				$result[$cats[$job['categoryid']]['name']] = array();
 			}
 			if(count($result[$categName]) < $maxJobsPerCateg) {
 				$result[$categName][] = $job;

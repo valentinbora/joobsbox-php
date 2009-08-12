@@ -21,7 +21,7 @@
 
 class Joobsbox_Model_JobOperations extends Zend_Db_Table_Abstract {
 	protected $_name = 'jobs';
-	protected $_primary = "ID";
+	protected $_primary = "id";
 	
 	function __construct() {
 		$this->_conf = Zend_Registry::get("conf");

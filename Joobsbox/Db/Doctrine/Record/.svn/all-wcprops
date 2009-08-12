@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/6149/branches/1.2/lib/Doctrine/Record
+END
+Iterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Record/Iterator.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Record/Exception.php
+END
+Abstract.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Record/Abstract.php
+END
+UnknownPropertyException.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Record/UnknownPropertyException.php
+END
+Filter.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Record/Filter.php
+END
+Listener.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Record/Listener.php
+END
+Generator.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/6149/branches/1.2/lib/Doctrine/Record/Generator.php
+END

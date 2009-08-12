@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/6075/branches/1.2/lib/Doctrine/Query
+END
+Forupdate.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Forupdate.php
+END
+Set.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Query/Set.php
+END
+Parser.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Parser.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Exception.php
+END
+From.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/From.php
+END
+Abstract.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Query/Abstract.php
+END
+Part.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Part.php
+END
+Orderby.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5975/branches/1.2/lib/Doctrine/Query/Orderby.php
+END
+JoinCondition.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Query/JoinCondition.php
+END
+Registry.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Query/Registry.php
+END
+Tokenizer.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/6075/branches/1.2/lib/Doctrine/Query/Tokenizer.php
+END
+Where.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/6064/branches/1.2/lib/Doctrine/Query/Where.php
+END
+Having.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Query/Having.php
+END
+Check.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Query/Check.php
+END
+Limit.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Limit.php
+END
+Select.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Select.php
+END
+Filter.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Filter.php
+END
+Offset.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Offset.php
+END
+Condition.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Query/Condition.php
+END
+Groupby.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5975/branches/1.2/lib/Doctrine/Query/Groupby.php
+END

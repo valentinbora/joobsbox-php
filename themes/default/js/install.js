@@ -1,5 +1,9 @@
 $(document).ready(function(){
-  $("#locale_selector").change(function(){
-    window.location.href += "?lang=" + $("#locale_selector").attr("value");
+  $("#locale").change(function(){
+    window.location.href += "?lang=" + $("#locale").attr("value");
+  });
+  
+  $("#dbadapter").change(function(){
+    window.location.href += "?dbadapter=" + $("#dbadapter").attr("value");
   });
 });

@@ -63,7 +63,7 @@ class Joobsbox_Iterator_Jobs extends ArrayIterator {
 		
 		$jobs = $this->_contents;
 		foreach($jobs as $key => $job) {
-			if($categories[$job['CategoryID']] != $categoryName) {
+			if($categories[$job['categoryid']] != $categoryName) {
 				unset($jobs[$key]);
 			}
 		}
@@ -74,7 +74,7 @@ class Joobsbox_Iterator_Jobs extends ArrayIterator {
 	function filterByCategoryId($categoryId) {
 		$jobs = $this->_contents;
 		foreach($jobs as $key => $job) {
-			if($job['CategoryID'] != $categoryId) {
+			if($job['categoryid'] != $categoryId) {
 				unset($jobs[$key]);
 			}
 		}

@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator
+END
+Regexp.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Regexp.php
+END
+Notnull.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Notnull.php
+END
+Driver.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Driver.php
+END
+Range.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Range.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Exception.php
+END
+Time.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Time.php
+END
+Htmlcolor.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Htmlcolor.php
+END
+Country.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Country.php
+END
+Timestamp.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Timestamp.php
+END
+Creditcard.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Creditcard.php
+END
+Unique.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Unique.php
+END
+Past.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Past.php
+END
+Notblank.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Notblank.php
+END
+Ip.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Ip.php
+END
+Future.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Future.php
+END
+Unsigned.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Unsigned.php
+END
+Date.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Date.php
+END
+Readonly.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Readonly.php
+END
+ErrorStack.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/ErrorStack.php
+END
+Minlength.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Minlength.php
+END
+Email.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Email.php
+END
+Nospace.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Nospace.php
+END
+Usstate.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Validator/Usstate.php
+END

@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task
+END
+GenerateMigrationsModels.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/GenerateMigrationsModels.php
+END
+RebuildDb.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/RebuildDb.php
+END
+GenerateMigrationsDb.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/GenerateMigrationsDb.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/Exception.php
+END
+CreateTables.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/CreateTables.php
+END
+DumpData.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/DumpData.php
+END
+GenerateModelsDb.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/GenerateModelsDb.php
+END
+GenerateMigration.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/GenerateMigration.php
+END
+CreateDb.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/CreateDb.php
+END
+LoadData.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/LoadData.php
+END
+DropDb.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/DropDb.php
+END
+GenerateSql.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/GenerateSql.php
+END
+BuildAllReload.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/BuildAllReload.php
+END
+GenerateMigrationsDiff.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/GenerateMigrationsDiff.php
+END
+Dql.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/Dql.php
+END
+GenerateModelsYaml.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/GenerateModelsYaml.php
+END
+GenerateYamlModels.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/GenerateYamlModels.php
+END
+GenerateYamlDb.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/GenerateYamlDb.php
+END
+Compile.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/Compile.php
+END
+BuildAllLoad.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/BuildAllLoad.php
+END
+BuildAll.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/BuildAll.php
+END
+Migrate.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Task/Migrate.php
+END

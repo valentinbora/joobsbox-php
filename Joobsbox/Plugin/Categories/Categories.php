@@ -40,8 +40,8 @@ class Categories extends Joobsbox_Plugin_AdminBase
 					// CATEGORY EXISTS - REORDERED || RENAMED
 					////////////////////////////////////////////
 
-					if($category['name'] 				!= $currentCategories->getCategory($id)->getProperty("Name")
-						|| $index 	!= $currentCategories->getCategory($id)->getProperty("OrderIndex")) 
+					if($category['name'] 				!= $currentCategories->getCategory($id)->getProperty("name")
+						|| $index 	!= $currentCategories->getCategory($id)->getProperty("orderindex")) 
 					{
 						$orderIndex = $index;
 						
@@ -51,12 +51,12 @@ class Categories extends Joobsbox_Plugin_AdminBase
 							$mustReload = true;
 						}
 						$data = array(
-							"OrderIndex" => $orderIndex,
-							"Name"		 => $category['name'],
-							"Link"     => $this->view->MakeLink($category['name']),
-							"Parent"	 => 0
+							"orderindex" => $orderIndex,
+							"name"		 => $category['name'],
+							"link"     => $this->view->MakeLink($category['name']),
+							"parent"	 => 0
 						);
-						$where = $db->quoteInto('ID = ?', $id);
+						$where = $db->quoteInto('id = ?', $id);
 						$categoryModel->update($data, $where);
 					}
 				}
@@ -68,10 +68,10 @@ class Categories extends Joobsbox_Plugin_AdminBase
 				$orderIndex = $index;
 				$category['name'] = preg_replace('%[^\w\.-\s]%', '', $category['name']);
 				$categoryModel->insert(array(
-					"Name"		=> $category['name'],
-					"OrderIndex"=> $orderIndex,
-					"Link"     => $this->view->MakeLink($category['name']),
-					"Parent"	=> 0
+					"name"		=> $category['name'],
+					"orderindex"=> $orderIndex,
+					"link"     => $this->view->MakeLink($category['name']),
+					"parent"	=> 0
 				));
 				$mustReload = true;
 			}
@@ -85,8 +85,8 @@ class Categories extends Joobsbox_Plugin_AdminBase
 		
 		foreach($mustDelete as $categoryID) {
 			if($categoryID > 1) {
-				$where = $db->quoteInto('ID = ?', $categoryID);
-				$db->update(Zend_Registry::get("conf")->dbtables->postings, array("CategoryID" => 1), 'CategoryID = ' . $categoryID);
+				$where = $db->quoteInto('id = ?', $categoryID);
+				$db->update(Zend_Registry::get("conf")->dbtables->postings, array("categoryid" => 1), 'categoryid = ' . $categoryID);
 				$categoryModel->delete($where);
 			}
 		}

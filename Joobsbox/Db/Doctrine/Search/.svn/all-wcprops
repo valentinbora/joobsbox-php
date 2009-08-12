@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/5934/branches/1.2/lib/Doctrine/Search
+END
+Parser.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Search/Parser.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Search/Exception.php
+END
+Indexer.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/5934/branches/1.2/lib/Doctrine/Search/Indexer.php
+END
+Record.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Search/Record.php
+END
+File.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Search/File.php
+END
+Analyzer.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Search/Analyzer.php
+END
+Listener.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Search/Listener.php
+END
+Query.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/5901/branches/1.2/lib/Doctrine/Search/Query.php
+END

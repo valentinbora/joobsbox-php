@@ -76,10 +76,8 @@ class UserController extends Zend_Controller_Action {
 		
 		if ($form->isValid($_POST)) {
 			$values = $form->getValues();
-			$auth = Zend_Auth::getInstance();
-			$authAdapter = Zend_Registry::get("authAdapter");
-			$authAdapter->setIdentity($values['username'])->setCredential($values['password']);
-			$result = $auth->authenticate($authAdapter);
+			$model = new Joobsbox_Model_Users;
+			$result = $model->authenticate($values['username'], $values['password']);
 			
 			if($result->isValid()) {
 				$sess = new Zend_Session_Namespace("auth");

@@ -1,80 +1,98 @@
 #joobsbox-header {
-  width: 100%; 
+  width: 600px;
   height: 75px; 
   background-color: #333333; 
-  background-image: url('../images/logo_dark.png'); 
+  background-image: url('../images/install_header.jpg'); 
   background-repeat: no-repeat; 
-  background-position: 17px 40%; 
-  font-size: 110%; 
+  background-position: center center; 
   text-transform: uppercase; 
   line-height: 80px; 
   color: #DDD; 
   font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif; 
   text-align: center;
+  padding: 10px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
 }
 
-dl.zend_form, dl.zend_form dt {
+#installation h1, #installation p {
   text-align: center;
 }
 
-#installation	{
-  padding: 10px; 
-  color: #333;
-}
-#installation p	{
-  margin-top: 10px;
-}
-#installation fieldset {
-  margin-top: 10px;
-}
-#installation legend {
-  font-size: 90%; 
-  font-weight: bold;
+#joobsbox-main form  {
+  width: 400px;
+  margin: 0 auto;
 }
 
-#installation dl {
-  border: 1px dotted #464646;
-  padding: 5px;
+#joobsbox-main form dd {
+  width: 100%;
+  margin: 0;
+  background-color: #DFDFDF;
+  -moz-border-radius: 10px;
+   -webkit-border-radius: 10px;
+}
+
+#joobsbox-main form dd fieldset {
+ border: 0; 
+ display: block;
+ margin-bottom: 10px;
+}
+
+#joobsbox-main form dd fieldset legend {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  margin-top: -12px;
+  margin-bottom: 5px;
+  padding: 7px;
+  background-color: #30B1CC;
+  color: #FFF;
+}
+
+#joobsbox-main form dl dt {
+  margin-top: 5px;
+}
+
+#joobsbox-main form dl dt label {
+  text-transform: uppercase;
+  font-size: 75%;
+  letter-spacing: 1px;
+}
+
+#joobsbox-main form dl dd {
+  margin: 0;
+  padding: 0;
+}
+
+#joobsbox-main form dl dd input[type="text"], #joobsbox-main form dl dd select {
+  width: 350px;
+  height: 24px;
+  font-size: 18px;
+  padding: 3px;
+}
+
+#joobsbox-main form dl dd select {
+  font-size: 12px;
+}
+
+#submit {
+  padding: 7px;
+  font-size: 20px;
+  margin: 5px;
+}
+
+#joobsbox-footer {
+  background-color: #FFF;
+  padding: 10px;
+  border-top: 1px dotted #555;
+  border-bottom: 0;
+  width: 600px; 
+  padding-top: 10px;
+  margin: 0 auto;
 }
 
 ul.errors {
   background-color: #EF1A14; 
   color: #FFF;
-}
-
-#installation dt {
-  padding-top: 5px;
-  background-color: #464646;
-  color: #FFF;
-}
-
-#installation dd {
-  background-color: #464646; 
-  width: 100%;
-  margin: 0;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-}
-
-#installation .fieldpair {
-  padding: 5px; 
-  margin: 5px; 
-  background-color: #464646; 
-  line-height: 1.8em;
-}
-
-#installation .fieldpair label	{
-  font-size: 90%; 
-  font-weight: bold; 
-  color: #EEE;
-  width: 30%;
-  display: block;
-  float: left;
-}
-#installation .error {
-  background-color: #EF1A14; 
-  color: #FFF;
-  list-style: none;
 }
 
 #installation ul.errors {
@@ -87,11 +105,6 @@ ul.errors {
 
 ul.errors li {
   padding: 3px;
-}
-
-#footer {
-  width: 100%; 
-  padding-top: 10px;
 }
 
 h1 {

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/5906/branches/1.2/lib/Doctrine/Parser
+END
+Json.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Parser/Json.php
+END
+YamlSf.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Parser/YamlSf.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Parser/Exception.php
+END
+Xml.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/5906/branches/1.2/lib/Doctrine/Parser/Xml.php
+END
+Yml.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Parser/Yml.php
+END
+Serialize.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Parser/Serialize.php
+END

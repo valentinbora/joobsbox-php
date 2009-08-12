@@ -40,7 +40,7 @@
 <div id="categ-wrapper">
   <ul id="categories">
     <?php foreach($this->categories->filterRootNodes() as $index => $category): ?>
-		<li class="editable" id="existing_<?php echo $category['ID']; ?>"><?php echo $category['Name']; ?></li>
+		<li class="editable" id="existing_<?php echo $category['id']; ?>"><?php echo $category['name']; ?></li>
 		<?php endforeach; ?>
   </ul>
 </div>

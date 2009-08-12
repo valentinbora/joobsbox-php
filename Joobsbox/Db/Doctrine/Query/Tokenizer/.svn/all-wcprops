@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Tokenizer
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/5900/branches/1.2/lib/Doctrine/Query/Tokenizer/Exception.php
+END

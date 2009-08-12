@@ -35,7 +35,7 @@ class Joobsbox_Model_Users {
 	 * @returns array
 	 */
 	public function getData($username) {
-	  $sql 	= "SELECT ID, username, realname, email, password, password_salt FROM " . $this->_users_table . " WHERE username = ?";
+	  $sql 	= "SELECT id, username, realname, email, password, password_salt FROM " . $this->_users_table . " WHERE username = ?";
 		return $this->_db->fetchRow($sql, $username);
 	}
 	
@@ -47,7 +47,7 @@ class Joobsbox_Model_Users {
 	 */
 	public function updateData($data) {
 	  // Treat data well
-	  unset($data['ID']); // No messing up with the IDs
+	  unset($data['id']); // No messing up with the IDs
 	  unset($data['submit']);
 	  unset($data['old_password']);
 	  // Password salting
@@ -62,5 +62,19 @@ class Joobsbox_Model_Users {
 	  }
 	  
 	  $this->_db->update($this->_users_table, $data, $this->_db->quoteInto('username = ?', Zend_Auth::getInstance()->getIdentity()));
+	}
+	
+	/**
+	 * Tries to authenticate user
+	 * 
+	 * @param string $username
+	 * @param string $password
+	 */
+	public function authenticate($username, $password) {
+	  $auth = Zend_Auth::getInstance();
+	  $authAdapter = Zend_Registry::get("authAdapter");
+	  $password = md5(Zend_Registry::get("staticSalt") . $password . sha1($password));
+	  $authAdapter->setIdentity($username)->setCredential($password);
+		return $auth->authenticate($authAdapter);
 	}
 }

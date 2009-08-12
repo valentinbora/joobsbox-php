@@ -1,4 +1,4 @@
-config/db.ini.php
+config/db.xml
 todo/
 docs/
 config/passwordHash.php

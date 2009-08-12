@@ -1,0 +1,34 @@
+<?php
+/**
+ * @package Joobsbox_Themes
+ * @category Joobsbox
+ * @author Valentin Bora <contact@valentinbora.com>
+ * @version 1.0
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
+ */
+ $this->headLink()->appendAlternate($this->baseUrl . '/rss/categorie/' . $this->MakeLink($this->category['Name']), 'application/rss+xml', $this->conf->general->common_title . ' RSS - ' . $this->category['Name']);
+?>
+<?php $this->headTitle()->prepend($this->category['Name']); ?>
+<div class="list">
+	<div class="inner">
+		<div class="toRight">
+			<a href="<?php echo $this->baseUrl;?>/rss/categorie/<?php echo $this->MakeLink($this->category['Name']);?>/">RSS</a>
+			<a href="<?php echo $this->baseUrl;?>/rss/categorie/<?php echo $this->MakeLink($this->category['Name']);?>/"><img src="<?php echo $this->themeImages;?>/icon-rss.gif" alt="RSS" border="0" /></a>
+		</div>
+		<a href="<?php echo $this->baseUrl;?>/categorie/<?php echo $this->MakeLink($this->category['Name']);?>.html">
+			<?php echo $this->category['Name']; ?>
+		</a>
+	</div>
+	<ul>          
+		<?php foreach($this->jobs as $a => $job): ?>
+		<li <?php if($a%2):?>class="alternate"<?php endif;?>>
+			<a href="<?php echo $this->baseUrl;?>/job/<?php echo $this->MakeLink($job['Title']) . "-" . $job['ID']; ?>.html"><?php echo $job['Title']; ?></a>
+			<span class="lighterSmall">la</span>
+			<?php echo $job['Company']; ?>
+			<span class="lighterSmall">in</span>
+			<?php echo $job['Location']; ?>
+		</li>
+		<?php endforeach; ?>
+	</ul>
+</div>

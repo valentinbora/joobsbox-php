@@ -54,18 +54,18 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 		
 		if(count($contents)) {
 		    foreach($contents as $category) {
-			    $category['Children'] = array();
-			    $category['CollectionParent'] = $this;
+			    $category['children'] = array();
+			    $category['collectionparent'] = $this;
 			    
-			    $this->_contents[$category['ID']] = new Joobsbox_Iterator_Categories_CategoryObject($category);
-			    $this->_contentsNames[$category['ID']] = $category['Name'];
-			    $this->_contentsLinks[$category['ID']] = $category['Link'];
+			    $this->_contents[$category['id']] = new Joobsbox_Iterator_Categories_CategoryObject($category);
+			    $this->_contentsNames[$category['id']] = $category['name'];
+			    $this->_contentsLinks[$category['id']] = $category['link'];
 		    }
 		
 		    ksort($this->_contents);
 		    foreach($this->_contents as $key => $category) {
-			    if($category['Parent']) {
-				    $this->_contents[$category['Parent']]['Children'][] = $category['ID'];
+			    if($category['parent']) {
+				    $this->_contents[$category['parent']]['children'][] = $category['id'];
 			    }
 		    }
 		}
@@ -210,8 +210,8 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 }
 
 function compareOrderIndex($a, $b) {
-	$a = $a['OrderIndex'];
-	$b = $b['OrderIndex'];
+	$a = $a['orderindex'];
+	$b = $b['orderindex'];
 	
 	if($a == $b) {
 		return 0;

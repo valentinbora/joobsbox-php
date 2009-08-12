@@ -26,10 +26,10 @@ class Joobsbox_Iterator_Categories_CategoryObject extends ArrayObject
     }
 	
 	public function getChildren() {
-		if(empty($this['Children'])) {
+		if(empty($this['children'])) {
 			return array();
 		} else {
-			return call_user_method_array('getCategories', $this['CollectionParent'], $this['Children']);
+			return call_user_method_array('getCategories', $this['CollectionParent'], $this['children']);
 		}
 	}
 	

@@ -46,6 +46,7 @@ class PublishController extends Zend_Controller_Action
 			->addFilter('StringTrim')
 			->addValidator('notEmpty')
 			->setRequired(true);
+			
 		$location = $form->createElement('text', 'location')
 			->setLabel('Location:')
 			->addFilter('StripTags')
@@ -97,20 +98,20 @@ class PublishController extends Zend_Controller_Action
 		$publishNamespace = new Zend_Session_Namespace('PublishJob');
 		if(isset($publishNamespace->editJobId)) {
 			$jobData = $this->_model->fetchJobById($publishNamespace->editJobId);
-			$title->setValue($jobData['Title']);
-			$company->setValue($jobData['Company']);
-			$location->setValue($jobData['Location']);
-			$category->setValue($jobData['CategoryID']);
-			$description->setValue($jobData['Description']);
-			$application->setValue($jobData['ToApply']);
+			$title->setValue($jobData['title']);
+			$company->setValue($jobData['company']);
+			$location->setValue($jobData['location']);
+			$category->setValue($jobData['categoryid']);
+			$description->setValue($jobData['description']);
+			$application->setValue($jobData['toapply']);
 			
-			$exp = $form->createElement('text', 'expirationDate')
+			$exp = $form->createElement('text', 'expirationdate')
 			  ->setLabel('Expiration date:')
 			  ->addFilter('StripTags')
 			  ->addFilter('StringTrim')
 			  ->addValidator('notEmpty')
 			  ->setRequired(true)
-			  ->setValue(date("m/d/Y", $jobData['ExpirationDate']));
+			  ->setValue(date("m/d/Y", $jobData['expirationdate']));
 			$form->addElement($exp);
 			
 			$submit->setLabel('Modify');
@@ -154,15 +155,15 @@ class PublishController extends Zend_Controller_Action
 				try {
 					$where = $jobOperations->getAdapter()->quoteInto('ID = ?', $publishNamespace->editJobId);
 					$values['id'] = $jobOperations->update(array(
-						'CategoryID'	=> $values['category'],
-						'Title'			=> $values['title'],
-						'Description'	=> $this->_helper->filter("purify_html", $values['description']),
-						'ToApply'		=> $values['application'],
-						'Company'		=> $values['company'],
-						'Location'		=> $values['location'],
-						'ChangedDate'	=> new Zend_Db_Expr('NOW()'),
-						'ExpirationDate' => strtotime($values['expirationDate']),
-						'Public'		=> 1
+						'categoryid'	=> $values['category'],
+						'title'			=> $values['title'],
+						'description'	=> $this->_helper->filter("purify_html", $values['description']),
+						'toapply'		=> $values['application'],
+						'company'		=> $values['company'],
+						'location'		=> $values['location'],
+						'changeddate'	=> date("Y-m-d"),
+						'expirationdate' => strtotime($values['expirationdate']),
+						'public'		=> 1
 					), $where);
 
 					$this->view->editSuccess = 1;
@@ -172,7 +173,6 @@ class PublishController extends Zend_Controller_Action
 					$publishNamespace->jobHash = $hash;
 					Joobsbox_Helpers_Cache::clearAllCache();
 				} catch (Exception $e) {
-				  dd("tralala");
 					throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
 				}
 			} else {
@@ -184,15 +184,16 @@ class PublishController extends Zend_Controller_Action
 				  $this->_conf = Zend_Registry::get("conf");
 				  
 					$values['id'] = $jobOperations->insert(array(
-						'CategoryID'  => $values['category'],
-						'Title'			  => $values['title'],
-						'Description'	=> $this->_helper->filter("purify_html", $values['description']),
-						'ToApply'		  => $values['application'],
-						'Company'		  => $values['company'],
-						'Location'		=> $values['location'],
-						'PostedAt'		=> new Zend_Db_Expr('NOW()'),
-						'ExpirationDate' => strtotime("+" . $this->_conf->general->posting_ttl . " days"),
-						'Public'		  => 0
+						'categoryid'  => $values['category'],
+						'title'			  => $values['title'],
+						'description'	=> $this->_helper->filter("purify_html", $values['description']),
+						'toapply'		  => $values['application'],
+						'company'		  => $values['company'],
+						'location'		=> $values['location'],
+						'changeddate' => date("Y-m-d"),
+						'postedat'		=> date("Y-m-d"),
+						'expirationdate' => strtotime("+" . $this->_conf->general->posting_ttl . " days"),
+						'PUBLIC'		  => 0
 					));
 
 					$this->view->addSuccess = 1;

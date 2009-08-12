@@ -1,7 +1,16 @@
 <?xml version="1.0"?>
 <zend-config>
-  <host>localhost</host>
-  <username>joobsbox</username>
-  <password>joobsbox</password>
-  <dbname>joobsbox</dbname>
+  <zend_db>
+    <dbadapter>PDO_SQLite</dbadapter>
+    <dbname>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/joobsbox.sqlite</dbname>
+  </zend_db>
+  <doctrine>
+    <connection_string>sqlite:////Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/joobsbox.sqlite</connection_string>
+    <models_path>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/Models</models_path>
+    <migrations_path>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/Migrations</migrations_path>
+    <sql_path>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/Sql</sql_path>
+    <yaml_schema_path>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/Schemas</yaml_schema_path>
+    <data_fixtures_path>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/Fixtures</data_fixtures_path>
+    <class_name>Joobsbox_Migration</class_name>
+  </doctrine>
 </zend-config>

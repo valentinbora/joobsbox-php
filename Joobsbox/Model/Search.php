@@ -54,7 +54,7 @@ class Joobsbox_Model_Search {
 	
 	public function deleteJob($jobId) {
 	  if(!$this->_enabled) return false();
-		$term = new Zend_Search_Lucene_Index_Term($jobId, 'ID');
+		$term = new Zend_Search_Lucene_Index_Term($jobId, 'id');
 		$hits  = $this->_index->termDocs($term);
 		if(count($hits)) {
 			foreach($hits as $hit) {
@@ -67,7 +67,7 @@ class Joobsbox_Model_Search {
 	  if(!$this->_enabled) return false;
 	  
 		// Delete old job with the same id from index
-		$term = new Zend_Search_Lucene_Index_Term($jobData['ID'], 'ID');
+		$term = new Zend_Search_Lucene_Index_Term($jobData['id'], 'id');
 		$hits  = $this->_index->termDocs($term);
 		if(count($hits)) {
 			foreach($hits as $hit) {
@@ -78,12 +78,12 @@ class Joobsbox_Model_Search {
 		// Add the job now
 		$job = new Zend_Search_Lucene_Document();
 		$job->addField(Zend_Search_Lucene_Field::Keyword('DocumentType', 'job', 'utf-8'));
-		$job->addField(Zend_Search_Lucene_Field::Keyword('ID', $jobData['ID'], 'utf-8'));
-		$job->addField(Zend_Search_Lucene_Field::Text('Title', $jobData['Title'], 'utf-8'));
-		$job->addField(Zend_Search_Lucene_Field::Text('Description', $jobData['Description'], 'utf-8'));
-		$job->addField(Zend_Search_Lucene_Field::Text('Company', $jobData['Company'], 'utf-8'));
-		$job->addField(Zend_Search_Lucene_Field::Keyword('CategoryID', $jobData['CategoryID'], 'utf-8'));
-		$job->addField(Zend_Search_Lucene_Field::Text('Location', $jobData['Location'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Keyword('id', $jobData['id'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Text('title', $jobData['title'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Text('description', $jobData['description'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Text('company', $jobData['company'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Keyword('categoryid', $jobData['categoryid'], 'utf-8'));
+		$job->addField(Zend_Search_Lucene_Field::Text('location', $jobData['location'], 'utf-8'));
 		
 		$this->_index->addDocument($job);
 		$this->_index->commit();

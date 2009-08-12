@@ -21,16 +21,16 @@
   		</thead>
   		<tbody>
   			<?php foreach($this->pending as $posting): ?>
-  			<tr id="job_<?php echo $posting['ID']; ?>" class="job">
-  				<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $_SERVER['REQUEST_URI'] . '/edit/' . $posting['ID']; ?>" class="editBtn"></a></td>
-  				<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
-  				<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></td>
-  				<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
-  				<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
-  				<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
+  			<tr id="job_<?php echo $posting['id']; ?>" class="job">
+  				<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $_SERVER['REQUEST_URI'] . '/edit/' . $posting['id']; ?>" class="editBtn"></a></td>
+  				<td><input type="checkbox" name="job[<?php echo $posting['id']; ?>]"/></td>
+  				<td><?php echo $this->filter("job_title_admin", $posting['title']); ?></td>
+  				<td><?php echo $this->filter("job_company_admin", $posting['company']); ?></td>
+  				<td><?php echo $this->filter("job_location_admin", $posting['location']); ?></td>
+  				<td><?php echo $this->filter("job_postedAt_admin", $posting['postedat']); ?></td>
   			</tr>
   			<tr class="next">
-  				<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
+  				<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['description'])); ?></td>
   			</tr>
   			<?php endforeach; ?>
   		</tbody>
@@ -61,16 +61,16 @@
 		</thead>
 		<tbody>
 			<?php foreach($this->postings as $posting): ?>
-			<tr id="job_<?php echo $posting['ID']; ?>" class="job">
-				<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $this->pluginUrl . 'edit/' . $posting['ID']; ?>" class="editBtn"></a></td>
-				<td><input type="checkbox" name="job[<?php echo $posting['ID']; ?>]"/></td>
-				<td><?php echo $this->filter("job_title_admin", $posting['Title']); ?></a></td>
-				<td><?php echo $this->filter("job_company_admin", $posting['Company']); ?></td>
-				<td><?php echo $this->filter("job_location_admin", $posting['Location']); ?></td>
-				<td><?php echo $this->filter("job_postedAt_admin", $posting['PostedAt']); ?></td>
+			<tr id="job_<?php echo $posting['id']; ?>" class="job">
+				<td class="operations"><a class="expand" href="#">+</a><a href="<?php echo $this->pluginUrl . 'edit/' . $posting['id']; ?>" class="editBtn"></a></td>
+				<td><input type="checkbox" name="job[<?php echo $posting['id']; ?>]"/></td>
+				<td><?php echo $this->filter("job_title_admin", $posting['title']); ?></a></td>
+				<td><?php echo $this->filter("job_company_admin", $posting['company']); ?></td>
+				<td><?php echo $this->filter("job_location_admin", $posting['location']); ?></td>
+				<td><?php echo $this->filter("job_postedAt_admin", $posting['postedat']); ?></td>
 			</tr>
 			<tr class="next">
-				<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['Description'])); ?></td>
+				<td colspan="6"><?php echo $this->filter("job_description_admin", htmlspecialchars($posting['description'])); ?></td>
 			</tr>
 			<?php endforeach; ?>
 		</tbody>

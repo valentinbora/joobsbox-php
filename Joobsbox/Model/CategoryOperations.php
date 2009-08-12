@@ -20,7 +20,7 @@
  */
 class Joobsbox_Model_CategoryOperations extends Zend_Db_Table_Abstract {
 	protected $_name = 'categories';
-	protected $_primary = "ID";	
+	protected $_primary = "id";	
 	protected $_sequence = true;
 	
 	public function __construct() {
