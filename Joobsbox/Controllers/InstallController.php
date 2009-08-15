@@ -143,7 +143,7 @@ class InstallController extends Zend_Controller_Action {
     		$dbitems[] = "dbuser";
 
     		$dbpass = $this->mainForm->createElement('text', 'dbpass')
-    			->setLabel($this->view->translate('Database name:'))
+    			->setLabel($this->view->translate('Database password:'))
     			->addFilter('StripTags')
     			->addFilter('StringTrim');
     		$this->mainForm->addElement($dbpass);
