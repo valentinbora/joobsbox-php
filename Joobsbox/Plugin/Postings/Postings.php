@@ -24,6 +24,7 @@ class Postings extends Joobsbox_Plugin_AdminBase
 {
 	function init() {
 		$this->jobsModel = $this->getModel("Jobs");
+		$this->searchModel = $this->getModel("Search");
 		$this->view->categories = $this->jobsModel->fetchCategories();
 	}
 	
@@ -61,6 +62,7 @@ class Postings extends Joobsbox_Plugin_AdminBase
 			$this->jobOperationsModel->delete($this->jobOperationsModel->getAdapter()->quoteInto('id = ?', $job));
 			$this->searchModel->deleteJob($job);
 		}
+
 		echo "ok";
 		Joobsbox_Helpers_Cache::clearAllCache();
 		die();
