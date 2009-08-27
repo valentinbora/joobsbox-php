@@ -21,24 +21,22 @@ require "Joobsbox/Application/ErrorHandler.php";
 
 Zend_Controller_Action_HelperBroker::addPath(APPLICATION_DIRECTORY . '/Joobsbox/Helpers', 'Joobsbox_Helpers');
 
-if(!isset($testing)) {
-	$front = Zend_Controller_Front::getInstance();
-	$front->setBaseUrl(BASE_URL)->setParam('disableOutputBuffering', true)->registerPlugin(new Joobsbox_Plugin_Controller);
+$front = Zend_Controller_Front::getInstance();
+$front->setBaseUrl(BASE_URL)->setParam('disableOutputBuffering', true)->registerPlugin(new Joobsbox_Plugin_Controller);
 
-	configureTheme();
-	
-	if(isset($joobsbox_render_var)) {
-	  setLayout('integration');
-	  if(isset($joobsbox_integration_text)) {
-	    $viewRenderer->view->integrationText = $joobsbox_integration_text;
-	  }
-		$front->returnResponse(true);
-	}
-  Zend_Registry::get("EventHelper")->fireEvent("joobsbox_init");
-  
-	$response = $front->dispatch();
+configureTheme();
 
-	if(isset($joobsbox_render_var)) {
-		$joobsbox_render_var = $response->getBody();
-	}
+if(isset($joobsbox_render_var)) {
+  setLayout('integration');
+  if(isset($joobsbox_integration_text)) {
+    $viewRenderer->view->integrationText = $joobsbox_integration_text;
+  }
+	$front->returnResponse(true);
+}
+Zend_Registry::get("EventHelper")->fireEvent("joobsbox_init");
+
+$response = $front->dispatch();
+
+if(isset($joobsbox_render_var)) {
+	$joobsbox_render_var = $response->getBody();
 }

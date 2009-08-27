@@ -20,15 +20,18 @@
  */
 
 class Joobsbox_Model_Search extends Joobsbox_Plugin_EventsFilters {
-	public $_index;
+	public $index;
 	public $_enabled = true;
+	private $_path;
 	
 	public function __construct() {
-		if(file_exists("Joobsbox/SearchIndexes/main")) {
-			$this->_index = Zend_Search_Lucene::open("Joobsbox/SearchIndexes/main");
+	  $this->_path = APPLICATION_DIRECTORY . "/Joobsbox/SearchIndexes/";
+	  
+		if(file_exists($this->_path . "main")) {
+			$this->index = Zend_Search_Lucene::open($this->_path . "main");
 		} else {
-		  if(is_writable('Joobsbox/SearchIndexes')) {
-			  $this->_index = Zend_Search_Lucene::create("Joobsbox/SearchIndexes/main");
+		  if(is_writable($this->_path)) {
+			  $this->index = Zend_Search_Lucene::create($this->_path . "main");
 			} else {
 			  $this->_enabled = false;
 			}
@@ -42,39 +45,39 @@ class Joobsbox_Model_Search extends Joobsbox_Plugin_EventsFilters {
 	public function search($string) {
 	  if(!$this->_enabled) return array();
 		$query = Zend_Search_Lucene_Search_QueryParser::parse($string);
-		return $this->_index->find($query);
+		return $this->index->find($query);
 	}
 	
 	public function searchTag($tag, $value) {
 	  if(!$this->_enabled) return array();
 	  Zend_Search_Lucene::setDefaultSearchField($tag);
 	  $query = Zend_Search_Lucene_Search_QueryParser::parse($value);
-		return $this->_index->find($query);
+		return $this->index->find($query);
 	}
 	
 	public function deleteJob($jobId) {
 	  if(!$this->_enabled) return false();
 		$term = new Zend_Search_Lucene_Index_Term($jobId, 'id');
-		$hits  = $this->_index->termDocs($term);
+		$hits  = $this->index->termDocs($term);
 		if(count($hits)) {
 			foreach($hits as $hit) {
-				$this->_index->delete($hit->id);
+				$this->index->delete($hit->id);
 			}
 		}
-		$this->fireEvent("job_deleted_from_search_index", $jobId);
+		$this->fireEvent("job_deleted_from_searchindex", $jobId);
 	}
 	
 	public function addJob($jobData) {
 	  if(!$this->_enabled) return false;
 
-	  $jobData = $this->filter("add_job_to_search_index", $jobData);
+	  $jobData = $this->filter("add_job_to_searchindex", $jobData);
 
 		// Delete old job with the same id from index
 		$term = new Zend_Search_Lucene_Index_Term($jobData['id'], 'id');
-		$hits  = $this->_index->termDocs($term);
+		$hits  = $this->index->termDocs($term);
 		if(count($hits)) {
 			foreach($hits as $hit) {
-				$this->_index->delete($hit->id);
+				$this->index->delete($hit->id);
 			}
 		}
 		
@@ -88,23 +91,23 @@ class Joobsbox_Model_Search extends Joobsbox_Plugin_EventsFilters {
 		$job->addField(Zend_Search_Lucene_Field::Keyword('categoryid', $jobData['categoryid'], 'utf-8'));
 		$job->addField(Zend_Search_Lucene_Field::Text('location', $jobData['location'], 'utf-8'));
 		
-		$this->fireEvent("job_added_to_search_index", $jobData);
+		$this->fireEvent("job_added_to_searchindex", $jobData);
 		
-		$this->_index->addDocument($job);
-		$this->_index->commit();
+		$this->index->addDocument($job);
+		$this->index->commit();
 	}
 	
 	public function resetIndex() {
 	  if(!$this->_enabled) return false();
-		for ($count = 0; $count < $this->_index->count(); $count++) {
-        $this->_index->delete($count);
+		for ($count = 0; $count < $this->index->count(); $count++) {
+        $this->index->delete($count);
     }
 		$this->commit();
 	}
 	
 	public function commit() {
 	  if(!$this->_enabled) return false();
-		$this->_index->commit();
-		$this->_index->optimize();
+		$this->index->commit();
+		$this->index->optimize();
 	}
 }

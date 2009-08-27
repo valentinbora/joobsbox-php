@@ -1,7 +1,6 @@
 <phpunit colors="true" bootstrap="bootstrap.php">
     <testsuite name="tests">
         <directory>tests</directory>
-	<file>tests/Model/JobsTest.php</file>
     </testsuite>
  
     <php>
@@ -10,7 +9,11 @@
  
     <filter>
         <whitelist>
-            <directory suffix=".php">../JoobsBox</directory>
+            <directory suffix=".php">../Joobsbox/</directory>
+		<exclude>
+			<file>../Joobsbox/Application/Translation.php</file>
+			<directory>../Joobsbox/Db/</directory>
+		</exclude>
         </whitelist>
     </filter>
  
@@ -20,32 +23,5 @@
             yui="true" highlight="true"
             lowUpperBound="50" highLowerBound="80"/>
         <log type="testdox-html" target="./log/testdox.html" />
-<pmd>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Project_CRAP"
-            threshold="5,30"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Class_DepthOfInheritanceTree"
-            threshold="6"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Class_EfferentCoupling"
-            threshold="20"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Class_ExcessiveClassLength"
-            threshold="1000"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Class_ExcessivePublicCount"
-            threshold="45"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Class_TooManyFields"
-            threshold="15"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Function_CodeCoverage"
-            threshold="35,70"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Function_CRAP"
-            threshold="30"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Function_CyclomaticComplexity"
-            threshold="20"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Function_ExcessiveMethodLength"
-            threshold="100"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Function_ExcessiveParameterList"
-            threshold="10"/>
-      <rule class="PHPUnit_Util_Log_PMD_Rule_Function_NPathComplexity"
-            threshold="200"/>
-    </pmd>
-
     </logging>
 </phpunit>

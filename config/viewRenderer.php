@@ -1,4 +1,7 @@
 <?php
+if(!defined("BASE_URL")) {
+  define("BASE_URL", "");
+}
 $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
 $viewRenderer->setNoRender();
 $viewRenderer->initView(); 
@@ -11,7 +14,7 @@ $viewRenderer->view->publicUrl = str_replace("index.php", "", BASE_URL) . "/publ
 
 function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index', $layoutPath = '/themes/core/layouts') {
 	global $baseUrl;
-	
+
 	$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
 
   if($layoutName == 'integration') {
@@ -26,7 +29,7 @@ function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index', $layo
 	$viewRenderer->view->asset        = new Joobsbox_Helpers_AssetHelper;
 	$viewRenderer->view->css          = new Joobsbox_Helpers_CssHelper;
 	$viewRenderer->view->js           = new Joobsbox_Helpers_JsHelper;
-	
+
 	$viewRenderer->view->addScriptPath(APPLICATION_DIRECTORY . '/themes/core/views/scripts');
 	$viewRenderer->view->addScriptPath(APPLICATION_DIRECTORY . '/themes/' . $theme . '/views/scripts');
 

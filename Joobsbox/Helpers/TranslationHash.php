@@ -25,8 +25,11 @@ class Joobsbox_Helpers_TranslationHash
 	}
 	
 	function regenerateHash() {
+	  if(!Zend_Registry::isRegistered("Translation_Hash")) {
+	    return;
+	  }
 		$translation = Zend_Json::encode(Zend_Registry::get("Translation_Hash"));
-		
+
 		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
 		$viewRenderer->view->translateHash = 'var translateHash=' . $translation . ';';
 	}

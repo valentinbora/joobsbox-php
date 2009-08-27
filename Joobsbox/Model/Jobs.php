@@ -115,7 +115,7 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 	 */
 	public function fetchNJobsPerCategory($maxJobsPerCateg=10) {
 		$maxJobsPerCateg	  = $this->_conf->general->jobs_per_categ;
-		$jobs 			        = $this->fetchAllJobs(0)->order("ID DESC")->fetch();
+		$jobs 			        = $this->fetchAllJobs(0)->order("id DESC")->fetch();
 		$categoriesById		  = $this->fetchCategories()->toArray();
 		$cats 			        = $this->fetchCategories()->filterEmpty()->orderByOrderIndex()->toArray();
 		
@@ -123,7 +123,7 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters {
 		
 		if(count($cats))
 		foreach($cats as $index => $category) {
-			$categId = $category['ID'];
+			$categId = $category['id'];
 			
 			while($categoriesById[$categId]['parent'] != 0) {
 				$categId = $categoriesById[$categId]['parent'];

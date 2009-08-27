@@ -8,6 +8,7 @@ ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . APPLICATION_D
 
 require_once APPLICATION_DIRECTORY . "/config/config.php";
 require_once APPLICATION_DIRECTORY . "/config/viewRenderer.php";
+require_once APPLICATION_DIRECTORY . "/Joobsbox/Application/Test.php";
 
 $front = Zend_Controller_Front::getInstance();
 $front->resetInstance();
