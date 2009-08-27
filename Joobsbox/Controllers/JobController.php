@@ -26,10 +26,13 @@ class JobController extends Zend_Controller_Action
 		$jobId  = end($jobId);
 		$jobId  = (int)$jobId;
 		
+		$this->_helper->event("view_job", $jobId);
+		
 		$jobs	= new Joobsbox_Model_Jobs();
 		$job	= $jobs->fetchJobById($jobId);
 		
 		if(!$job) {
+		  $this->_helper->event("job_not_exists", $jobId);
 			throw new Zend_Controller_Action_Exception($this->view->translate('The requested job does not exist!'));
 		}
 		

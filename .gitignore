@@ -5,3 +5,4 @@ config/passwordHash.php
 design
 Joobsbox/SearchIndexes/*/*
 *.kpf
+*.sqlite

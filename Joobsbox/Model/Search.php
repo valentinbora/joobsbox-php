@@ -19,7 +19,7 @@
  * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
 
-class Joobsbox_Model_Search {
+class Joobsbox_Model_Search extends Joobsbox_Plugin_EventsFilters {
 	public $_index;
 	public $_enabled = true;
 	
@@ -61,11 +61,14 @@ class Joobsbox_Model_Search {
 				$this->_index->delete($hit->id);
 			}
 		}
+		$this->fireEvent("job_deleted_from_search_index", $jobId);
 	}
 	
 	public function addJob($jobData) {
 	  if(!$this->_enabled) return false;
-	  
+
+	  $jobData = $this->filter("add_job_to_search_index", $jobData);
+
 		// Delete old job with the same id from index
 		$term = new Zend_Search_Lucene_Index_Term($jobData['id'], 'id');
 		$hits  = $this->_index->termDocs($term);
@@ -84,6 +87,8 @@ class Joobsbox_Model_Search {
 		$job->addField(Zend_Search_Lucene_Field::Text('company', $jobData['company'], 'utf-8'));
 		$job->addField(Zend_Search_Lucene_Field::Keyword('categoryid', $jobData['categoryid'], 'utf-8'));
 		$job->addField(Zend_Search_Lucene_Field::Text('location', $jobData['location'], 'utf-8'));
+		
+		$this->fireEvent("job_added_to_search_index", $jobData);
 		
 		$this->_index->addDocument($job);
 		$this->_index->commit();

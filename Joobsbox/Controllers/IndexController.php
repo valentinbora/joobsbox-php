@@ -15,8 +15,8 @@
  * Manages the homepage
  * @package Joobsbox_Controller
  * @category Joobsbox
- * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
- * @license	   http://www.joobsbox.com/joobsbox-php-license)
+ * @copyright Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	http://www.joobsbox.com/joobsbox-php-license)
  */
 class IndexController extends Zend_Controller_Action {
 	protected $_model;
@@ -32,7 +32,6 @@ class IndexController extends Zend_Controller_Action {
 		  $this->view->jobs = $this->_model->fetchNJobsPerCategory();
 		
 		  $this->_helper->event("received_jobs");
-		  
 		} catch(Exception $e) {
 		  rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
       $this->_redirect('install/step1');

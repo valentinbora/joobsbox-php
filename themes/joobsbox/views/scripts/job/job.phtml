@@ -18,16 +18,16 @@
 ); ?>
 <div class="inner">
 	<strong>
-		<?php echo $this->filter("job_title", $this->job['Title']); ?>
+		<?php echo $this->filter("job_title", $this->job['title']); ?>
 		<span class="lighterSmall"> <?php echo $this->translate("at"); ?> </span>
-		<?php echo $this->filter("job_company", $this->job['Company']); ?>
+		<?php echo $this->filter("job_company", $this->job['company']); ?>
 		<span class="lighterSmall"> <?php echo $this->translate("in"); ?> </span>
-		<?php echo $this->filter("job_location", $this->job['Location']); ?>
+		<?php echo $this->filter("job_location", $this->job['location']); ?>
 	</strong>
 </div>
 <div id="jobContent">
 	<h2><?php echo $this->translate("Description:"); ?></h2>
-	<?php echo $this->filter("job_description", $this->job['Description']); ?>
+	<?php echo $this->filter("job_description", $this->job['description']); ?>
 	<h2><?php echo $this->translate("To apply:"); ?></h2>
-	<?php echo $this->filter("job_application_method", $this->job['ToApply']); ?>
+	<?php echo $this->filter("job_application_method", $this->job['toapply']); ?>
 </div>

@@ -26,15 +26,17 @@ class CategoryController extends Zend_Controller_Action
 		$categoryName = $this->getRequest()->getParam("action");
 		$categoryName = explode(".", $categoryName);
 		$categoryName = $categoryName[0];
+		$categoryName = $this->_helper->filter("category_name", $categoryName);
 		
-		$category   = $this->_model->fetchCategories()->getCategory($categoryName);
+		$category     = $this->_model->fetchCategories()->getCategory($categoryName);
 		
 		if($category) {
-			$categoryId = $category['ID'];
-			$jobs = $this->_model->fetchAllJobs(0)->where("CategoryID = '$categoryId'")->fetch();
-			$this->view->category = array("Name" => $categoryName, "ID" => $categoryId);
+			$categoryId = $category['id'];
+			$jobs = $this->_model->fetchAllJobs(0)->where("categoryid = '$categoryId'")->fetch();
+			$this->view->category = array("name" => $categoryName, "id" => $categoryId);
 			$this->view->jobs = $jobs->toArray();
 		} else {
+		  $this->_helper->event("category_not_exist", $categoryName);
 			throw new Exception($this->view->translate("This category does not exist."));
 		}
 	}

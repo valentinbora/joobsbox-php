@@ -42,7 +42,7 @@ class ErrorController extends Zend_Controller_Action
                 break; 
         } 
 
-		$dev = Zend_Registry::get("conf")->general->dev;
+		    $dev = Zend_Registry::get("conf")->general->dev;
         $this->view->dev       = $dev;
         $this->view->exception = $errors->exception; 
         $this->view->request   = $errors->request; 

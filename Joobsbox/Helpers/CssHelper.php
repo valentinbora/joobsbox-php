@@ -73,10 +73,15 @@ class Joobsbox_Helpers_CssHelper extends Zend_Controller_Action_Helper_Abstract
           
            $this->css[$path] = 1;
            Zend_Registry::set("css", $this->css);
+           break;
          }
        }
       }
       return $this;
+  }
+  
+  public function prependPath($path) {
+    array_unshift($this->cssPaths, $path);
   }
   
   public function addPath($path) {
