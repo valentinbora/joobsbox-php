@@ -1,11 +1,16 @@
 <?xml version="1.0"?>
 <zend-config>
   <zend_db>
-    <dbadapter>PDO_SQLite</dbadapter>
-    <dbname>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/joobsbox.sqlite</dbname>
+    <dbadapter>PDO_MySQL</dbadapter>
+    <dbname>joobsbox</dbname>
+    <username>joobsbox</username>
+    <password>joobsbox</password>
+    <host>localhost</host>
+    <dbprefix>jbs_</dbprefix>
+    <dbstart>SET NAMES UTF8</dbstart>
   </zend_db>
   <doctrine>
-    <connection_string>sqlite:////Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/joobsbox.sqlite</connection_string>
+    <connection_string>mysql://joobsbox:joobsbox@localhost/joobsbox</connection_string>
     <models_path>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/Models</models_path>
     <migrations_path>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/Migrations</migrations_path>
     <sql_path>/Users/valentinbora/Work/web/joobsbox-php/Joobsbox/Db/Sql</sql_path>

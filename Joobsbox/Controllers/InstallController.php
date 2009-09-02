@@ -307,6 +307,7 @@ class InstallController extends Zend_Controller_Action {
 	}
 	
 	public function step2Action() {
+	  $this->reloadConfig();
 	  
 		configureTheme(APPLICATION_THEME, 'install');
 		$session = new Zend_Session_Namespace('Install');
@@ -316,8 +317,9 @@ class InstallController extends Zend_Controller_Action {
     $loader = Zend_Loader_Autoloader::getInstance();
     $loader->pushAutoloader(array('Doctrine', 'autoload'));
     $doctrineConfig = new Zend_Config_Xml(APPLICATION_DIRECTORY . "/config/db.xml", "doctrine");
-    
+
     $manager = Doctrine_Manager::getInstance();
+    $manager->setAttribute(Doctrine::ATTR_TBLNAME_FORMAT, $this->config->db->prefix . '%s');
     $manager->setCollate('utf8_unicode_ci');
     $manager->setCharset('utf8');
     $manager->openConnection($doctrineConfig->connection_string);
@@ -325,8 +327,8 @@ class InstallController extends Zend_Controller_Action {
     Doctrine::createTablesFromModels($doctrineConfig->models_path);
 
 	  $db = Zend_Registry::get("db");
-	  $db->delete($config->db->prefix . "categories", array("Name='Uncategorized'"));
-		$db->insert($config->db->prefix . "categories", array(
+	  $db->delete($this->config->db->prefix . "categories", array("Name='Uncategorized'"));
+		$db->insert($this->config->db->prefix . "categories", array(
 		    'ID'    => 0,
 		    'Name'  => 'Uncategorized',
 		    'Link'  => 'Uncategorized',
@@ -410,10 +412,10 @@ class InstallController extends Zend_Controller_Action {
       $username = $values['username'];
       $password = $values['password'];
       
-      $config = new Zend_Config_Xml("config/config.xml");
+      $this->reloadConfig();
       
-	    $db->delete($config->db->prefix . 'users', array("username='$username'"));
-	    $db->insert($config->db->prefix . 'users', array(
+	    $db->delete($this->config->db->prefix . 'users', array("username='$username'"));
+	    $db->insert($this->config->db->prefix . 'users', array(
 		    'username' => $values['username'],
     		'password' => md5(Zend_Registry::get('staticSalt') . $values['password'] . sha1($password)),
     		'password_salt' => sha1($values['password']),
@@ -421,10 +423,10 @@ class InstallController extends Zend_Controller_Action {
     		'email' => $values['email']
 	    ));
 	    
-	    $config = new Zend_Config_Xml('config/config.xml', null, array('allowModifications' => true));
+	    $config = new Zend_Config_Xml(APPLICATION_DIRECTORY . '/config/config.xml', null, array('allowModifications' => true));
   		$config->general->restrict_install = 1;
 
-      $writer = new Zend_Config_Writer_Xml(array('config' => $config, 'filename' => 'config/config.xml'));
+      $writer = new Zend_Config_Writer_Xml(array('config' => $config, 'filename' => APPLICATION_DIRECTORY . '/config/config.xml'));
       $writer->write();
 
       $model = new Joobsbox_Model_Users;
@@ -439,5 +441,9 @@ class InstallController extends Zend_Controller_Action {
   		$form->populate($values);
   		$this->view->form = $form->render();
   	}
+	}
+	
+	private function reloadConfig() {
+	  $this->config = new Zend_Config_Xml(APPLICATION_DIRECTORY . "/config/config.xml");
 	}
 }
