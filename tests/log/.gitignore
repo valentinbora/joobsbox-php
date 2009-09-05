@@ -1,2 +1,4 @@
 report
 testdox.html
+*.xml
+*.svg
