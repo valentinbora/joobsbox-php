@@ -25,6 +25,9 @@
 class Joobsbox_Plugin_Base {
 	public $_helper;
 	public $isAdmin = false;
+	/**
+	 * @var string the plugin name set by Joobsbox_Plugin_Loader
+	 */
 	protected $_pluginName;
 	
 	/**
@@ -127,12 +130,38 @@ class Joobsbox_Plugin_Base {
 	}
 	
 	/**
-     * gives access to application models
-     */
+   * gives access to application models
+   */
 	protected function getModel($modelName) {
 		$modelName = "Joobsbox_Model_$modelName";
 		return new $modelName;
 	}
+	
+	/**
+   * gets current response object for manipulation
+   * @return Zend_Controller_Request
+   */
+	protected function getRequest() {
+    $front = Zend_Controller_Front::getInstance();
+    return $front->getRequest();
+	}
+	
+	/**
+   * gets current response object for manipulation
+   * @return Zend_Controller_Response
+   */
+  public function getResponse() {
+    $front = Zend_Controller_Front::getInstance();
+    return $front->getResponse();
+  }
+  
+  public function __get($what) {
+    switch($what) {
+      case "view":
+        return Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
+        break;
+    }
+  }
 }
 
 /**
