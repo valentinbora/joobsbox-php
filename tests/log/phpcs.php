@@ -17,7 +17,7 @@ foreach($xml->file as $file) {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>JoobsBox PHP - PHP Mess Detector Report</title>
+	<title>JoobsBox PHP - PHP Code Sniffer Report</title>
 	<style type="text/css">
 	  body {
 	    font-family: "Corbel", "Myriad Pro", "Calibri", "Verdana", "Helvetica", "Arial", sans-serif;
@@ -85,7 +85,7 @@ foreach($xml->file as $file) {
 </head>
 
 <body>
-  <h1>JoobsBox PHP - PHP Mess Detector Report</h1>
+  <h1>JoobsBox PHP - PHP Code Sniffer Report</h1>
   
   <ul id="files">
   <?php foreach($files as $file): ?>
