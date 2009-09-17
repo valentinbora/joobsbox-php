@@ -32,18 +32,18 @@ class RssController extends Zend_Controller_Action {
 		$this->_model 	= new Joobsbox_Model_Jobs();
 		$allJobs 		= false;
 		
-		if(isset($params['categorie'])) {
-			$category = $this->_model->fetchCategories()->getCategory($params['categorie']);
+		if(isset($params['category'])) {
+			$category = $this->_model->fetchCategories()->getCategory($params['category']);
 			if($category) {
-				$categoryId = $category->getProperty('ID');
+				$categoryId = $category->getProperty('id');
 				$jobs = $this->_model->fetchAllJobs(0)
-									 ->order('ID DESC')
-									 ->where("CategoryID = '$categoryId'")
+									 ->order('id DESC')
+									 ->where("categoryid = '$categoryId'")
 									 ->limit($conf->rss->all_jobs_count, 0)
 									 ->fetch();
 				$jobs = $jobs->toArray();
 				if(count($jobs)) {
-				  $lastUpdate = strtotime($jobs[0]['ChangedDate']);
+				  $lastUpdate = strtotime($jobs[0]['changeddate']);
 				} else {
 				  $lastUpdate = strtotime("today");
 				}
@@ -60,7 +60,7 @@ class RssController extends Zend_Controller_Action {
 								 ->fetch();
 			$jobs = $jobs->toArray();
 			if(count($jobs)) {
-			  $lastUpdate = strtotime($jobs[0]['ChangedDate']);
+			  $lastUpdate = strtotime($jobs[0]['changeddate']);
 			} else {
 			  $lastUpdate = strtotime("today");
 			}
@@ -69,7 +69,7 @@ class RssController extends Zend_Controller_Action {
 		// Generate the feed
 		$siteUrl = "http://" . $_SERVER["HTTP_HOST"];
 		$data		= array(
-			"title"			  => $conf->general->common_title . " - " . (($allJobs) ? ("Toate joburile") : ($params['categorie'])),
+			"title"			  => $conf->general->common_title . " - " . (($allJobs) ? ($this->view->translate("All jobs")) : ($params['category'])),
 			"link"			  => $siteUrl . $_SERVER["REQUEST_URI"],
 			"lastUpdate"	  => $lastUpdate,
 			'charset'		  => 'utf-8',
@@ -79,12 +79,12 @@ class RssController extends Zend_Controller_Action {
 		if(count($jobs))
 		foreach($jobs as $job) {
 			$data['entries'][] = array(
-				'title'		  => html_entity_decode($job['Title'], ENT_QUOTES, "UTF-8"),
-				'link'		  => $siteUrl . $this->view->baseUrl . '/' . $this->view->MakeLink($job['Title']) . '-' . $job['ID'] . '.html',
-				'description' => nl2br(strip_tags(html_entity_decode($job['Description'], ENT_QUOTES, "UTF-8"))),
+				'title'		  => html_entity_decode($job['title'], ENT_QUOTES, "UTF-8"),
+				'link'		  => $this->view->serverUrl() . $this->view->baseUrl('/job') . '/' . ($job['title']) . '-' . $job['id'] . '.html',
+				'description' => nl2br(strip_tags(html_entity_decode($job['description'], ENT_QUOTES, "UTF-8"))),
 			);
 		}
-		
+
 		$feed = Zend_Feed::importArray($data, 'rss');
 		echo $feed->saveXml();
 		exit();
