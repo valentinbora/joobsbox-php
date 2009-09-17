@@ -200,7 +200,6 @@ class PublishController extends Zend_Controller_Action
 					$this->_helper->event("job_posted", $values);
 					$publishNamespace->jobHash = $hash;
 				} catch (Exception $e) {
-				  dd($e);
 					throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
 				}
 			}

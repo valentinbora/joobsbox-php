@@ -63,6 +63,10 @@ div#tree-controls a#saveConfiguration 	{width: auto; background-image: url('../i
   background-position: 2% 50%;
   background-repeat: no-repeat;
   padding-left: 45px;
+}   
+
+#currently-edited-input {
+  width: 100%;
 }
 
 #info {

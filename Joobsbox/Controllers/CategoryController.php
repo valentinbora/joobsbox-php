@@ -31,12 +31,12 @@ class CategoryController extends Zend_Controller_Action
     public function indexAction() 
     {
         $this->_model = new Joobsbox_Model_Jobs();
-    
+
         $categoryName = $this->getRequest()->getParam("action");
         $categoryName = explode(".", $categoryName);
         $categoryName = $categoryName[0];
         $categoryName = $this->_helper->filter("category_name", $categoryName);
-    
+            
         $category     = $this->_model->fetchCategories()->getCategory($categoryName);
     
         if ($category) {

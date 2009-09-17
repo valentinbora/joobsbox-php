@@ -74,7 +74,7 @@ class AdminController extends Zend_Controller_Action
         $this->_corePluginUrl = $this->view->noScriptBaseUrl . "/Joobsbox/Plugin";
         $this->_pluginPath = APPLICATION_DIRECTORY . "/plugins";
         $this->_pluginUrl = $this->view->noScriptBaseUrl . "/plugins";
-
+                 
         $this->_helper->Event("admin_panel_init");
         $this->_conf = Zend_Registry::get("conf");
 
@@ -97,6 +97,9 @@ class AdminController extends Zend_Controller_Action
         $this->menuPlugins = array();
         $this->dashboardCandidates = array();
 
+        $translate = Zend_Registry::get("Zend_Translate");
+        $locale    = Zend_Registry::get("Zend_Locale");
+        
         // Search for them
         foreach (new DirectoryIterator($this->_corePluginPath) as $plugin) {
             $name = $plugin->getFilename();
@@ -113,6 +116,10 @@ class AdminController extends Zend_Controller_Action
                     $this->plugins[$name]->paths->urlPath = $this->_corePluginUrl;
                     $this->menuPlugins[$name] = $this->plugins[$name];
                     $this->_pluginPaths[$name] = $this->_corePluginPath . '/' . $name;
+                    
+                    if (file_exists($this->_pluginPaths[$name] . '/languages/' . $locale . '.mo') && substr((string)$locale, 0, 2) != 'en') {
+                        $translate->addTranslation($this->_pluginPaths[$name] . '/languages/' . $locale . '.mo', $locale);
+                    }
                 }
   
                 if ($class->hasMethod('dashboard')) {
@@ -164,10 +171,12 @@ class AdminController extends Zend_Controller_Action
         $this->view->pluginsThemePath = str_replace("index.php", "", $this->view->baseUrl);
         $this->view->locale  = Zend_Registry::get("Zend_Locale");
 
-        $session = new Zend_Session_Namespace("AdminPanel");
+        $session = new Zend_Session_Namespace("AdminPanel");                
         $this->_alerts = array_merge($this->_alerts, $this->_helper->FlashMessenger->getMessages());
-        $this->_alerts = array_merge($this->_alerts, array_unique($session->alerts));
-        unset($session->alerts);
+        if (isset($session->alerts)) {
+            $this->_alerts = array_merge($this->_alerts, array_unique($session->alerts));
+            unset($session->alerts);
+        }
 
         /* Load stuff */
         $this->view->css->load("reset.css", "global.css", "admin.css");
@@ -175,7 +184,7 @@ class AdminController extends Zend_Controller_Action
         $this->view->headScript()->prependScript($this->view->translateHash . 'var baseUrl = "' . $this->view->baseUrl . '";' . ' var href = "' . $_SERVER['REQUEST_URI'] . '";', 'text/javascript', array('charset' => 'UTF-8'));
         $this->view->js->load('functions.js');
         $this->view->asset->load("jquery", "jquery-pngfix");
-        $this->view->js->load(array('global.js', 100));
+        $this->view->js->load(array('global.js', 100)); 
     }
   
     /**
@@ -279,7 +288,7 @@ class AdminController extends Zend_Controller_Action
         if (!$this->verifyAccess()) {
             $this->_redirect("user/login");
         }
-
+        
         $action = $this->getRequest()->getParam('action');
         $pluginNames = array_keys($this->plugins);
         if (($pluginIndex = array_search($action, array_map('strtolower', array_keys($this->plugins)))) !== false) {
@@ -326,11 +335,11 @@ class AdminController extends Zend_Controller_Action
         $view->currentPluginName = $pluginName;
         $plugin->view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;;
         $plugin->path = $plugin->view->path = $this->plugins[$pluginName]->paths->urlPath . '/' . $pluginName;
-        $plugin->dirPath = $this->_pluginPath . $pluginName . '/';
+        $plugin->dirPath = $this->plugins[$pluginName]->paths->dirPath . '/' . $pluginName;
         $plugin->view->dirPath = $this->_pluginPaths[$pluginName] . '/';
         $plugin->_helper = $this->_helper;
-        $plugin->alerts  = &$this->_alerts;
-        $plugin->notices  = &$this->_notices;
+        $plugin->alerts  = $this->_alerts;
+        $plugin->notices  = $this->_notices;
         $plugin->corePlugins = $this->_corePlugins;
         $plugin->request = $this->getRequest();
         $plugin->ajax = false;
@@ -343,6 +352,13 @@ class AdminController extends Zend_Controller_Action
 
         if (method_exists($plugin, "init")) {
             $plugin->init();
+        }
+
+        $translate = Zend_Registry::get("Zend_Translate");
+        $locale    = Zend_Registry::get("Zend_Locale");
+
+        if (file_exists($plugin->dirPath . '/languages/' . $locale . '.mo') && substr((string)$locale, 0, 2) != 'en') {
+            $translate->addTranslation($plugin->dirPath . '/languages/' . $locale . '.mo', $locale);
         }
 
         if ($return) {
@@ -361,13 +377,6 @@ class AdminController extends Zend_Controller_Action
             } elseif (method_exists($plugin, "indexAction")) {
                 call_user_func(array($plugin, "indexAction"));
             }
-        }
-
-        $translate = Zend_Registry::get("Zend_Translate");
-        $locale    = Zend_Registry::get("Zend_Locale");
-
-        if (file_exists($this->_pluginPath . $pluginName . '/languages/' . $locale . '.mo') && substr($locale, 0, 2) != 'en') {
-            $translate->addTranslation($this->_pluginPath . $pluginName . '/languages/' . $locale . '.mo', $locale);
         }
 
         Zend_Registry::set("Translation_Hash", $translate->getMessages());

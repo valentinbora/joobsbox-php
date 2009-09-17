@@ -100,7 +100,6 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters
             name,
             link,
             orderindex,
-            parent,
             (SELECT COUNT(*) FROM " . $this->postings_table . " WHERE categoryid=" . $this->categories_table . ".id) nrPostings
           FROM 
             " . $this->categories_table . "
@@ -144,9 +143,9 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters
         foreach ($jobs as $job) {
             $categId = $job['categoryid'];
 
-            while ($cats[$categId]['parent'] != 0) {
+            /*while ($cats[$categId]['parent'] != 0) {
                 $categId = $cats[$categId]['parent'];
-            }
+            }*/
 
             $categName = $cats[$categId]['name'];
             if (!isset($result[$categName])) {

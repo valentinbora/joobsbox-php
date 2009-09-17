@@ -60,9 +60,9 @@
 						if(isset($pluginOptions->main) && isset($pluginOptions->main->{"title_" . $this->locale})) {
 							echo ucfirst($pluginOptions->main->{"title_" . $this->locale});
 						} elseif(isset($pluginOptions->main) && isset($pluginOptions->main->title)) {
-							echo ucfirst($pluginOptions->main->title);
+							echo $this->translate(ucfirst($pluginOptions->main->title));
 						} else {
-							echo ucfirst($pluginName); 
+							echo $this->translate(ucfirst($pluginName)); 
 						}
 					?>
 				</a>

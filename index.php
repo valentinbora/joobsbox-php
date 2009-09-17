@@ -1,8 +1,9 @@
 <?php
-@ini_set("display_errors", "off");
+@ini_set("display_errors", "on");
+error_reporting(E_ALL | E_NOTICE);
 define('APPLICATION_DIRECTORY', dirname(__FILE__));
 
-ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . APPLICATION_DIRECTORY);
+ini_set("include_path", APPLICATION_DIRECTORY . PATH_SEPARATOR . ini_get("include_path"));
 
 require "Joobsbox/Application/Development.php";
 require "config/config.php";
@@ -22,7 +23,7 @@ require "Joobsbox/Application/ErrorHandler.php";
 Zend_Controller_Action_HelperBroker::addPath(APPLICATION_DIRECTORY . '/Joobsbox/Helpers', 'Joobsbox_Helpers');
 
 $front = Zend_Controller_Front::getInstance();
-$front->setBaseUrl(BASE_URL)->setParam('disableOutputBuffering', true)->registerPlugin(new Joobsbox_Plugin_Controller);
+$front->setBaseUrl(BASE_URL)->setParam('disableOutputBuffering', true)->registerPlugin(new Joobsbox_Plugin_Controller)->throwExceptions(true);
 
 configureTheme();
 

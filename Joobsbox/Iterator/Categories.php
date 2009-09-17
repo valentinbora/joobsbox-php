@@ -62,12 +62,12 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 			    $this->_contentsLinks[$category['id']] = $category['link'];
 		    }
 		
-		    ksort($this->_contents);
-		    foreach($this->_contents as $key => $category) {
-			    if($category['parent']) {
-				    $this->_contents[$category['parent']]['children'][] = $category['id'];
-			    }
-		    }
+		    ksort($this->_contents); 
+            // foreach($this->_contents as $key => $category) {
+            //              if($category['parent']) {
+            //                  $this->_contents[$category['parent']]['children'][] = $category['id'];
+            //              }
+            // }
 		}
 	}
 	
@@ -135,14 +135,14 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 	function filterRootNodes() {
 		$filtered = $this->_contents;
 
-		if(count($filtered)) {
-		    foreach($filtered as $key => $value) {
-			    if($value['Parent'] != 0) {
-				    unset($filtered[$key]);
-			    }
-		    }
-		}
-		
+        // if(count($filtered)) {
+        //     foreach($filtered as $key => $value) {
+        //      if($value['Parent'] != 0) {
+        //          unset($filtered[$key]);
+        //      }
+        //     }
+        // }
+        
 		return new Joobsbox_Iterator_Categories($filtered);
 	}
 	

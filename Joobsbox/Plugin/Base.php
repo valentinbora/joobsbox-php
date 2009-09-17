@@ -142,8 +142,8 @@ class Joobsbox_Plugin_Base {
    * @return Zend_Controller_Request
    */
 	protected function getRequest() {
-    $front = Zend_Controller_Front::getInstance();
-    return $front->getRequest();
+        $front = Zend_Controller_Front::getInstance();
+        return $front->getRequest();
 	}
 	
 	/**
@@ -155,7 +155,7 @@ class Joobsbox_Plugin_Base {
     return $front->getResponse();
   }
   
-  public function __get($what) {
+  public function __get($what) {   
     switch($what) {
       case "view":
         return Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;

@@ -24,12 +24,12 @@
 */
 class Joobsbox_Model_CategoryOperations extends Zend_Db_Table_Abstract
 {
-    private $_name = 'categories';
-    private $_primary = "id"; 
-    private $_sequence = true;
+    protected $_name = 'categories';
 
     /**
-     * Sets up Zend_Db_Table
+     * Sets up Zend_Db_Table             
+     *
+     * @return void
      */  
     public function __construct() 
     {

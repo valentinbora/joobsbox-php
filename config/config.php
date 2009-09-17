@@ -5,7 +5,7 @@ ini_set("memory_limit", "64M");
 
 // Class autoload functionality
 require_once APPLICATION_DIRECTORY . '/Zend/Loader/Autoloader.php';
-$loader = Zend_Loader_Autoloader::getInstance()->registerNamespace('Joobsbox_');
+$loader = Zend_Loader_Autoloader::getInstance()->registerNamespace('Joobsbox_')->suppressNotFoundWarnings(true);
 	
 // Timezone default
 date_default_timezone_set("GMT");
