@@ -62,19 +62,19 @@ Zend_Registry::set('Zend_Translate', $translate);
 
 // Database parameters
 if(file_exists(APPLICATION_DIRECTORY . '/config/db.xml')) {
-  try {
-    $dbconf = new Zend_Config_Xml(APPLICATION_DIRECTORY . '/config/db.xml', 'zend_db');
-	  $db = Zend_Db::factory($dbconf->dbadapter, $dbconf);
-  	Zend_Db_Table_Abstract::setDefaultAdapter($db);
-	  Zend_Registry::set("db", $db);
-	  if(strlen($dbconf->start)) {
-	    $db->query($dbconf->start);
-	  }
-	} catch (Exception $e) {
-	  @rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
-	  throw $e;
-    exit();
-	}
+    try {
+        $dbconf = new Zend_Config_Xml(APPLICATION_DIRECTORY . '/config/db.xml', 'zend_db');
+        $db = Zend_Db::factory($dbconf->dbadapter, $dbconf);
+        Zend_Db_Table_Abstract::setDefaultAdapter($db);
+        Zend_Registry::set("db", $db);
+        if(strlen($dbconf->dbstart)) {
+            $db->query($dbconf->dbstart);
+        }
+    } catch (Exception $e) {
+        @rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
+        throw $e;
+        exit();
+    }
 
 	getStaticSalt($conf);
 	

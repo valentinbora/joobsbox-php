@@ -11,4 +11,4 @@ function customErrorHandler($errNo, $errStr, $errFile, $errLine) {
    }
 }
 
-set_error_handler("customErrorHandler");
+//set_error_handler("customErrorHandler");

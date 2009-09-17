@@ -147,12 +147,14 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters
                 $categId = $cats[$categId]['parent'];
             }*/
 
-            $categName = $cats[$categId]['name'];
-            if (!isset($result[$categName])) {
-                $result[$cats[$job['categoryid']]['name']] = array();
-            }
-            if (count($result[$categName]) < $maxJobsPerCateg) {
-                $result[$categName][] = $job;
+            if(isset($cats[$categId])) {
+                $categName = $cats[$categId]['name'];
+                if (!isset($result[$categName])) {
+                    $result[$cats[$job['categoryid']]['name']] = array();
+                }
+                if (count($result[$categName]) < $maxJobsPerCateg) {
+                    $result[$categName][] = $job;
+                }
             }
         }
 
