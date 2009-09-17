@@ -132,9 +132,9 @@ class Joobsbox_Model_Jobs extends Joobsbox_Plugin_EventsFilters
             foreach ($cats as $index => $category) {
                 $categId = $category['id'];
   
-                while ($categoriesById[$categId]['parent'] != 0) {
-                    $categId = $categoriesById[$categId]['parent'];
-                }
+                // while ($categoriesById[$categId]['parent'] != 0) {
+                //     $categId = $categoriesById[$categId]['parent'];
+                // }
                 
                 $result[$categoriesById[$categId]['name']] = array();
             }

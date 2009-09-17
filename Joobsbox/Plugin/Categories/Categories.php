@@ -25,7 +25,7 @@ class Categories extends Joobsbox_Plugin_AdminBase
 		$db = $categoryModel->getAdapter();
 		
 		$orderDirector = array();
-		
+
 		foreach($categories as $index => $category) {
 		  $existing = explode("_", $category["existing"]);
 		  
@@ -63,7 +63,7 @@ class Categories extends Joobsbox_Plugin_AdminBase
 				///////////////////
 				
 				$orderIndex = $index;
-				$category['name'] = preg_replace('%[^\w\.-\s]%', '', $category['name']);
+//				$category['name'] = preg_replace('%[^\w\.-\s]%', '', $category['name']);
 				$categoryModel->insert(array(
 					"name"		=> $category['name'],
 					"orderindex"=> $orderIndex,

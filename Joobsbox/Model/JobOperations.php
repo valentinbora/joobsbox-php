@@ -25,8 +25,7 @@
 
 class Joobsbox_Model_JobOperations extends Zend_Db_Table_Abstract
 {
-    private $_name = 'jobs';
-    private $_primary = "id";
+    protected $_name = 'jobs';
     
     /**
      * Sets up Zend_Db_Table

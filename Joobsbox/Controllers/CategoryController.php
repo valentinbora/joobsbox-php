@@ -32,20 +32,20 @@ class CategoryController extends Zend_Controller_Action
     {
         $this->_model = new Joobsbox_Model_Jobs();
 
-        $categoryName = $this->getRequest()->getParam("action");
-        $categoryName = explode(".", $categoryName);
-        $categoryName = $categoryName[0];
-        $categoryName = $this->_helper->filter("category_name", $categoryName);
+        $categoryLink = $this->getRequest()->getParam("action");
+        $categoryLink = explode(".", $categoryLink);
+        $categoryLink = $categoryLink[0];
+        $categoryLink = $this->_helper->filter("category_link", $categoryLink);
             
-        $category     = $this->_model->fetchCategories()->getCategory($categoryName);
+        $category     = $this->_model->fetchCategories()->getCategory($categoryLink);
     
         if ($category) {
             $categoryId = $category['id'];
             $jobs = $this->_model->fetchAllJobs(0)->where("categoryid = '$categoryId'")->fetch();
-            $this->view->category = array("name" => $categoryName, "id" => $categoryId);
+            $this->view->category = array("name" => $category['name'], "id" => $categoryId);
             $this->view->jobs = $jobs->toArray();
         } else {
-            $this->_helper->event("category_not_exist", $categoryName);
+            $this->_helper->event("category_not_exist", $categoryLink);
             throw new Exception($this->view->translate("This category does not exist."));
         }
     }
