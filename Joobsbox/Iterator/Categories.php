@@ -100,6 +100,7 @@ class Joobsbox_Iterator_Categories extends ArrayIterator {
 			  return $this->_contents[$id];
 			}
 		}
+		
 		return FALSE;
 	}
 	

@@ -108,7 +108,7 @@ class InstallController extends Zend_Controller_Action {
 		  $this->prefDBAdapter = "PDO_MySQL";
 		}
 		
-    $dbadapter = $this->mainForm->createElement('select', 'dbadapter')
+        $dbadapter = $this->mainForm->createElement('select', 'dbadapter')
 			->setLabel($this->view->translate('Database type:'))
 			->setMultiOptions($adapters)
 			->setValue($this->prefDBAdapter)
@@ -130,45 +130,45 @@ class InstallController extends Zend_Controller_Action {
 		$dbitems = array("dbadapter", "dbname");
 		
 		switch($this->prefDBAdapter) {
-      case "PDO_MySQL":
-    	  $notEmpty = new Zend_Validate_NotEmpty();
-    		$dbuser = $this->mainForm->createElement('text', 'dbuser')
-    			->setLabel($this->view->translate('Database user:'))
-    			->addFilter('StripTags')
-    			->addFilter('StringTrim')
-    			->setAttrib('class', 'validate[required]')
-    			->addValidator($notEmpty->setMessage($this->view->translate("Database user is mandatory")))
-    			->setRequired(true);
-    		$this->mainForm->addElement($dbuser);
-    		$dbitems[] = "dbuser";
+            case "PDO_MySQL":
+    	        $notEmpty = new Zend_Validate_NotEmpty();
+    		    $dbuser = $this->mainForm->createElement('text', 'dbuser')
+        			->setLabel($this->view->translate('Database user:'))
+        			->addFilter('StripTags')
+        			->addFilter('StringTrim')
+        			->setAttrib('class', 'validate[required]')
+        			->addValidator($notEmpty->setMessage($this->view->translate("Database user is mandatory")))
+        			->setRequired(true);
+    		    $this->mainForm->addElement($dbuser);
+    		    $dbitems[] = "dbuser";
 
-    		$dbpass = $this->mainForm->createElement('text', 'dbpass')
-    			->setLabel($this->view->translate('Database password:'))
-    			->addFilter('StripTags')
-    			->addFilter('StringTrim');
-    		$this->mainForm->addElement($dbpass);
-    		$dbitems[] = "dbpass";
+    		    $dbpass = $this->mainForm->createElement('text', 'dbpass')
+        			->setLabel($this->view->translate('Database password:'))
+        			->addFilter('StripTags')
+        			->addFilter('StringTrim');
+    		    $this->mainForm->addElement($dbpass);
+    		    $dbitems[] = "dbpass";
 
-    		$notEmpty = clone $notEmpty;
-    		$dbhost = $this->mainForm->createElement('text', 'dbhost')
-    			->setLabel($this->view->translate('Database host:'))
-    			->addFilter('StripTags')
-    			->setAttrib("class", "validate[required]")
-    			->addFilter('StringTrim')
-    			->addValidator($notEmpty->setMessage($this->view->translate("Database host is mandatory")))
-    			->setValue('localhost')
-    			->setRequired(true);
-    		$this->mainForm->addElement($dbhost);
-    		$dbitems[] = "dbhost";
+        		$notEmpty = clone $notEmpty;
+        		$dbhost = $this->mainForm->createElement('text', 'dbhost')
+        			->setLabel($this->view->translate('Database host:'))
+        			->addFilter('StripTags')
+        			->setAttrib("class", "validate[required]")
+        			->addFilter('StringTrim')
+        			->addValidator($notEmpty->setMessage($this->view->translate("Database host is mandatory")))
+        			->setValue('localhost')
+        			->setRequired(true);
+        		$this->mainForm->addElement($dbhost);
+        		$dbitems[] = "dbhost";
 
-    		$dbprefix = $this->mainForm->createElement('text', 'dbprefix')
-    			->setLabel($this->view->translate('Table prefix:'))
-    			->addFilter('StripTags')
-    			->addFilter('StringTrim');
-    		$this->mainForm->addElement($dbprefix);
-    		$dbitems[] = "dbprefix";
-    		break;
-    }
+        		$dbprefix = $this->mainForm->createElement('text', 'dbprefix')
+        			->setLabel($this->view->translate('Table prefix:'))
+        			->addFilter('StripTags')
+        			->addFilter('StringTrim');
+        		$this->mainForm->addElement($dbprefix);
+        		$dbitems[] = "dbprefix";
+        		break;
+      }
     
     $submit = $this->mainForm->createElement("submit", "submit")->setLabel("Next");
     $this->mainForm->addElement($submit);

@@ -34,10 +34,10 @@ class SearchController extends Zend_Controller_Action {
 		$resultsArray = array();
 		foreach($results as $result) {
 			$resultsArray[] = array(
-				"ID"		=> $result->ID,
-				"Title"		=> $result->Title,
-				"Location"	=> $result->Location,
-				"Company"	=> $result->Company
+				"id"		=> $result->id,
+				"title"		=> $result->title,
+				"location"	=> $result->location,
+				"company"	=> $result->company
 			);
 		}
 		$this->view->searchedString = $this->_helper->filter("purify_html", $query);

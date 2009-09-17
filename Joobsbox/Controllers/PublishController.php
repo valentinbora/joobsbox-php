@@ -123,14 +123,14 @@ class PublishController extends Zend_Controller_Action
 		$this->form = $form;
 		
 		// </createForm>
-		
+
 		// Render the form
 		$this->view->form = $form->render;
 		
 		if ($this->getRequest()->isPost()) {
-        $this->validateForm();
-		    return;
-    }
+            $this->validateForm();
+            return;
+        }
 		
 		$this->view->form = $this->form->render();	
     }
@@ -140,8 +140,8 @@ class PublishController extends Zend_Controller_Action
 		$publishNamespace = new Zend_Session_Namespace('PublishJob');
 		$values = $form->getValues();
 
-    if ($form->isValid($_POST)) {
-		  $jobOperations = new Joobsbox_Model_JobOperations;
+        if ($form->isValid($_POST)) {        
+		    $jobOperations = new Joobsbox_Model_JobOperations;
 			$searchModel = new Joobsbox_Model_Search;	
 			$values = $form->getValues();
 			$hash = md5(implode("", $values));
