@@ -229,10 +229,10 @@ class InstallController extends Zend_Controller_Action {
     		  $dbconfig   = array(
     		    "zend_db" => array(
     		      "dbadapter" => $dbadapter,
-    			    "dbname" => APPLICATION_DIRECTORY . "/Joobsbox/Db/" . $values['dbname'] . ".sqlite"
+    			    "dbname" => APPLICATION_DIRECTORY . "/data/" . $values['dbname'] . ".sqlite"
     			  ),
         			"doctrine" => array(
-        			  "connection_string" => "sqlite:///" . APPLICATION_DIRECTORY . "/Joobsbox/Db/" . $values['dbname'] . ".sqlite",
+        			  "connection_string" => "sqlite:///" . APPLICATION_DIRECTORY . "/data/" . $values['dbname'] . ".sqlite",
         			  "models_path"       => APPLICATION_DIRECTORY . "/Joobsbox/Db/Models",
         			  "migrations_path"   => APPLICATION_DIRECTORY . "/Joobsbox/Db/Migrations",
         			  "sql_path"          => APPLICATION_DIRECTORY . "/Joobsbox/Db/Sql",
@@ -314,20 +314,20 @@ class InstallController extends Zend_Controller_Action {
 		
 		// Set up Doctrine DB
 		require_once APPLICATION_DIRECTORY . '/Joobsbox/Db/Doctrine.php';        
-    $loader = Zend_Loader_Autoloader::getInstance();
-    $loader->pushAutoloader(array('Doctrine', 'autoload'));
-    $doctrineConfig = new Zend_Config_Xml(APPLICATION_DIRECTORY . "/config/db.xml", "doctrine");
+        $loader = Zend_Loader_Autoloader::getInstance();
+        $loader->pushAutoloader(array('Doctrine', 'autoload'));
+        $doctrineConfig = new Zend_Config_Xml(APPLICATION_DIRECTORY . "/config/db.xml", "doctrine");
 
-    $manager = Doctrine_Manager::getInstance();
-    $manager->setAttribute(Doctrine::ATTR_TBLNAME_FORMAT, $this->config->db->prefix . '%s');
-    $manager->setCollate('utf8_unicode_ci');
-    $manager->setCharset('utf8');
-    $manager->openConnection($doctrineConfig->connection_string);
-    
-    Doctrine::createTablesFromModels($doctrineConfig->models_path);
+        $manager = Doctrine_Manager::getInstance();
+        $manager->setAttribute(Doctrine::ATTR_TBLNAME_FORMAT, $this->config->db->prefix . '%s');
+        $manager->setCollate('utf8_unicode_ci');
+        $manager->setCharset('utf8');
+        $manager->openConnection($doctrineConfig->connection_string);
 
-	  $db = Zend_Registry::get("db");
-	  $db->delete($this->config->db->prefix . "categories", array("Name='Uncategorized'"));
+        Doctrine::createTablesFromModels($doctrineConfig->models_path);
+
+	    $db = Zend_Registry::get("db");
+	    $db->delete($this->config->db->prefix . "categories", array("Name='Uncategorized'"));
 		$db->insert($this->config->db->prefix . "categories", array(
 		    'ID'    => 0,
 		    'Name'  => 'Uncategorized',
