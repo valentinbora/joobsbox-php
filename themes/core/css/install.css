@@ -1,8 +1,8 @@
 #joobsbox-header {
-  width: 600px;
+  width: 380px;
   height: 75px; 
   background-color: #333333; 
-  background-image: url('../images/install_header.jpg'); 
+  background-image: url('../images/logo_dark.png'); 
   background-repeat: no-repeat; 
   background-position: center center; 
   text-transform: uppercase; 
@@ -85,7 +85,7 @@
   padding: 10px;
   border-top: 1px dotted #555;
   border-bottom: 0;
-  width: 600px; 
+  width: 380px; 
   padding-top: 10px;
   margin: 0 auto;
 }
