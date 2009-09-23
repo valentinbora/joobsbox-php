@@ -1,10 +1,8 @@
 <?php
-if(!defined("BASE_URL")) {
-  define("BASE_URL", "");
-}
+
 $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
 $viewRenderer->setNoRender();
-$viewRenderer->initView(); 
+$viewRenderer->initView();
 $viewRenderer->view->baseUrl = BASE_URL;
 $viewRenderer->view->noScriptBaseUrl = str_replace("index.php", "", BASE_URL);
 if(substr($viewRenderer->view->noScriptBaseUrl, -1) == "/") {

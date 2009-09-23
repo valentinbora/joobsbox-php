@@ -4,14 +4,19 @@ ini_set('magic_quotes_gpc', false);
 ini_set("memory_limit", "64M");
 
 // Class autoload functionality
-require_once APPLICATION_DIRECTORY . '/Zend/Loader/Autoloader.php';
-$loader = Zend_Loader_Autoloader::getInstance()->registerNamespace('Joobsbox_')->suppressNotFoundWarnings(true);
-	
+require_once LIBRARY_DIRECTORY . '/Zend/Loader/Autoloader.php';
+require_once LIBRARY_DIRECTORY . '/ezComponents/Base/src/base.php';
+
+$loader = Zend_Loader_Autoloader::getInstance()
+    ->registerNamespace('Joobsbox_')
+    ->suppressNotFoundWarnings(true)
+    ->pushAutoloader(array('ezcBase', 'autoload'), 'ezc');
+    
 // Timezone default
 date_default_timezone_set("GMT");
 
 // Static parameters
-$conf = new Zend_Config_Xml(APPLICATION_DIRECTORY . "/config/config.xml");
+$conf = new Zend_Config_Xml(CONFIG_LOCATION);
 Zend_Registry::set("conf", $conf);
 
 // Set up caching
@@ -28,7 +33,7 @@ if($conf->general->cache) {
   	)
   );
 
-  $backendOptions = array('cache_dir' => 'Joobsbox/Cache/');
+  $backendOptions = array('cache_dir' => APPLICATION_DIRECTORY . '/Joobsbox/Cache/');
 
   $cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
 
@@ -61,15 +66,17 @@ Zend_Registry::set("Translation_Hash", $translate->getMessages());
 Zend_Registry::set('Zend_Translate', $translate);
 
 // Database parameters
-if(file_exists(APPLICATION_DIRECTORY . '/config/db.xml')) {
+if(file_exists(DB_CONFIG_LOCATION)) {
     try {
-        $dbconf = new Zend_Config_Xml(APPLICATION_DIRECTORY . '/config/db.xml', 'zend_db');
+        $dbconf = new Zend_Config_Xml(DB_CONFIG_LOCATION, 'zend_db');
         $db = Zend_Db::factory($dbconf->dbadapter, $dbconf);
         Zend_Db_Table_Abstract::setDefaultAdapter($db);
         Zend_Registry::set("db", $db);
         if(strlen($dbconf->dbstart)) {
             $db->query($dbconf->dbstart);
         }
+        
+
     } catch (Exception $e) {
         @rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
         throw $e;
@@ -99,14 +106,14 @@ function getStaticSalt($conf) {
 		for ($i = 0; $i < 50; $i++) {
 			$salt .= chr(rand(97, 122));
 		}
-		$tempConf = new Zend_Config_Xml("config/config.xml", null, array(
+		$tempConf = new Zend_Config_Xml(CONFIG_LOCATION, null, array(
 		  'skipExtends'        => true,
       'allowModifications' => true)
     );
     
 		$tempConf->db->passwordSalt = $salt;
 		
-    $writer = new Zend_Config_Writer_Xml(array('config'   => $conf, 'filename' => 'config/config.xml'));
+    $writer = new Zend_Config_Writer_Xml(array('config'   => $conf, 'filename' => CONFIG_LOCATION));
     $writer->write();
 		Zend_Registry::set('staticSalt', $salt);
 	} else {

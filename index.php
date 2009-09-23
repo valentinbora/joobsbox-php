@@ -1,9 +1,11 @@
 <?php
-@ini_set("display_errors", "on");
-error_reporting(E_ALL | E_NOTICE);
-define('APPLICATION_DIRECTORY', dirname(__FILE__));
 
-ini_set("include_path", APPLICATION_DIRECTORY . PATH_SEPARATOR . ini_get("include_path"));
+define('APPLICATION_DIRECTORY', dirname(__FILE__));
+define('LIBRARY_DIRECTORY', dirname(__FILE__) . "/library");
+define('CONFIG_LOCATION', APPLICATION_DIRECTORY . "/config/config.xml");
+define('DB_CONFIG_LOCATION', APPLICATION_DIRECTORY . "/config/db.xml");
+
+ini_set("include_path", APPLICATION_DIRECTORY . PATH_SEPARATOR . LIBRARY_DIRECTORY . PATH_SEPARATOR . ini_get("include_path"));
 
 require "Joobsbox/Application/Development.php";
 require "config/config.php";
@@ -18,12 +20,12 @@ Zend_Registry::set("FilterHelper", 		  new Joobsbox_Helpers_Filter);
 Zend_Registry::set("TranslationHelper", new Joobsbox_Helpers_TranslationHash);
 Zend_Registry::get("TranslationHelper")->regenerateHash();
 
-require "Joobsbox/Application/ErrorHandler.php";
+require APPLICATION_DIRECTORY . "/Joobsbox/Application/ErrorHandler.php";
 
 Zend_Controller_Action_HelperBroker::addPath(APPLICATION_DIRECTORY . '/Joobsbox/Helpers', 'Joobsbox_Helpers');
 
 $front = Zend_Controller_Front::getInstance();
-$front->setBaseUrl(BASE_URL)->setParam('disableOutputBuffering', true)->registerPlugin(new Joobsbox_Plugin_Controller)->throwExceptions(true);
+$front->setParam('disableOutputBuffering', true)->registerPlugin(new Joobsbox_Plugin_Controller);
 
 configureTheme();
 

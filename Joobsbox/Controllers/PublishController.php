@@ -153,7 +153,7 @@ class PublishController extends Zend_Controller_Action
 			if(isset($publishNamespace->editJobId)) {
 				// We have to modify it, nothing more to discuss
 				try {
-					$where = $jobOperations->getAdapter()->quoteInto('ID = ?', $publishNamespace->editJobId);
+					$where = $jobOperations->getAdapter()->quoteInto('id = ?', $publishNamespace->editJobId);
 					$values['id'] = $jobOperations->update(array(
 						'categoryid'	=> $values['category'],
 						'title'			=> $values['title'],
@@ -184,22 +184,23 @@ class PublishController extends Zend_Controller_Action
 				  $this->_conf = Zend_Registry::get("conf");
 				  
 					$values['id'] = $jobOperations->insert(array(
-						'categoryid'  => $values['category'],
-						'title'			  => $values['title'],
-						'description'	=> $this->_helper->filter("purify_html", $values['description']),
-						'toapply'		  => $values['application'],
-						'company'		  => $values['company'],
-						'location'		=> $values['location'],
-						'changeddate' => date("Y-m-d"),
-						'postedat'		=> date("Y-m-d"),
-						'expirationdate' => strtotime("+" . $this->_conf->general->posting_ttl . " days"),
-						'PUBLIC'		  => 0
+						'categoryid'        => $values['category'],
+						'title'			    => $values['title'],
+						'description'       => $this->_helper->filter("purify_html", $values['description']),
+						'toapply'		    => $values['application'],
+						'company'		    => $values['company'],
+						'location'		    => $values['location'],
+						'changeddate'       => date("Y-m-d"),
+						'postedat'		    => date("Y-m-d"),
+						'expirationdate'    => strtotime("+" . $this->_conf->general->posting_ttl . " days"),
+						'PUBLIC'		    => 0
 					));
 
 					$this->view->addSuccess = 1;
 					$this->_helper->event("job_posted", $values);
 					$publishNamespace->jobHash = $hash;
 				} catch (Exception $e) {
+				    dd($e);
 					throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
 				}
 			}
