@@ -7,23 +7,23 @@
  * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
  * @license	   http://www.joobsbox.com/joobsbox-php-license
  */
- $this->headLink()->appendAlternate($this->baseUrl . $this->TranslateUrl("/rss/category") . $this->MakeLink($this->category['name']), 'application/rss+xml', $this->conf->general->common_title . ' RSS - ' . $this->category['name']);
+ $this->headLink()->appendAlternate($this->baseUrl . $this->translateUrl("/rss/category") . $this->makeLink($this->category['name']), 'application/rss+xml', $this->conf->general->common_title . ' RSS - ' . $this->category['name']);
 ?>
-<?php $this->headtitle()->prepend($this->category['name']); ?>
+<?php $this->headTitle()->prepend($this->category['name']); ?>
 <div class="list">
 	<div class="inner">
 		<div class="toRight">
-			<a href="<?php echo $this->baseUrl;?>/rss/categorie/<?php echo $this->MakeLink($this->category['name']);?>/">RSS</a>
-			<a href="<?php echo $this->baseUrl;?>/rss/categorie/<?php echo $this->MakeLink($this->category['name']);?>/"><img src="<?php echo $this->themeImages;?>/icon-rss.gif" alt="RSS" border="0" /></a>
+			<a href="<?php echo $this->baseUrl . '/rss/' . $this->translateUrl("category") . '/' . $this->makeLink($this->category['name']);?>/">RSS</a>
+			<a href="<?php echo $this->baseUrl . '/rss/' . $this->translateUrl("category") . '/' . $this->makeLink($this->category['name']);?>/"><img src="<?php echo $this->themeImages;?>/icon-rss.gif" alt="RSS" border="0" /></a>
 		</div>
-		<a href="<?php echo $this->baseUrl;?>/categorie/<?php echo $this->MakeLink($this->category['name']);?>.html">
+		<a href="<?php echo $this->baseUrl . '/' . $this->translateUrl("category") . '/' . $this->makeLink($this->category['name']);?>.html">
 			<?php echo $this->category['name']; ?>
 		</a>
 	</div>
 	<ul>          
 		<?php foreach($this->jobs as $a => $job): ?>
 		<li <?php if($a%2):?>class="alternate"<?php endif;?>>
-			<a href="<?php echo $this->baseUrl;?>/job/<?php echo $this->MakeLink($job['title']) . "-" . $job['id']; ?>.html"><?php echo $job['title']; ?></a>
+			<a href="<?php echo $this->baseUrl;?>/job/<?php echo $this->makeLink($job['title']) . "-" . $job['id']; ?>.html"><?php echo $job['title']; ?></a>
 			<span class="lighterSmall">la</span>
 			<?php echo $job['company']; ?>
 			<span class="lighterSmall">in</span>
