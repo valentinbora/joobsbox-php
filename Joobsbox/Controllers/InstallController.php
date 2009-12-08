@@ -21,6 +21,7 @@
 class InstallController extends Zend_Controller_Action {
 	protected $_model;
 	protected $prefDBAdapter = "PDO_MySQL";
+        protected $_redirector = null;
 	
 	public function init() {
 	    Zend_Registry::get("PluginLoader")->disablePlugins();
@@ -57,13 +58,31 @@ class InstallController extends Zend_Controller_Action {
       if (isset($config->general->restrict_install) && $config->general->restrict_install && file_exists("config/db.xml")) {
 		      throw new Exception($this->view->translate("This JoobsBox is already installed. Manually remove the restrict_install line from config/config.xml if you want to reinstall it."));
 	    }
+            $this->_redirector = $this->_helper->getHelper('Redirector');
 	}
 	
 	public function indexAction(){
-		$this->_redirect("install/step1");
+//            $this->_redirect("install/reqCheck");
+            $this->_redirector->gotoSimple('reqcheck', 'install');
 	}
 	
-	public function step1Action() {
+	public function reqcheckAction() {
+            configureTheme(APPLICATION_THEME, 'install');
+            $minPHPVersion = 5.3;
+	    $reqOK = array();
+            $reqOK["PDO"] = (strlen(extension_loaded("pdo_mysql"))) ? 1 : 0;
+	   // $reqOK["mod_rewrite"] = (in_array("mod_rewrite", apache_get_modules())) ? true : false;
+	    $reqOK["PHPver"] = (floatval(phpversion())>=$minPHPVersion) ? 1 : 0;
+
+	    if(!in_array("0", $reqOK)) {
+                $this->_redirect("install/step1");
+	    } else {
+		$this->view->reqOK = $reqOK;
+	    }
+            
+        }
+
+        public function step1Action() {
 		configureTheme(APPLICATION_THEME, 'install');
 		$locales = Zend_Registry::get("Zend_Locale")->getTranslationList('language', 'en');
 		foreach ($locales as $key => $value) {

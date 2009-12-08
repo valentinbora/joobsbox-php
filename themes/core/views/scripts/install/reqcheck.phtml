@@ -1,0 +1,28 @@
+<?php
+/**
+ * @package Joobsbox_Themes
+ * @category Joobsbox
+ * @author Manuel R. Ciosici <contact@manuelciosici.com>
+ * @version 1.0
+ * @copyright  Copyright (c) 2009 Joobsbox. (http://www.joobsbox.com)
+ * @license	   http://www.joobsbox.com/joobsbox-php-license
+ */
+?>
+<?php $this->headTitle()->prepend($this->translate('Installation - Minimum Requirements ')); ?>
+<div id="installation">
+	<h1><?php echo $this->translate('Welcome to Joobsbox installation!'); ?></h1>
+	<p>
+	<?php echo $this->translate('Unfortunately your server environment doesn\'t meet all expectations.'); ?><br/>
+	<?php
+		foreach($this->reqOK as $key => $value){
+			echo "<span>$key</span>";
+			echo "<span class=\"present ";
+                            echo ($value) ? "yes" : "no";
+                            echo "\">";
+                        echo ($value) ? "yes" : "no";
+			echo "</span><br/>";
+                }
+	?>
+	
+	</p>
+</div>

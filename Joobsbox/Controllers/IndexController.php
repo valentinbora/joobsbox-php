@@ -23,9 +23,8 @@ class IndexController extends Zend_Controller_Action {
 	
 	public function indexAction(){
 		if(!file_exists(APPLICATION_DIRECTORY . "/config/db.xml")) {
-			$this->_redirect('install/step1');
+			$this->_redirect('install/');
 		}
-		
 		try {
 		  $this->_model = new Joobsbox_Model_Jobs();
 				
@@ -34,7 +33,7 @@ class IndexController extends Zend_Controller_Action {
 		  $this->_helper->event("received_jobs");
 		} catch(Exception $e) {
 		  rename(APPLICATION_DIRECTORY . "/config/db.xml", APPLICATION_DIRECTORY . "/config/db.xml.bak");
-      $this->_redirect('install/step1');
+      			$this->_redirect('install/step1');
 		}
 	}
 }
