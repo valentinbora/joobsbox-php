@@ -71,7 +71,7 @@ class Postings extends Joobsbox_Plugin_AdminBase
 	private function acceptAction() {
 		$this->jobOperationsModel = $this->getModel("JobOperations");
 		$this->searchModel = $this->getModel("Search");
-		
+
 		foreach($_POST['job'] as $job => $a) {
 			$job = (int)$job;
 			Zend_Registry::get("EventHelper")->fireEvent("job_accepted", $job);
@@ -80,7 +80,7 @@ class Postings extends Joobsbox_Plugin_AdminBase
 			$this->searchModel->addJob($this->jobsModel->fetchJobById($job));
 			
 			// Rebuild cache
-			Joobsbox_Helpers_Cache::clearAllCache();
+            Joobsbox_Helpers_Cache::clearAllCache();
 		}
 		echo "ok";
 		die();

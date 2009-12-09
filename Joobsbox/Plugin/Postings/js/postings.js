@@ -31,23 +31,33 @@ $(function() {
 	// Action buttons
 	$("#deletePostingsPending").click(function(ev) {
 		$("#actionPending").attr("value", "delete");
+		$("#info").fadeIn();
+ 		$("#info").text("Wait...");
 		$.ajax({
 			type: "POST",
 			url: window.location.href,
 			data: $("#form-pending").serialize(),
 			success: function(msg){
+				$("#info").text("Saved");
 				$("#pending-postings tbody tr.selected").each(function() {
 					$(this).fadeOut("slow", function(el) {
 						$(this).remove();
 					});
 				});
-				$('#operationDialog').dialog('open');
+				function hideInfo()
+				{
+					setTimeout(function(){
+					  	$("#info").fadeOut();
+					}, 3000);
+				}
 				setTimeout(checkPending, 1000);
 			}
 		 });
 	});
 	$("#acceptPostingsPending").click(function(ev) {
 		$("#actionPending").attr("value", "accept");
+		$("#info").fadeIn();
+ 		$("#info").text("Wait...");
 		$.ajax({
 			type: "POST",
 			url: window.location.href,
@@ -62,13 +72,21 @@ $(function() {
 						restoreEvents();
 					});
 				});
-				$('#operationDialog').dialog('open');
-        setTimeout(checkPending, 1000);
+				$("#info").text("Saved");
+				function hideInfo()
+				{
+					setTimeout(function(){
+					  	$("#info").fadeOut();
+					}, 3000);
+				}
+        		setTimeout(checkPending, 1000);
 			}
 		 });
 	});
 	$("#deletePostingsApproved").click(function(ev) {
 		$("#actionPending").attr("value", "delete");
+		$("#info").fadeIn();
+ 		$("#info").text("Wait...");
 		$.ajax({
 			type: "POST",
 			url: window.location.href,
@@ -80,7 +98,13 @@ $(function() {
 						$(this).remove();
 					});
 				});
-				$('#operationDialog').dialog('open');
+				$("#info").text("Saved");
+				function hideInfo()
+				{
+					setTimeout(function(){
+					  	$("#info").fadeOut();
+					}, 3000);
+				}
 			}
 		 });
 	});
@@ -137,4 +161,11 @@ function expandJob(job) {
 		x.css('display', 'none');
 	}
 	job.closest('tr').toggleClass("noBorder");
+}
+
+function hideInfo()
+{
+	setTimeout(function(){
+	  	$("#info").fadeOut();
+	}, 3000);
 }
