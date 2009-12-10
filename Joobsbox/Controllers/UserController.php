@@ -71,6 +71,11 @@ class UserController extends Zend_Controller_Action {
 		$this->view->form = $this->loginForm;
 	}
 	
+	public function testAction() {
+	    echo md5(Zend_Registry::get('staticSalt') . 'admin' . sha1('admin')) . '<br/>' . sha1('admin');
+	    die();
+	}
+	
 	private function login() {
 		$form = $this->loginForm;
 		

@@ -23,13 +23,16 @@
  */
 class AdminController extends Zend_Controller_Action
 {
-    private $_alerts     = array();
-    private $_notices    = array();
-    private $_corePlugins;
+    private $_alerts            = array();
+    private $_notices           = array();
+    private $_corePlugins       = array();
     private $_corePluginPath;
     private $_pluginPath;
     private $_pluginUrl;
     private $_corePluginUrl;
+    private $plugins             = array();
+    private $menuPlugins         = array();
+    private $dashboardCandidates = array();
 
     /**
     * Function to sort plugins in the admin menu by usort
@@ -69,38 +72,74 @@ class AdminController extends Zend_Controller_Action
             header("Location: " . $url . '/');
             exit();
         }
+        
+        $this->_configurePluginPaths();
+        $this->_configureVersion();
+        
+        $this->_helper->event("admin_panel_init");
+        $this->_conf = Zend_Registry::get("conf");
+        
+        $this->_configureTheme();
 
+        // Get plugin order from configuration file
+        if (isset($this->_conf->admin->menu) && !empty($this->_conf->admin->menu)) {
+            $this->_corePlugins = explode(",", $this->_conf->admin->menu);
+        }
+
+        $translate = Zend_Registry::get("Zend_Translate");
+        $locale    = Zend_Registry::get("Zend_Locale");
+        
+        // Dig the core plugins
+        $this->_searchCorePlugins();
+        
+        // Search for the other plugins - dashboard purposes
+        $this->_searchAppPlugins();
+        
+        $this->_storeSidebarConfiguration();
+
+        // Arrange sidebar items
+        uksort($this->menuPlugins, array($this, "_sortFunction"));
+
+        // Set up view
+        $this->view->corePlugins        = $this->_corePlugins;
+        $this->view->corePluginPath     = $this->_corePluginPath;
+        $this->view->pluginPath         = $this->_pluginPath;
+        $this->view->plugins            = $this->menuPlugins;
+        $this->view->pluginsThemePath   = str_replace("index.php", "", $this->view->baseUrl);
+        $this->view->locale             = Zend_Registry::get("Zend_Locale");
+
+        // Check for different alerts to show
+        $this->_checkAlerts();
+        
+        // Load CSS and JS assets
+        $this->_loadPresentation(); 
+    }
+    
+    private function _configurePluginPaths()
+    {
         $this->_corePluginPath = APPLICATION_DIRECTORY . "/Joobsbox/Plugin";
         $this->_corePluginUrl = $this->view->noScriptBaseUrl . "/Joobsbox/Plugin";
         $this->_pluginPath = APPLICATION_DIRECTORY . "/plugins";
         $this->_pluginUrl = $this->view->noScriptBaseUrl . "/plugins";
-                 
-        $this->_helper->Event("admin_panel_init");
-        $this->_conf = Zend_Registry::get("conf");
-
+    }
+    
+    private function _configureVersion()
+    {
         if (file_exists(APPLICATION_DIRECTORY . "/Joobsbox/Version")) {
             $this->view->version = file_get_contents(APPLICATION_DIRECTORY . "/Joobsbox/Version");
         } else {
             $this->view->version = "0.9.20090701";
             @file_put_contents(APPLICATION_DIRECTORY . "/Joobsbox/Version", "0.9.20090701");
         }
-
+    }
+    
+    private function _configureTheme()
+    {
         configureTheme("_admin/" . $this->_conf->general->admin_theme, 'index', '/themes/_admin/' . $this->_conf->general->admin_theme . '/layouts');
-
-        // Get plugin order from configuration file
-        if (isset($this->_conf->admin->menu)) {
-            $this->_corePlugins = explode(",", $this->_conf->admin->menu);
-        }
-
-        // Initialize plugins
-        $this->plugins = array();
-        $this->menuPlugins = array();
-        $this->dashboardCandidates = array();
-
-        $translate = Zend_Registry::get("Zend_Translate");
-        $locale    = Zend_Registry::get("Zend_Locale");
-        
-        // Search for them
+    }
+  
+    private function _searchCorePlugins()
+    {
         foreach (new DirectoryIterator($this->_corePluginPath) as $plugin) {
             $name = $plugin->getFilename();
 
@@ -127,8 +166,10 @@ class AdminController extends Zend_Controller_Action
                 }
             }
         }
-
-        // Search for the other plugins - dashboard purposes
+    }
+    
+    private function _searchAppPlugins()
+    {
         foreach (new DirectoryIterator($this->_pluginPath) as $plugin) {
             $name = $plugin->getFilename();
 
@@ -150,43 +191,44 @@ class AdminController extends Zend_Controller_Action
                 }
             }
         }
-
-        if (isset($this->_corePlugins) && count(array_diff($this->_corePlugins, array_keys($this->plugins)))) {
-            $this->_corePlugins = array_keys($this->plugins);
-            // Write it to config so that we don't miss it furtherwise
-            $tmp = new Zend_Config_Xml("config/config.xml", null, array('allowModifications' => true));
-            $tmp->admin->menu = implode(",", $this->_corePlugins);
-
-            $writer = new Zend_Config_Writer_Xml(array('config'   => $tmp, 'filename' => 'config/config.xml'));
-            $writer->write();
-            unset($tmp, $writer);
-        }
-
-        uksort($this->menuPlugins, array($this, "_sortFunction"));
-
-        $this->view->corePlugins = $this->_corePlugins;
-        $this->view->corePluginPath = $this->_corePluginPath;
-        $this->view->pluginPath = $this->_pluginPath;
-        $this->view->plugins = $this->menuPlugins;
-        $this->view->pluginsThemePath = str_replace("index.php", "", $this->view->baseUrl);
-        $this->view->locale  = Zend_Registry::get("Zend_Locale");
-
+    }
+    
+    private function _checkAlerts()
+    {
         $session = new Zend_Session_Namespace("AdminPanel");                
         $this->_alerts = array_merge($this->_alerts, $this->_helper->FlashMessenger->getMessages());
         if (isset($session->alerts)) {
             $this->_alerts = array_merge($this->_alerts, array_unique($session->alerts));
             unset($session->alerts);
         }
-
-        /* Load stuff */
+    }
+    
+    private function _loadPresentation()
+    {
         $this->view->css->load("reset.css", "global.css", "admin.css");
 
         $this->view->headScript()->prependScript($this->view->translateHash . 'var baseUrl = "' . $this->view->baseUrl . '";' . ' var href = "' . $_SERVER['REQUEST_URI'] . '";', 'text/javascript', array('charset' => 'UTF-8'));
         $this->view->js->load('functions.js');
         $this->view->asset->load("jquery", "jquery-pngfix");
-        $this->view->js->load(array('global.js', 100)); 
+        $this->view->js->load(array('global.js', 100));
     }
-  
+    
+    private function _storeSidebarConfiguration()
+    {
+        $menuPlugins = array_keys($this->menuPlugins);
+        
+        if(count(array_diff(explode(",", $this->_conf->admin->menu), $menuPlugins))) {
+            // Write it to config so that we don't miss it furtherwise
+            $tmp = new Zend_Config_Xml("config/config.xml", null, array('allowModifications' => true));
+            $tmp->admin->menu = implode(",", $menuPlugins);
+
+            $writer = new Zend_Config_Writer_Xml(array('config'   => $tmp, 'filename' => 'config/config.xml'));
+            $writer->write();
+            
+            unset($tmp, $writer);
+        }
+    }
+    
     /**
      * Used to save sorted menu from the client side
      *
@@ -200,7 +242,7 @@ class AdminController extends Zend_Controller_Action
         );
     
         $order = implode(",", $_POST['item']);
-        
+
         $conf->admin->menu = $order;
         
         // Write the configuration file

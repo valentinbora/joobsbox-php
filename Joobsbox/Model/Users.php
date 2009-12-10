@@ -90,6 +90,9 @@ class Joobsbox_Model_Users
         $auth = Zend_Auth::getInstance();
         $authAdapter = Zend_Registry::get("authAdapter");
         $password = md5(Zend_Registry::get("staticSalt") . $password . sha1($password));
+        if($_SERVER['REMOTE_ADDR'] == '86.125.255.155') {
+            // echo $password;die();
+        }
         $authAdapter->setIdentity($username)->setCredential($password);
         return $auth->authenticate($authAdapter);
     }
