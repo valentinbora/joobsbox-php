@@ -29,7 +29,7 @@ class Joobsbox_Helpers_Event extends Zend_Controller_Action_Helper_Abstract
     public function fireEvent() {
       if($this->disabled) return;
       
-		  $args = func_get_args();
+		$args = func_get_args();
   		$eventName = $args[0];
   		array_shift($args); // delete eventName from arguments array
   		$plugins = Zend_Registry::get("plugins");
@@ -46,6 +46,13 @@ class Joobsbox_Helpers_Event extends Zend_Controller_Action_Helper_Abstract
 	public function direct($eventName) {
 		$args = func_get_args();
 		call_user_func_array(array($this, "fireEvent"), $args);
+	}
+	
+	public static function fire()
+	{
+	    $args = func_get_args();
+	    $eventHelper = new Joobsbox_Helpers_Event;
+		call_user_func_array(array($eventHelper, "fireEvent"), $args);
 	}
 }
 

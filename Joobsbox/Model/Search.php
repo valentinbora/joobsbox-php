@@ -137,7 +137,7 @@ class Joobsbox_Model_Search extends Joobsbox_Plugin_EventsFilters
         $job->addField(Zend_Search_Lucene_Field::Text('title', $jobData['title'], 'utf-8'));
         $job->addField(Zend_Search_Lucene_Field::Text('description', $jobData['description'], 'utf-8'));
         $job->addField(Zend_Search_Lucene_Field::Text('company', $jobData['company'], 'utf-8'));
-        $job->addField(Zend_Search_Lucene_Field::Keyword('categoryid', $jobData['categoryid'], 'utf-8'));
+        $job->addField(Zend_Search_Lucene_Field::Keyword('category', $jobData['category'], 'utf-8'));
         $job->addField(Zend_Search_Lucene_Field::Text('location', $jobData['location'], 'utf-8'));
 
         $this->fireEvent("job_added_to_searchindex", $jobData);

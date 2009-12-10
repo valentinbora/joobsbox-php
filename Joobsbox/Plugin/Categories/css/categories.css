@@ -33,8 +33,8 @@ div#tree-controls a	{
 
 div#tree-controls a:hover				{text-decoration: underline;}
 div#tree-controls a#createNewNode		{background-image: url('../images/icons/add_20.png');}
-div#tree-controls a#renameNode		{background-image: url('../images/icons/rename_20.png');}
-div#tree-controls a#deleteNode		{background-image: url('../images/icons/delete_20.png');}
+div#tree-controls a#renameNode			{background-image: url('../images/icons/rename_20.png');}
+div#tree-controls a#deleteNode			{background-image: url('../images/icons/delete_20.png');}
 div#tree-controls a#saveConfiguration 	{width: auto; background-image: url('../images/icons/save_24.png');}
 	
 #categ-wrapper {

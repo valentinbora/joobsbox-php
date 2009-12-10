@@ -27,105 +27,10 @@ class PublishController extends Zend_Controller_Action
 		 *
 		 */
 		$this->_model = new Joobsbox_Model_Jobs;
+		$this->form = new Joobsbox_Form_Publish;
 		
-		// <createForm>
-    $form = new Zend_Form;
-		$form->setAction($_SERVER['REQUEST_URI'])->setMethod('post')->setAttrib("id", "formPublish");
-	
-		$title = $form->createElement('text', 'title')
-			->setLabel('Job title:')
-			->addFilter('StripTags')
-			->addFilter('StringTrim')
-			->addValidator('notEmpty')
-			->setDescription('Ex: "Flash Designer" or "ASP.NET Programmer"')
-			->setRequired(true);
-			
-		$company = $form->createElement('text', 'company')
-			->setLabel('Company:')
-			->addFilter('StripTags')
-			->addFilter('StringTrim')
-			->addValidator('notEmpty')
-			->setRequired(true);
-			
-		$location = $form->createElement('text', 'location')
-			->setLabel('Location:')
-			->addFilter('StripTags')
-			->addFilter('StringTrim')
-			->addValidator('notEmpty')
-			->setDescription('Example: "London, Paris, Berlin, New York"')
-			->setRequired(true);
-			
-		$categories[0] = $this->view->translate("Choose...");
-		foreach($this->_model->fetchCategories()->getIndexNamePairs() as $key => $value) {
-			$categories[$key] = $value;
-		}
-		
-		$greaterThan = new Zend_Validate_GreaterThan(false, array('0'));
-		$greaterThan->setMessage($this->view->translate("Choosing a category is mandatory."));
-		$category = $form->createElement('select', 'category')
-			->setLabel('Category:')
-			->addValidator('notEmpty')
-			->addValidator($greaterThan)
-			->setRequired(true)
-			->setMultiOptions($categories);
-			
-		$description = $form->createElement('textarea', 'description')
-			->setLabel('Job description:')
-			->setDescription('HTML code is not accepted. Length must be less than 4000 characters.')
-			->addFilter('StripTags')
-			->addFilter('StringTrim')
-			->addValidator('notEmpty')
-			->setRequired(true);
-		
-		$application = $form->createElement('text', 'application')
-			->setLabel('Means of application:')
-			->addFilter('StripTags')
-			->addFilter('StringTrim')
-			->addValidator('notEmpty')
-			->setDescription('Ex: "Send CV to email ..." or "Apply online at URL ..."')
-			->setRequired(true);
-		
-		$submit = $form->createElement('submit', 'submit')
-			->setLabel("Add");
-			
-		$form->addElement($title)
-			 ->addElement($company)
-			 ->addElement($location)
-			 ->addElement($category)
-			 ->addElement($description)
-			 ->addElement($application);
-		
-		$publishNamespace = new Zend_Session_Namespace('PublishJob');
-		if(isset($publishNamespace->editJobId)) {
-			$jobData = $this->_model->fetchJobById($publishNamespace->editJobId);
-			$title->setValue($jobData['title']);
-			$company->setValue($jobData['company']);
-			$location->setValue($jobData['location']);
-			$category->setValue($jobData['categoryid']);
-			$description->setValue($jobData['description']);
-			$application->setValue($jobData['toapply']);
-			
-			$exp = $form->createElement('text', 'expirationdate')
-			  ->setLabel('Expiration date:')
-			  ->addFilter('StripTags')
-			  ->addFilter('StringTrim')
-			  ->addValidator('notEmpty')
-			  ->setRequired(true)
-			  ->setValue(date("m/d/Y", $jobData['expirationdate']));
-			$form->addElement($exp);
-			
-			$submit->setLabel('Modify');
-		}
-			
-		
-		$form->addElement($submit);
-			 
-		$this->form = $form;
-		
-		// </createForm>
-
 		// Render the form
-		$this->view->form = $form->render;
+		$this->view->form = $this->form->render;
 		
 		if ($this->getRequest()->isPost()) {
             $this->validateForm();
@@ -137,15 +42,18 @@ class PublishController extends Zend_Controller_Action
 	
 	private function validateForm() {
 		$form = $this->form;
+		
 		$publishNamespace = new Zend_Session_Namespace('PublishJob');
 		$values = $form->getValues();
 
         if ($form->isValid($_POST)) {        
+            $form = $this->_helper->filter('publish_form_submit', $this->form);
+            
 		    $jobOperations = new Joobsbox_Model_JobOperations;
 			$searchModel = new Joobsbox_Model_Search;	
 			$values = $form->getValues();
 			$hash = md5(implode("", $values));
-			
+
 			if(isset($publishNamespace->jobHash) && $publishNamespace->jobHash == $hash) {
 				throw new Exception($this->view->translate("You are not allowed to add the same job multiple times."));
 			}
@@ -154,7 +62,8 @@ class PublishController extends Zend_Controller_Action
 				// We have to modify it, nothing more to discuss
 				try {
 					$where = $jobOperations->getAdapter()->quoteInto('id = ?', $publishNamespace->editJobId);
-					$values['id'] = $jobOperations->update(array(
+					$values['id'] = $publishNamespace->editJobId;
+					$jobOperations->update(array(
 						'categoryid'	=> $values['category'],
 						'title'			=> $values['title'],
 						'description'	=> $this->_helper->filter("purify_html", $values['description']),
@@ -167,7 +76,7 @@ class PublishController extends Zend_Controller_Action
 					), $where);
 
 					$this->view->editSuccess = 1;
-					$searchModel->addJob($publishNamespace->editJobId);
+					$searchModel->addJob($values);
 					unset($publishNamespace->editJobId);
 					$this->_helper->event("job_edited", $values);
 					$publishNamespace->jobHash = $hash;
@@ -180,8 +89,8 @@ class PublishController extends Zend_Controller_Action
 				$values = $form->getValues();
 
 				try {
-				  // Needs posting_ttl configuration directive
-				  $this->_conf = Zend_Registry::get("conf");
+				    // Needs posting_ttl configuration directive
+				    $this->_conf = Zend_Registry::get("conf");
 				  
 					$values['id'] = $jobOperations->insert(array(
 						'categoryid'        => $values['category'],
@@ -193,14 +102,13 @@ class PublishController extends Zend_Controller_Action
 						'changeddate'       => date("Y-m-d"),
 						'postedat'		    => date("Y-m-d"),
 						'expirationdate'    => strtotime("+" . $this->_conf->general->posting_ttl . " days"),
-						'PUBLIC'		    => 0
+						'public'		    => 0
 					));
-
+                    
 					$this->view->addSuccess = 1;
 					$this->_helper->event("job_posted", $values);
 					$publishNamespace->jobHash = $hash;
 				} catch (Exception $e) {
-				    dd($e);
 					throw new Exception($this->view->translate("An error occured while saving the job. Please try again."));
 				}
 			}

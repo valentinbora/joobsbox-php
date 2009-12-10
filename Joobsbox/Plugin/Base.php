@@ -44,9 +44,9 @@ class Joobsbox_Plugin_Base {
 		$pf = $pf->db->prefix;
 		$data = $db->fetchAll("SELECT * FROM {$pf}plugin_data WHERE plugin_name=? AND option_name=?", array($this->_pluginName, $name));
 		if(count($data)) {
-		  return $data[0]['option_value'];
+		    return $data[0]->option_value;
 		} else {
-		  return "";
+		    return "";
 		}
 	}
 	
@@ -113,7 +113,7 @@ class Joobsbox_Plugin_Base {
 		if($protection[1]['class'] == 'Joobsbox_Plugin_Loader' || $protection[1]['class'] == "AdminController") {
 			$this->_pluginName = $pluginName;
 		} else {
-		  throw new Exception("Who's trying to mangle the name?! Arrgh");
+		    throw new Exception("Who's trying to mangle the name?! Arrgh");
 		}
 	}
 	

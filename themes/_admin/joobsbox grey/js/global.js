@@ -11,7 +11,7 @@ $(document).ready(function(){
   		distance: 15,
   		cancel: '#menu-dashboard, .separator',
   		update: function() {
-  		  $.post(baseUrl + '/admin/sortmenu', $("#admin-menu").sortable("serialize"));
+  		  $.post(baseUrl + '/admin/sortmenu/', $("#admin-menu").sortable("serialize"));
   	  }
   	});
   }

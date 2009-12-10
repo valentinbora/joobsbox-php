@@ -14,7 +14,7 @@
  *
  * Example usage:
  * <code>
- * echo $this->Filter('event_name', $dataToFilter);
+ * echo $this->filter('event_name', $dataToFilter);
  * </code>
  *
  * @package Joobsbox_Helpers
@@ -46,13 +46,21 @@ class Joobsbox_Helpers_Filter extends Zend_Controller_Action_Helper_Abstract
   		if(count($args) == 1)
   			return $args[0];
   		if(count($args) == 0)
-  		  return "";
-  		return $args;
+            return "";
+        
+  		return new Joobsbox_Iterator_Generic($args);
 	}
 	
 	public function direct($eventName) {
 		$args = func_get_args();
 		return call_user_func_array(array($this, "filter"), $args);
+	}
+	
+	public static function filterStatic()
+	{
+	    $args = func_get_args();
+	    $filterHelper = new Joobsbox_Helpers_Filter;
+		call_user_func_array(array($filterHelper, "filter"), $args);
 	}
 }
 

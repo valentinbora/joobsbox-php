@@ -7,36 +7,6 @@
 	<div style="clear:both"></div>
 </div>
 
-<?php /* 
-<div id="categ-wrapper">
-	<ul>
-		<li id="node_root" class="open" rel="root">
-			<a href="#"><?php echo $this->translate('Categories'); ?></a>
-			<?php if(count($this->categories->filterRootNodes())): ?>
-			<ul>
-				<?php foreach($this->categories->filterRootNodes() as $category): ?>
-
-							<li id="node_<?php echo $category['ID']; ?>" rel="primary-categ">
-								<a href="#" class="editable"><?php echo $category['Name']; ?></a>
-				<?php 			$children = $category->getChildren();
-								if(count($children)): 										?>
-									<ul>
-				<?php 				foreach($children as $child):							?>
-										<li id="node_<?php echo $child['ID']; ?>" rel="secondary-categ">
-											<a href="#"><?php echo $child['Name']; ?></a>
-										</li>
-				<?php				endforeach;												?>
-									</ul>
-				<?php 			endif; 														?>
-							</li>
-				<?php endforeach; 													?>
-			</ul>
-			<?php endif; ?>
-		</li>
-	</ul>
-</div>
- */ ?>
- 
 <div id="categ-wrapper">
   <ul id="categories">
     <?php foreach($this->categories->filterRootNodes() as $index => $category): ?>

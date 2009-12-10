@@ -140,6 +140,8 @@ class AdminController extends Zend_Controller_Action
   
     private function _searchCorePlugins()
     {
+        $locale = $this->_conf->general->locale;
+        
         foreach (new DirectoryIterator($this->_corePluginPath) as $plugin) {
             $name = $plugin->getFilename();
 

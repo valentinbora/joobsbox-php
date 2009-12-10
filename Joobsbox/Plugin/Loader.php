@@ -24,15 +24,15 @@
  */
 class Joobsbox_Plugin_Loader {
   
-  public function disablePlugins() {
-    Zend_Registry::get("EventHelper")->disabled = true;
-    Zend_Registry::get("FilterHelper")->disabled = true;
-  }
+    public function disablePlugins() {
+        Zend_Registry::get("EventHelper")->disabled = true;
+        Zend_Registry::get("FilterHelper")->disabled = true;
+    }
   
 	function __construct() {
-	  $front = Zend_Controller_Front::getInstance();
+	    $front = Zend_Controller_Front::getInstance();
 	  
-		$event_handlers = array();
+		$event_handlers     = array();
 		$filters		    = array();
 		
 		$dir = new DirectoryIterator(APPLICATION_DIRECTORY . "/plugins");
@@ -63,13 +63,17 @@ class Joobsbox_Plugin_Loader {
 						  $plugins[$className]->isAdmin = true;
 						}
 
-						$plugins[$className]->conf = new Zend_Config_Xml("plugins/$className/config.xml");
+						$plugins[$className]->conf      = new Zend_Config_Xml("plugins/$className/config.xml");
+						$plugins[$className]->path      = "plugins/$className";
 						
 						if(method_exists($plugins[$className], 'setPluginName')) {
 							$plugins[$className]->setPluginName($className);
 						}
 						if(method_exists($plugins[$className], 'initPlugin')) {
 							$plugins[$className]->initPlugin();
+						}
+						if(method_exists($plugins[$className], 'init')) {
+							$plugins[$className]->init();
 						}
 						if(method_exists($plugins[$className], 'startup')) {
 							$plugins[$className]->startup();
