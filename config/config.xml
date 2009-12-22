@@ -19,7 +19,7 @@
     <description></description>
   </rss>
   <db>
-    <prefix>jbs_</prefix>
+    <prefix></prefix>
     <passwordSalt>zypepwvpulajmkupaiowuluofqnfiunisdmizixutydgjyvjgk</passwordSalt>
   </db>
   <dbtables>
@@ -29,6 +29,6 @@
   </dbtables>
   <admin>
     <dashboard>Categories,Postings</dashboard>
-    <menu>Postings,Categories,Settings,Themes,Users,Plugins,Upgrades</menu>
+    <menu>Categories,Changelog,Settings,Plugins,Postings,Upgrades,Themes,Users</menu>
   </admin>
 </zend-config>
