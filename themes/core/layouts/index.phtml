@@ -24,6 +24,7 @@
 
 <?php
 	$this->css->load('global.css');
+	$this->headScript()->prependScript('var baseUrl="' . $this->baseUrl() . '";', 'text/javascript', array('charset' => 'UTF-8'));
 	$this->headScript()->prependScript($this->translateHash, 'text/javascript', array('charset' => 'UTF-8'));
 	$this->asset->load('jquery', 'jquery-corner', 'jquery-pngfix');
 	$this->js->load('public/js/functions.js', 'public/js/global.js');
@@ -44,13 +45,11 @@
 <body>
 	<div id="wrapper">
 		<div id="joobsbox-main">
-		  <?php echo $this->render('header.phtml'); ?>
+		  <?php echo $this->render('header.phtml');?>
 			<?php echo $this->layout()->content;?>
 			<?php echo $this->render('footer.phtml'); ?>
 	</div>
 	<?php echo $this->headScript(); ?>
-	
-	<?php if ($this->conf->general->demo): ?>
 	<script type="text/javascript" charset="utf-8">
         var is_ssl = ("https:" == document.location.protocol);
         var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
@@ -68,6 +67,6 @@
 
         var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
       </script>
-  <?php endif; ?>
+  
 </body>
 </html>
