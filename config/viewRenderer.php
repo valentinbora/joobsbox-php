@@ -6,8 +6,9 @@ $viewRenderer->initView();
 $viewRenderer->view->baseUrl = BASE_URL;
 $viewRenderer->view->noScriptBaseUrl = str_replace("index.php", "", BASE_URL);
 if(substr($viewRenderer->view->noScriptBaseUrl, -1) == "/") {
-  $viewRenderer->view->noScriptBaseUrl = substr($viewRenderer->view->noScriptBaseUrl, 0, strlen($viewRenderer->view->noScriptBaseUrl)-1);
-}
+    $viewRenderer->view->noScriptBaseUrl = substr($viewRenderer->view->noScriptBaseUrl, 0, strlen($viewRenderer->view->noScriptBaseUrl)-1);
+}                                                                                
+
 $viewRenderer->view->publicUrl = str_replace("index.php", "", BASE_URL) . "/public";
 
 function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index', $layoutPath = '/themes/core/layouts') {
@@ -16,11 +17,11 @@ function configureTheme($theme = APPLICATION_THEME, $layoutName = 'index', $layo
 	$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer'); 
 
   if($layoutName == 'integration') {
-	  $viewRenderer->view->themeUrl		  = str_replace("index.php", "", BASE_URL) . '/public/' . $theme;
+	  $viewRenderer->view->themeUrl		  = $viewRenderer->view->noScriptBaseUrl . '/public/' . $theme;
 	  $viewRenderer->view->themeImages	= $viewRenderer->view->themeUrl . "/images";
 	} else {
-	  $viewRenderer->view->themeUrl		  = str_replace("index.php", "", BASE_URL) . "/themes/" . $theme;
-	  $viewRenderer->view->themesUrl	  = str_replace("index.php", "", BASE_URL) . "/themes/";
+	  $viewRenderer->view->themeUrl		  = $viewRenderer->view->noScriptBaseUrl . "/themes/" . $theme;
+	  $viewRenderer->view->themesUrl	  = $viewRenderer->view->noScriptBaseUrl . "/themes/";
 	  $viewRenderer->view->themeImages	= $viewRenderer->view->themeUrl . "/images";
 	}
 	$viewRenderer->view->theme			  = $theme;
