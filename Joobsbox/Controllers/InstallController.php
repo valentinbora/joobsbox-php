@@ -67,22 +67,22 @@ class InstallController extends Zend_Controller_Action {
 	}
 	
 	public function reqcheckAction() {
-            configureTheme(APPLICATION_THEME, 'install');
-            $minPHPVersion = 5.3;
+        configureTheme(APPLICATION_THEME, 'install');
+        $minPHPVersion = 5.2;
 	    $reqOK = array();
-            $reqOK["PDO"] = (strlen(extension_loaded("pdo_mysql"))) ? 1 : 0;
-	   // $reqOK["mod_rewrite"] = (in_array("mod_rewrite", apache_get_modules())) ? true : false;
+        $reqOK["PDO"] = (strlen(extension_loaded("pdo_mysql"))) ? 1 : 0;
+	    // $reqOK["mod_rewrite"] = (in_array("mod_rewrite", apache_get_modules())) ? true : false;
 	    $reqOK["PHPver"] = (floatval(phpversion())>=$minPHPVersion) ? 1 : 0;
 
 	    if(!in_array("0", $reqOK)) {
-                $this->_redirect("install/step1");
+            $this->_redirect("install/step1");
 	    } else {
-		$this->view->reqOK = $reqOK;
+		    $this->view->reqOK = $reqOK;
 	    }
             
-        }
+    }
 
-        public function step1Action() {
+    public function step1Action() {
 		configureTheme(APPLICATION_THEME, 'install');
 		$locales = Zend_Registry::get("Zend_Locale")->getTranslationList('language', 'en');
 		foreach ($locales as $key => $value) {
